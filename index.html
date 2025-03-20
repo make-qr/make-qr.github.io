@@ -1,0 +1,118 @@
+<!DOCTYPE html>  
+<html lang="vi">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Tạo mã QR miễn phí</title>  
+    <script src="https://cdn.tailwindcss.com"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>  
+</head>  
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">  
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">  
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Tạo mã QR miễn phí</h1>  
+        
+        <div class="mb-4">  
+            <label for="qr-input" class="block text-sm font-medium text-gray-700 mb-2">Nhập nội dung cần tạo mã QR:</label>  
+            <textarea   
+                id="qr-input"   
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                rows="3"   
+                placeholder="Nhập văn bản hoặc URL..."  
+            ></textarea>  
+        </div>  
+        
+        <div class="mb-4">  
+            <label class="block text-sm font-medium text-gray-700 mb-2">Kích thước:</label>  
+            <select id="qr-size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">  
+                <option value="128">Nhỏ (128x128)</option>  
+                <option value="200" selected>Trung bình (200x200)</option>  
+                <option value="256">Lớn (256x256)</option>  
+                <option value="320">Rất lớn (320x320)</option>  
+            </select>  
+        </div>  
+        
+        <div class="flex space-x-2 mb-6">  
+            <button   
+                id="generate-btn"   
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"  
+            >  
+                Tạo mã QR  
+            </button>  
+            
+            <button   
+                id="download-btn"   
+                class="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"  
+                disabled  
+            >  
+                Tải xuống  
+            </button>  
+        </div>  
+        
+        <div class="flex justify-center mb-4">  
+            <div id="qrcode-container" class="border border-gray-300 rounded-md p-4 bg-white hidden"></div>  
+        </div>  
+        
+        <div id="qrcode" class="flex justify-center"></div>  
+    </div>  
+
+    <script>  
+        document.addEventListener('DOMContentLoaded', function() {  
+            const qrInput = document.getElementById('qr-input');  
+            const qrSize = document.getElementById('qr-size');  
+            const generateBtn = document.getElementById('generate-btn');  
+            const downloadBtn = document.getElementById('download-btn');  
+            const qrcodeContainer = document.getElementById('qrcode-container');  
+            const qrcode = document.getElementById('qrcode');  
+            
+            let qrInstance = null;  
+            
+            // Hàm tạo mã QR  
+            generateBtn.addEventListener('click', function() {  
+                const text = qrInput.value.trim();  
+                const size = parseInt(qrSize.value);  
+                
+                if (text === '') {  
+                    alert('Vui lòng nhập nội dung để tạo mã QR!');  
+                    return;  
+                }  
+                
+                // Xóa mã QR cũ nếu có  
+                qrcode.innerHTML = '';  
+                
+                // Tạo mã QR mới  
+                qrInstance = new QRCode(qrcode, {  
+                    text: text,  
+                    width: size,  
+                    height: size,  
+                    colorDark: "#000000",  
+                    colorLight: "#ffffff",  
+                    correctLevel: QRCode.CorrectLevel.H  
+                });  
+                
+                // Hiển thị container và kích hoạt nút tải xuống  
+                qrcodeContainer.classList.remove('hidden');  
+                downloadBtn.disabled = false;  
+            });  
+            
+            // Hàm tải xuống mã QR  
+            downloadBtn.addEventListener('click', function() {  
+                if (!qrcode.querySelector('img')) {  
+                    alert('Vui lòng tạo mã QR trước!');  
+                    return;  
+                }  
+                
+                // Lấy ảnh từ thẻ img  
+                const img = qrcode.querySelector('img');  
+                
+                // Tạo một thẻ a tạm thời để tải xuống  
+                const link = document.createElement('a');  
+                link.download = 'qrcode.png';  
+                link.href = img.src;  
+                document.body.appendChild(link);  
+                link.click();  
+                document.body.removeChild(link);  
+            });  
+        });  
+    </script>  
+</body>  
+</html>  
