@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Công cụ quét mã QR với camera hoặc từ ảnh đã lưu">
+    <meta name="keywords" content="quét mã QR, QR scanner, đọc mã QR, QR code">
+    <meta name="author" content="QR Generator">
+    <meta property="og:title" content="Quét mã QR">
+    <meta property="og:description" content="Quét mã QR dễ dàng bằng camera hoặc ảnh đã lưu">
+    <meta property="og:type" content="website">
+    <title>Quét mã QR | QR Scanner</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>">
+    <!-- Production version of Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- HTML5-QRCode library -->
+    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        #qr-reader {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #qr-reader img {
+            max-width: 100%;
+        }
+        #result-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-auto">
+        <div class="flex items-center justify-center mb-6">
+            <div class="mr-3 bg-blue-600 text-white p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800">Quét mã QR</h1>
+        </div>
+        
+        <div class="mb-6">
+            <div class="flex mb-4">
+                <button id="camera-tab" class="px-4 py-2 bg-blue-600 text-white rounded-t-lg mr-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Quét bằng camera
+                </button>
+                <button id="file-tab" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-t-lg flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Quét từ hình ảnh
+                </button>
+            </div>
+            
+            <div id="camera-container" class="border border-gray-300 rounded-b-lg p-4">
+                <div id="qr-reader"></div>
+                <p class="text-sm text-gray-500 mt-2">Đặt mã QR trước camera để quét.</p>
+                <div class="mt-4">
+                    <button id="start-camera" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Bắt đầu quét
+                    </button>
+                    <button id="stop-camera" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 ml-2 hidden flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+                        </svg>
+                        Dừng quét
+                    </button>
+                </div>
+            </div>
+            
+            <div id="file-container" class="border border-gray-300 rounded-b-lg p-4 hidden">
+                <div class="mb-4">
+                    <label for="qr-file-input" class="block text-sm font-medium text-gray-700 mb-2">
+                        Chọn ảnh có chứa mã QR:
+                    </label>
+                    <input type="file" id="qr-file-input" accept="image/*" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <p class="text-xs text-gray-500 mt-1">Hỗ trợ các định dạng: JPG, PNG, GIF, WEBP</p>
+                </div>
+                
+                <div class="mt-4">
+                    <button id="scan-file-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                        </svg>
+                        Đọc mã QR
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="result-container" class="bg-gray-100 rounded-lg shadow-inner p-6 hidden">
+            <h3 class="text-lg font-medium text-gray-800 mb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Kết quả:
+            </h3>
+            <div id="qr-result" class="break-words bg-white p-4 rounded border border-gray-300 min-h-[60px]"></div>
+            
+            <div class="mt-4 flex space-x-2">
+                <button id="copy-btn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-3 rounded-md transition duration-200 text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                    Sao chép
+                </button>
+                <button id="clear-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-1 px-3 rounded-md transition duration-200 text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Xóa
+                </button>
+                <a id="open-link" href="#" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded-md transition duration-200 text-sm hidden flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Mở liên kết
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-6 border-t border-gray-200 pt-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-center text-sm text-gray-500">
+                    <a href="qr.html" class="text-blue-600 hover:underline flex items-center justify-center md:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Quay lại trang tạo mã QR
+                    </a>
+                </p>
+                <p class="text-gray-600 text-sm mt-4 md:mt-0">
+                    &copy; 2023 QR Generator. Tất cả các quyền được bảo lưu.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements for tab switching
+            const cameraTab = document.getElementById('camera-tab');
+            const fileTab = document.getElementById('file-tab');
+            const cameraContainer = document.getElementById('camera-container');
+            const fileContainer = document.getElementById('file-container');
+            
+            // Elements for camera scanning
+            const qrReader = document.getElementById('qr-reader');
+            const startCameraBtn = document.getElementById('start-camera');
+            const stopCameraBtn = document.getElementById('stop-camera');
+            
+            // Elements for file scanning
+            const qrFileInput = document.getElementById('qr-file-input');
+            const scanFileBtn = document.getElementById('scan-file-btn');
+            
+            // Result elements
+            const resultContainer = document.getElementById('result-container');
+            const qrResult = document.getElementById('qr-result');
+            const copyBtn = document.getElementById('copy-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const openLinkBtn = document.getElementById('open-link');
+            
+            // Variable to store HTML5 QR scanner instance
+            let html5QrCode;
+            
+            // Switch between tabs
+            cameraTab.addEventListener('click', () => {
+                cameraTab.classList.remove('bg-gray-200', 'text-gray-700');
+                cameraTab.classList.add('bg-blue-600', 'text-white');
+                fileTab.classList.remove('bg-blue-600', 'text-white');
+                fileTab.classList.add('bg-gray-200', 'text-gray-700');
+                
+                cameraContainer.classList.remove('hidden');
+                fileContainer.classList.add('hidden');
+            });
+            
+            fileTab.addEventListener('click', () => {
+                fileTab.classList.remove('bg-gray-200', 'text-gray-700');
+                fileTab.classList.add('bg-blue-600', 'text-white');
+                cameraTab.classList.remove('bg-blue-600', 'text-white');
+                cameraTab.classList.add('bg-gray-200', 'text-gray-700');
+                
+                fileContainer.classList.remove('hidden');
+                cameraContainer.classList.add('hidden');
+                
+                // Stop camera if it's running
+                if (html5QrCode && html5QrCode.isScanning) {
+                    html5QrCode.stop();
+                    startCameraBtn.classList.remove('hidden');
+                    stopCameraBtn.classList.add('hidden');
+                }
+            });
+            
+            // Function to handle successful scan
+            function onScanSuccess(decodedText, decodedResult) {
+                // Display result
+                resultContainer.classList.remove('hidden');
+                qrResult.textContent = decodedText;
+                
+                // Check if result is a URL and show open link button if it is
+                if (decodedText.startsWith('http://') || decodedText.startsWith('https://')) {
+                    openLinkBtn.href = decodedText;
+                    openLinkBtn.classList.remove('hidden');
+                } else {
+                    openLinkBtn.classList.add('hidden');
+                }
+                
+                // Stop camera scanning if it's running
+                if (html5QrCode && html5QrCode.isScanning) {
+                    html5QrCode.stop();
+                    startCameraBtn.classList.remove('hidden');
+                    stopCameraBtn.classList.add('hidden');
+                }
+            }
+            
+            // Start camera scanning
+            startCameraBtn.addEventListener('click', () => {
+                // Check if Html5Qrcode is defined
+                if (typeof Html5Qrcode === 'undefined') {
+                    alert("Thư viện quét mã QR chưa được tải. Vui lòng tải lại trang và thử lại.");
+                    return;
+                }
+                
+                try {
+                    // Create HTML5 QR code scanner
+                    html5QrCode = new Html5Qrcode("qr-reader");
+                    
+                    // Start scanning
+                    html5QrCode.start(
+                        { facingMode: "environment" }, // Use back camera if available
+                        {
+                            fps: 10,
+                            qrbox: { width: 250, height: 250 }
+                        },
+                        onScanSuccess,
+                        (errorMessage) => {
+                            // Handle scan error (ignoring)
+                            console.log(errorMessage);
+                        }
+                    ).then(() => {
+                        // QR Code scanning is started
+                        startCameraBtn.classList.add('hidden');
+                        stopCameraBtn.classList.remove('hidden');
+                    }).catch((err) => {
+                        console.error("Error starting QR Code scanner:", err);
+                        alert("Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập camera và thử lại.");
+                    });
+                } catch (error) {
+                    console.error("Error initializing QR scanner:", error);
+                    alert("Có lỗi khi khởi tạo máy quét mã QR. Vui lòng tải lại trang và thử lại.");
+                }
+            });
+            
+            // Stop camera scanning
+            stopCameraBtn.addEventListener('click', () => {
+                if (html5QrCode && html5QrCode.isScanning) {
+                    html5QrCode.stop().then(() => {
+                        startCameraBtn.classList.remove('hidden');
+                        stopCameraBtn.classList.add('hidden');
+                    }).catch((err) => {
+                        console.error("Error stopping QR Code scanner:", err);
+                    });
+                }
+            });
+            
+            // Scan QR code from file
+            scanFileBtn.addEventListener('click', () => {
+                if (!qrFileInput.files.length) {
+                    alert("Vui lòng chọn file hình ảnh có chứa mã QR");
+                    return;
+                }
+                
+                // Check if Html5Qrcode is defined
+                if (typeof Html5Qrcode === 'undefined') {
+                    alert("Thư viện quét mã QR chưa được tải. Vui lòng tải lại trang và thử lại.");
+                    return;
+                }
+                
+                const file = qrFileInput.files[0];
+                
+                try {
+                    if (!html5QrCode) {
+                        html5QrCode = new Html5Qrcode("qr-reader");
+                    }
+                    
+                    html5QrCode.scanFile(file, true)
+                        .then(decodedText => {
+                            onScanSuccess(decodedText);
+                        })
+                        .catch(error => {
+                            console.error("Error scanning file:", error);
+                            alert("Không thể đọc mã QR từ hình ảnh này. Vui lòng thử hình ảnh khác hoặc đảm bảo hình ảnh có chứa mã QR rõ ràng.");
+                        });
+                } catch (error) {
+                    console.error("Error initializing QR scanner:", error);
+                    alert("Có lỗi khi quét mã QR. Vui lòng tải lại trang và thử lại.");
+                }
+            });
+            
+            // Copy result to clipboard
+            copyBtn.addEventListener('click', () => {
+                const text = qrResult.textContent;
+                
+                if (text) {
+                    navigator.clipboard.writeText(text)
+                        .then(() => {
+                            const originalText = copyBtn.textContent;
+                            copyBtn.textContent = 'Đã sao chép!';
+                            setTimeout(() => {
+                                copyBtn.textContent = originalText;
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Không thể sao chép: ', err);
+                            alert('Không thể sao chép văn bản. Vui lòng thử lại.');
+                        });
+                }
+            });
+            
+            // Clear result
+            clearBtn.addEventListener('click', () => {
+                resultContainer.classList.add('hidden');
+                qrResult.textContent = '';
+                qrFileInput.value = '';
+            });
+        });
+    </script>
+</body>
+</html> 
