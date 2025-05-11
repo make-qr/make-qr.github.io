@@ -3,35 +3,514 @@
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Tạo mã QR miễn phí</title>  
-    <script src="https://cdn.tailwindcss.com"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>  
+    <meta name="description" content="Công cụ tạo mã QR đa năng hỗ trợ văn bản, URL, vCard, Email, SMS, WiFi và file">
+    <meta name="keywords" content="mã QR, tạo mã QR, QR code, tạo QR code, QR generator">
+    <meta name="author" content="QR Generator">
+    <meta property="og:title" content="Tạo mã QR đa năng">
+    <meta property="og:description" content="Tạo mã QR cho văn bản, liên kết, danh thiếp, email, tin nhắn, WiFi và file">
+    <meta property="og:type" content="website">
+    <title>Tạo mã QR đa năng | QR Generator</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔲</text></svg>">
+    <!-- Replace CDN with production-ready CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
+    <!-- Load HTML5-QRCode from a more reliable CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        #qr-frame-preview {
+            position: relative;
+        }
+        #qr-frame-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+        #qr-frame-preview .overlay {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            border: 3px dashed #3B82F6;
+            box-sizing: border-box;
+        }
+        #qr-scan-container {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Thêm style cho khung QR */
+        .qr-with-frame {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+        }
+        .qr-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        .qr-frame-style-1 {
+            border: 5px solid #000;
+            border-radius: 10px;
+        }
+        .qr-frame-style-2 {
+            border: 8px solid #000;
+            border-radius: 50%;
+        }
+        .qr-frame-style-3 {
+            border: 10px solid #000;
+            clip-path: polygon(0% 0%, 30% 0%, 40% 10%, 60% 10%, 70% 0%, 100% 0%, 100% 30%, 90% 40%, 90% 60%, 100% 70%, 100% 100%, 70% 100%, 60% 90%, 40% 90%, 30% 100%, 0% 100%, 0% 70%, 10% 60%, 10% 40%, 0% 30%);
+        }
+        .qr-frame-style-4 {
+            border: 3px dashed #000;
+            border-radius: 15px;
+        }
+        .qr-frame-style-5 {
+            border: 2px solid #000;
+            box-shadow: 0 0 0 5px #000;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .qr-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #000;
+            word-break: break-word;
+        }
+        .frame-preview {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .frame-preview-inner {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            position: relative;
+        }
+        .frame-option {
+            cursor: pointer;
+            border: 2px solid transparent;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        .frame-option.selected {
+            border-color: #3B82F6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        /* Style cho tab scan */
+        .scan-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .scan-tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        .scan-tab.active {
+            background-color: white;
+            border-bottom: 2px solid white;
+            font-weight: bold;
+            color: #3B82F6;
+        }
+        .scan-content {
+            display: none;
+        }
+        .scan-content.active {
+            display: block;
+        }
+        #file-qr-preview {
+            max-width: 300px;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            display: none;
+        }
+        .dark-mode .scan-tab {
+            background-color: #34495e;
+            border-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        .dark-mode .scan-tab.active {
+            background-color: #2c3e50;
+            color: #3498db;
+        }
+        .dark-mode #file-qr-preview {
+            border-color: #2c3e50;
+        }
+    </style>
 </head>  
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">  
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">  
-        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Tạo mã QR miễn phí</h1>  
+<body class="bg-gray-100 min-h-screen p-4">  
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-auto">  
+        <div class="flex items-center justify-center mb-6">
+            <div class="mr-3 bg-blue-600 text-white p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                </svg>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800">Tạo mã QR đa năng</h1>  
+        </div>
         
-        <div class="mb-4">  
-            <label for="qr-input" class="block text-sm font-medium text-gray-700 mb-2">Nhập nội dung cần tạo mã QR:</label>  
-            <textarea   
-                id="qr-input"   
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
-                rows="3"   
-                placeholder="Nhập văn bản hoặc URL..."  
-            ></textarea>  
-        </div>  
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-200 mb-4">
+            <button 
+                data-target="tab-text" 
+                class="tab-btn px-4 py-2 text-sm font-medium rounded-t-md bg-blue-600 text-white"
+            >
+                Văn bản
+            </button>
+            <button 
+                data-target="tab-url" 
+                class="tab-btn px-4 py-2 text-sm font-medium"
+            >
+                URL
+            </button>
+            <button 
+                data-target="tab-vcard" 
+                class="tab-btn px-4 py-2 text-sm font-medium"
+            >
+                vCard
+            </button>
+            <button 
+                data-target="tab-email" 
+                class="tab-btn px-4 py-2 text-sm font-medium"
+            >
+                Email
+            </button>
+            <button 
+                data-target="tab-sms" 
+                class="tab-btn px-4 py-2 text-sm font-medium"
+            >
+                SMS
+            </button>
+            <button 
+                data-target="tab-wifi" 
+                class="tab-btn px-4 py-2 text-sm font-medium"
+            >
+                WiFi
+            </button>
+            <button 
+                data-target="tab-file" 
+                class="tab-btn px-4 py-2 text-sm font-medium"
+            >
+                File
+            </button>
+            <a 
+                href="quet-qr.html" 
+                class="tab-btn px-4 py-2 text-sm font-medium flex items-center"
+            >
+                Quét QR
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+            </a>
+        </div>
         
-        <div class="mb-4">  
-            <label class="block text-sm font-medium text-gray-700 mb-2">Kích thước:</label>  
-            <select id="qr-size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">  
-                <option value="128">Nhỏ (128x128)</option>  
-                <option value="200" selected>Trung bình (200x200)</option>  
-                <option value="256">Lớn (256x256)</option>  
-                <option value="320">Rất lớn (320x320)</option>  
-            </select>  
-        </div>  
+        <!-- Tab Content -->
+        <div class="tab-content active" id="tab-text">
+            <div class="mb-4">  
+                <label for="text-input" class="block text-sm font-medium text-gray-700 mb-2">Nhập văn bản:</label>  
+                <textarea   
+                    id="text-input"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    rows="3"   
+                    placeholder="Nhập văn bản đơn giản..."  
+                ></textarea>  
+            </div>
+        </div>
         
-        <div class="flex space-x-2 mb-6">  
+        <div class="tab-content" id="tab-url">
+            <div class="mb-4">  
+                <label for="url-input" class="block text-sm font-medium text-gray-700 mb-2">Nhập URL:</label>  
+                <input   
+                    type="url"
+                    id="url-input"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    placeholder="https://example.com"  
+                />
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tab-vcard">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="mb-4">  
+                    <label for="vcard-name" class="block text-sm font-medium text-gray-700 mb-2">Họ và tên:</label>  
+                    <input   
+                        type="text"
+                        id="vcard-name"   
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                        placeholder="Nguyễn Văn A"  
+                    />
+                </div>
+                <div class="mb-4">  
+                    <label for="vcard-org" class="block text-sm font-medium text-gray-700 mb-2">Tổ chức:</label>  
+                    <input   
+                        type="text"
+                        id="vcard-org"   
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                        placeholder="Công ty ABC"  
+                    />
+                </div>
+                <div class="mb-4">  
+                    <label for="vcard-phone" class="block text-sm font-medium text-gray-700 mb-2">Số điện thoại:</label>  
+                    <input   
+                        type="tel"
+                        id="vcard-phone"   
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                        placeholder="0912345678"  
+                    />
+                </div>
+                <div class="mb-4">  
+                    <label for="vcard-email" class="block text-sm font-medium text-gray-700 mb-2">Email:</label>  
+                    <input   
+                        type="email"
+                        id="vcard-email"   
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                        placeholder="email@example.com"  
+                    />
+                </div>
+                <div class="mb-4">  
+                    <label for="vcard-url" class="block text-sm font-medium text-gray-700 mb-2">Website:</label>  
+                    <input   
+                        type="url"
+                        id="vcard-url"   
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                        placeholder="https://example.com"  
+                    />
+                </div>
+                <div class="mb-4">  
+                    <label for="vcard-address" class="block text-sm font-medium text-gray-700 mb-2">Địa chỉ:</label>  
+                    <input   
+                        type="text"
+                        id="vcard-address"   
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                        placeholder="123 Đường ABC, Quận 1, TP.HCM"  
+                    />
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tab-email">
+            <div class="mb-4">  
+                <label for="email-to" class="block text-sm font-medium text-gray-700 mb-2">Email đến:</label>  
+                <input   
+                    type="email"
+                    id="email-to"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    placeholder="nguoinhan@example.com"  
+                />
+            </div>
+            <div class="mb-4">  
+                <label for="email-subject" class="block text-sm font-medium text-gray-700 mb-2">Tiêu đề:</label>  
+                <input   
+                    type="text"
+                    id="email-subject"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    placeholder="Tiêu đề email"  
+                />
+            </div>
+            <div class="mb-4">  
+                <label for="email-body" class="block text-sm font-medium text-gray-700 mb-2">Nội dung:</label>  
+                <textarea   
+                    id="email-body"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    rows="3"   
+                    placeholder="Nội dung email..."  
+                ></textarea>  
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tab-sms">
+            <div class="mb-4">  
+                <label for="sms-phone" class="block text-sm font-medium text-gray-700 mb-2">Số điện thoại:</label>  
+                <input   
+                    type="tel"
+                    id="sms-phone"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    placeholder="0912345678"  
+                />
+            </div>
+            <div class="mb-4">  
+                <label for="sms-message" class="block text-sm font-medium text-gray-700 mb-2">Nội dung tin nhắn:</label>  
+                <textarea   
+                    id="sms-message"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    rows="3"   
+                    placeholder="Nội dung tin nhắn..."  
+                ></textarea>  
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tab-wifi">
+            <div class="mb-4">  
+                <label for="wifi-ssid" class="block text-sm font-medium text-gray-700 mb-2">Tên mạng (SSID):</label>  
+                <input   
+                    type="text"
+                    id="wifi-ssid"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    placeholder="Tên mạng WiFi"  
+                />
+            </div>
+            <div class="mb-4">  
+                <label for="wifi-password" class="block text-sm font-medium text-gray-700 mb-2">Mật khẩu:</label>  
+                <input   
+                    type="password"
+                    id="wifi-password"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    placeholder="Mật khẩu WiFi"  
+                />
+            </div>
+            <div class="mb-4">  
+                <label class="block text-sm font-medium text-gray-700 mb-2">Loại bảo mật:</label>  
+                <select id="wifi-encryption" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="WPA">WPA/WPA2</option>
+                    <option value="WEP">WEP</option>
+                    <option value="nopass">Không mật khẩu</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <div class="flex items-center">
+                    <input type="checkbox" id="wifi-hidden" class="mr-2">
+                    <label for="wifi-hidden" class="text-sm font-medium text-gray-700">Mạng ẩn</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tab-file">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Chọn loại file:</label>
+                <select id="file-type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="image">Hình ảnh</option>
+                    <option value="pdf">PDF</option>
+                </select>
+            </div>
+            <div class="mb-4">  
+                <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">Chọn file:</label>  
+                <input   
+                    type="file"
+                    id="file-upload"   
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
+                    accept=".jpg,.jpeg,.png,.pdf,.gif"
+                />
+                <p class="text-xs text-gray-500 mt-1">Lưu ý: File có dung lượng lớn sẽ tạo mã QR phức tạp và khó quét.</p>
+            </div>
+            <div id="file-preview" class="hidden mb-4 border rounded-lg p-2 flex justify-center">
+                <img id="image-preview" src="" alt="Preview" class="max-h-40 hidden">
+                <div id="pdf-preview" class="hidden text-center py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <p id="pdf-name" class="mt-2 text-sm font-medium"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QR Code Style Settings -->
+        <div class="border-t border-gray-200 pt-4 mt-4">
+            <h3 class="text-lg font-medium text-gray-800 mb-2">Tùy chỉnh mã QR</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="qr-size" class="block text-sm font-medium text-gray-700 mb-2">Kích thước:</label>  
+                    <select id="qr-size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">  
+                        <option value="128">Nhỏ (128x128)</option>  
+                        <option value="200" selected>Trung bình (200x200)</option>  
+                        <option value="256">Lớn (256x256)</option>  
+                        <option value="320">Rất lớn (320x320)</option>  
+                    </select>
+                </div>
+                <div>
+                    <label for="qr-foreground" class="block text-sm font-medium text-gray-700 mb-2">Màu mã QR:</label>  
+                    <input data-jscolor="{}" id="qr-foreground" value="#000000" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="qr-background" class="block text-sm font-medium text-gray-700 mb-2">Màu nền:</label>  
+                    <input data-jscolor="{}" id="qr-background" value="#FFFFFF" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            
+            <!-- Thêm tùy chỉnh khung -->
+            <div class="mt-6">
+                <h4 class="text-md font-medium text-gray-800 mb-2">Khung trang trí</h4>
+                <div class="grid grid-cols-2 md:grid-cols-6 gap-2 mb-4">
+                    <div class="frame-option selected" data-frame-style="none">
+                        <div class="frame-preview">
+                            <div class="frame-preview-inner"></div>
+                        </div>
+                        <p class="text-xs text-center mt-1">Không khung</p>
+                    </div>
+                    <div class="frame-option" data-frame-style="style-1">
+                        <div class="frame-preview">
+                            <div class="frame-preview-inner qr-frame-style-1"></div>
+                        </div>
+                        <p class="text-xs text-center mt-1">Viền đơn giản</p>
+                    </div>
+                    <div class="frame-option" data-frame-style="style-2">
+                        <div class="frame-preview">
+                            <div class="frame-preview-inner qr-frame-style-2"></div>
+                        </div>
+                        <p class="text-xs text-center mt-1">Viền tròn</p>
+                    </div>
+                    <div class="frame-option" data-frame-style="style-3">
+                        <div class="frame-preview">
+                            <div class="frame-preview-inner qr-frame-style-3"></div>
+                        </div>
+                        <p class="text-xs text-center mt-1">Viền đặc biệt</p>
+                    </div>
+                    <div class="frame-option" data-frame-style="style-4">
+                        <div class="frame-preview">
+                            <div class="frame-preview-inner qr-frame-style-4"></div>
+                        </div>
+                        <p class="text-xs text-center mt-1">Viền nét đứt</p>
+                    </div>
+                    <div class="frame-option" data-frame-style="style-5">
+                        <div class="frame-preview">
+                            <div class="frame-preview-inner qr-frame-style-5"></div>
+                        </div>
+                        <p class="text-xs text-center mt-1">Viền kép</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="frame-color" class="block text-sm font-medium text-gray-700 mb-2">Màu khung:</label>  
+                        <input data-jscolor="{}" id="frame-color" value="#000000" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="qr-caption" class="block text-sm font-medium text-gray-700 mb-2">Chú thích (tùy chọn):</label>  
+                        <input type="text" id="qr-caption" placeholder="Nhập chú thích cho mã QR" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex space-x-2 my-6">  
             <button   
                 id="generate-btn"   
                 class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"  
@@ -53,12 +532,28 @@
         </div>  
         
         <div id="qrcode" class="flex justify-center"></div>  
+        
+        <!-- Footer -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-sm mb-2 md:mb-0">
+                    &copy; 2023 QR Generator. Tất cả các quyền được bảo lưu.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="quet-qr.html" class="text-blue-600 hover:underline text-sm flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Quét mã QR
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>  
 
     <script>  
         document.addEventListener('DOMContentLoaded', function() {  
-            const qrInput = document.getElementById('qr-input');  
-            const qrSize = document.getElementById('qr-size');  
             const generateBtn = document.getElementById('generate-btn');  
             const downloadBtn = document.getElementById('download-btn');  
             const qrcodeContainer = document.getElementById('qrcode-container');  
@@ -66,52 +561,393 @@
             
             let qrInstance = null;  
             
+            // Tab Navigation
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('bg-blue-600', 'text-white'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to current button and content
+                    this.classList.add('bg-blue-600', 'text-white');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Frame customization event listeners
+            const frameOptions = document.querySelectorAll('.frame-option');
+            let selectedFrameStyle = 'none';
+            
+            frameOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    frameOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Store selected frame style
+                    selectedFrameStyle = this.getAttribute('data-frame-style');
+                });
+            });
+            
+            // Update frame preview colors
+            document.getElementById('frame-color').addEventListener('input', function() {
+                const frameColor = this.value;
+                document.querySelectorAll('.frame-preview-inner').forEach(frame => {
+                    if (frame.classList.length > 1) { // Has frame style
+                        frame.style.borderColor = frameColor;
+                    }
+                });
+            });
+            
+            // Function to generate QR code with frame
+            function generateQRCode(text) {
+                // Validate input
+                if (!text || typeof text !== 'string') {
+                    console.error("Invalid text for QR code:", text);
+                    alert("Không thể tạo mã QR: Dữ liệu không hợp lệ");
+                    return;
+                }
+                
+                try {
+                    // Xóa mã QR cũ nếu có  
+                    qrcode.innerHTML = '';
+                    
+                    const size = parseInt(document.getElementById('qr-size').value);
+                    const foreground = document.getElementById('qr-foreground').value;
+                    const background = document.getElementById('qr-background').value;
+                    const frameColor = document.getElementById('frame-color').value;
+                    const caption = document.getElementById('qr-caption').value.trim();
+                    
+                    // Create container for QR code with possible frame
+                    const qrContainer = document.createElement('div');
+                    
+                    // Add frame if selected
+                    if (selectedFrameStyle !== 'none') {
+                        qrContainer.className = 'qr-with-frame';
+                        
+                        const frameElement = document.createElement('div');
+                        frameElement.className = `qr-frame qr-frame-${selectedFrameStyle}`;
+                        frameElement.style.borderColor = frameColor;
+                        
+                        qrContainer.appendChild(frameElement);
+                    }
+                    
+                    // Create element for the QR code itself
+                    const qrElement = document.createElement('div');
+                    qrElement.id = 'qr-code-element';
+                    qrContainer.appendChild(qrElement);
+                    
+                    // Add caption if provided
+                    if (caption) {
+                        const captionElement = document.createElement('div');
+                        captionElement.className = 'qr-caption';
+                        captionElement.textContent = caption;
+                        captionElement.style.color = frameColor;
+                        qrContainer.appendChild(captionElement);
+                    }
+                    
+                    // Add container to DOM
+                    qrcode.appendChild(qrContainer);
+                    
+                    // If text is too long, warn the user
+                    if (text.length > 1000) {
+                        console.warn("QR code text is very long:", text.length, "characters");
+                    }
+                    
+                    // Generate QR code in the element
+                    qrInstance = new QRCode(qrElement, {  
+                        text: text,  
+                        width: size,  
+                        height: size,  
+                        colorDark: foreground,  
+                        colorLight: background,  
+                        correctLevel: QRCode.CorrectLevel.H  
+                    });  
+                    
+                    // Hiển thị container và kích hoạt nút tải xuống  
+                    qrcodeContainer.classList.remove('hidden');  
+                    downloadBtn.disabled = false;
+                } catch (error) {
+                    console.error("Error generating QR code:", error);
+                    alert("Không thể tạo mã QR: " + error.message);
+                    
+                    // Clean up on error
+                    qrcode.innerHTML = '';
+                    qrcodeContainer.classList.add('hidden');  
+                    downloadBtn.disabled = true;
+                }
+            }
+            
             // Hàm tạo mã QR  
             generateBtn.addEventListener('click', function() {  
-                const text = qrInput.value.trim();  
-                const size = parseInt(qrSize.value);  
+                // Determine active tab
+                const activeTab = document.querySelector('.tab-content.active').id;
+                let qrContent = '';
                 
-                if (text === '') {  
+                switch (activeTab) {
+                    case 'tab-text':
+                        qrContent = document.getElementById('text-input').value.trim();
+                        break;
+                        
+                    case 'tab-url':
+                        qrContent = document.getElementById('url-input').value.trim();
+                        break;
+                        
+                    case 'tab-vcard':
+                        const name = document.getElementById('vcard-name').value.trim();
+                        const org = document.getElementById('vcard-org').value.trim();
+                        const phone = document.getElementById('vcard-phone').value.trim();
+                        const email = document.getElementById('vcard-email').value.trim();
+                        const url = document.getElementById('vcard-url').value.trim();
+                        const address = document.getElementById('vcard-address').value.trim();
+                        
+                        // Create vCard format
+                        qrContent = "BEGIN:VCARD\nVERSION:3.0\n";
+                        if (name) qrContent += `FN:${name}\nN:${name}\n`;
+                        if (org) qrContent += `ORG:${org}\n`;
+                        if (phone) qrContent += `TEL:${phone}\n`;
+                        if (email) qrContent += `EMAIL:${email}\n`;
+                        if (url) qrContent += `URL:${url}\n`;
+                        if (address) qrContent += `ADR:;;${address};;;\n`;
+                        qrContent += "END:VCARD";
+                        break;
+                        
+                    case 'tab-email':
+                        const emailTo = document.getElementById('email-to').value.trim();
+                        const emailSubject = document.getElementById('email-subject').value.trim();
+                        const emailBody = document.getElementById('email-body').value.trim();
+                        
+                        qrContent = `mailto:${emailTo}`;
+                        if (emailSubject || emailBody) {
+                            qrContent += '?';
+                            if (emailSubject) qrContent += `subject=${encodeURIComponent(emailSubject)}`;
+                            if (emailSubject && emailBody) qrContent += '&';
+                            if (emailBody) qrContent += `body=${encodeURIComponent(emailBody)}`;
+                        }
+                        break;
+                        
+                    case 'tab-sms':
+                        const smsPhone = document.getElementById('sms-phone').value.trim();
+                        const smsMessage = document.getElementById('sms-message').value.trim();
+                        
+                        qrContent = `sms:${smsPhone}`;
+                        if (smsMessage) {
+                            qrContent += `?body=${encodeURIComponent(smsMessage)}`;
+                        }
+                        break;
+                        
+                    case 'tab-wifi':
+                        const wifiSsid = document.getElementById('wifi-ssid').value.trim();
+                        const wifiPassword = document.getElementById('wifi-password').value;
+                        const wifiEncryption = document.getElementById('wifi-encryption').value;
+                        const wifiHidden = document.getElementById('wifi-hidden').checked;
+                        
+                        qrContent = "WIFI:";
+                        if (wifiEncryption !== 'nopass') qrContent += `T:${wifiEncryption};`;
+                        qrContent += `S:${wifiSsid};`;
+                        if (wifiEncryption !== 'nopass') qrContent += `P:${wifiPassword};`;
+                        if (wifiHidden) qrContent += "H:true;";
+                        qrContent += ";";
+                        break;
+                        
+                    case 'tab-file':
+                        const fileInput = document.getElementById('file-upload');
+                        if (!fileInput.files.length) {
+                            alert('Vui lòng chọn file!');
+                            return;
+                        }
+                        
+                        const file = fileInput.files[0];
+                        if (file.size > 1024 * 100) { // Reduce limit to 100KB
+                            alert('Kích thước file quá lớn! Mã QR có thể không hoạt động. Vui lòng chọn file nhỏ hơn 100KB.');
+                        }
+                        
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            try {
+                                // Validate that we have data
+                                if (!e.target.result) {
+                                    throw new Error("Không thể đọc dữ liệu file.");
+                                }
+                                
+                                // Check if file size is manageable for QR code
+                                if (e.target.result.length > 1024 * 200) { // 200KB in data URL is too much
+                                    alert("File quá lớn sau khi chuyển đổi. QR code có thể không hoạt động đúng. Vui lòng chọn file nhỏ hơn.");
+                                }
+                                
+                                // Generate QR code safely
+                                generateQRCode(e.target.result);
+                            } catch (error) {
+                                console.error("Lỗi khi xử lý file:", error);
+                                alert("Không thể tạo mã QR từ file này. " + error.message);
+                            }
+                        };
+                        reader.onerror = function() {
+                            alert("Lỗi khi đọc file. Vui lòng thử lại với file khác.");
+                        };
+                        reader.readAsDataURL(file);
+                        return; // Skip the normal QR generation below
+                }
+                
+                if (!qrContent) {
                     alert('Vui lòng nhập nội dung để tạo mã QR!');  
                     return;  
                 }  
                 
-                // Xóa mã QR cũ nếu có  
-                qrcode.innerHTML = '';  
-                
-                // Tạo mã QR mới  
-                qrInstance = new QRCode(qrcode, {  
-                    text: text,  
-                    width: size,  
-                    height: size,  
-                    colorDark: "#000000",  
-                    colorLight: "#ffffff",  
-                    correctLevel: QRCode.CorrectLevel.H  
-                });  
-                
-                // Hiển thị container và kích hoạt nút tải xuống  
-                qrcodeContainer.classList.remove('hidden');  
-                downloadBtn.disabled = false;  
-            });  
+                generateQRCode(qrContent);
+            });
             
-            // Hàm tải xuống mã QR  
+            // Điều chỉnh hàm tải xuống để tải mã QR với khung
             downloadBtn.addEventListener('click', function() {  
                 if (!qrcode.querySelector('img')) {  
                     alert('Vui lòng tạo mã QR trước!');  
                     return;  
-                }  
+                }
                 
-                // Lấy ảnh từ thẻ img  
-                const img = qrcode.querySelector('img');  
+                // Get the QR code container with frame (if any)
+                const qrWithFrame = qrcode.querySelector('.qr-with-frame') || qrcode;
                 
-                // Tạo một thẻ a tạm thời để tải xuống  
-                const link = document.createElement('a');  
-                link.download = 'qrcode.png';  
-                link.href = img.src;  
-                document.body.appendChild(link);  
-                link.click();  
-                document.body.removeChild(link);  
+                // Create a canvas element to draw the QR code with frame
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Set canvas size
+                const padding = 20; // Extra padding for the frame
+                const qrImg = qrcode.querySelector('img');
+                const hasFrame = qrWithFrame.classList.contains('qr-with-frame');
+                const hasCaption = qrWithFrame.querySelector('.qr-caption');
+                
+                const captionHeight = hasCaption ? 40 : 0;
+                const frameWidth = hasFrame ? padding * 2 : 0;
+                
+                canvas.width = qrImg.width + frameWidth;
+                canvas.height = qrImg.height + frameWidth + captionHeight;
+                
+                // Fill background
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // If there's a frame, draw it
+                if (hasFrame) {
+                    const frameColor = document.getElementById('frame-color').value;
+                    const frameStyle = selectedFrameStyle;
+                    
+                    ctx.strokeStyle = frameColor;
+                    ctx.lineWidth = 10;
+                    
+                    if (frameStyle === 'style-1') {
+                        // Simple rectangular frame
+                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - captionHeight - 30);
+                    } else if (frameStyle === 'style-2') {
+                        // Round frame
+                        ctx.beginPath();
+                        const radius = canvas.width / 2;
+                        ctx.arc(canvas.width/2, (canvas.height - captionHeight)/2, radius - 10, 0, Math.PI * 2);
+                        ctx.stroke();
+                    } else if (frameStyle === 'style-4') {
+                        // Dashed frame
+                        ctx.setLineDash([10, 10]);
+                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
+                    } else if (frameStyle === 'style-5') {
+                        // Double frame
+                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
+                        ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - captionHeight - 30);
+                    } else {
+                        // Default frame
+                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
+                    }
+                }
+                
+                // Draw the QR code image
+                ctx.drawImage(qrImg, hasFrame ? padding/2 : 0, hasFrame ? padding/2 : 0);
+                
+                // If there's a caption, draw it
+                if (hasCaption) {
+                    const caption = hasCaption.textContent;
+                    ctx.font = 'bold 20px Arial';
+                    ctx.fillStyle = document.getElementById('frame-color').value;
+                    ctx.textAlign = 'center';
+                    ctx.fillText(caption, canvas.width/2, canvas.height - captionHeight/2);
+                }
+                
+                // Convert canvas to data URL
+                const dataURL = canvas.toDataURL('image/png');
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.download = 'qrcode-with-frame.png';
+                link.href = dataURL;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             });  
+
+            // Handle file upload for the file tab
+            const fileUpload = document.getElementById('file-upload');
+            const filePreview = document.getElementById('file-preview');
+            const imagePreview = document.getElementById('image-preview');
+            const pdfPreview = document.getElementById('pdf-preview');
+            const pdfName = document.getElementById('pdf-name');
+            
+            fileUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) {
+                    filePreview.classList.add('hidden');
+                    return;
+                }
+                
+                // Check file size limit - strict 100KB limit
+                const MAX_FILE_SIZE = 100 * 1024; // 100KB
+                if (file.size > MAX_FILE_SIZE) {
+                    alert(`File quá lớn (${Math.round(file.size/1024)}KB). Vui lòng chọn file nhỏ hơn ${MAX_FILE_SIZE/1024}KB.`);
+                    fileUpload.value = '';
+                    filePreview.classList.add('hidden');
+                    return;
+                }
+                
+                const fileType = document.getElementById('file-type').value;
+                
+                if (fileType === 'image') {
+                    if (!file.type.startsWith('image/')) {
+                        alert('Vui lòng chọn file hình ảnh');
+                        fileUpload.value = '';
+                        filePreview.classList.add('hidden');
+                        return;
+                    }
+                    
+                    // Show image preview
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        imagePreview.src = event.target.result;
+                        imagePreview.classList.remove('hidden');
+                        pdfPreview.classList.add('hidden');
+                        filePreview.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else if (fileType === 'pdf') {
+                    if (file.type !== 'application/pdf') {
+                        alert('Vui lòng chọn file PDF');
+                        fileUpload.value = '';
+                        filePreview.classList.add('hidden');
+                        return;
+                    }
+                    
+                    // Show PDF info
+                    pdfName.textContent = file.name;
+                    imagePreview.classList.add('hidden');
+                    pdfPreview.classList.remove('hidden');
+                    filePreview.classList.remove('hidden');
+                }
+            });
         });  
     </script>  
 </body>  
