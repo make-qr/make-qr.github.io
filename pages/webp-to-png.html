@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuyển đổi WebP sang PNG | Image Converter</title>
-    <meta name="description" content="Công cụ chuyển đổi ảnh WebP sang PNG miễn phí, không cần tải lên máy chủ">
+    <title>Convert WebP to PNG | Image Converter</title>
+    <meta name="description" content="Free WebP to PNG image conversion tool that works directly in your browser - no server upload required">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+    <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .drop-zone {
-            border: 2px dashed #3B82F6;
-            transition: all 0.3s;
-        }
-        .drop-zone.active {
-            border-color: #10B981;
-            background-color: rgba(16, 185, 129, 0.1);
-        }
-        .progress-bar {
-            width: 0%;
-            height: 10px;
-            background-color: #3B82F6;
-            border-radius: 5px;
-            transition: width 0.3s;
-        }
-    </style>
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="../assets/js/qr.js"></script>
     <script src="../assets/js/template-loader.js"></script>
+    <script src="../assets/js/image-processing.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
     <script>
@@ -43,13 +33,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
             </div>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Chuyển đổi WebP sang PNG</h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Convert WebP to PNG</h1>
         </div>
 
         <div class="mb-8">
             <p class="text-gray-600 mb-4">
-                Công cụ này cho phép bạn chuyển đổi nhiều ảnh WebP sang định dạng PNG. 
-                Tất cả quá trình xử lý diễn ra ngay trên trình duyệt - ảnh của bạn không bị tải lên máy chủ.
+                This tool allows you to convert multiple WebP images to PNG format.
+                All processing happens directly in your browser - your images are not uploaded to any server.
             </p>
             
             <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
@@ -61,8 +51,8 @@
                     </div>
                     <div class="ml-3">
                         <p class="text-sm text-blue-700">
-                            WebP là định dạng ảnh phát triển bởi Google với kích thước file nhỏ hơn. 
-                            PNG hỗ trợ độ trong suốt và được hỗ trợ rộng rãi trên tất cả thiết bị và phần mềm.
+                            WebP is an image format developed by Google with smaller file sizes.
+                            PNG supports transparency and is widely supported on all devices and software.
                         </p>
                     </div>
                 </div>
@@ -73,21 +63,21 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
-            <p class="text-gray-700 text-lg font-medium">Kéo & thả các file WebP vào đây</p>
-            <p class="text-gray-500 text-sm mt-1">hoặc</p>
+            <p class="text-gray-700 text-lg font-medium">Drag & drop WebP files here</p>
+            <p class="text-gray-500 text-sm mt-1">or</p>
             <label class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
-                <span>Chọn ảnh WebP</span>
+                <span>Select WebP Images</span>
                 <input type="file" id="fileInput" accept=".webp" multiple class="hidden">
             </label>
-            <p class="text-gray-500 text-xs mt-2">Hỗ trợ nhiều file (định dạng .webp)</p>
+            <p class="text-gray-500 text-xs mt-2">Supports multiple files (.webp format)</p>
         </div>
 
         <div id="conversionSettings" class="mb-6 hidden">
-            <h3 class="text-lg font-semibold text-gray-800 mb-3">Thiết lập chuyển đổi</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">Conversion Settings</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="quality" class="block text-sm font-medium text-gray-700 mb-1">
-                        Chất lượng ảnh PNG:
+                        PNG Image Quality:
                     </label>
                     <div class="flex items-center">
                         <input type="range" id="quality" min="1" max="10" value="9" 
@@ -97,31 +87,31 @@
                 </div>
                 <div>
                     <label for="prefix" class="block text-sm font-medium text-gray-700 mb-1">
-                        Tiền tố tên file (tùy chọn):
+                        Filename Prefix (optional):
                     </label>
-                    <input type="text" id="prefix" placeholder="vd: converted_" 
+                    <input type="text" id="prefix" placeholder="e.g. converted_" 
                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
             </div>
         </div>
 
         <div id="progressContainer" class="mb-6 hidden">
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">Tiến trình chuyển đổi</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Conversion Progress</h3>
             <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="progress-bar" id="progressBar"></div>
+                <div class="bg-blue-600 h-2.5 rounded-full" id="progressBar" style="width: 0%"></div>
             </div>
             <p class="text-gray-600 text-sm mt-1" id="progressText">0%</p>
         </div>
 
         <div id="fileList" class="mb-6 hidden">
-            <h3 class="text-lg font-semibold text-gray-800 mb-3">Danh sách ảnh (<span id="fileCount">0</span>)</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">File List (<span id="fileCount">0</span>)</h3>
             <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 max-h-60 overflow-y-auto">
                 <table class="min-w-full">
                     <thead>
                         <tr>
-                            <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">Tên file</th>
-                            <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">Kích thước</th>
-                            <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">Trạng thái</th>
+                            <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">Filename</th>
+                            <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">Size</th>
+                            <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">Status</th>
                         </tr>
                     </thead>
                     <tbody id="fileListBody">
@@ -133,44 +123,29 @@
 
         <div class="flex flex-wrap gap-3">
             <button id="convertBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hidden">
-                Chuyển đổi sang PNG
+                Convert to PNG
             </button>
             
             <button id="downloadAllBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hidden">
-                Tải xuống tất cả
+                Download All
             </button>
             
-            <div class="flex">
-                <button id="convertMultipleBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Convert Selected</button>
-                <button id="clearAllBtn" class="ml-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Clear All</button>
-            </div>
+            <button id="clearBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hidden">
+                Clear All
+            </button>
         </div>
 
         <div id="resultContainer" class="mt-8 hidden">
-            <h3 class="text-lg font-semibold text-gray-800 mb-3">Kết quả chuyển đổi</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">Conversion Results</h3>
             <div id="resultList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- Converted image previews will be added here -->
-            </div>
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-gray-200">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-600 text-sm mb-2 md:mb-0">
-                    &copy; 2023 Image Converter. Tất cả các quyền được bảo lưu.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="index.html" class="text-blue-600 hover:underline text-sm">Trang chủ</a>
-                    <a href="compress-png.html" class="text-blue-600 hover:underline text-sm">Nén ảnh PNG</a>
-                    <a href="compress-jpg.html" class="text-blue-600 hover:underline text-sm">Nén ảnh JPG</a>
-                    <a href="merge-pdf.html" class="text-blue-600 hover:underline text-sm">Gộp file PDF</a>
-                    <a href="convert-to-webp.html" class="text-blue-600 hover:underline text-sm">Chuyển sang WebP</a>
-                </div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Elements
             const dropZone = document.getElementById('dropZone');
             const fileInput = document.getElementById('fileInput');
             const fileList = document.getElementById('fileList');
@@ -215,11 +190,13 @@
             });
             
             function highlight() {
-                dropZone.classList.add('active');
+                dropZone.classList.add('border-blue-500');
+                dropZone.classList.add('border-2');
             }
             
             function unhighlight() {
-                dropZone.classList.remove('active');
+                dropZone.classList.remove('border-blue-500');
+                dropZone.classList.remove('border-2');
             }
             
             // Handle dropped files
@@ -241,7 +218,7 @@
                 const webpFiles = newFiles.filter(file => file.type === 'image/webp' || file.name.toLowerCase().endsWith('.webp'));
                 
                 if (webpFiles.length === 0) {
-                    alert('Vui lòng chọn các file ảnh WebP.');
+                    alert('Please select WebP image files.');
                     return;
                 }
                 
@@ -270,7 +247,7 @@
                     </td>
                     <td class="py-2 text-sm">${formatFileSize(file.size)}</td>
                     <td class="py-2 text-sm" data-status="pending">
-                        <span class="text-yellow-600">Chờ xử lý</span>
+                        <span class="text-yellow-600">Pending</span>
                     </td>
                 `;
                 fileListBody.appendChild(row);
@@ -314,7 +291,7 @@
                 const statusCells = fileListBody.querySelectorAll('[data-status]');
                 statusCells.forEach(cell => {
                     cell.setAttribute('data-status', 'pending');
-                    cell.innerHTML = '<span class="text-yellow-600">Chờ xử lý</span>';
+                    cell.innerHTML = '<span class="text-yellow-600">Pending</span>';
                 });
                 
                 let completed = 0;
@@ -350,7 +327,7 @@
                                         // Update status
                                         const statusCell = fileListBody.querySelectorAll('[data-status]')[index];
                                         statusCell.setAttribute('data-status', 'success');
-                                        statusCell.innerHTML = '<span class="text-green-600">Thành công</span>';
+                                        statusCell.innerHTML = '<span class="text-green-600">Success</span>';
                                         
                                         // Update progress
                                         completed++;
@@ -396,7 +373,7 @@
             function handleConversionError(index) {
                 const statusCell = fileListBody.querySelectorAll('[data-status]')[index];
                 statusCell.setAttribute('data-status', 'error');
-                statusCell.innerHTML = '<span class="text-red-600">Lỗi</span>';
+                statusCell.innerHTML = '<span class="text-red-600">Error</span>';
             }
             
             function updateProgress(completed, total) {
@@ -424,7 +401,7 @@
                 
                 convertedFiles.forEach(file => {
                     const compressionRatio = ((1 - (file.convertedSize / file.originalSize)) * 100).toFixed(1);
-                    const sizeChange = file.convertedSize > file.originalSize ? 'tăng' : 'giảm';
+                    const sizeChange = file.convertedSize > file.originalSize ? 'increased' : 'decreased';
                     
                     const resultItem = document.createElement('div');
                     resultItem.className = 'bg-white border rounded-lg overflow-hidden';
@@ -435,14 +412,16 @@
                         <div class="p-3">
                             <img src="${file.url}" alt="${file.name}" class="w-full h-32 object-contain mb-2">
                             <div class="text-xs text-gray-600">
-                                <p>Kích thước gốc: ${formatFileSize(file.originalSize)}</p>
-                                <p>Kích thước mới: ${formatFileSize(file.convertedSize)}</p>
-                                <p>Thay đổi: ${Math.abs(compressionRatio)}% (${sizeChange})</p>
+                                <p>Original size: ${formatFileSize(file.originalSize)}</p>
+                                <p>New size: ${formatFileSize(file.convertedSize)}</p>
+                                <p>Change: ${Math.abs(compressionRatio)}% (${sizeChange})</p>
                             </div>
-                            <button class="w-full mt-2 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition" 
-                                    onclick="downloadFile('${file.url}', '${file.name}')">
-                                Tải xuống
-                            </button>
+                            <a href="${file.url}" download="${file.name}" class="w-full mt-2 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download
+                            </a>
                         </div>
                     `;
                     resultList.appendChild(resultItem);
@@ -457,46 +436,45 @@
                 
                 // If there's just one file, download it directly
                 if (convertedFiles.length === 1) {
-                    downloadFile(convertedFiles[0].url, convertedFiles[0].name);
+                    const file = convertedFiles[0];
+                    const a = document.createElement('a');
+                    a.href = file.url;
+                    a.download = file.name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
                     return;
                 }
                 
-                // For multiple files, check if JSZip is available
-                if (typeof JSZip !== 'undefined') {
-                    downloadAsZip();
-                } else {
-                    // If JSZip is not available, load it
-                    const script = document.createElement('script');
-                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-                    script.onload = downloadAsZip;
-                    script.onerror = () => {
-                        alert('Không thể tải thư viện JSZip. Vui lòng tải từng file riêng lẻ.');
-                    };
-                    document.head.appendChild(script);
-                }
-            }
-            
-            function downloadAsZip() {
+                // For multiple files, create a ZIP
                 const zip = new JSZip();
-                let count = 0;
                 
-                convertedFiles.forEach(file => {
-                    // Fetch each blob and add to zip
-                    fetch(file.url)
+                // Add each file to the ZIP
+                Promise.all(convertedFiles.map(file => {
+                    return fetch(file.url)
                         .then(response => response.blob())
                         .then(blob => {
                             zip.file(file.name, blob);
-                            count++;
-                            
-                            if (count === convertedFiles.length) {
-                                // All files added, generate and download zip
-                                zip.generateAsync({type: 'blob'})
-                                    .then(content => {
-                                        const zipUrl = URL.createObjectURL(content);
-                                        downloadFile(zipUrl, 'converted_images.zip');
-                                    });
-                            }
                         });
+                }))
+                .then(() => {
+                    // Generate the ZIP file
+                    return zip.generateAsync({type: 'blob'});
+                })
+                .then(content => {
+                    // Download the ZIP file
+                    const zipUrl = URL.createObjectURL(content);
+                    const a = document.createElement('a');
+                    a.href = zipUrl;
+                    a.download = 'converted_images.zip';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(zipUrl);
+                })
+                .catch(error => {
+                    console.error('Error creating ZIP file:', error);
+                    alert('Failed to create ZIP file. Please download files individually.');
                 });
             }
             
@@ -524,64 +502,7 @@
                 document.getElementById('qualityValue').textContent = 9;
                 fileInput.value = '';
             }
-            
-            // Global function for downloading individual files
-            window.downloadFile = function(url, filename) {
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            };
         });
     </script>
 </body>
-<!-- Footer -->
-<div class="bg-gray-800 text-white p-6 mt-8">
-    <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-            <div>
-                <h3 class="text-lg font-semibold mb-3">QR Code</h3>
-                <ul class="space-y-2">
-                    <li><a href="index-en.html" class="text-gray-300 hover:text-white">Generate QR Code</a></li>
-                    <li><a href="quet-qr-en.html" class="text-gray-300 hover:text-white">Scan QR Code</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Image Conversion</h3>
-                <ul class="space-y-2">
-                    <li><a href="webp-to-png-en.html" class="text-gray-300 hover:text-white">WebP to PNG</a></li>
-                    <li><a href="convert-to-webp-en.html" class="text-gray-300 hover:text-white">PNG/JPG to WebP</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Image Compression</h3>
-                <ul class="space-y-2">
-                    <li><a href="compress-png-en.html" class="text-gray-300 hover:text-white">Compress PNG</a></li>
-                    <li><a href="compress-jpg-en.html" class="text-gray-300 hover:text-white">Compress JPG</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold mb-3">PDF Tools</h3>
-                <ul class="space-y-2">
-                    <li><a href="merge-pdf-en.html" class="text-gray-300 hover:text-white">Merge PDF Files</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400 text-sm mb-2 md:mb-0">
-                &copy; 2023 Document Tools. All rights reserved.
-            </p>
-            <div class="flex space-x-4">
-                <a href="index.html" class="text-gray-300 hover:text-white text-sm">Tiếng Việt</a>
-                <a href="index-en.html" class="text-gray-300 hover:text-white text-sm">English</a>
-            </div>
-        </div>
-    </div>
-</div>
 </html> 

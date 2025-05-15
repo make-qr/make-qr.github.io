@@ -29,9 +29,6 @@
     </script>
 </head>
 <body class="bg-gray-100">
-    <!-- Navigation -->
-    
-
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-auto">
@@ -50,7 +47,7 @@
 
             <div class="space-y-6">
                 <!-- File Upload Section -->
-                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors">
                     <input type="file" id="png-upload" accept=".png" class="hidden">
                     <label for="png-upload" class="cursor-pointer">
                         <div class="space-y-4">
@@ -75,6 +72,9 @@
                             <div class="flex justify-between text-sm text-gray-500">
                                 <span>Higher Compression</span>
                                 <span>Better Quality</span>
+                            </div>
+                            <div class="mt-1 text-center">
+                                <span class="text-sm font-medium text-gray-700" id="quality-value">80</span>
                             </div>
                         </div>
                         
@@ -113,6 +113,21 @@
                                 <p class="text-sm text-gray-600" id="compression-ratio">Compression Ratio: --</p>
                             </div>
                         </div>
+                        <!-- Preview area -->
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2 text-center">Original</h3>
+                                <div class="bg-gray-100 p-2 rounded flex items-center justify-center" style="min-height: 200px;">
+                                    <img id="original-preview" class="max-w-full max-h-48 object-contain" />
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-700 mb-2 text-center">Compressed</h3>
+                                <div class="bg-gray-100 p-2 rounded flex items-center justify-center" style="min-height: 200px;">
+                                    <img id="compressed-preview" class="max-w-full max-h-48 object-contain" />
+                                </div>
+                            </div>
+                        </div>
                         <!-- Download Button -->
                         <div class="mt-6 text-center">
                             <button id="download-btn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
@@ -125,13 +140,11 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    
-
     <script>
-            // Update quality value display
+        // Update quality value display
         const qualityInput = document.getElementById('quality-slider');
         const qualityValue = document.getElementById('quality-value');
+        
         qualityInput.addEventListener('input', () => {
             qualityValue.textContent = qualityInput.value;
         });
@@ -139,13 +152,12 @@
         // Preview original image
         const pngInput = document.getElementById('png-upload');
         const originalPreview = document.getElementById('original-preview');
-        const originalSize = document.getElementById('original-size');
-
+        
         pngInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
-            if (file) {
+            if (file && file.type === 'image/png') {
                 originalPreview.src = URL.createObjectURL(file);
-                originalSize.textContent = (file.size / 1024).toFixed(2) + ' KB';
+                // The rest is handled by the image-processing.js script
             }
         });
     </script>

@@ -17,7 +17,6 @@
     
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
-    <script src="../assets/js/qr.js"></script>
     <script src="../assets/js/template-loader.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
@@ -30,9 +29,6 @@
     </script>
 </head>
 <body class="bg-gray-100">
-    <!-- Navigation -->
-    
-
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-8">
         <div class="text-center mb-12">
@@ -51,11 +47,11 @@
                 <!-- Camera Scanner -->
                 <div class="scan-content active" id="camera-scanner">
                     <div id="qr-reader" class="w-full h-64 border rounded-lg overflow-hidden"></div>
-            </div>
+                </div>
             
                 <!-- File Scanner -->
                 <div class="scan-content" id="file-scanner">
-                <div class="mb-4">
+                    <div class="mb-4">
                         <label class="block text-gray-700 font-medium mb-2">Select QR Code Image</label>
                         <input type="file" id="qr-file" accept="image/*" class="w-full">
                     </div>
@@ -95,11 +91,86 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
-    
     
     <script>
+        // QR Scanner Functions
+        let html5QrCode = null;
+        let fileScanner = null;
+        
+        function initQRScanner() {
+            if (html5QrCode) {
+                return;
+            }
+            
+            html5QrCode = new Html5Qrcode("qr-reader");
+            
+            const qrConfig = { fps: 10, qrbox: { width: 250, height: 250 } };
+            
+            html5QrCode.start(
+                { facingMode: "environment" }, 
+                qrConfig, 
+                onScanSuccess,
+                onScanError
+            ).catch(err => {
+                console.error("Failed to start scanner:", err);
+                document.getElementById('camera-scanner').innerHTML = `
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200 text-center">
+                        <p class="text-red-700">Camera access failed. Please check camera permissions or try the file upload method.</p>
+                    </div>
+                `;
+            });
+        }
+        
+        function onScanSuccess(decodedText, decodedResult) {
+            document.getElementById('scan-result').value = decodedText;
+            
+            // Optional: Stop scanning after success
+            // If you want continuous scanning, remove this line
+            // html5QrCode.stop();
+        }
+        
+        function onScanError(error) {
+            // Handle scan errors silently to avoid console spam
+            // console.warn(`QR scan error: ${error}`);
+        }
+        
+        function stopScanner() {
+            if (html5QrCode && html5QrCode.isScanning) {
+                html5QrCode.stop().then(() => {
+                    console.log('Scanner stopped');
+                }).catch(err => {
+                    console.error('Failed to stop scanner:', err);
+                });
+            }
+        }
+        
+        // Handle file scanning
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+            
+            const imageUrl = URL.createObjectURL(file);
+            const preview = document.getElementById('file-qr-preview');
+            preview.src = imageUrl;
+            preview.style.display = 'block';
+            
+            // Use Html5Qrcode to scan the file
+            if (!fileScanner) {
+                fileScanner = new Html5Qrcode("qr-reader", { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
+            }
+            
+            fileScanner.scanFile(file, true)
+                .then(decodedText => {
+                    document.getElementById('scan-result').value = decodedText;
+                })
+                .catch(err => {
+                    console.error("QR code scan error:", err);
+                    document.getElementById('scan-result').value = "No QR code found in image or error scanning.";
+                });
+        }
+        
         // Initialize QR Scanner
         document.addEventListener('DOMContentLoaded', () => {
             // Tab switching
@@ -119,12 +190,20 @@
                     // Initialize camera scanner if camera tab is active
                     if (target === 'camera') {
                         initQRScanner();
+                    } else {
+                        stopScanner();
                     }
                 });
             });
 
             // Initialize camera scanner by default
             initQRScanner();
+            
+            // File input handler
+            const fileInput = document.getElementById('qr-file');
+            if (fileInput) {
+                fileInput.addEventListener('change', handleFileSelect);
+            }
 
             // Copy result button
             const copyBtn = document.getElementById('copy-result');
@@ -134,9 +213,9 @@
                 resultText.select();
                 document.execCommand('copy');
                 copyBtn.textContent = 'Copied!';
-                            setTimeout(() => {
+                setTimeout(() => {
                     copyBtn.textContent = 'Copy Result';
-                            }, 2000);
+                }, 2000);
             });
         });
     </script>
