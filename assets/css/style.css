@@ -1,0 +1,202 @@
+/* Main styles */
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+/* QR Code styles */
+#qr-frame-preview {
+    position: relative;
+}
+#qr-frame-preview img {
+    max-width: 100%;
+    height: auto;
+}
+#qr-frame-preview .overlay {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border: 3px dashed #3B82F6;
+    box-sizing: border-box;
+}
+#qr-scan-container {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    position: relative;
+}
+
+/* QR Frame styles */
+.qr-with-frame {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+}
+.qr-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+.qr-frame-style-1 {
+    border: 5px solid #000;
+    border-radius: 10px;
+}
+.qr-frame-style-2 {
+    border: 8px solid #000;
+    border-radius: 50%;
+}
+.qr-frame-style-3 {
+    border: 10px solid #000;
+    clip-path: polygon(0% 0%, 30% 0%, 40% 10%, 60% 10%, 70% 0%, 100% 0%, 100% 30%, 90% 40%, 90% 60%, 100% 70%, 100% 100%, 70% 100%, 60% 90%, 40% 90%, 30% 100%, 0% 100%, 0% 70%, 10% 60%, 10% 40%, 0% 30%);
+}
+.qr-frame-style-4 {
+    border: 3px dashed #000;
+    border-radius: 15px;
+}
+.qr-frame-style-5 {
+    border: 2px solid #000;
+    box-shadow: 0 0 0 5px #000;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+/* Navigation styles */
+.main-nav {
+    background-color: #1E40AF;
+    color: white;
+}
+.main-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+.nav-logo {
+    font-weight: bold;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+}
+/* Dropdown menu styles */
+.nav-dropdown {
+    position: relative;
+    margin: 0 0.5rem;
+    padding-bottom: 20px; /* Create space to move to dropdown */
+}
+/* Create a hoverable bridge between button and content */
+.nav-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px; /* Height of the bridge */
+    background: transparent;
+}
+.nav-dropdown-btn {
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: white;
+    transition: color 0.2s ease;
+}
+.nav-dropdown-btn:hover {
+    color: #93C5FD;
+}
+.nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 0.375rem;
+    z-index: 50;
+    top: 100%;
+    left: 0;
+    padding-top: 20px; /* Add negative margin to overlap with the bridge */
+    margin-top: -20px;
+}
+/* Show menu on hover and maintain visibility */
+.nav-dropdown:hover .nav-dropdown-content,
+.nav-dropdown-content:hover {
+    display: block;
+}
+.nav-dropdown-content a {
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s ease;
+    color: #4B5563;
+}
+.nav-dropdown-content a:hover {
+    background-color: #EFF6FF;
+    color: #1E40AF;
+}
+
+/* Mobile menu */
+.mobile-menu-btn {
+    cursor: pointer;
+}
+.mobile-menu {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Dark mode styles */
+.dark-mode .scan-tab {
+    background-color: #34495e;
+    border-color: #2c3e50;
+    color: #ecf0f1;
+}
+.dark-mode .scan-tab.active {
+    background-color: #2c3e50;
+    color: #3498db;
+}
+.dark-mode #file-qr-preview {
+    border-color: #2c3e50;
+}
+
+/* Utility classes */
+.qr-caption {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #000;
+    word-break: break-word;
+}
+.frame-preview {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.frame-preview-inner {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    position: relative;
+}
+.frame-option {
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+.frame-option.selected {
+    border-color: #3B82F6;
+    background-color: rgba(59, 130, 246, 0.1);
+} 

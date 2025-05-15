@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online QR code generator & document tools - Create, customize QR codes, compress images, merge PDFs, and more tools for document processing">
+    <meta name="keywords" content="qr code generator, qr code maker, document tools, image compression, pdf merger, webp converter, online tools, free tools">
+    <meta name="author" content="Document Tools">
+    <meta property="og:title" content="{{PAGE_TITLE}} - Document Tools">
+    <meta property="og:description" content="Create customizable QR codes, compress images, convert formats, merge PDFs and more with our free online document processing tools">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://documenttools.com/">
+    <meta property="og:image" content="{{ROOT_PATH}}assets/images/document-tools-og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{PAGE_TITLE}}">
+    <meta name="twitter:description" content="Create customizable QR codes and process documents with our free online tools">
+    <meta name="robots" content="index, follow">
+    <meta name="canonical" href="https://documenttools.com/{{CANONICAL_PATH}}">
+    <title>{{PAGE_TITLE}} - Document Tools</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔲</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ROOT_PATH}}assets/css/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-257SVV94KB');
+    </script>
+    <!-- Scripts -->
+    {{CUSTOM_HEAD}}
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="main-nav shadow-md">
+        <div class="container mx-auto main-nav-container max-w-6xl">
+            <a href="{{ROOT_PATH}}index.html" class="nav-logo" aria-label="Document Tools Home">
+                <span class="text-xl mr-2">🔲</span>
+                <span>Document Tools</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-btn text-white hover:text-blue-200" aria-expanded="false" aria-label="QR Code Tools Dropdown">
+                        <span>QR Code</span>
+                        <svg class="h-4 w-4 ml-1 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown-content rounded-md py-2 w-48">
+                        <a href="{{ROOT_PATH}}index.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Generate QR Code">Generate QR Code</a>
+                        <a href="{{ROOT_PATH}}pages/scan-qr.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Scan QR Code">Scan QR Code</a>
+                    </div>
+                </div>
+                
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-btn text-white hover:text-blue-200" aria-expanded="false" aria-label="Image Tools Dropdown">
+                        <span>Image Tools</span>
+                        <svg class="h-4 w-4 ml-1 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown-content rounded-md py-2 w-48">
+                        <a href="{{ROOT_PATH}}pages/compress-jpg.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Compress JPG Images">Compress JPG</a>
+                        <a href="{{ROOT_PATH}}pages/compress-png.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Compress PNG Images">Compress PNG</a>
+                        <a href="{{ROOT_PATH}}pages/convert-to-webp.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Convert Images to WebP Format">Convert to WebP</a>
+                        <a href="{{ROOT_PATH}}pages/webp-to-png.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Convert WebP to PNG Format">WebP to PNG</a>
+                    </div>
+                </div>
+                
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-btn text-white hover:text-blue-200" aria-expanded="false" aria-label="PDF Tools Dropdown">
+                        <span>PDF Tools</span>
+                        <svg class="h-4 w-4 ml-1 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown-content rounded-md py-2 w-48">
+                        <a href="{{ROOT_PATH}}pages/merge-pdf.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700" aria-label="Merge PDF Files">Merge PDF Files</a>
+                    </div>
+                </div>
+                
+                <a href="{{ROOT_PATH}}copy-code.html" class="nav-dropdown-btn hover:text-blue-200 text-white" aria-label="Copy Code Tool">Copy Code Tool</a>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-btn md:hidden flex items-center" aria-label="Toggle mobile menu" aria-expanded="false">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden bg-blue-800 p-4">
+            <a href="{{ROOT_PATH}}index.html" class="block py-2 text-white" aria-label="Generate QR Code">Generate QR Code</a>
+            <a href="{{ROOT_PATH}}pages/scan-qr.html" class="block py-2 text-white" aria-label="Scan QR Code">Scan QR Code</a>
+            <div class="border-t border-blue-700 my-2"></div>
+            <a href="{{ROOT_PATH}}pages/compress-jpg.html" class="block py-2 text-white" aria-label="Compress JPG Images">Compress JPG</a>
+            <a href="{{ROOT_PATH}}pages/compress-png.html" class="block py-2 text-white" aria-label="Compress PNG Images">Compress PNG</a>
+            <a href="{{ROOT_PATH}}pages/convert-to-webp.html" class="block py-2 text-white" aria-label="Convert Images to WebP Format">Convert to WebP</a>
+            <a href="{{ROOT_PATH}}pages/webp-to-png.html" class="block py-2 text-white" aria-label="Convert WebP to PNG Format">WebP to PNG</a>
+            <div class="border-t border-blue-700 my-2"></div>
+            <a href="{{ROOT_PATH}}pages/merge-pdf.html" class="block py-2 text-white" aria-label="Merge PDF Files">Merge PDF Files</a>
+            <a href="{{ROOT_PATH}}copy-code.html" class="block py-2 text-white" aria-label="Copy Code Tool">Copy Code Tool</a>
+        </div>
+    </nav> 

@@ -1,42 +1,290 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online QR code generator & document tools - Create, customize QR codes, compress images, merge PDFs, and more tools for document processing">
-    <meta name="keywords" content="qr code generator, qr code maker, document tools, image compression, pdf merger, webp converter, online tools, free tools">
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="description" content="Free online document processing and conversion tools - QR code, PDF, images, and more">
+    <meta name="keywords" content="online tools, QR code generator, image conversion, PDF merge, image compression">
     <meta name="author" content="Document Tools">
-    <meta property="og:title" content="QR Code Generator & Document Tools - Free Online Utilities">
-    <meta property="og:description" content="Create customizable QR codes, compress images, convert formats, merge PDFs and more with our free online document processing tools">
+    <meta property="og:title" content="Free Online Document Processing Tools">
+    <meta property="og:description" content="Free online document processing and conversion tools - QR code, PDF, images, and more">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://documenttools.com/">
-    <meta property="og:image" content="assets/images/document-tools-og.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="QR Code Generator & Document Tools">
-    <meta name="twitter:description" content="Create customizable QR codes and process documents with our free online tools">
-    <meta name="robots" content="index, follow">
-    <meta name="canonical" href="https://documenttools.com/">
-    <title>QR Code Generator & Document Tools - Free Online Utilities</title>
-    
+    <title>Document Tools | Free Online Document Processing</title>
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔲</text></svg>">
-    
-    <!-- Stylesheets -->
+    <!-- Replace CDN with production-ready CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    
-    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
-    <script src="assets/js/qr.js"></script>
-    <script src="assets/js/template-loader.js"></script>
-</head>
-<body class="bg-gray-100">
-    <!-- Navigation -->
+    <!-- Load HTML5-QRCode from a more reliable CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        #qr-frame-preview {
+            position: relative;
+        }
+        #qr-frame-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+        #qr-frame-preview .overlay {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            border: 3px dashed #3B82F6;
+            box-sizing: border-box;
+        }
+        #qr-scan-container {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Thêm style cho khung QR */
+        .qr-with-frame {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+        }
+        .qr-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        .qr-frame-style-1 {
+            border: 5px solid #000;
+            border-radius: 10px;
+        }
+        .qr-frame-style-2 {
+            border: 8px solid #000;
+            border-radius: 50%;
+        }
+        .qr-frame-style-3 {
+            border: 10px solid #000;
+            clip-path: polygon(0% 0%, 30% 0%, 40% 10%, 60% 10%, 70% 0%, 100% 0%, 100% 30%, 90% 40%, 90% 60%, 100% 70%, 100% 100%, 70% 100%, 60% 90%, 40% 90%, 30% 100%, 0% 100%, 0% 70%, 10% 60%, 10% 40%, 0% 30%);
+        }
+        .qr-frame-style-4 {
+            border: 3px dashed #000;
+            border-radius: 15px;
+        }
+        .qr-frame-style-5 {
+            border: 2px solid #000;
+            box-shadow: 0 0 0 5px #000;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .qr-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #000;
+            word-break: break-word;
+        }
+        .frame-preview {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .frame-preview-inner {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            position: relative;
+        }
+        .frame-option {
+            cursor: pointer;
+            border: 2px solid transparent;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        .frame-option.selected {
+            border-color: #3B82F6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        /* Style cho tab scan */
+        .scan-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .scan-tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        .scan-tab.active {
+            background-color: white;
+            border-bottom: 2px solid white;
+            font-weight: bold;
+            color: #3B82F6;
+        }
+        .scan-content {
+            display: none;
+        }
+        .scan-content.active {
+            display: block;
+        }
+        #file-qr-preview {
+            max-width: 300px;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            display: none;
+        }
+        .dark-mode .scan-tab {
+            background-color: #34495e;
+            border-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        .dark-mode .scan-tab.active {
+            background-color: #2c3e50;
+            color: #3498db;
+        }
+        .dark-mode #file-qr-preview {
+            border-color: #2c3e50;
+        }
+        /* Main navigation styles */
+        .main-nav {
+            background-color: #1E40AF;
+            color: white;
+        }
+        .main-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+        }
+        .nav-logo {
+            font-weight: bold;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-dropdown {
+            position: relative;
+            margin: 0 0.5rem;
+        }
+        .nav-dropdown-btn {
+            padding: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 200px;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 10;
+            border-radius: 0.375rem;
+        }
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: block;
+        }
+        .nav-dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            text-decoration: none;
+        }
+        .nav-dropdown-item:hover {
+            background-color: #F3F4F6;
+        }
+        .language-switcher {
+            display: flex;
+            align-items: center;
+        }
+        .language-btn {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            margin-left: 0.5rem;
+            font-size: 0.875rem;
+        }
+        .language-btn.active {
+            background-color: white;
+            color: #1E40AF;
+        }
+        /* Mobile menu styles */
+        .mobile-menu-btn {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .mobile-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: #1E40AF;
+                z-index: 20;
+                padding: 1rem;
+            }
+            .mobile-menu.active {
+                display: block;
+            }
+            .mobile-menu-category {
+                margin-bottom: 1rem;
+            }
+            .mobile-menu-title {
+                color: white;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }
+            .mobile-menu-items {
+                background-color: white;
+                border-radius: 0.375rem;
+            }
+            .mobile-menu-item {
+                display: block;
+                padding: 0.75rem 1rem;
+                color: #374151;
+                text-decoration: none;
+                border-bottom: 1px solid #E5E7EB;
+            }
+            .mobile-menu-item:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+    <script src="../assets/js/template-loader.js"></script>
+</head>  
+<body class="bg-gray-100 min-h-screen">
+    <!-- Main Navigation -->
     
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="p-4">  
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-auto">  
             <div class="flex items-center justify-center mb-6">
                 <div class="mr-3 bg-blue-600 text-white p-2 rounded-lg">
@@ -48,7 +296,7 @@
             </div>
             
             <!-- Tab Navigation -->
-            <div class="flex flex-wrap border-b border-gray-200 mb-4">
+            <div class="flex border-b border-gray-200 mb-4">
                 <button data-target="tab-text" class="tab-btn px-4 py-2 text-sm font-medium rounded-t-md bg-blue-600 text-white">Text</button>
                 <button data-target="tab-url" class="tab-btn px-4 py-2 text-sm font-medium">URL</button>
                 <button data-target="tab-vcard" class="tab-btn px-4 py-2 text-sm font-medium">vCard</button>
@@ -56,7 +304,7 @@
                 <button data-target="tab-sms" class="tab-btn px-4 py-2 text-sm font-medium">SMS</button>
                 <button data-target="tab-wifi" class="tab-btn px-4 py-2 text-sm font-medium">WiFi</button>
                 <button data-target="tab-file" class="tab-btn px-4 py-2 text-sm font-medium">File</button>
-                <a href="pages/scan-qr.html" class="tab-btn px-4 py-2 text-sm font-medium flex items-center">Scan QR<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+                <a href="quet-qr.html" class="tab-btn px-4 py-2 text-sm font-medium flex items-center">Scan QR<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
             </div>
             
             <!-- Tab Content -->
@@ -92,7 +340,7 @@
                             type="text"
                             id="vcard-name"   
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
-                            placeholder="John Doe"  
+                            placeholder="Nguyễn Văn A"  
                         />
                     </div>
                     <div class="mb-4">  
@@ -110,7 +358,7 @@
                             type="tel"
                             id="vcard-phone"   
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"   
-                            placeholder="+1 (555) 123-4567"  
+                            placeholder="0912345678"  
                         />
                     </div>
                     <div class="mb-4">  
@@ -359,10 +607,92 @@
             
             <div id="qrcode" class="flex justify-center"></div>  
             
-            
+            <!-- Footer -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">QR Code</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-blue-600 hover:underline">Generate QR Code</a></li>
+                            <li><a href="quet-qr.html" class="text-blue-600 hover:underline">Scan QR Code</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Image Conversion</h3>
+                        <ul class="space-y-2">
+                            <li><a href="webp-to-png.html" class="text-blue-600 hover:underline">WebP to PNG</a></li>
+                            <li><a href="convert-to-webp.html" class="text-blue-600 hover:underline">PNG/JPG to WebP</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Image Compression</h3>
+                        <ul class="space-y-2">
+                            <li><a href="compress-png.html" class="text-blue-600 hover:underline">Compress PNG</a></li>
+                            <li><a href="compress-jpg.html" class="text-blue-600 hover:underline">Compress JPG</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">PDF Tools</h3>
+                        <ul class="space-y-2">
+                            <li><a href="merge-pdf.html" class="text-blue-600 hover:underline">Merge PDF Files</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+            </div>
         </div>  
-    </main>
-
+    </div>  
+    <!-- Footer -->
+    <div class="bg-gray-800 text-white p-6 mt-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">QR Code</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-en.html" class="text-gray-300 hover:text-white">Generate QR Code</a></li>
+                        <li><a href="quet-qr-en.html" class="text-gray-300 hover:text-white">Scan QR Code</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Image Conversion</h3>
+                    <ul class="space-y-2">
+                        <li><a href="webp-to-png-en.html" class="text-gray-300 hover:text-white">WebP to PNG</a></li>
+                        <li><a href="convert-to-webp-en.html" class="text-gray-300 hover:text-white">PNG/JPG to WebP</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Image Compression</h3>
+                    <ul class="space-y-2">
+                        <li><a href="compress-png-en.html" class="text-gray-300 hover:text-white">Compress PNG</a></li>
+                        <li><a href="compress-jpg-en.html" class="text-gray-300 hover:text-white">Compress JPG</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">PDF Tools</h3>
+                    <ul class="space-y-2">
+                        <li><a href="merge-pdf-en.html" class="text-gray-300 hover:text-white">Merge PDF Files</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-2 md:mb-0">
+                    &copy; 2023 Document Tools. All rights reserved.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="index.html" class="text-gray-300 hover:text-white text-sm">Tiếng Việt</a>
+                    <a href="index-en.html" class="text-gray-300 hover:text-white text-sm">English</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>  
         document.addEventListener('DOMContentLoaded', function() {  
             const generateBtn = document.getElementById('generate-btn');  
@@ -764,15 +1094,10 @@
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const mobileMenu = document.querySelector('.mobile-menu');
             
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('active');
-                });
-            }
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
         });  
     </script>  
-    
-    <!-- Footer -->
-    
-</body>
-</html> 
+</body>  
+</html>  

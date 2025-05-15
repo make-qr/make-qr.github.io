@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online QR code scanner - scan QR codes from your camera or image files">
+    <meta name="keywords" content="qr code scanner, scan qr code, qr reader, qr code reader">
+    <meta name="author" content="Document Tools">
+    <title>QR Code Scanner | Document Tools</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <script src="../assets/js/qr.js"></script>
+    <script src="../assets/js/template-loader.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">QR Code Scanner</h1>
+            <p class="text-xl text-gray-600">Scan QR codes using your camera or from image files</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+            <!-- Scan Tabs -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <div class="scan-tabs">
+                    <button class="scan-tab active" data-tab="camera">Camera Scanner</button>
+                    <button class="scan-tab" data-tab="file">File Scanner</button>
+                </div>
+
+                <!-- Camera Scanner -->
+                <div class="scan-content active" id="camera-scanner">
+                    <div id="qr-reader" class="w-full h-64 border rounded-lg overflow-hidden"></div>
+            </div>
+            
+                <!-- File Scanner -->
+                <div class="scan-content" id="file-scanner">
+                <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Select QR Code Image</label>
+                        <input type="file" id="qr-file" accept="image/*" class="w-full">
+                    </div>
+                    <img id="file-qr-preview" class="max-w-full h-auto mx-auto">
+                </div>
+                
+                <!-- Result -->
+                <div class="mt-6">
+                    <label class="block text-gray-700 font-medium mb-2">Scan Result</label>
+                    <textarea id="scan-result" rows="3" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" readonly></textarea>
+                    <button id="copy-result" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                        Copy Result
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="mt-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Features</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">📷</div>
+                    <h3 class="text-xl font-bold mb-2">Camera Scanning</h3>
+                    <p class="text-gray-600">Scan QR codes in real-time using your device's camera</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">🖼️</div>
+                    <h3 class="text-xl font-bold mb-2">Image Scanning</h3>
+                    <p class="text-gray-600">Upload and scan QR codes from image files</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold mb-2">Easy Copy</h3>
+                    <p class="text-gray-600">Copy scan results with a single click</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    
+    
+    <script>
+        // Initialize QR Scanner
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.scan-tab');
+            const contents = document.querySelectorAll('.scan-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+
+                    // Update active states
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(`${target}-scanner`).classList.add('active');
+
+                    // Initialize camera scanner if camera tab is active
+                    if (target === 'camera') {
+                        initQRScanner();
+                    }
+                });
+            });
+
+            // Initialize camera scanner by default
+            initQRScanner();
+
+            // Copy result button
+            const copyBtn = document.getElementById('copy-result');
+            const resultText = document.getElementById('scan-result');
+
+            copyBtn.addEventListener('click', () => {
+                resultText.select();
+                document.execCommand('copy');
+                copyBtn.textContent = 'Copied!';
+                            setTimeout(() => {
+                    copyBtn.textContent = 'Copy Result';
+                            }, 2000);
+            });
+        });
+    </script>
+</body>
+</html> 

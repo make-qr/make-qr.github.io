@@ -1,0 +1,69 @@
+    <!-- Page Tools Menu -->
+    <div class="mt-8 pt-6 border-t border-gray-200 px-4 md:px-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Tools Menu</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">QR Code</h3>
+                <ul class="space-y-2">
+                    <li><a href="{{ROOT_PATH}}index.html" class="text-blue-600 hover:underline" aria-label="Generate QR Code">Generate QR Code</a></li>
+                    <li><a href="{{ROOT_PATH}}pages/scan-qr.html" class="text-blue-600 hover:underline" aria-label="Scan QR Code">Scan QR Code</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Image Tools</h3>
+                <ul class="space-y-2">
+                    <li><a href="{{ROOT_PATH}}pages/compress-jpg.html" class="text-blue-600 hover:underline" aria-label="Compress JPG Images">Compress JPG</a></li>
+                    <li><a href="{{ROOT_PATH}}pages/compress-png.html" class="text-blue-600 hover:underline" aria-label="Compress PNG Images">Compress PNG</a></li>
+                    <li><a href="{{ROOT_PATH}}pages/convert-to-webp.html" class="text-blue-600 hover:underline" aria-label="Convert Images to WebP Format">Convert to WebP</a></li>
+                    <li><a href="{{ROOT_PATH}}pages/webp-to-png.html" class="text-blue-600 hover:underline" aria-label="Convert WebP to PNG Format">WebP to PNG</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Other Tools</h3>
+                <ul class="space-y-2">
+                    <li><a href="{{ROOT_PATH}}pages/merge-pdf.html" class="text-blue-600 hover:underline" aria-label="Merge PDF Files">Merge PDF Files</a></li>
+                    <li><a href="{{ROOT_PATH}}copy-code.html" class="text-blue-600 hover:underline" aria-label="Copy Code Tool">Copy Code Tool</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16 w-full">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">About</h4>
+                    <p class="text-gray-400">Free online tools for all your document processing needs</p>
+                    <img src="{{ROOT_PATH}}assets/images/logo-footer.png" alt="Document Tools Logo" class="mt-4 max-h-10" loading="lazy" width="160" height="40">
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="{{ROOT_PATH}}pages/compress-jpg.html" class="text-gray-400 hover:text-white" aria-label="Compress JPG Images">Compress JPG</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/compress-png.html" class="text-gray-400 hover:text-white" aria-label="Compress PNG Images">Compress PNG</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/convert-to-webp.html" class="text-gray-400 hover:text-white" aria-label="Convert Images to WebP Format">Convert to WebP</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/webp-to-png.html" class="text-gray-400 hover:text-white" aria-label="Convert WebP to PNG Format">WebP to PNG</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/merge-pdf.html" class="text-gray-400 hover:text-white" aria-label="Merge PDF Files">Merge PDF</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/scan-qr.html" class="text-gray-400 hover:text-white" aria-label="Scan QR Code">Scan QR</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact</h4>
+                    <p class="text-gray-400">Questions? Suggestions? Let us know!</p>
+                    <a href="mailto:contact@documenttools.com" class="text-blue-400 hover:text-blue-300" aria-label="Email us">contact@documenttools.com</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2025</span> Document Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load JS -->
+    <script src="{{ROOT_PATH}}assets/js/navigation.js" defer></script>
+    {{CUSTOM_SCRIPTS}}
+</body>
+</html> 

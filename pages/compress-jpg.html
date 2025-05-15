@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online JPG image compression tool - Reduce JPG file size while maintaining quality. No upload needed, all processing is done in your browser.">
+    <meta name="keywords" content="jpg compression, image compression, compress jpg online, reduce image size, optimize jpg">
+    <meta name="author" content="Document Tools">
+    <title>Compress JPG Images | Document Tools</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="../assets/js/template-loader.js"></script>
+    <script src="../assets/js/image-processing.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">JPG Image Compression</h1>
+            <p class="text-xl text-gray-600">Compress your JPG images while maintaining quality</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+            <form id="jpg-compress-form" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="mb-6">
+                    <label for="jpg-input" class="block text-gray-700 font-medium mb-2">Select JPG Image</label>
+                    <input type="file" id="jpg-input" accept=".jpg,.jpeg" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="mb-6">
+                    <label for="jpg-quality" class="block text-gray-700 font-medium mb-2">
+                        Compression Quality: <span id="quality-value">80</span>%
+                    </label>
+                    <input type="range" id="jpg-quality" min="1" max="100" value="80" class="w-full">
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    Compress Image
+                </button>
+            </form>
+
+            <!-- Preview Section -->
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Preview</h2>
+                <div class="grid grid-cols-2 gap-4">
+                <div>
+                        <h3 class="text-lg font-medium mb-2">Original</h3>
+                        <img id="original-preview" class="w-full h-48 object-contain bg-gray-100 rounded border">
+                        <p class="mt-2 text-sm text-gray-600">Size: <span id="original-size">-</span></p>
+                </div>
+                <div>
+                        <h3 class="text-lg font-medium mb-2">Compressed</h3>
+                        <img id="compressed-preview" class="w-full h-48 object-contain bg-gray-100 rounded border">
+                        <p class="mt-2 text-sm text-gray-600">Size: <span id="compressed-size">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mt-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Features</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-bold mb-2">Quality Control</h3>
+                    <p class="text-gray-600">Adjust compression level to balance size and quality</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">Fast Processing</h3>
+                    <p class="text-gray-600">Compress your images instantly in your browser</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold mb-2">Privacy First</h3>
+                    <p class="text-gray-600">All processing happens locally - no file upload needed</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Update quality value display
+        const qualityInput = document.getElementById('jpg-quality');
+        const qualityValue = document.getElementById('quality-value');
+        qualityInput.addEventListener('input', () => {
+            qualityValue.textContent = qualityInput.value;
+        });
+
+        // Preview original image
+        const jpgInput = document.getElementById('jpg-input');
+        const originalPreview = document.getElementById('original-preview');
+        const originalSize = document.getElementById('original-size');
+
+        jpgInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                // Display original image
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    originalPreview.src = event.target.result;
+                    originalSize.textContent = formatBytes(file.size);
+                };
+                reader.readAsDataURL(file);
+                
+                // Reset compressed preview
+                document.getElementById('compressed-preview').src = '';
+                document.getElementById('compressed-size').textContent = '-';
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('jpg-compress-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const file = jpgInput.files[0];
+            if (!file) {
+                alert('Please select a JPG image first');
+                return;
+            }
+            
+            const quality = Number(qualityInput.value) / 100;
+            const compressedImageDataUrl = await compressJPGImage(file, quality);
+            
+            // Display compressed image
+            document.getElementById('compressed-preview').src = compressedImageDataUrl;
+            
+            // Calculate compressed size
+            const compressedSize = Math.round((compressedImageDataUrl.length * 3) / 4);
+            document.getElementById('compressed-size').textContent = formatBytes(compressedSize);
+        });
+
+        // Helper function to format bytes
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+        // Compress JPG image function
+        async function compressJPGImage(file, quality) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve(dataUrl);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+</body>
+</html> 
