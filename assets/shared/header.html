@@ -9,13 +9,13 @@
     <meta property="og:title" content="{{PAGE_TITLE}} - Document Tools">
     <meta property="og:description" content="Create customizable QR codes, compress images, convert formats, merge PDFs and more with our free online document processing tools">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://documenttools.com/">
+    <meta property="og:url" content="https://make-qr.github.io/">
     <meta property="og:image" content="{{ROOT_PATH}}assets/images/document-tools-og.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{PAGE_TITLE}}">
     <meta name="twitter:description" content="Create customizable QR codes and process documents with our free online tools">
     <meta name="robots" content="index, follow">
-    <meta name="canonical" href="https://documenttools.com/{{CANONICAL_PATH}}">
+    <meta name="canonical" href="https://make-qr.github.io/{{CANONICAL_PATH}}">
     <title>{{PAGE_TITLE}} - Document Tools</title>
     
     <!-- Favicon -->
@@ -24,17 +24,31 @@
     <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ROOT_PATH}}assets/css/style.css" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-257SVV94KB');
-    </script>
+    
     <!-- Scripts -->
     {{CUSTOM_HEAD}}
+    
+    <!-- Schema.org breadcrumb markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://make-qr.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{PAGE_TITLE}}",
+          "item": "https://make-qr.github.io/{{CANONICAL_PATH}}"
+        }
+      ]
+    }
+    </script>
 </head>
 <body class="bg-gray-100">
     <!-- Navigation -->

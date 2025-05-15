@@ -1,0 +1,12 @@
+# robots.txt for documenttools.com
+User-agent: *
+Allow: /
+Allow: /pages/
+Allow: /assets/images/
+
+# Prevent crawling of potentially large files
+Disallow: /assets/js/
+Disallow: /assets/css/
+
+# Sitemap location
+Sitemap: https://make-qr.github.io/sitemap.xml 
