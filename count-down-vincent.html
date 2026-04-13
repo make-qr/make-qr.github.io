@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Nghỉ Việc</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    h1 { font-size: 32px; }
+    h2 { color: #ccc; }
+
+    .date-info {
+      margin: 15px 0;
+      font-size: 16px;
+      color: #aaa;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 10px;
+      width: 90px;
+    }
+
+    .number {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .phase {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .quote {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ddd;
+      font-style: italic;
+    }
+
+    .progress-container {
+      width: 300px;
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      margin: 25px auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      transition: width 0.5s;
+    }
+
+    .percent {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📆 Countdown Nghỉ Việc</h1>
+  <h2>Thắng Trần - Vincent</h2>
+
+  <div class="date-info">
+    <div>🏁 Thời điểm kết thúc: <span id="endDate"></span></div>
+  </div>
+
+  <div class="countdown">
+    <div class="box">
+      <div id="days" class="number">0</div>
+      <div class="label">Days</div>
+    </div>
+    <div class="box">
+      <div id="hours" class="number">0</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="box">
+      <div id="minutes" class="number">0</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="box">
+      <div id="seconds" class="number">0</div>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
+
+  <div class="phase" id="phase"></div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="percent" id="percent"></div>
+
+  <div class="quote" id="quote"></div>
+
+  <script>
+    // 👉 SET NGÀY + GIỜ KẾT THÚC (17:00)
+    const end = new Date("2026-05-13T17:00:00");
+
+    const totalDays = 30;
+
+    function formatDateTime(date) {
+      return date.toLocaleString('vi-VN');
+    }
+
+    document.getElementById("endDate").innerText = formatDateTime(end);
+
+    function update() {
+      const now = new Date();
+      const distance = end - now;
+
+      if (distance <= 0) {
+        document.body.innerHTML = "<h1>🎉 ĐÃ HOÀN TẤT QUÁ TRÌNH 🎉</h1>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      // Phase (lịch sự hơn)
+      let phase = "";
+      if (days > 20) phase = "🟢 Giai đoạn khởi đầu";
+      else if (days > 5) phase = "🟡 Đang tiến dần đến thời điểm kết thúc";
+      else phase = "🔴 Giai đoạn hoàn tất";
+      document.getElementById("phase").innerText = phase;
+
+      // Progress
+      const passed = totalDays - days;
+      const percent = Math.min(100, Math.max(0, Math.floor((passed / totalDays) * 100)));
+
+      document.getElementById("percent").innerText = percent + "% hoàn thành";
+      document.getElementById("progressBar").style.width = percent + "%";
+
+      // Quote (lịch sự)
+      let quote = "";
+      if (days > 20) quote = "Đang trong quá trình chuyển giao.";
+      else if (days > 10) quote = "Các công việc đang dần được hoàn tất.";
+      else if (days > 3) quote = "Đang hoàn thiện các bước cuối cùng.";
+      else quote = "Sẵn sàng cho giai đoạn tiếp theo.";
+
+      document.getElementById("quote").innerText = quote;
+    }
+
+    update();
+    setInterval(update, 1000);
+  </script>
+
+</body>
+</html>
