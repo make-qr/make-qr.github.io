@@ -132,7 +132,7 @@ class ImageProcessor {
 }
 
 // Event listeners for all image processing pages
-document.addEventListener('DOMContentLoaded', () => {
+function initImageProcessing() {
     // Compress PNG 
     const pngUpload = document.getElementById('png-upload');
     const compressBtn = document.getElementById('compress-btn');
@@ -368,4 +368,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-}); 
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageProcessing);
+} else {
+    initImageProcessing();
+} 

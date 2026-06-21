@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online QR code generator & document tools - Create, customize QR codes, compress images, merge PDFs, and more tools for document processing">
+    <meta name="description" content="Free online QR code generator and browser tools — create QR codes, scan, compress images, merge PDFs, and test devices. Private, no signup.">
     <meta name="keywords" content="qr code generator, qr code maker, document tools, image compression, pdf merger, webp converter, online tools, free tools">
-    <meta name="author" content="Document Tools">
-    <meta property="og:title" content="QR Code Generator & Document Tools - Free Online Utilities">
+    <meta name="author" content="Make QR">
+    <meta property="og:title" content="QR Code Generator & Free Online Tools - Make QR">
     <meta property="og:description" content="Create customizable QR codes, compress images, convert formats, merge PDFs and more with our free online document processing tools">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://make-qr.github.io/">
-    <meta property="og:image" content="assets/images/document-tools-og.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="QR Code Generator & Document Tools">
+    <meta property="og:image" content="https://make-qr.github.io/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Make QR - Free Online Tools">
     <meta name="twitter:description" content="Create customizable QR codes and process documents with our free online tools">
     <meta name="robots" content="index, follow">
     <meta name="canonical" href="https://make-qr.github.io/">
-    <title>QR Code Generator & Document Tools - Free Online Utilities</title>
+    <title>Make QR - Free QR Code Generator & Online Tools</title>
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔲</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='4' y='18' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='18' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='24' y='18' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='18' y='24' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='24' y='24' width='4' height='4' fill='%231E40AF'/%3E%3C/svg%3E">
     
     <!-- Stylesheets -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="assets/css/tailwind.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
-    <script src="assets/js/qr.js"></script>
-    <script src="assets/js/template-loader.js"></script>
+    <script src="assets/js/template-loader.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js" defer></script>
+    <script src="assets/js/qr-generator.js" defer></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
     <script>
@@ -45,7 +45,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "QR Code Generator & Document Tools",
+      "name": "Make QR",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -70,34 +70,104 @@
         "Convert WebP to PNG",
         "Merge PDF files"
       ],
-      "url": "https://make-qr.github.io/",
-      "creator": {
-        "@type": "Organization",
-        "name": "Document Tools",
-        "email": "contact@documenttools.com",
-        "logo": "https://make-qr.github.io/assets/images/logo-footer.png"
-      }
+      "url": "https://make-qr.github.io/"
     }
     </script>
 </head>
-<body class="bg-gray-100">
+<body class="page-body">
     <!-- Navigation -->
     
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-auto">  
-            <div class="flex items-center justify-center mb-6">
-                <div class="mr-3 bg-blue-600 text-white p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <main class="home-main max-w-7xl mx-auto px-4 py-8">
+        <section class="home-hero">
+            <span class="home-badge">Free · Private · No signup</span>
+            <h1 class="home-hero-title">QR codes &amp; online tools</h1>
+            <p class="home-hero-desc">Create customizable QR codes, compress images, merge PDFs, and test your devices — everything runs locally in your browser.</p>
+            <div class="home-hero-actions">
+                <a href="#qr-generator" class="home-btn-primary">Create QR code</a>
+                <a href="pages/scan-qr.html" class="home-btn-secondary">Scan QR code</a>
+            </div>
+        </section>
+
+        <section class="home-tools" aria-label="Tools">
+            <h2 class="home-section-title">All tools</h2>
+            <div class="home-tools-grid">
+                <a href="#qr-generator" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--qr" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Generate QR</span>
+                    <span class="home-tool-desc">Text, URL, WiFi, vCard &amp; more</span>
+                </a>
+                <a href="pages/scan-qr.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--scan" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Scan QR</span>
+                    <span class="home-tool-desc">Camera, upload, or paste</span>
+                </a>
+                <a href="pages/compress-jpg.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--image" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Compress JPG</span>
+                    <span class="home-tool-desc">Reduce file size</span>
+                </a>
+                <a href="pages/compress-png.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--image" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Compress PNG</span>
+                    <span class="home-tool-desc">Optimize PNG images</span>
+                </a>
+                <a href="pages/convert-to-webp.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--image" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Convert to WebP</span>
+                    <span class="home-tool-desc">Modern image format</span>
+                </a>
+                <a href="pages/merge-pdf.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--pdf" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Merge PDF</span>
+                    <span class="home-tool-desc">Combine multiple files</span>
+                </a>
+                <a href="pages/test-tools/index.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--device" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </span>
+                    <span class="home-tool-name">Device tests</span>
+                    <span class="home-tool-desc">Mic, webcam, mouse &amp; more</span>
+                </a>
+                <a href="pages/test-keyboard/index.html" class="home-tool-card">
+                    <span class="home-tool-icon home-tool-icon--device" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                    </span>
+                    <span class="home-tool-name">Keyboard test</span>
+                    <span class="home-tool-desc">Check every key</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="qr-generator" class="home-qr-section">
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-4xl mx-auto">  
+            <div class="home-qr-header">
+                <div class="home-qr-header-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                     </svg>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800">Versatile QR Code Generator</h1>  
+                <div>
+                    <h2 class="home-qr-title">QR Code Generator</h2>
+                    <p class="home-qr-subtitle">Customize colors, frames, and download instantly</p>
+                </div>
             </div>
             
             <!-- Tab Navigation -->
-            <div class="flex flex-wrap border-b border-gray-200 mb-4">
+            <div class="qr-tab-nav flex border-b border-gray-200 mb-4 -mx-1 px-1">
                 <button data-target="tab-text" class="tab-btn px-4 py-2 text-sm font-medium rounded-t-md bg-blue-600 text-white">Text</button>
                 <button data-target="tab-url" class="tab-btn px-4 py-2 text-sm font-medium">URL</button>
                 <button data-target="tab-vcard" class="tab-btn px-4 py-2 text-sm font-medium">vCard</button>
@@ -330,7 +400,6 @@
                     </div>
                 </div>
                 
-                <!-- Thêm tùy chỉnh khung -->
                 <div class="mt-6">
                     <h4 class="text-md font-medium text-gray-800 mb-2">Frame Options</h4>
                     <div class="grid grid-cols-2 md:grid-cols-6 gap-2 mb-4">
@@ -407,420 +476,28 @@
             </div>  
             
             <div id="qrcode" class="flex justify-center"></div>  
-            
-            
-        </div>  
+        </div>
+        </section>
+
+        <section class="home-trust" aria-label="Why Make QR">
+            <div class="home-trust-item">
+                <span class="home-trust-icon" aria-hidden="true">🔒</span>
+                <h3>Private by design</h3>
+                <p>Files and data stay on your device. Nothing is uploaded to our servers.</p>
+            </div>
+            <div class="home-trust-item">
+                <span class="home-trust-icon" aria-hidden="true">⚡</span>
+                <h3>Instant results</h3>
+                <p>No queues or waiting — tools run directly in your browser.</p>
+            </div>
+            <div class="home-trust-item">
+                <span class="home-trust-icon" aria-hidden="true">💸</span>
+                <h3>Always free</h3>
+                <p>All tools are free to use with no account required.</p>
+            </div>
+        </section>
     </main>
 
-    <script>  
-        document.addEventListener('DOMContentLoaded', function() {  
-            const generateBtn = document.getElementById('generate-btn');  
-            const downloadBtn = document.getElementById('download-btn');  
-            const qrcodeContainer = document.getElementById('qrcode-container');  
-            const qrcode = document.getElementById('qrcode');  
-            
-            let qrInstance = null;  
-            
-            // Tab Navigation
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    
-                    // Remove active class from all buttons and contents
-                    tabButtons.forEach(btn => btn.classList.remove('bg-blue-600', 'text-white'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    // Add active class to current button and content
-                    this.classList.add('bg-blue-600', 'text-white');
-                    document.getElementById(targetId).classList.add('active');
-                });
-            });
-            
-            // Frame customization event listeners
-            const frameOptions = document.querySelectorAll('.frame-option');
-            let selectedFrameStyle = 'none';
-            
-            frameOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove selected class from all options
-                    frameOptions.forEach(opt => opt.classList.remove('selected'));
-                    
-                    // Add selected class to clicked option
-                    this.classList.add('selected');
-                    
-                    // Store selected frame style
-                    selectedFrameStyle = this.getAttribute('data-frame-style');
-                });
-            });
-            
-            // Update frame preview colors
-            document.getElementById('frame-color').addEventListener('input', function() {
-                const frameColor = this.value;
-                document.querySelectorAll('.frame-preview-inner').forEach(frame => {
-                    if (frame.classList.length > 1) { // Has frame style
-                        frame.style.borderColor = frameColor;
-                    }
-                });
-            });
-            
-            // Function to generate QR code with frame
-            function generateQRCode(text) {
-                // Validate input
-                if (!text || typeof text !== 'string') {
-                    console.error("Invalid text for QR code:", text);
-                    alert("Cannot generate QR code: Invalid data");
-                    return;
-                }
-                
-                try {
-                    // Xóa mã QR cũ nếu có  
-                    qrcode.innerHTML = '';
-                    
-                    const size = parseInt(document.getElementById('qr-size').value);
-                    const foreground = document.getElementById('qr-foreground').value;
-                    const background = document.getElementById('qr-background').value;
-                    const frameColor = document.getElementById('frame-color').value;
-                    const caption = document.getElementById('qr-caption').value.trim();
-                    
-                    // Create container for QR code with possible frame
-                    const qrContainer = document.createElement('div');
-                    
-                    // Add frame if selected
-                    if (selectedFrameStyle !== 'none') {
-                        qrContainer.className = 'qr-with-frame';
-                        
-                        const frameElement = document.createElement('div');
-                        frameElement.className = `qr-frame qr-frame-${selectedFrameStyle}`;
-                        frameElement.style.borderColor = frameColor;
-                        
-                        qrContainer.appendChild(frameElement);
-                    }
-                    
-                    // Create element for the QR code itself
-                    const qrElement = document.createElement('div');
-                    qrElement.id = 'qr-code-element';
-                    qrContainer.appendChild(qrElement);
-                    
-                    // Add caption if provided
-                    if (caption) {
-                        const captionElement = document.createElement('div');
-                        captionElement.className = 'qr-caption';
-                        captionElement.textContent = caption;
-                        captionElement.style.color = frameColor;
-                        qrContainer.appendChild(captionElement);
-                    }
-                    
-                    // Add container to DOM
-                    qrcode.appendChild(qrContainer);
-                    
-                    // If text is too long, warn the user
-                    if (text.length > 1000) {
-                        console.warn("QR code text is very long:", text.length, "characters");
-                    }
-                    
-                    // Generate QR code in the element
-                    qrInstance = new QRCode(qrElement, {  
-                        text: text,  
-                        width: size,  
-                        height: size,  
-                        colorDark: foreground,  
-                        colorLight: background,  
-                        correctLevel: QRCode.CorrectLevel.H  
-                    });  
-                    
-                    // Hiển thị container và kích hoạt nút tải xuống  
-                    qrcodeContainer.classList.remove('hidden');  
-                    downloadBtn.disabled = false;
-                } catch (error) {
-                    console.error("Error generating QR code:", error);
-                    alert("Cannot generate QR code: " + error.message);
-                    
-                    // Clean up on error
-                    qrcode.innerHTML = '';
-                    qrcodeContainer.classList.add('hidden');  
-                    downloadBtn.disabled = true;
-                }
-            }
-            
-            // Hàm tạo mã QR  
-            generateBtn.addEventListener('click', function() {  
-                // Determine active tab
-                const activeTab = document.querySelector('.tab-content.active').id;
-                let qrContent = '';
-                
-                switch (activeTab) {
-                    case 'tab-text':
-                        qrContent = document.getElementById('text-input').value.trim();
-                        break;
-                        
-                    case 'tab-url':
-                        qrContent = document.getElementById('url-input').value.trim();
-                        break;
-                        
-                    case 'tab-vcard':
-                        const name = document.getElementById('vcard-name').value.trim();
-                        const org = document.getElementById('vcard-org').value.trim();
-                        const phone = document.getElementById('vcard-phone').value.trim();
-                        const email = document.getElementById('vcard-email').value.trim();
-                        const url = document.getElementById('vcard-url').value.trim();
-                        const address = document.getElementById('vcard-address').value.trim();
-                        
-                        // Create vCard format
-                        qrContent = "BEGIN:VCARD\nVERSION:3.0\n";
-                        if (name) qrContent += `FN:${name}\nN:${name}\n`;
-                        if (org) qrContent += `ORG:${org}\n`;
-                        if (phone) qrContent += `TEL:${phone}\n`;
-                        if (email) qrContent += `EMAIL:${email}\n`;
-                        if (url) qrContent += `URL:${url}\n`;
-                        if (address) qrContent += `ADR:;;${address};;;\n`;
-                        qrContent += "END:VCARD";
-                        break;
-                        
-                    case 'tab-email':
-                        const emailTo = document.getElementById('email-to').value.trim();
-                        const emailSubject = document.getElementById('email-subject').value.trim();
-                        const emailBody = document.getElementById('email-body').value.trim();
-                        
-                        qrContent = `mailto:${emailTo}`;
-                        if (emailSubject || emailBody) {
-                            qrContent += '?';
-                            if (emailSubject) qrContent += `subject=${encodeURIComponent(emailSubject)}`;
-                            if (emailSubject && emailBody) qrContent += '&';
-                            if (emailBody) qrContent += `body=${encodeURIComponent(emailBody)}`;
-                        }
-                        break;
-                        
-                    case 'tab-sms':
-                        const smsPhone = document.getElementById('sms-phone').value.trim();
-                        const smsMessage = document.getElementById('sms-message').value.trim();
-                        
-                        qrContent = `sms:${smsPhone}`;
-                        if (smsMessage) {
-                            qrContent += `?body=${encodeURIComponent(smsMessage)}`;
-                        }
-                        break;
-                        
-                    case 'tab-wifi':
-                        const wifiSsid = document.getElementById('wifi-ssid').value.trim();
-                        const wifiPassword = document.getElementById('wifi-password').value;
-                        const wifiEncryption = document.getElementById('wifi-encryption').value;
-                        const wifiHidden = document.getElementById('wifi-hidden').checked;
-                        
-                        qrContent = "WIFI:";
-                        if (wifiEncryption !== 'nopass') qrContent += `T:${wifiEncryption};`;
-                        qrContent += `S:${wifiSsid};`;
-                        if (wifiEncryption !== 'nopass') qrContent += `P:${wifiPassword};`;
-                        if (wifiHidden) qrContent += "H:true;";
-                        qrContent += ";";
-                        break;
-                        
-                    case 'tab-file':
-                        const fileInput = document.getElementById('file-upload');
-                        if (!fileInput.files.length) {
-                            alert('Please select a file!');
-                            return;
-                        }
-                        
-                        const file = fileInput.files[0];
-                        if (file.size > 1024 * 100) { // Reduce limit to 100KB
-                            alert('File is too large! QR code may not work. Please select a file smaller than 100KB.');
-                        }
-                        
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            try {
-                                // Validate that we have data
-                                if (!e.target.result) {
-                                    throw new Error("Cannot read file data.");
-                                }
-                                
-                                // Check if file size is manageable for QR code
-                                if (e.target.result.length > 1024 * 200) { // 200KB in data URL is too much
-                                    alert("Converted file is too large. QR code may not work properly. Please select a smaller file.");
-                                }
-                                
-                                // Generate QR code safely
-                                generateQRCode(e.target.result);
-                            } catch (error) {
-                                console.error("Lỗi khi xử lý file:", error);
-                                alert("Cannot generate QR code from this file. " + error.message);
-                            }
-                        };
-                        reader.onerror = function() {
-                            alert("Error reading file. Please try another file.");
-                        };
-                        reader.readAsDataURL(file);
-                        return; // Skip the normal QR generation below
-                }
-                
-                if (!qrContent) {
-                    alert('Please enter content to generate QR code!');  
-                    return;  
-                }  
-                
-                generateQRCode(qrContent);
-            });
-            
-            // Điều chỉnh hàm tải xuống để tải mã QR với khung
-            downloadBtn.addEventListener('click', function() {  
-                if (!qrcode.querySelector('img')) {  
-                    alert('Please generate a QR code first!');  
-                    return;  
-                }
-                
-                // Get the QR code container with frame (if any)
-                const qrWithFrame = qrcode.querySelector('.qr-with-frame') || qrcode;
-                
-                // Create a canvas element to draw the QR code with frame
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                // Set canvas size
-                const padding = 20; // Extra padding for the frame
-                const qrImg = qrcode.querySelector('img');
-                const hasFrame = qrWithFrame.classList.contains('qr-with-frame');
-                const hasCaption = qrWithFrame.querySelector('.qr-caption');
-                
-                const captionHeight = hasCaption ? 40 : 0;
-                const frameWidth = hasFrame ? padding * 2 : 0;
-                
-                canvas.width = qrImg.width + frameWidth;
-                canvas.height = qrImg.height + frameWidth + captionHeight;
-                
-                // Fill background
-                ctx.fillStyle = '#FFFFFF';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // If there's a frame, draw it
-                if (hasFrame) {
-                    const frameColor = document.getElementById('frame-color').value;
-                    const frameStyle = selectedFrameStyle;
-                    
-                    ctx.strokeStyle = frameColor;
-                    ctx.lineWidth = 10;
-                    
-                    if (frameStyle === 'style-1') {
-                        // Simple rectangular frame
-                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
-                        ctx.lineWidth = 1;
-                        ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - captionHeight - 30);
-                    } else if (frameStyle === 'style-2') {
-                        // Round frame
-                        ctx.beginPath();
-                        const radius = canvas.width / 2;
-                        ctx.arc(canvas.width/2, (canvas.height - captionHeight)/2, radius - 10, 0, Math.PI * 2);
-                        ctx.stroke();
-                    } else if (frameStyle === 'style-4') {
-                        // Dashed frame
-                        ctx.setLineDash([10, 10]);
-                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
-                    } else if (frameStyle === 'style-5') {
-                        // Double frame
-                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
-                        ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - captionHeight - 30);
-                    } else {
-                        // Default frame
-                        ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - captionHeight - 10);
-                    }
-                }
-                
-                // Draw the QR code image
-                ctx.drawImage(qrImg, hasFrame ? padding/2 : 0, hasFrame ? padding/2 : 0);
-                
-                // If there's a caption, draw it
-                if (hasCaption) {
-                    const caption = hasCaption.textContent;
-                    ctx.font = 'bold 20px Arial';
-                    ctx.fillStyle = document.getElementById('frame-color').value;
-                    ctx.textAlign = 'center';
-                    ctx.fillText(caption, canvas.width/2, canvas.height - captionHeight/2);
-                }
-                
-                // Convert canvas to data URL
-                const dataURL = canvas.toDataURL('image/png');
-                
-                // Create download link
-                const link = document.createElement('a');
-                link.download = 'qrcode-with-frame.png';
-                link.href = dataURL;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });  
-
-            // Handle file upload for the file tab
-            const fileUpload = document.getElementById('file-upload');
-            const filePreview = document.getElementById('file-preview');
-            const imagePreview = document.getElementById('image-preview');
-            const pdfPreview = document.getElementById('pdf-preview');
-            const pdfName = document.getElementById('pdf-name');
-            
-            fileUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) {
-                    filePreview.classList.add('hidden');
-                    return;
-                }
-                
-                // Check file size limit - strict 100KB limit
-                const MAX_FILE_SIZE = 100 * 1024; // 100KB
-                if (file.size > MAX_FILE_SIZE) {
-                    alert(`File is too large (${Math.round(file.size/1024)}KB). Please select a file smaller than ${MAX_FILE_SIZE/1024}KB.`);
-                    fileUpload.value = '';
-                    filePreview.classList.add('hidden');
-                    return;
-                }
-                
-                const fileType = document.getElementById('file-type').value;
-                
-                if (fileType === 'image') {
-                    if (!file.type.startsWith('image/')) {
-                        alert('Please select an image file');
-                        fileUpload.value = '';
-                        filePreview.classList.add('hidden');
-                        return;
-                    }
-                    
-                    // Show image preview
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        imagePreview.src = event.target.result;
-                        imagePreview.classList.remove('hidden');
-                        pdfPreview.classList.add('hidden');
-                        filePreview.classList.remove('hidden');
-                    };
-                    reader.readAsDataURL(file);
-                } else if (fileType === 'pdf') {
-                    if (file.type !== 'application/pdf') {
-                        alert('Please select a PDF file');
-                        fileUpload.value = '';
-                        filePreview.classList.add('hidden');
-                        return;
-                    }
-                    
-                    // Show PDF info
-                    pdfName.textContent = file.name;
-                    imagePreview.classList.add('hidden');
-                    pdfPreview.classList.remove('hidden');
-                    filePreview.classList.remove('hidden');
-                }
-            });
-
-            // Mobile menu toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('active');
-                });
-            }
-        });  
-    </script>  
-    
     <!-- Footer -->
     
 </body>

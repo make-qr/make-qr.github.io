@@ -1,85 +1,76 @@
-    <!-- Page Tools Menu -->
-    <div class="mt-8 pt-6 border-t border-gray-200 px-4 md:px-8">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Tools Menu</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">QR Code</h3>
-                <ul class="space-y-2">
-                    <li><a href="{{ROOT_PATH}}index.html" class="text-blue-600 hover:underline" aria-label="Generate QR Code">Generate QR Code</a></li>
-                    <li><a href="{{ROOT_PATH}}pages/scan-qr.html" class="text-blue-600 hover:underline" aria-label="Scan QR Code">Scan QR Code</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Image Tools</h3>
-                <ul class="space-y-2">
-                    <li><a href="{{ROOT_PATH}}pages/compress-jpg.html" class="text-blue-600 hover:underline" aria-label="Compress JPG Images">Compress JPG</a></li>
-                    <li><a href="{{ROOT_PATH}}pages/compress-png.html" class="text-blue-600 hover:underline" aria-label="Compress PNG Images">Compress PNG</a></li>
-                    <li><a href="{{ROOT_PATH}}pages/convert-to-webp.html" class="text-blue-600 hover:underline" aria-label="Convert Images to WebP Format">Convert to WebP</a></li>
-                    <li><a href="{{ROOT_PATH}}pages/webp-to-png.html" class="text-blue-600 hover:underline" aria-label="Convert WebP to PNG Format">WebP to PNG</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Other Tools</h3>
-                <ul class="space-y-2">
-                    <li><a href="{{ROOT_PATH}}pages/merge-pdf.html" class="text-blue-600 hover:underline" aria-label="Merge PDF Files">Merge PDF Files</a></li>
-                    <li><a href="{{ROOT_PATH}}copy-code.html" class="text-blue-600 hover:underline" aria-label="Copy Code Tool">Copy Code Tool</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16 w-full">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h4 class="text-lg font-bold mb-4">About</h4>
-                    <p class="text-gray-400">Free online tools for all your document processing needs</p>
-                    <img src="{{ROOT_PATH}}assets/images/logo-footer.png" alt="Document Tools Logo" class="mt-4 max-h-10" loading="lazy" width="160" height="40">
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="{{ROOT_PATH}}pages/compress-jpg.html" class="text-gray-400 hover:text-white" aria-label="Compress JPG Images">Compress JPG</a></li>
-                        <li><a href="{{ROOT_PATH}}pages/compress-png.html" class="text-gray-400 hover:text-white" aria-label="Compress PNG Images">Compress PNG</a></li>
-                        <li><a href="{{ROOT_PATH}}pages/convert-to-webp.html" class="text-gray-400 hover:text-white" aria-label="Convert Images to WebP Format">Convert to WebP</a></li>
-                        <li><a href="{{ROOT_PATH}}pages/webp-to-png.html" class="text-gray-400 hover:text-white" aria-label="Convert WebP to PNG Format">WebP to PNG</a></li>
-                        <li><a href="{{ROOT_PATH}}pages/merge-pdf.html" class="text-gray-400 hover:text-white" aria-label="Merge PDF Files">Merge PDF</a></li>
-                        <li><a href="{{ROOT_PATH}}pages/scan-qr.html" class="text-gray-400 hover:text-white" aria-label="Scan QR Code">Scan QR</a></li>
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-brand">
+                <a href="{{ROOT_PATH}}index.html" class="site-logo site-logo--footer" aria-label="Make QR Home">
+                    <svg class="site-logo-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="4" y="4" width="10" height="10" rx="2" fill="currentColor"/>
+                        <rect x="18" y="4" width="10" height="10" rx="2" fill="currentColor"/>
+                        <rect x="4" y="18" width="10" height="10" rx="2" fill="currentColor"/>
+                        <rect x="18" y="18" width="4" height="4" fill="currentColor"/>
+                        <rect x="24" y="18" width="4" height="4" fill="currentColor"/>
+                        <rect x="18" y="24" width="4" height="4" fill="currentColor"/>
+                        <rect x="24" y="24" width="4" height="4" fill="currentColor"/>
+                    </svg>
+                    <span class="site-logo-text">
+                        <span class="site-logo-name">Make QR</span>
+                        <span class="site-logo-tagline">Free online tools</span>
+                    </span>
+                </a>
+                <p class="site-footer-desc">
+                    QR codes, image &amp; PDF tools, plus device tests for keyboard, mic, camera and more — all in your browser.
+                </p>
+            </div>
+
+            <div class="site-footer-grid">
+                <div class="site-footer-col">
+                    <h4 class="site-footer-heading">QR Code</h4>
+                    <ul class="site-footer-list">
+                        <li><a href="{{ROOT_PATH}}index.html">Generate QR Code</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/scan-qr.html">Scan QR Code</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Contact</h4>
-                    <p class="text-gray-400">Questions? Suggestions? Let us know!</p>
-                    <a href="mailto:contact@documenttools.com" class="text-blue-400 hover:text-blue-300" aria-label="Email us">contact@documenttools.com</a>
+                <div class="site-footer-col">
+                    <h4 class="site-footer-heading">Image &amp; PDF</h4>
+                    <ul class="site-footer-list">
+                        <li><a href="{{ROOT_PATH}}pages/compress-jpg.html">Compress JPG</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/compress-png.html">Compress PNG</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/convert-to-webp.html">Convert to WebP</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/webp-to-png.html">WebP to PNG</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/merge-pdf.html">Merge PDF</a></li>
+                    </ul>
+                </div>
+                <div class="site-footer-col site-footer-col--wide">
+                    <h4 class="site-footer-heading">Device Test</h4>
+                    <ul class="site-footer-list site-footer-list--cols">
+                        <li><a href="{{ROOT_PATH}}pages/test-keyboard/index.html">Keyboard Test</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/test-tools/microphone-test.html">Microphone Test</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/test-tools/webcam-test.html">Webcam Test</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/test-tools/speaker-test.html">Speaker Test</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/test-tools/mouse-test.html">Mouse Test</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/test-tools/dead-pixel-test.html">Dead Pixel Test</a></li>
+                        <li><a href="{{ROOT_PATH}}pages/test-tools/controller-tester.html">Controller Test</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-                <p>&copy; <span id="current-year">2025</span> Document Tools. All rights reserved.</p>
-            </div>
+        </div>
+
+        <div class="site-footer-bottom">
+            <p>&copy; <span id="current-year">2025</span> Make QR</p>
+            <p class="site-footer-badge">100% client-side · Files never leave your device</p>
         </div>
     </footer>
 
-    <!-- Load JS -->
-    <script src="{{ROOT_PATH}}assets/js/navigation.js" defer></script>
     {{CUSTOM_SCRIPTS}}
-    
-    <!-- Schema.org Organization markup -->
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Document Tools",
+      "@type": "WebSite",
+      "name": "Make QR",
       "url": "https://make-qr.github.io/",
-      "logo": "https://make-qr.github.io/assets/images/logo-footer.png",
-      "email": "contact@documenttools.com",
-      "description": "Free online tools for all your document processing needs",
-      "sameAs": [
-        "https://make-qr.github.io/"
-      ]
+      "description": "Free online QR tools, image & PDF utilities, and browser-based device tests for keyboard, microphone, webcam and more."
     }
     </script>
 </body>
-</html> 
+</html>

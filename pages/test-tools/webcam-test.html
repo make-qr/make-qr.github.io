@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Webcam Test Online - Check Your Camera in Browser | Make QR</title>
+  <meta name="description" content="Test your webcam online directly in your browser. Check camera preview, resolution, permissions, and take a snapshot. Private, free, and no upload required." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='4' y='18' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='18' width='4' height='4' fill='%231E40AF'/%3E%3C/svg%3E">
+<meta name="author" content="Make QR">
+<link href="../../assets/css/tailwind.min.css" rel="stylesheet">
+<link href="../../assets/css/style.css" rel="stylesheet">
+<link href="../../assets/css/device-test.css" rel="stylesheet">
+<script src="../../assets/js/template-loader.js" defer></script>
+</head>
+<body class="page-body">
+  <main class="wrap">
+    <section class="hero">
+      <div class="badge">🔒 Private webcam test · no upload</div>
+      <h1>Webcam Test Online</h1>
+      <p>Check your camera directly in the browser. Preview video, verify permissions, switch cameras, and take a quick snapshot — without recording or uploading anything.</p>
+    </section>
+
+    <section class="tool" aria-label="Webcam test tool">
+      <div class="panel">
+        <div class="videoBox" id="videoBox">
+          <div class="statusPill" id="statusPill">Camera not started</div>
+          <video id="video" autoplay playsinline muted></video>
+          <div class="placeholder" id="placeholder">
+            <div class="icon">📷</div>
+            <strong>Ready to test your webcam?</strong><br />
+            Click “Start Webcam Test” to allow camera access.
+          </div>
+        </div>
+        <div class="controls">
+          <button class="primary" id="startBtn">Start Webcam Test</button>
+          <button class="danger" id="stopBtn" disabled>Stop Camera</button>
+          <button id="mirrorBtn" disabled>Mirror: Off</button>
+          <button id="snapBtn" disabled>Take Snapshot</button>
+          <button id="fullBtn" disabled>Fullscreen</button>
+        </div>
+      </div>
+
+      <aside class="panel side">
+        <h2>Camera diagnostics</h2>
+        <label for="cameraSelect">Camera device</label>
+        <select id="cameraSelect" disabled><option>No camera selected</option></select>
+        <div class="metric"><span>Status</span><b id="mStatus" class="warn">Not started</b></div>
+        <div class="metric"><span>Permission</span><b id="mPermission">Unknown</b></div>
+        <div class="metric"><span>Resolution</span><b id="mResolution">—</b></div>
+        <div class="metric"><span>Aspect ratio</span><b id="mAspect">—</b></div>
+        <div class="metric"><span>Cameras found</span><b id="mDevices">—</b></div>
+        <div class="metric"><span>Browser</span><b id="mBrowser">—</b></div>
+        <div class="privacy">Your webcam stream stays local in your browser. This page does not record, store, or upload your camera video.</div>
+        <div class="snapshot" id="snapshot"><h2>Snapshot</h2><img id="snapImg" alt="Webcam snapshot preview" /><br><button id="downloadBtn">Download Snapshot</button></div>
+      </aside>
+    </section>
+
+    <section class="content">
+      <article class="panel section">
+        <h2>How to test your webcam</h2>
+        <ol>
+          <li>Click <strong>Start Webcam Test</strong>.</li>
+          <li>Allow camera permission when your browser asks.</li>
+          <li>Check the preview, resolution, and selected camera.</li>
+          <li>Use mirror mode or take a snapshot if needed.</li>
+        </ol>
+      </article>
+
+      <article class="panel section">
+        <h2>Common webcam problems</h2>
+        <ul>
+          <li><strong>Permission denied:</strong> reopen browser camera permissions and allow access.</li>
+          <li><strong>Black screen:</strong> close Zoom, Meet, Teams, or apps using the camera.</li>
+          <li><strong>No camera found:</strong> reconnect external webcam or check device drivers.</li>
+          <li><strong>Blurry image:</strong> clean the lens and improve room lighting.</li>
+        </ul>
+      </article>
+
+      <article class="panel section faq">
+        <h2>Webcam Test FAQ</h2>
+        <details open><summary>Is this webcam test private?</summary><p>Yes. The camera preview runs locally in your browser. No video is uploaded to a server.</p></details>
+        <details><summary>Do you record my webcam?</summary><p>No. This tool only displays your webcam stream so you can test it.</p></details>
+        <details><summary>Can I test an external webcam?</summary><p>Yes. Connect the webcam, start the test, then select it from the camera dropdown.</p></details>
+        <details><summary>Why is my webcam not working?</summary><p>The most common causes are denied permissions, another app using the camera, disconnected hardware, or outdated drivers.</p></details>
+      </article>
+
+      <article class="panel section">
+        <h2>Related online tools</h2>
+        <div class="links"><a href="index.html">All Device Tests</a>
+          <a href="microphone-test.html">Microphone Test</a>
+          <a href="../test-keyboard/index.html">Keyboard Test</a>
+          <a href="speaker-test.html">Speaker Test</a>
+          <a href="mouse-test.html">Mouse Test</a>
+          <a href="dead-pixel-test.html">Dead Pixel Test</a>
+          <a href="controller-tester.html">Controller Tester</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  
+
+  <script>
+    const video = document.getElementById('video');
+    const videoBox = document.getElementById('videoBox');
+    const placeholder = document.getElementById('placeholder');
+    const statusPill = document.getElementById('statusPill');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const mirrorBtn = document.getElementById('mirrorBtn');
+    const snapBtn = document.getElementById('snapBtn');
+    const fullBtn = document.getElementById('fullBtn');
+    const cameraSelect = document.getElementById('cameraSelect');
+    const mStatus = document.getElementById('mStatus');
+    const mPermission = document.getElementById('mPermission');
+    const mResolution = document.getElementById('mResolution');
+    const mAspect = document.getElementById('mAspect');
+    const mDevices = document.getElementById('mDevices');
+    const mBrowser = document.getElementById('mBrowser');
+    const snapshot = document.getElementById('snapshot');
+    const snapImg = document.getElementById('snapImg');
+    const downloadBtn = document.getElementById('downloadBtn');
+    let stream = null;
+
+    mBrowser.textContent = navigator.userAgent.includes('Edg') ? 'Microsoft Edge' : navigator.userAgent.includes('Chrome') ? 'Chrome' : navigator.userAgent.includes('Firefox') ? 'Firefox' : navigator.userAgent.includes('Safari') ? 'Safari' : 'Browser';
+
+    function setStatus(text, cls='') {
+      statusPill.textContent = text; mStatus.textContent = text; mStatus.className = cls;
+    }
+    function stopCamera(){
+      if(stream){ stream.getTracks().forEach(t => t.stop()); stream = null; }
+      video.style.display = 'none'; placeholder.style.display = 'block';
+      stopBtn.disabled = mirrorBtn.disabled = snapBtn.disabled = fullBtn.disabled = true;
+      startBtn.disabled = false; setStatus('Stopped','warn');
+    }
+    async function listCameras(){
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const cams = devices.filter(d => d.kind === 'videoinput');
+      mDevices.textContent = cams.length;
+      cameraSelect.innerHTML = cams.length ? '' : '<option>No camera found</option>';
+      cams.forEach((cam, i) => {
+        const opt = document.createElement('option');
+        opt.value = cam.deviceId; opt.textContent = cam.label || `Camera ${i + 1}`;
+        cameraSelect.appendChild(opt);
+      });
+      cameraSelect.disabled = cams.length < 2;
+    }
+    async function startCamera(deviceId){
+      try{
+        stopCamera(); startBtn.disabled = true; setStatus('Requesting permission','warn');
+        const constraints = { video: deviceId ? { deviceId:{exact:deviceId} } : { width:{ideal:1280}, height:{ideal:720} }, audio:false };
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream; video.style.display = 'block'; placeholder.style.display = 'none';
+        stopBtn.disabled = mirrorBtn.disabled = snapBtn.disabled = fullBtn.disabled = false;
+        mPermission.textContent = 'Granted'; mPermission.className = 'ok'; setStatus('Camera working','ok');
+        await listCameras();
+        const track = stream.getVideoTracks()[0];
+        if(track && track.getSettings().deviceId) cameraSelect.value = track.getSettings().deviceId;
+        video.onloadedmetadata = () => {
+          const w = video.videoWidth, h = video.videoHeight;
+          mResolution.textContent = w && h ? `${w} × ${h}` : '—';
+          mAspect.textContent = w && h ? (w / h).toFixed(2) + ':1' : '—';
+        };
+      } catch(err){
+        startBtn.disabled = false; mPermission.textContent = err.name === 'NotAllowedError' ? 'Denied' : 'Error'; mPermission.className = 'bad';
+        setStatus(err.name === 'NotAllowedError' ? 'Permission denied' : 'Camera error','bad');
+        placeholder.style.display = 'block'; placeholder.innerHTML = `<div class="icon">⚠️</div><strong>${err.name}</strong><br>${err.message || 'Unable to start camera.'}`;
+      }
+    }
+    startBtn.onclick = () => startCamera(cameraSelect.value && cameraSelect.value !== 'No camera selected' ? cameraSelect.value : undefined);
+    stopBtn.onclick = stopCamera;
+    cameraSelect.onchange = () => startCamera(cameraSelect.value);
+    mirrorBtn.onclick = () => { videoBox.classList.toggle('mirror'); mirrorBtn.textContent = videoBox.classList.contains('mirror') ? 'Mirror: On' : 'Mirror: Off'; };
+    fullBtn.onclick = () => videoBox.requestFullscreen && videoBox.requestFullscreen();
+    snapBtn.onclick = () => {
+      const canvas = document.createElement('canvas'); canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      if(videoBox.classList.contains('mirror')){ ctx.translate(canvas.width,0); ctx.scale(-1,1); }
+      ctx.drawImage(video,0,0,canvas.width,canvas.height);
+      snapImg.src = canvas.toDataURL('image/png'); snapshot.style.display = 'block';
+    };
+    downloadBtn.onclick = () => { const a = document.createElement('a'); a.href = snapImg.src; a.download = 'webcam-test-snapshot.png'; a.click(); };
+    if(!navigator.mediaDevices?.getUserMedia){ setStatus('Not supported','bad'); startBtn.disabled = true; placeholder.innerHTML = '<div class="icon">⚠️</div><strong>Your browser does not support webcam access.</strong>'; }
+    else listCameras().catch(()=>{});
+  </script>
+</body>
+</html>

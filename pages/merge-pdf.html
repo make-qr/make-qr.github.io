@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gộp file PDF | PDF Merger | Document Tools</title>
-    <meta name="description" content="Công cụ gộp nhiều file PDF thành một file duy nhất, hoạt động trên trình duyệt">
+    <title>Merge PDF | Make QR</title>
+    <meta name="description" content="Merge multiple PDF files into one — runs entirely in your browser, no upload required">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
     
     <!-- Load the PDF libraries with version pinning and integrity checks -->
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -202,7 +203,7 @@
             }
         }
     </style>
-    <script src="../assets/js/template-loader.js"></script>
+    <script src="../assets/js/template-loader.js" defer></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
     <script>
@@ -213,11 +214,8 @@
     gtag('config', 'G-257SVV94KB');
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen">
-    <!-- Main Navigation -->
-    
-
-    <div class="p-4">
+<body class="page-body">
+    <main class="max-w-5xl mx-auto px-4 py-8">
         <div class="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-6">
             <div class="flex items-center justify-center mb-6">
                 <div class="mr-3 bg-blue-600 text-white p-2 rounded-lg">
@@ -225,13 +223,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Gộp file PDF</h1>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Merge PDF</h1>
             </div>
 
             <div class="mb-8">
                 <p class="text-gray-600 mb-4">
-                    Công cụ này cho phép bạn gộp nhiều file PDF thành một file duy nhất.
-                    Tất cả quá trình xử lý diễn ra ngay trên trình duyệt - file của bạn không bị tải lên máy chủ.
+                    Combine multiple PDF files into a single document.
+                    All processing happens in your browser — your files are never uploaded to a server.
                 </p>
                 
                 <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
@@ -243,8 +241,8 @@
                         </div>
                         <div class="ml-3">
                             <p class="text-sm text-blue-700">
-                                Bạn có thể chọn nhiều file PDF, sắp xếp thứ tự các file bằng cách kéo thả, và gộp chúng thành một file PDF duy nhất.
-                                Kết quả gộp sẽ giữ nguyên chất lượng của các file gốc.
+                                Select multiple PDFs, drag to reorder them, and merge into one file.
+                                Output keeps the original quality of your source documents.
                             </p>
                         </div>
                     </div>
@@ -255,21 +253,21 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
-                <p class="text-gray-700 text-lg font-medium">Kéo & thả các file PDF vào đây</p>
-                <p class="text-gray-500 text-sm mt-1">hoặc</p>
+                <p class="text-gray-700 text-lg font-medium">Drag & drop PDF files here</p>
+                <p class="text-gray-500 text-sm mt-1">or</p>
                 <label class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
-                    <span>Chọn file PDF</span>
+                    <span>Choose PDF files</span>
                     <input type="file" id="fileInput" accept=".pdf" multiple class="hidden">
                 </label>
-                <p class="text-gray-500 text-xs mt-2">Chọn nhiều file PDF để gộp</p>
+                <p class="text-gray-500 text-xs mt-2">Select multiple PDF files to merge</p>
             </div>
 
             <div id="pdfSettings" class="mb-6 hidden">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Thiết lập gộp PDF</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Merge settings</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="outputFilename" class="block text-sm font-medium text-gray-700 mb-1">
-                            Tên file kết quả:
+                            Output filename:
                         </label>
                         <input type="text" id="outputFilename" value="merged-document.pdf"
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -278,7 +276,7 @@
             </div>
 
             <div id="progressContainer" class="mb-6 hidden">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Tiến trình xử lý</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Processing progress</h3>
                 <div class="w-full bg-gray-200 rounded-full h-2.5">
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
@@ -294,9 +292,9 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <h3 class="text-sm font-medium text-red-800">Đã xảy ra lỗi</h3>
+                        <h3 class="text-sm font-medium text-red-800">An error occurred</h3>
                         <div class="mt-2 text-sm text-red-700" id="errorMessage">
-                            Không thể gộp file PDF. Vui lòng thử lại hoặc kiểm tra các file đầu vào.
+                            Unable to merge PDF files. Please try again or check your input files.
                         </div>
                     </div>
                 </div>
@@ -304,14 +302,14 @@
             
             <!-- Debug panel for developers -->
             <div id="debugPanel" class="debug-panel">
-                <h4 class="font-bold mb-1">Thông tin gỡ lỗi:</h4>
+                <h4 class="font-bold mb-1">Debug information:</h4>
                 <div id="debugContent"></div>
             </div>
 
             <div id="fileList" class="mb-6 hidden">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-lg font-semibold text-gray-800">Danh sách PDF (<span id="fileCount">0</span>)</h3>
-                    <p class="text-sm text-gray-600 italic">Kéo để sắp xếp thứ tự file</p>
+                    <h3 class="text-lg font-semibold text-gray-800">PDF list (<span id="fileCount">0</span>)</h3>
+                    <p class="text-sm text-gray-600 italic">Drag to reorder files</p>
                 </div>
                 <div id="pdfList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <!-- PDF items will be added here -->
@@ -320,20 +318,20 @@
 
             <div class="flex flex-wrap gap-3">
                 <button id="mergeBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hidden">
-                    Gộp PDF
+                    Merge PDF
                 </button>
                 
                 <button id="downloadBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hidden">
-                    Tải xuống
+                    Download
                 </button>
                 
                 <button id="clearBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 hidden">
-                    Xóa tất cả
+                    Clear all
                 </button>
             </div>
 
             <div id="previewContainer" class="mt-8 hidden">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Xem trước kết quả</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Preview</h3>
                 <div class="border rounded-lg overflow-hidden bg-gray-50">
                     <div class="p-4 flex justify-center">
                         <canvas id="previewCanvas" class="max-w-full border shadow-sm"></canvas>
@@ -345,7 +343,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
-                            <span class="mx-3 text-gray-700">Trang <span id="currentPage">1</span> / <span id="totalPages">1</span></span>
+                            <span class="mx-3 text-gray-700">Page <span id="currentPage">1</span> / <span id="totalPages">1</span></span>
                             <button id="nextPageBtn" class="p-2 rounded-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -353,54 +351,14 @@
                             </button>
                         </div>
                         <div class="text-sm text-gray-600">
-                            <span id="pdfInfo">Kích thước: 0 KB, Số trang: 0</span>
+                            <span id="pdfInfo">Size: 0 KB, Pages: 0</span>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="mt-8 pt-6 border-t border-gray-200 max-w-5xl mx-auto p-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">QR Code</h3>
-                <ul class="space-y-2">
-                    <li><a href="index.html" class="text-blue-600 hover:underline">Tạo mã QR</a></li>
-                    <li><a href="quet-qr.html" class="text-blue-600 hover:underline">Quét mã QR</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Công cụ hình ảnh</h3>
-                <ul class="space-y-2">
-                    <li><a href="webp-to-png.html" class="text-blue-600 hover:underline">Chuyển WebP sang PNG</a></li>
-                    <li><a href="convert-to-webp.html" class="text-blue-600 hover:underline">Chuyển PNG/JPG sang WebP</a></li>
-                    <li><a href="compress-png.html" class="text-blue-600 hover:underline">Nén ảnh PNG</a></li>
-                    <li><a href="compress-jpg.html" class="text-blue-600 hover:underline">Nén ảnh JPG</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Công cụ PDF</h3>
-                <ul class="space-y-2">
-                    <li><a href="merge-pdf.html" class="text-blue-600 hover:underline">Gộp file PDF</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 pt-6">
-            <p class="text-gray-600 text-sm mb-2 md:mb-0">
-                &copy; 2023 Document Tools. Tất cả các quyền được bảo lưu.
-            </p>
-            <div class="flex space-x-4">
-                <a href="merge-pdf.html" class="text-blue-600 hover:underline text-sm">Tiếng Việt</a>
-                <a href="merge-pdf-en.html" class="text-blue-600 hover:underline text-sm">English</a>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -414,7 +372,7 @@
             
             // Initialize pdfjsLib
             if (!pdfjsLib) {
-                alert('Thư viện PDF.js không được tải. Vui lòng làm mới trang.');
+                alert('PDF.js library failed to load. Please refresh the page.');
                 return;
             }
             
@@ -445,7 +403,7 @@
             
             // Add debug toggle button
             const debugToggleBtn = document.createElement('button');
-            debugToggleBtn.textContent = 'Hiện/Ẩn công cụ gỡ lỗi';
+            debugToggleBtn.textContent = 'Show/hide debug panel';
             debugToggleBtn.className = 'mt-4 text-xs bg-gray-200 hover:bg-gray-300 text-gray-800 py-1 px-2 rounded';
             debugToggleBtn.onclick = function() {
                 debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
@@ -504,7 +462,7 @@
                 );
                 
                 if (pdfFiles.length === 0) {
-                    alert('Vui lòng chọn các file PDF.');
+                    alert('Please select PDF files.');
                     return;
                 }
                 
@@ -544,9 +502,9 @@
                             </div>
                             <div class="p-3">
                                 <h4 class="text-sm font-medium text-gray-700 truncate" title="${file.name}">${file.name}</h4>
-                                <p class="text-xs text-gray-600 mt-1">${formatFileSize(file.size)} - ${pageCount} trang</p>
+                                <p class="text-xs text-gray-600 mt-1">${formatFileSize(file.size)} - ${pageCount} pages</p>
                                 <button class="w-full mt-2 px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-xs rounded transition remove-btn">
-                                    Xóa
+                                    Remove
                                 </button>
                             </div>
                         `;
@@ -786,7 +744,7 @@
                         } catch (error) {
                             console.error(`Error processing file ${file.name}:`, error);
                             updateDebugInfo(`Error processing ${file.name}: ${error.message}`);
-                            showErrorMessage(`Không thể xử lý file "${file.name}". File có thể bị hỏng hoặc bị bảo vệ.`);
+                            showErrorMessage(`Unable to process file "${file.name}". The file may be corrupted or password-protected.`);
                         }
                     }
                     
@@ -825,7 +783,7 @@
                 } catch (error) {
                     console.error('Error merging PDFs:', error);
                     updateDebugInfo(`Fatal error during merge: ${error.message}`);
-                    showErrorMessage('Có lỗi khi gộp PDF: ' + error.message);
+                    showErrorMessage('Error merging PDF: ' + error.message);
                 } finally {
                     mergeBtn.disabled = false;
                     progressContainer.classList.add('hidden');
@@ -862,7 +820,7 @@
                     
                     // Update PDF info
                     const sizeText = formatFileSize(pdfData.size);
-                    pdfInfo.textContent = `Kích thước: ${sizeText}, Số trang: ${pdfPreviewDoc.numPages}`;
+                    pdfInfo.textContent = `Size: ${sizeText}, Pages: ${pdfPreviewDoc.numPages}`;
                     
                     // Render first page
                     await renderPage(currentPage);
@@ -877,7 +835,7 @@
                 } catch (error) {
                     console.error('Error previewing PDF:', error);
                     updateDebugInfo(`PDF preview error: ${error.message}`);
-                    showErrorMessage('Không thể hiển thị xem trước PDF. Lỗi: ' + error.message);
+                    showErrorMessage('Unable to display PDF preview. Error: ' + error.message);
                 }
             }
             
@@ -886,7 +844,7 @@
             
             function downloadMergedPdf() {
                 if (!rawPdfData || rawPdfData.byteLength === 0) {
-                    showErrorMessage('Không có PDF để tải xuống. Vui lòng gộp lại các file.');
+                    showErrorMessage('No PDF to download. Please merge your files first.');
                     updateDebugInfo('Download error: No PDF data available');
                     return;
                 }
@@ -927,7 +885,7 @@
                 } catch (error) {
                     console.error('Error downloading PDF:', error);
                     updateDebugInfo(`Download error: ${error.message}`);
-                    showErrorMessage('Không thể tải xuống PDF: ' + error.message);
+                    showErrorMessage('Unable to download PDF: ' + error.message);
                 }
             }
             
@@ -1035,51 +993,4 @@
         });
     </script>
 </body>
-<!-- Footer -->
-<div class="bg-gray-800 text-white p-6 mt-8">
-    <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-            <div>
-                <h3 class="text-lg font-semibold mb-3">QR Code</h3>
-                <ul class="space-y-2">
-                    <li><a href="index-en.html" class="text-gray-300 hover:text-white">Generate QR Code</a></li>
-                    <li><a href="quet-qr-en.html" class="text-gray-300 hover:text-white">Scan QR Code</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Image Conversion</h3>
-                <ul class="space-y-2">
-                    <li><a href="webp-to-png-en.html" class="text-gray-300 hover:text-white">WebP to PNG</a></li>
-                    <li><a href="convert-to-webp-en.html" class="text-gray-300 hover:text-white">PNG/JPG to WebP</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Image Compression</h3>
-                <ul class="space-y-2">
-                    <li><a href="compress-png-en.html" class="text-gray-300 hover:text-white">Compress PNG</a></li>
-                    <li><a href="compress-jpg-en.html" class="text-gray-300 hover:text-white">Compress JPG</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 class="text-lg font-semibold mb-3">PDF Tools</h3>
-                <ul class="space-y-2">
-                    <li><a href="merge-pdf-en.html" class="text-gray-300 hover:text-white">Merge PDF Files</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400 text-sm mb-2 md:mb-0">
-                &copy; 2023 Document Tools. All rights reserved.
-            </p>
-            <div class="flex space-x-4">
-                <a href="index.html" class="text-gray-300 hover:text-white text-sm">Tiếng Việt</a>
-                <a href="index-en.html" class="text-gray-300 hover:text-white text-sm">English</a>
-            </div>
-        </div>
-    </div>
-</div>
 </html> 

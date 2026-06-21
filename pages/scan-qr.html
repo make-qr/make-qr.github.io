@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online QR code scanner - scan QR codes from your camera or image files">
+    <meta name="description" content="Free online QR code scanner - scan from camera, paste screenshot (Ctrl+V), or upload image files">
     <meta name="keywords" content="qr code scanner, scan qr code, qr reader, qr code reader">
-    <meta name="author" content="Document Tools">
-    <title>QR Code Scanner | Document Tools</title>
+    <meta name="author" content="Make QR">
+    <title>QR Code Scanner | Make QR</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>">
     
     <!-- Stylesheets -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/tailwind.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
-    <script src="../assets/js/template-loader.js"></script>
+    <script src="../assets/js/template-loader.js" defer></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
     <script>
@@ -28,20 +28,20 @@
     gtag('config', 'G-257SVV94KB');
     </script>
 </head>
-<body class="bg-gray-100">
+<body class="page-body">
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-8">
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-900 mb-4">QR Code Scanner</h1>
-            <p class="text-xl text-gray-600">Scan QR codes using your camera or from image files</p>
+            <p class="text-xl text-gray-600">Scan from camera, paste a screenshot, or upload an image</p>
         </div>
 
         <div class="max-w-2xl mx-auto">
             <!-- Scan Tabs -->
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
                 <div class="scan-tabs">
-                    <button class="scan-tab active" data-tab="camera">Camera Scanner</button>
-                    <button class="scan-tab" data-tab="file">File Scanner</button>
+                    <button class="scan-tab active" data-tab="camera">Camera</button>
+                    <button class="scan-tab" data-tab="file">Paste / Upload</button>
                 </div>
 
                 <!-- Camera Scanner -->
@@ -49,14 +49,23 @@
                     <div id="qr-reader" class="w-full h-64 border rounded-lg overflow-hidden"></div>
                 </div>
             
-                <!-- File Scanner -->
+                <!-- Paste / File Scanner -->
                 <div class="scan-content" id="file-scanner">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2">Select QR Code Image</label>
-                        <input type="file" id="qr-file" accept="image/*" class="w-full">
+                    <div id="paste-zone" class="paste-zone" tabindex="0">
+                        <p class="text-gray-800 font-medium mb-2">Paste screenshot here</p>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Capture QR on screen, then press <kbd>Ctrl</kbd>+<kbd>V</kbd> (Windows/Linux) or <kbd>⌘</kbd>+<kbd>V</kbd> (Mac).
+                            You can also drag &amp; drop an image.
+                        </p>
+                        <button type="button" id="paste-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors mb-4">
+                            Paste from Clipboard
+                        </button>
+                        <div class="text-sm text-gray-500 mb-2">or choose a file</div>
+                        <input type="file" id="qr-file" accept="image/*" class="w-full max-w-xs mx-auto block text-sm">
                     </div>
-                    <img id="file-qr-preview" class="max-w-full h-auto mx-auto">
+                    <img id="file-qr-preview" alt="Pasted or uploaded QR preview">
                 </div>
+                <div id="qr-file-scanner-hidden" class="hidden" aria-hidden="true"></div>
                 
                 <!-- Result -->
                 <div class="mt-6">
@@ -74,150 +83,207 @@
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Features</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="text-4xl mb-4">📷</div>
-                    <h3 class="text-xl font-bold mb-2">Camera Scanning</h3>
-                    <p class="text-gray-600">Scan QR codes in real-time using your device's camera</p>
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold mb-2">Paste Screenshot</h3>
+                    <p class="text-gray-600">Screenshot a QR on your screen and paste with Ctrl+V — no file save needed</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <div class="text-4xl mb-4">🖼️</div>
-                    <h3 class="text-xl font-bold mb-2">Image Scanning</h3>
-                    <p class="text-gray-600">Upload and scan QR codes from image files</p>
+                    <h3 class="text-xl font-bold mb-2">Upload Image</h3>
+                    <p class="text-gray-600">Upload or drag &amp; drop QR code image files</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="text-4xl mb-4">📋</div>
-                    <h3 class="text-xl font-bold mb-2">Easy Copy</h3>
-                    <p class="text-gray-600">Copy scan results with a single click</p>
+                    <div class="text-4xl mb-4">📷</div>
+                    <h3 class="text-xl font-bold mb-2">Camera Scanning</h3>
+                    <p class="text-gray-600">Scan QR codes in real-time using your device's camera</p>
                 </div>
             </div>
         </div>
     </main>
     
     <script>
-        // QR Scanner Functions
         let html5QrCode = null;
         let fileScanner = null;
-        
+        let previewObjectUrl = null;
+
+        function switchToFileTab() {
+            document.querySelectorAll('.scan-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.scan-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('.scan-tab[data-tab="file"]').classList.add('active');
+            document.getElementById('file-scanner').classList.add('active');
+            stopScanner();
+        }
+
         function initQRScanner() {
-            if (html5QrCode) {
-                return;
-            }
-            
-            html5QrCode = new Html5Qrcode("qr-reader");
-            
-            const qrConfig = { fps: 10, qrbox: { width: 250, height: 250 } };
-            
+            if (html5QrCode) return;
+
+            html5QrCode = new Html5Qrcode('qr-reader');
             html5QrCode.start(
-                { facingMode: "environment" }, 
-                qrConfig, 
+                { facingMode: 'environment' },
+                { fps: 10, qrbox: { width: 250, height: 250 } },
                 onScanSuccess,
                 onScanError
-            ).catch(err => {
-                console.error("Failed to start scanner:", err);
-                document.getElementById('camera-scanner').innerHTML = `
-                    <div class="bg-red-50 p-4 rounded-lg border border-red-200 text-center">
-                        <p class="text-red-700">Camera access failed. Please check camera permissions or try the file upload method.</p>
-                    </div>
-                `;
+            ).catch(() => {
+                document.getElementById('camera-scanner').innerHTML =
+                    '<div class="bg-red-50 p-4 rounded-lg border border-red-200 text-center">' +
+                    '<p class="text-red-700">Camera access failed. Use Paste / Upload tab instead.</p></div>';
             });
         }
-        
-        function onScanSuccess(decodedText, decodedResult) {
+
+        function onScanSuccess(decodedText) {
             document.getElementById('scan-result').value = decodedText;
-            
-            // Optional: Stop scanning after success
-            // If you want continuous scanning, remove this line
-            // html5QrCode.stop();
         }
-        
-        function onScanError(error) {
-            // Handle scan errors silently to avoid console spam
-            // console.warn(`QR scan error: ${error}`);
-        }
-        
+
+        function onScanError() {}
+
         function stopScanner() {
             if (html5QrCode && html5QrCode.isScanning) {
-                html5QrCode.stop().then(() => {
-                    console.log('Scanner stopped');
-                }).catch(err => {
-                    console.error('Failed to stop scanner:', err);
-                });
+                html5QrCode.stop().catch(() => {});
             }
         }
-        
-        // Handle file scanning
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file) {
+
+        function ensureFileScanner() {
+            if (!fileScanner) {
+                fileScanner = new Html5Qrcode('qr-file-scanner-hidden');
+            }
+        }
+
+        async function scanImageFile(file) {
+            if (!file || !file.type.startsWith('image/')) {
+                document.getElementById('scan-result').value = 'Please paste or upload an image file.';
                 return;
             }
-            
-            const imageUrl = URL.createObjectURL(file);
+
+            switchToFileTab();
+
             const preview = document.getElementById('file-qr-preview');
-            preview.src = imageUrl;
+            if (previewObjectUrl) URL.revokeObjectURL(previewObjectUrl);
+            previewObjectUrl = URL.createObjectURL(file);
+            preview.src = previewObjectUrl;
             preview.style.display = 'block';
-            
-            // Use Html5Qrcode to scan the file
-            if (!fileScanner) {
-                fileScanner = new Html5Qrcode("qr-reader", { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
+
+            ensureFileScanner();
+
+            try {
+                const decodedText = await fileScanner.scanFile(file, false);
+                document.getElementById('scan-result').value = decodedText;
+            } catch (err) {
+                document.getElementById('scan-result').value = 'No QR code found in image. Try a clearer screenshot.';
             }
-            
-            fileScanner.scanFile(file, true)
-                .then(decodedText => {
-                    document.getElementById('scan-result').value = decodedText;
-                })
-                .catch(err => {
-                    console.error("QR code scan error:", err);
-                    document.getElementById('scan-result').value = "No QR code found in image or error scanning.";
-                });
         }
-        
-        // Initialize QR Scanner
-        document.addEventListener('DOMContentLoaded', () => {
-            // Tab switching
+
+        function getImageFromClipboardData(clipboardData) {
+            if (!clipboardData) return null;
+            for (const item of clipboardData.items) {
+                if (item.type.startsWith('image/')) {
+                    return item.getAsFile();
+                }
+            }
+            return null;
+        }
+
+        function handlePaste(event) {
+            const imageFile = getImageFromClipboardData(event.clipboardData);
+            if (!imageFile) return;
+
+            event.preventDefault();
+            scanImageFile(imageFile);
+        }
+
+        async function pasteFromClipboard() {
+            if (navigator.clipboard && navigator.clipboard.read) {
+                try {
+                    const items = await navigator.clipboard.read();
+                    for (const item of items) {
+                        const imageType = item.types.find(type => type.startsWith('image/'));
+                        if (imageType) {
+                            const blob = await item.getType(imageType);
+                            await scanImageFile(new File([blob], 'clipboard.png', { type: imageType }));
+                            return;
+                        }
+                    }
+                    document.getElementById('scan-result').value =
+                        'No image in clipboard. Take a screenshot first (Win+Shift+S / Cmd+Shift+4 / PrtSc).';
+                } catch (err) {
+                    document.getElementById('paste-zone').focus();
+                    document.getElementById('scan-result').value =
+                        'Click the paste zone, then press Ctrl+V / ⌘+V to paste your screenshot.';
+                }
+                return;
+            }
+
+            document.getElementById('paste-zone').focus();
+            document.getElementById('scan-result').value =
+                'Click here and press Ctrl+V / ⌘+V to paste your screenshot.';
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) scanImageFile(file);
+        }
+
+        function initScanPage() {
             const tabs = document.querySelectorAll('.scan-tab');
             const contents = document.querySelectorAll('.scan-content');
+            const pasteZone = document.getElementById('paste-zone');
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     const target = tab.dataset.tab;
-
-                    // Update active states
                     tabs.forEach(t => t.classList.remove('active'));
                     contents.forEach(c => c.classList.remove('active'));
                     tab.classList.add('active');
                     document.getElementById(`${target}-scanner`).classList.add('active');
 
-                    // Initialize camera scanner if camera tab is active
                     if (target === 'camera') {
                         initQRScanner();
                     } else {
                         stopScanner();
+                        pasteZone.focus();
                     }
                 });
             });
 
-            // Initialize camera scanner by default
             initQRScanner();
-            
-            // File input handler
-            const fileInput = document.getElementById('qr-file');
-            if (fileInput) {
-                fileInput.addEventListener('change', handleFileSelect);
-            }
 
-            // Copy result button
+            document.getElementById('qr-file').addEventListener('change', handleFileSelect);
+            document.getElementById('paste-btn').addEventListener('click', pasteFromClipboard);
+            document.addEventListener('paste', handlePaste);
+
+            pasteZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                pasteZone.classList.add('drag-over');
+            });
+            pasteZone.addEventListener('dragleave', () => pasteZone.classList.remove('drag-over'));
+            pasteZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                pasteZone.classList.remove('drag-over');
+                const file = e.dataTransfer.files[0];
+                if (file) scanImageFile(file);
+            });
+            pasteZone.addEventListener('click', (e) => {
+                if (e.target === pasteZone) pasteZone.focus();
+            });
+
             const copyBtn = document.getElementById('copy-result');
             const resultText = document.getElementById('scan-result');
-
-            copyBtn.addEventListener('click', () => {
-                resultText.select();
-                document.execCommand('copy');
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(resultText.value);
+                } catch (err) {
+                    resultText.select();
+                    document.execCommand('copy');
+                }
                 copyBtn.textContent = 'Copied!';
-                setTimeout(() => {
-                    copyBtn.textContent = 'Copy Result';
-                }, 2000);
+                setTimeout(() => { copyBtn.textContent = 'Copy Result'; }, 2000);
             });
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initScanPage);
+        } else {
+            initScanPage();
+        }
     </script>
 </body>
 </html> 
