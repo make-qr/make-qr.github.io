@@ -1,0 +1,434 @@
+.pdf-tool-shell {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+.pdf-tool-root [hidden] {
+    display: none !important;
+}
+
+.pdf-tool-panel {
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background: #fff;
+}
+
+.pdf-tool-hero {
+    max-width: 48rem;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+}
+
+.pdf-tool-hero h1 {
+    margin: 0 0 0.75rem;
+    color: #1f2937;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+}
+
+.pdf-tool-hero p {
+    color: #4b5563;
+    line-height: 1.7;
+}
+
+.pdf-trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.pdf-trust-badge {
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    color: #1e40af;
+    background: #dbeafe;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.pdf-drop-zone {
+    display: flex;
+    min-height: 14rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 2px dashed #60a5fa;
+    border-radius: 0.75rem;
+    background: #f8fafc;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.pdf-drop-zone:hover,
+.pdf-drop-zone:focus,
+.pdf-drop-zone.dragover {
+    border-color: #2563eb;
+    background: #eff6ff;
+    outline: none;
+}
+
+.pdf-drop-icon {
+    margin-bottom: 0.75rem;
+    color: #2563eb;
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.pdf-drop-title {
+    color: #1f2937;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.pdf-drop-note {
+    margin-top: 0.35rem;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.pdf-button {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1rem;
+    border: 0;
+    border-radius: 0.45rem;
+    color: #fff;
+    background: #2563eb;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.pdf-button:hover {
+    background: #1d4ed8;
+}
+
+.pdf-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.pdf-button--secondary {
+    color: #374151;
+    background: #e5e7eb;
+}
+
+.pdf-button--secondary:hover {
+    background: #d1d5db;
+}
+
+.pdf-button--success {
+    background: #059669;
+}
+
+.pdf-button--success:hover {
+    background: #047857;
+}
+
+.pdf-workspace[hidden],
+.pdf-progress[hidden],
+.pdf-error[hidden],
+.pdf-results[hidden] {
+    display: none;
+}
+
+.pdf-workspace {
+    margin-top: 1.5rem;
+}
+
+.pdf-workspace-header,
+.pdf-toolbar,
+.pdf-action-bar,
+.pdf-results-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.pdf-summary {
+    color: #4b5563;
+    font-size: 0.9rem;
+}
+
+.pdf-toolbar {
+    justify-content: flex-start;
+    margin: 1rem 0;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background: #f3f4f6;
+}
+
+.pdf-toolbar button {
+    padding: 0.4rem 0.65rem;
+    border-radius: 0.35rem;
+    color: #374151;
+    background: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.pdf-toolbar button:hover {
+    color: #1d4ed8;
+    background: #eff6ff;
+}
+
+.pdf-mode-controls {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #dbeafe;
+    border-radius: 0.5rem;
+    background: #eff6ff;
+}
+
+.pdf-control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.75rem;
+}
+
+.pdf-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: #374151;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.pdf-control input,
+.pdf-control select,
+.pdf-control textarea {
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.4rem;
+    background: #fff;
+    font: inherit;
+    font-weight: 400;
+}
+
+.pdf-control textarea {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+.pdf-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 0.75rem;
+}
+
+.pdf-page-card {
+    position: relative;
+    overflow: hidden;
+    padding: 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.pdf-page-card.is-selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.pdf-tool-root[data-pdf-tool="delete"] .pdf-page-card.is-selected {
+    border-color: #dc2626;
+    background: #fef2f2;
+}
+
+.pdf-page-card.dragging {
+    opacity: 0.4;
+}
+
+.pdf-page-card.dragover {
+    border-color: #2563eb;
+    outline: 2px solid #bfdbfe;
+}
+
+.pdf-page-select {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+    color: #374151;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.pdf-thumbnail-frame {
+    display: flex;
+    height: 9rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.25rem;
+    background: #f3f4f6;
+}
+
+.pdf-thumbnail {
+    max-width: 90%;
+    max-height: 8.5rem;
+    transition: transform 0.2s;
+}
+
+.pdf-page-label {
+    overflow: hidden;
+    margin-top: 0.5rem;
+    color: #374151;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pdf-page-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.pdf-page-actions button {
+    min-height: 2rem;
+    border-radius: 0.3rem;
+    color: #1d4ed8;
+    background: #dbeafe;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.pdf-page-actions button:hover {
+    background: #bfdbfe;
+}
+
+.pdf-page-actions .danger {
+    color: #b91c1c;
+    background: #fee2e2;
+}
+
+.pdf-action-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin-top: 1rem;
+    padding: 0.85rem;
+    border-top: 1px solid #d1d5db;
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.pdf-progress {
+    margin-top: 1rem;
+}
+
+.pdf-progress-track {
+    overflow: hidden;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: #e5e7eb;
+}
+
+.pdf-progress-bar {
+    width: 0;
+    height: 100%;
+    background: #2563eb;
+    transition: width 0.2s;
+}
+
+.pdf-progress-text,
+.pdf-status {
+    margin-top: 0.45rem;
+    color: #4b5563;
+    font-size: 0.85rem;
+}
+
+.pdf-error {
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    border-left: 4px solid #dc2626;
+    color: #991b1b;
+    background: #fef2f2;
+}
+
+.pdf-results {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border: 1px solid #a7f3d0;
+    border-radius: 0.5rem;
+    background: #ecfdf5;
+}
+
+.pdf-result-list {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+}
+
+.pdf-result-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem;
+    border-radius: 0.4rem;
+    background: #fff;
+}
+
+.pdf-info-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.pdf-info-card {
+    padding: 1.1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.6rem;
+    background: #fff;
+}
+
+.pdf-info-card h2 {
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.pdf-info-card p,
+.pdf-info-card li {
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.pdf-info-card ol,
+.pdf-info-card ul {
+    padding-left: 1.2rem;
+}
+
+@media (max-width: 640px) {
+    .pdf-tool-panel {
+        padding: 1rem;
+    }
+
+    .pdf-page-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pdf-action-bar .pdf-button {
+        flex: 1;
+    }
+}

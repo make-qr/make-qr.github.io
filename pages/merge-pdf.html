@@ -1,34 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merge PDF | Make QR</title>
-    <meta name="description" content="Merge multiple PDF files into one — runs entirely in your browser, no upload required">
+    <meta name="description" content="Merge, reorder, rotate, duplicate, and remove PDF pages or images — free, private, and processed entirely in your browser">
+    <link rel="canonical" href="https://make-qr.github.io/pages/merge-pdf.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
     <link href="../assets/css/tailwind.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     
-    <!-- Load the PDF libraries with version pinning and integrity checks -->
+    <!-- Version-pinned PDF libraries -->
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-    <!-- Add JSZip for batch downloads -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    
-    <script>
-        // Debug log function for diagnostics
-        function debugLog(message, data) {
-            console.log(`[PDF Merger] ${message}`, data || '');
-        }
-        
-        // Set SameSite attribute to cookies
-        document.cookie = "SameSite=Strict; Secure";
-        
-        // Configure PDF.js with error handling
-        window.pdfjsLib = window.pdfjsLib || {};
-        window.pdfjsLib.GlobalWorkerOptions = window.pdfjsLib.GlobalWorkerOptions || {};
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
-    </script>
-    
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
     
     <style>
@@ -202,6 +186,109 @@
                 border-bottom: none;
             }
         }
+        .mode-tabs {
+            display: inline-flex;
+            gap: 0.25rem;
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            background: #e5e7eb;
+        }
+        .mode-tab {
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.375rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .mode-tab.active {
+            color: white;
+            background: #2563eb;
+        }
+        .pdf-card,
+        .page-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: white;
+            transition: opacity 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+        .pdf-card.drag-over,
+        .page-card.drag-over {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+        .pdf-card.dragging,
+        .page-card.dragging {
+            opacity: 0.45;
+        }
+        .pdf-card-content {
+            padding: 0.75rem;
+        }
+        .pdf-card-title,
+        .page-card-title {
+            overflow: hidden;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .pdf-card-details {
+            margin-top: 0.25rem;
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+        .pdf-card-actions,
+        .page-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .page-action-btn {
+            flex: 1;
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.375rem;
+            color: #1d4ed8;
+            background: #dbeafe;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .page-action-btn:hover {
+            background: #bfdbfe;
+        }
+        .page-action-btn.danger {
+            color: #b91c1c;
+            background: #fee2e2;
+        }
+        .page-action-btn.danger:hover {
+            background: #fecaca;
+        }
+        .page-card {
+            padding: 0.625rem;
+        }
+        .page-card-unselected {
+            opacity: 0.5;
+        }
+        .page-select {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .page-card-title {
+            margin-top: 0.5rem;
+        }
+        .page-card .pdf-thumbnail-container {
+            height: 130px;
+        }
+        .page-card .pdf-thumbnail {
+            max-height: 120px;
+            transition: transform 0.2s;
+        }
     </style>
     <script src="../assets/js/template-loader.js" defer></script>
     <!-- Google tag (gtag.js) -->
@@ -228,7 +315,7 @@
 
             <div class="mb-8">
                 <p class="text-gray-600 mb-4">
-                    Combine multiple PDF files into a single document.
+                    Combine PDF files and JPG or PNG images into a single document.
                     All processing happens in your browser — your files are never uploaded to a server.
                 </p>
                 
@@ -241,25 +328,26 @@
                         </div>
                         <div class="ml-3">
                             <p class="text-sm text-blue-700">
-                                Select multiple PDFs, drag to reorder them, and merge into one file.
-                                Output keeps the original quality of your source documents.
+                                Reorder files or individual pages, select the pages you need, then rotate,
+                                duplicate, remove, preview, and download the result.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="drop-zone w-full h-64 rounded-lg flex flex-col items-center justify-center cursor-pointer mb-6" id="dropZone">
+            <div class="drop-zone w-full h-64 rounded-lg flex flex-col items-center justify-center cursor-pointer mb-6"
+                 id="dropZone" role="button" tabindex="0" aria-label="Choose or drop PDF, JPG, and PNG files">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
-                <p class="text-gray-700 text-lg font-medium">Drag & drop PDF files here</p>
+                <p class="text-gray-700 text-lg font-medium">Drag & drop PDF or image files here</p>
                 <p class="text-gray-500 text-sm mt-1">or</p>
                 <label class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
-                    <span>Choose PDF files</span>
-                    <input type="file" id="fileInput" accept=".pdf" multiple class="hidden">
+                    <span>Choose files</span>
+                    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple class="hidden">
                 </label>
-                <p class="text-gray-500 text-xs mt-2">Select multiple PDF files to merge</p>
+                <p class="text-gray-500 text-xs mt-2">Supported formats: PDF, JPG, PNG</p>
             </div>
 
             <div id="pdfSettings" class="mb-6 hidden">
@@ -300,20 +388,32 @@
                 </div>
             </div>
             
-            <!-- Debug panel for developers -->
-            <div id="debugPanel" class="debug-panel">
-                <h4 class="font-bold mb-1">Debug information:</h4>
-                <div id="debugContent"></div>
-            </div>
-
             <div id="fileList" class="mb-6 hidden">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-lg font-semibold text-gray-800">PDF list (<span id="fileCount">0</span>)</h3>
-                    <p class="text-sm text-gray-600 italic">Drag to reorder files</p>
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Arrange content</h3>
+                        <p class="text-sm text-gray-600">
+                            <span id="fileCount">0</span> files ·
+                            <span id="pageCount">0</span> pages ·
+                            <span id="selectedCount">0</span> selected
+                        </p>
+                    </div>
+                    <div class="mode-tabs" role="tablist" aria-label="Editing mode">
+                        <button id="fileModeBtn" class="mode-tab active" type="button" role="tab" aria-selected="true">
+                            File mode
+                        </button>
+                        <button id="pageModeBtn" class="mode-tab" type="button" role="tab" aria-selected="false">
+                            Page mode
+                        </button>
+                    </div>
                 </div>
                 <div id="pdfList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- PDF items will be added here -->
+                    <!-- File cards are rendered here -->
                 </div>
+                <div id="pageList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 hidden">
+                    <!-- Page cards are rendered here -->
+                </div>
+                <p class="text-sm text-gray-500 italic mt-3">Drag cards to change their order.</p>
             </div>
 
             <div class="flex flex-wrap gap-3">
@@ -329,6 +429,7 @@
                     Clear all
                 </button>
             </div>
+            <p id="mergeStatus" class="mt-3 text-sm text-gray-600" role="status" aria-live="polite"></p>
 
             <div id="previewContainer" class="mt-8 hidden">
                 <h3 class="text-lg font-semibold text-gray-800 mb-3">Preview</h3>
@@ -360,637 +461,6 @@
         </div>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-            });
-            
-            // Initialize pdfjsLib
-            if (!pdfjsLib) {
-                alert('PDF.js library failed to load. Please refresh the page.');
-                return;
-            }
-            
-            const dropZone = document.getElementById('dropZone');
-            const fileInput = document.getElementById('fileInput');
-            const fileList = document.getElementById('fileList');
-            const pdfList = document.getElementById('pdfList');
-            const fileCount = document.getElementById('fileCount');
-            const mergeBtn = document.getElementById('mergeBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const clearBtn = document.getElementById('clearBtn');
-            const previewContainer = document.getElementById('previewContainer');
-            const progressContainer = document.getElementById('progressContainer');
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-            const pdfSettings = document.getElementById('pdfSettings');
-            const previewCanvas = document.getElementById('previewCanvas');
-            const currentPageElem = document.getElementById('currentPage');
-            const totalPagesElem = document.getElementById('totalPages');
-            const prevPageBtn = document.getElementById('prevPageBtn');
-            const nextPageBtn = document.getElementById('nextPageBtn');
-            const pdfInfo = document.getElementById('pdfInfo');
-            const errorContainer = document.getElementById('errorContainer');
-            const debugPanel = document.getElementById('debugPanel');
-            
-            // Global variable to store merged PDF data
-            let rawPdfData = null;
-            
-            // Add debug toggle button
-            const debugToggleBtn = document.createElement('button');
-            debugToggleBtn.textContent = 'Show/hide debug panel';
-            debugToggleBtn.className = 'mt-4 text-xs bg-gray-200 hover:bg-gray-300 text-gray-800 py-1 px-2 rounded';
-            debugToggleBtn.onclick = function() {
-                debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
-            };
-            document.querySelector('.max-w-5xl').appendChild(debugToggleBtn);
-            
-            let files = [];
-            let pdfPreviewDoc = null;
-            let currentPage = 1;
-            
-            // Handle drag and drop events
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                dropZone.addEventListener(eventName, preventDefaults, false);
-            });
-            
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            
-            ['dragenter', 'dragover'].forEach(eventName => {
-                dropZone.addEventListener(eventName, highlight, false);
-            });
-            
-            ['dragleave', 'drop'].forEach(eventName => {
-                dropZone.addEventListener(eventName, unhighlight, false);
-            });
-            
-            function highlight() {
-                dropZone.classList.add('active');
-            }
-            
-            function unhighlight() {
-                dropZone.classList.remove('active');
-            }
-            
-            // Handle dropped files
-            dropZone.addEventListener('drop', handleDrop, false);
-            
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const newFiles = [...dt.files];
-                handleFiles(newFiles);
-            }
-            
-            // Handle selected files
-            fileInput.addEventListener('change', function() {
-                handleFiles([...this.files]);
-            });
-            
-            function handleFiles(newFiles) {
-                // Filter only PDF files
-                const pdfFiles = newFiles.filter(file => 
-                    file.type === 'application/pdf' || 
-                    file.name.toLowerCase().endsWith('.pdf')
-                );
-                
-                if (pdfFiles.length === 0) {
-                    alert('Please select PDF files.');
-                    return;
-                }
-                
-                // Add files to the list
-                const filesAdded = pdfFiles.filter(file => {
-                    // Check if file already exists in the array
-                    if (!files.some(f => f.name === file.name && f.size === file.size)) {
-                        files.push(file);
-                        return true;
-                    }
-                    return false;
-                });
-                
-                // Update UI for new files
-                addFilesToList(filesAdded);
-                updateFileCount();
-                showElements();
-            }
-            
-            async function addFilesToList(newFiles) {
-                for (const file of newFiles) {
-                    try {
-                        // Generate thumbnail from first page
-                        const dataUrl = await generatePdfThumbnail(file);
-                        
-                        // Get page count
-                        const pageCount = await getPdfPageCount(file);
-                        
-                        const pdfItem = document.createElement('div');
-                        pdfItem.className = 'bg-white border rounded-lg overflow-hidden draggable-item';
-                        pdfItem.setAttribute('draggable', 'true');
-                        pdfItem.setAttribute('data-filename', file.name);
-                        
-                        pdfItem.innerHTML = `
-                            <div class="pdf-thumbnail-container">
-                                <img src="${dataUrl}" alt="${file.name}" class="pdf-thumbnail">
-                            </div>
-                            <div class="p-3">
-                                <h4 class="text-sm font-medium text-gray-700 truncate" title="${file.name}">${file.name}</h4>
-                                <p class="text-xs text-gray-600 mt-1">${formatFileSize(file.size)} - ${pageCount} pages</p>
-                                <button class="w-full mt-2 px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-xs rounded transition remove-btn">
-                                    Remove
-                                </button>
-                            </div>
-                        `;
-                        
-                        // Add drag and drop event listeners
-                        pdfItem.addEventListener('dragstart', handleDragStart);
-                        pdfItem.addEventListener('dragover', handleDragOver);
-                        pdfItem.addEventListener('dragenter', handleDragEnter);
-                        pdfItem.addEventListener('dragleave', handleDragLeave);
-                        pdfItem.addEventListener('drop', handleDrop);
-                        pdfItem.addEventListener('dragend', handleDragEnd);
-                        
-                        // Add remove button functionality
-                        pdfItem.querySelector('.remove-btn').addEventListener('click', function() {
-                            const fileName = pdfItem.getAttribute('data-filename');
-                            files = files.filter(f => f.name !== fileName);
-                            pdfItem.remove();
-                            updateFileCount();
-                            
-                            if (files.length === 0) {
-                                hideElements();
-                            }
-                        });
-                        
-                        pdfList.appendChild(pdfItem);
-                    } catch (error) {
-                        console.error('Error adding PDF to list:', error);
-                    }
-                }
-            }
-            
-            // Drag and drop functions for reordering
-            let draggedItem = null;
-            
-            function handleDragStart(e) {
-                draggedItem = this;
-                this.classList.add('dragging');
-                e.dataTransfer.effectAllowed = 'move';
-                e.dataTransfer.setData('text/plain', ''); // Required for Firefox
-            }
-            
-            function handleDragOver(e) {
-                e.preventDefault();
-                e.dataTransfer.dropEffect = 'move';
-                return false;
-            }
-            
-            function handleDragEnter(e) {
-                this.classList.add('drag-over');
-            }
-            
-            function handleDragLeave(e) {
-                this.classList.remove('drag-over');
-            }
-            
-            function handleDrop(e) {
-                e.stopPropagation();
-                
-                if (draggedItem !== this) {
-                    // Get the position of the dragged and target items
-                    const allItems = Array.from(pdfList.querySelectorAll('.draggable-item'));
-                    const draggedIndex = allItems.indexOf(draggedItem);
-                    const targetIndex = allItems.indexOf(this);
-                    
-                    // Reorder DOM elements
-                    if (draggedIndex < targetIndex) {
-                        pdfList.insertBefore(draggedItem, this.nextSibling);
-                    } else {
-                        pdfList.insertBefore(draggedItem, this);
-                    }
-                    
-                    // Reorder files array to match the new DOM order
-                    reorderFilesArray();
-                }
-                
-                this.classList.remove('drag-over');
-                return false;
-            }
-            
-            function handleDragEnd(e) {
-                // Remove visual cues
-                const allItems = document.querySelectorAll('.draggable-item');
-                allItems.forEach(item => {
-                    item.classList.remove('dragging');
-                    item.classList.remove('drag-over');
-                });
-                
-                draggedItem = null;
-            }
-            
-            function reorderFilesArray() {
-                // Get the new order from the DOM
-                const newOrder = Array.from(pdfList.querySelectorAll('.draggable-item')).map(
-                    item => item.getAttribute('data-filename')
-                );
-                
-                // Create a new array with the files in the correct order
-                const newFilesArray = [];
-                newOrder.forEach(fileName => {
-                    const file = files.find(f => f.name === fileName);
-                    if (file) {
-                        newFilesArray.push(file);
-                    }
-                });
-                
-                // Update the files array
-                files = newFilesArray;
-            }
-            
-            async function generatePdfThumbnail(file) {
-                try {
-                    const arrayBuffer = await file.arrayBuffer();
-                    const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-                    const page = await pdf.getPage(1);
-                    
-                    const scale = 0.5;
-                    const viewport = page.getViewport({scale});
-                    
-                    // Create canvas
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-                    
-                    // Render PDF page to canvas
-                    await page.render({
-                        canvasContext: context,
-                        viewport: viewport
-                    }).promise;
-                    
-                    return canvas.toDataURL();
-                } catch (error) {
-                    console.error('Error generating thumbnail:', error);
-                    // Return placeholder image for error
-                    return 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YwMCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMCAyaDRhNCw0LDAsMCwxLDQsNFYyMGEyLDIsMCwwLDEtMiwySDZhMiwyLDAsMCwxLTItMlY4YTQsNCwwLDAsMSw0LTRaIi8+PHBhdGggZD0ibTE0IDJ2NGg0Ii8+PHBhdGggZD0iTTkuNSAxMGgwYS4zLjMsMCwwLDEsLjMuM3YzLjRhLjMuMywwLDAsMS0uMy4zaDBhLjMuMywwLDAsMS0uMy0uM1YxMC4zYS4zLjMsMCwwLDEsLjMtLjNaIi8+PHBhdGggZD0iTTE0LjUgMTBoMGEuMy4zLDAsMCwxLC4zLjN2My40YS4zLjMsMCwwLDEtLjMuM2gwYS4zLjMsMCwwLDEtLjMtLjNWMTAuM2EuMy4zLDAsMCwxLC4zLS4zWiIvPjxwYXRoIGQ9Ik0xMiA4djhhMiwxLjUsMCwwLDAsNCwwIi8+PHBhdGggZD0iTTEyIDhoLTJhMiwyLDAsMCwwLTIsMnYyaDR2LTJBMiwyLDAsMCwwLDEwLDhaIi8+PC9zdmc+';
-                }
-            }
-            
-            async function getPdfPageCount(file) {
-                try {
-                    const arrayBuffer = await file.arrayBuffer();
-                    const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-                    return pdf.numPages;
-                } catch (error) {
-                    console.error('Error getting page count:', error);
-                    return '?';
-                }
-            }
-            
-            function updateFileCount() {
-                fileCount.textContent = files.length;
-            }
-            
-            function showElements() {
-                if (files.length > 0) {
-                    fileList.classList.remove('hidden');
-                    mergeBtn.classList.remove('hidden');
-                    clearBtn.classList.remove('hidden');
-                    pdfSettings.classList.remove('hidden');
-                }
-            }
-            
-            function hideElements() {
-                fileList.classList.add('hidden');
-                mergeBtn.classList.add('hidden');
-                clearBtn.classList.add('hidden');
-                downloadBtn.classList.add('hidden');
-                pdfSettings.classList.add('hidden');
-                previewContainer.classList.add('hidden');
-                progressContainer.classList.add('hidden');
-            }
-            
-            function formatFileSize(bytes) {
-                if (bytes < 1024) return bytes + ' B';
-                else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
-                else return (bytes / 1048576).toFixed(2) + ' MB';
-            }
-            
-            // Merge button event
-            mergeBtn.addEventListener('click', mergePdfs);
-            
-            async function mergePdfs() {
-                if (files.length === 0) return;
-                
-                // Reset state
-                rawPdfData = null;
-                previewContainer.classList.add('hidden');
-                errorContainer.classList.add('hidden');
-                progressContainer.classList.remove('hidden');
-                mergeBtn.disabled = true;
-                downloadBtn.classList.add('hidden');
-                
-                // Add debug info
-                updateDebugInfo('Starting PDF merge process...');
-                updateDebugInfo(`Files to merge: ${files.length}`);
-                
-                try {
-                    // Create PDF merger using PDF-lib
-                    const mergedPdf = await PDFLib.PDFDocument.create();
-                    updateDebugInfo('Created new PDF document');
-                    
-                    // Process each PDF file
-                    for (let i = 0; i < files.length; i++) {
-                        const file = files[i];
-                        updateProgress(i, files.length);
-                        
-                        try {
-                            updateDebugInfo(`Processing file ${i+1}/${files.length}: ${file.name}`);
-                            
-                            // Read file as ArrayBuffer
-                            const arrayBuffer = await readFileAsArrayBuffer(file);
-                            updateDebugInfo(`Read file as ArrayBuffer: ${arrayBuffer.byteLength} bytes`);
-                            
-                            // Load source PDF
-                            const pdf = await PDFLib.PDFDocument.load(arrayBuffer, {
-                                ignoreEncryption: true
-                            });
-                            
-                            const pageCount = pdf.getPageCount();
-                            updateDebugInfo(`File has ${pageCount} pages`);
-                            
-                            if (pageCount > 0) {
-                                // Copy pages from source PDF to merged PDF
-                                const pageIndices = Array.from({ length: pageCount }, (_, i) => i);
-                                const copiedPages = await mergedPdf.copyPages(pdf, pageIndices);
-                                
-                                // Add pages to merged document
-                                copiedPages.forEach(page => {
-                                    mergedPdf.addPage(page);
-                                });
-                                
-                                updateDebugInfo(`Added ${pageCount} pages to merged document`);
-                            } else {
-                                updateDebugInfo(`Warning: File has 0 pages`);
-                            }
-                            
-                        } catch (error) {
-                            console.error(`Error processing file ${file.name}:`, error);
-                            updateDebugInfo(`Error processing ${file.name}: ${error.message}`);
-                            showErrorMessage(`Unable to process file "${file.name}". The file may be corrupted or password-protected.`);
-                        }
-                    }
-                    
-                    // Update progress to 100%
-                    updateProgress(files.length, files.length);
-                    
-                    // Get page count of merged document
-                    const finalPageCount = mergedPdf.getPageCount();
-                    updateDebugInfo(`Final merged document has ${finalPageCount} pages`);
-                    
-                    if (finalPageCount > 0) {
-                        // Save the merged PDF 
-                        updateDebugInfo('Saving merged PDF...');
-                        rawPdfData = await mergedPdf.save();
-                        
-                        if (!rawPdfData || rawPdfData.length === 0) {
-                            throw new Error('Failed to generate PDF data');
-                        }
-                        
-                        updateDebugInfo(`Merged PDF size: ${rawPdfData.byteLength} bytes`);
-                        
-                        // Create a copy for preview
-                        const previewBlob = new Blob([rawPdfData], {type: 'application/pdf'});
-                        updateDebugInfo(`Preview blob created: ${previewBlob.size} bytes`);
-                        
-                        // Show preview
-                        await showPdfPreview(previewBlob);
-                        
-                        // Enable download button
-                        downloadBtn.classList.remove('hidden');
-                        updateDebugInfo('PDF merge completed successfully');
-                    } else {
-                        throw new Error('No pages were added to the merged document');
-                    }
-                    
-                } catch (error) {
-                    console.error('Error merging PDFs:', error);
-                    updateDebugInfo(`Fatal error during merge: ${error.message}`);
-                    showErrorMessage('Error merging PDF: ' + error.message);
-                } finally {
-                    mergeBtn.disabled = false;
-                    progressContainer.classList.add('hidden');
-                }
-            }
-            
-            function readFileAsArrayBuffer(file) {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = e => resolve(e.target.result);
-                    reader.onerror = e => reject(new Error(`File read error: ${e.target.error}`));
-                    reader.readAsArrayBuffer(file);
-                });
-            }
-            
-            async function showPdfPreview(pdfDataOrBlob) {
-                try {
-                    let pdfData;
-                    if (pdfDataOrBlob instanceof Blob) {
-                        pdfData = pdfDataOrBlob;
-                    } else {
-                        pdfData = new Blob([pdfDataOrBlob], {type: 'application/pdf'});
-                    }
-                    
-                    updateDebugInfo(`Previewing PDF: ${pdfData.size} bytes`);
-                    
-                    // Load PDF using pdf.js
-                    const url = URL.createObjectURL(pdfData);
-                    pdfPreviewDoc = await pdfjsLib.getDocument({url: url}).promise;
-                    currentPage = 1;
-                    
-                    // Update total pages display
-                    totalPagesElem.textContent = pdfPreviewDoc.numPages;
-                    
-                    // Update PDF info
-                    const sizeText = formatFileSize(pdfData.size);
-                    pdfInfo.textContent = `Size: ${sizeText}, Pages: ${pdfPreviewDoc.numPages}`;
-                    
-                    // Render first page
-                    await renderPage(currentPage);
-                    
-                    // Show preview container
-                    previewContainer.classList.remove('hidden');
-                    
-                    // Update buttons state
-                    updatePaginationButtons();
-                    
-                    updateDebugInfo('PDF preview loaded successfully');
-                } catch (error) {
-                    console.error('Error previewing PDF:', error);
-                    updateDebugInfo(`PDF preview error: ${error.message}`);
-                    showErrorMessage('Unable to display PDF preview. Error: ' + error.message);
-                }
-            }
-            
-            // Download button event
-            downloadBtn.addEventListener('click', downloadMergedPdf);
-            
-            function downloadMergedPdf() {
-                if (!rawPdfData || rawPdfData.byteLength === 0) {
-                    showErrorMessage('No PDF to download. Please merge your files first.');
-                    updateDebugInfo('Download error: No PDF data available');
-                    return;
-                }
-                
-                try {
-                    updateDebugInfo(`Starting download of PDF: ${rawPdfData.byteLength} bytes`);
-                    
-                    // Create blob from raw PDF data
-                    const blob = new Blob([rawPdfData], {type: 'application/pdf'});
-                    updateDebugInfo(`Download blob created: ${blob.size} bytes`);
-                    
-                    // Get filename
-                    const filename = document.getElementById('outputFilename').value || 'merged-document.pdf';
-                    updateDebugInfo(`Download filename: ${filename}`);
-                    
-                    // First open in new tab to verify content
-                    const blobUrl = URL.createObjectURL(blob);
-                    window.open(blobUrl, '_blank');
-                    updateDebugInfo('Opened PDF in new tab');
-                    
-                    // Create download link
-                    const a = document.createElement('a');
-                    a.href = blobUrl;
-                    a.download = filename;
-                    a.style.display = 'none';
-                    
-                    // Append to body and trigger click
-                    document.body.appendChild(a);
-                    a.click();
-                    updateDebugInfo('Download triggered');
-                    
-                    // Clean up
-                    setTimeout(() => {
-                        document.body.removeChild(a);
-                        updateDebugInfo('Download link removed');
-                    }, 100);
-                    
-                } catch (error) {
-                    console.error('Error downloading PDF:', error);
-                    updateDebugInfo(`Download error: ${error.message}`);
-                    showErrorMessage('Unable to download PDF: ' + error.message);
-                }
-            }
-            
-            // Helper functions for UI
-            function showErrorMessage(message) {
-                const errorMessageElem = document.getElementById('errorMessage');
-                errorMessageElem.textContent = message;
-                document.getElementById('errorContainer').classList.remove('hidden');
-                updateDebugInfo(`Error message shown: ${message}`);
-            }
-            
-            function hideElement(element) {
-                if (element) element.classList.add('hidden');
-            }
-            
-            function updateDebugInfo(message) {
-                console.log(`[PDF Debug] ${message}`);
-                const debugContent = document.getElementById('debugContent');
-                if (debugContent) {
-                    const line = document.createElement('div');
-                    line.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
-                    debugContent.appendChild(line);
-                    debugContent.scrollTop = debugContent.scrollHeight;
-                }
-            }
-            
-            function updateProgress(completed, total) {
-                const percent = Math.round((completed / total) * 100);
-                progressBar.style.width = `${percent}%`;
-                progressText.textContent = `${percent}% (${completed}/${total})`;
-            }
-            
-            async function renderPage(pageNum) {
-                if (!pdfPreviewDoc) return;
-                
-                try {
-                    const page = await pdfPreviewDoc.getPage(pageNum);
-                    const viewport = page.getViewport({scale: 1.0});
-                    
-                    // Set canvas size to match page size
-                    const canvas = previewCanvas;
-                    const ctx = canvas.getContext('2d');
-                    
-                    // Calculate scale to fit within container while maintaining aspect ratio
-                    const containerWidth = canvas.parentElement.clientWidth - 50; // Subtract padding
-                    const scale = containerWidth / viewport.width;
-                    const scaledViewport = page.getViewport({scale});
-                    
-                    canvas.width = scaledViewport.width;
-                    canvas.height = scaledViewport.height;
-                    
-                    // Render the page
-                    await page.render({
-                        canvasContext: ctx,
-                        viewport: scaledViewport
-                    }).promise;
-                    
-                    // Update current page display
-                    currentPageElem.textContent = pageNum;
-                } catch (error) {
-                    console.error('Error rendering page:', error);
-                }
-            }
-            
-            function updatePaginationButtons() {
-                if (!pdfPreviewDoc) return;
-                
-                prevPageBtn.disabled = currentPage <= 1;
-                nextPageBtn.disabled = currentPage >= pdfPreviewDoc.numPages;
-            }
-            
-            // Pagination buttons
-            prevPageBtn.addEventListener('click', function() {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderPage(currentPage);
-                    updatePaginationButtons();
-                }
-            });
-            
-            nextPageBtn.addEventListener('click', function() {
-                if (pdfPreviewDoc && currentPage < pdfPreviewDoc.numPages) {
-                    currentPage++;
-                    renderPage(currentPage);
-                    updatePaginationButtons();
-                }
-            });
-            
-            // Clear button event
-            clearBtn.addEventListener('click', clearAll);
-            
-            function clearAll() {
-                files = [];
-                rawPdfData = null;
-                pdfPreviewDoc = null;
-                
-                pdfList.innerHTML = '';
-                updateFileCount();
-                hideElements();
-                
-                // Reset form
-                document.getElementById('outputFilename').value = 'merged-document.pdf';
-                fileInput.value = '';
-            }
-        });
-    </script>
+    <script src="../assets/js/merge-pdf.js" defer></script>
 </body>
 </html> 

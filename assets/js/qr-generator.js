@@ -11,12 +11,23 @@
         if (!generateBtn || !downloadBtn || !qrcode) return;
 
         let selectedFrameStyle = 'none';
+        const placeholderTemplate = qrcode.firstElementChild
+            ? qrcode.firstElementChild.cloneNode(true)
+            : null;
+
+        function resetGeneratedResult() {
+            qrcode.replaceChildren();
+            if (placeholderTemplate) qrcode.appendChild(placeholderTemplate.cloneNode(true));
+            if (qrcodeContainer) qrcodeContainer.classList.remove('hidden');
+            downloadBtn.disabled = true;
+        }
 
         document.querySelectorAll('.frame-option').forEach(option => {
             option.addEventListener('click', function () {
                 document.querySelectorAll('.frame-option').forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
                 selectedFrameStyle = this.getAttribute('data-frame-style');
+                resetGeneratedResult();
             });
         });
 
@@ -85,9 +96,7 @@
             } catch (error) {
                 console.error('Error generating QR code:', error);
                 alert('Cannot generate QR code: ' + error.message);
-                qrcode.innerHTML = '';
-                qrcodeContainer.classList.add('hidden');
-                downloadBtn.disabled = true;
+                resetGeneratedResult();
             }
         }
 
@@ -306,6 +315,15 @@
                 }
             });
         }
+
+        document.querySelectorAll('.tab-btn[data-target]').forEach(button => {
+            button.addEventListener('click', resetGeneratedResult);
+        });
+        document.querySelectorAll('.qr-builder-editor input, .qr-builder-editor textarea, .qr-builder-editor select')
+            .forEach(input => {
+                input.addEventListener('input', resetGeneratedResult);
+                input.addEventListener('change', resetGeneratedResult);
+            });
     }
 
     if (document.readyState === 'loading') {
