@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Make QR">
+  <rect width="512" height="512" rx="112" fill="#1e40af"/>
+  <g fill="#fff">
+    <path d="M80 80h144v144H80zm36 36v72h72v-72z"/>
+    <path d="M288 80h144v144H288zm36 36v72h72v-72z"/>
+    <path d="M80 288h144v144H80zm36 36v72h72v-72z"/>
+    <path d="M276 276h60v60h-60zm84 0h72v36h-72zm0 60h36v36h-36zm48 0h24v96h-24zm-132 24h60v72h-60zm84 36h36v36h-36z"/>
+  </g>
+</svg>

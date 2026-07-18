@@ -4,33 +4,32 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online QR code generator and browser tools — create QR codes, scan, compress images, merge PDFs, and test devices. Private, no signup.">
-    <meta name="keywords" content="qr code generator, qr code maker, document tools, image compression, pdf merger, webp converter, online tools, free tools">
+    <meta name="description" content="Create static QR codes for URLs, WiFi, vCards, text and more. Add colors, shapes, frames or a logo, then download a free high-quality PNG.">
     <meta name="author" content="Make QR">
-    <meta property="og:title" content="QR Code Generator & Free Online Tools - Make QR">
-    <meta property="og:description" content="Create customizable QR codes, compress images, convert formats, merge PDFs and more with our free online document processing tools">
+    <meta property="og:title" content="Free QR Code Generator with Logo | Make QR">
+    <meta property="og:description" content="Create customizable static QR codes in your browser. No signup, no watermark, and no embedded ads.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://make-qr.github.io/">
-    <meta property="og:image" content="https://make-qr.github.io/">
+    <meta property="og:site_name" content="Make QR">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Make QR - Free Online Tools">
-    <meta name="twitter:description" content="Create customizable QR codes and process documents with our free online tools">
+    <meta name="twitter:title" content="Free QR Code Generator with Logo | Make QR">
+    <meta name="twitter:description" content="Create customizable static QR codes in your browser—free, private and without signup.">
     <meta name="robots" content="index, follow">
-    <meta name="canonical" href="https://make-qr.github.io/">
-    <title>Make QR - Free QR Code Generator & Online Tools</title>
+    <link rel="canonical" href="https://make-qr.github.io/">
+    <title>Free QR Code Generator with Logo | Make QR</title>
     
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='4' y='18' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='18' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='24' y='18' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='18' y='24' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='24' y='24' width='4' height='4' fill='%231E40AF'/%3E%3C/svg%3E">
     
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="assets/css/tailwind.min.css" rel="stylesheet">
-    <link href="assets/css/style.css?v=20260718-2" rel="stylesheet">
+    <link href="assets/css/style.css?v=20260718-5" rel="stylesheet">
     
     <!-- Scripts -->
     <script src="assets/js/template-loader.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js" defer></script>
-    <script src="assets/js/qr-generator.js?v=20260718" defer></script>
+    <script src="assets/js/qr-generator.js?v=20260718-3" defer></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
     <script>
@@ -41,37 +40,86 @@
     gtag('config', 'G-257SVV94KB');
     </script>
     
-    <!-- Schema.org markup -->
+    <!-- Structured data for search engines and answer engines -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Make QR",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "description": "Free online QR code generator & document tools - Create, customize QR codes, compress images, merge PDFs, and more tools for document processing",
-      "potentialAction": {
-        "@type": "CreateAction",
-        "object": "QRCode",
-        "result": {
-          "@type": "DigitalDocument",
-          "encodingFormat": "image/png"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://make-qr.github.io/#website",
+          "url": "https://make-qr.github.io/",
+          "name": "Make QR"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://make-qr.github.io/#webpage",
+          "url": "https://make-qr.github.io/",
+          "name": "Free QR Code Generator with Logo",
+          "description": "Create and customize static QR codes for URLs, text, WiFi, vCards, email and SMS.",
+          "isPartOf": {"@id": "https://make-qr.github.io/#website"},
+          "mainEntity": {"@id": "https://make-qr.github.io/#app"}
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://make-qr.github.io/#app",
+          "name": "Make QR Code Generator",
+          "url": "https://make-qr.github.io/",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript and a modern web browser",
+          "description": "A free browser-based static QR code generator with live preview, colors, shapes, frames, logos and PNG download.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "URL, text, WiFi, vCard, email and SMS QR codes",
+            "Live QR code preview",
+            "Custom colors, shapes, frames and logos",
+            "L, M, Q and H error correction",
+            "High-quality PNG download",
+            "Static QR codes that do not expire"
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://make-qr.github.io/#howto",
+          "name": "How to create a QR code",
+          "step": [
+            {"@type": "HowToStep", "name": "Choose a QR type", "text": "Select URL, text, WiFi, vCard, email, SMS or file."},
+            {"@type": "HowToStep", "name": "Add content and customize", "text": "Enter the content and optionally change colors, shapes, frame, logo, size and error correction."},
+            {"@type": "HowToStep", "name": "Test and download", "text": "Check the live preview, test the QR code with a phone, and download the PNG."}
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://make-qr.github.io/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is this QR code generator free?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can create and download unlimited static QR codes without an account, watermark or paid plan."}
+            },
+            {
+              "@type": "Question",
+              "name": "Do QR codes created here expire?",
+              "acceptedAnswer": {"@type": "Answer", "text": "No. The generator creates static QR codes that store content directly in the pattern, so they do not depend on a paid redirect or subscription."}
+            },
+            {
+              "@type": "Question",
+              "name": "Can I add a logo to a QR code?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Yes. Upload a PNG, JPG or SVG logo. The generator automatically selects high error correction to improve scan reliability."}
+            },
+            {
+              "@type": "Question",
+              "name": "Is my QR code content uploaded?",
+              "acceptedAnswer": {"@type": "Answer", "text": "The QR generator processes the content locally in your browser and does not upload the content for QR creation."}
+            }
+          ]
         }
-      },
-      "featureList": [
-        "Generate QR codes for text, URLs, vCards, email, SMS, WiFi",
-        "Scan QR codes",
-        "Compress JPG and PNG images",
-        "Convert images to WebP format",
-        "Convert WebP to PNG",
-        "Merge PDF files"
-      ],
-      "url": "https://make-qr.github.io/"
+      ]
     }
     </script>
 </head>
@@ -81,16 +129,6 @@
 
     <!-- Main Content -->
     <main class="home-main max-w-7xl mx-auto px-4 py-8">
-        <section class="home-hero">
-            <span class="home-badge">Free · Private · No signup</span>
-            <h1 class="home-hero-title">QR codes &amp; online tools</h1>
-            <p class="home-hero-desc">Create customizable QR codes, compress images, merge PDFs, and test your devices — everything runs locally in your browser.</p>
-            <div class="home-hero-actions">
-                <a href="#qr-generator" class="home-btn-primary">Create QR code</a>
-                <a href="pages/scan-qr.html" class="home-btn-secondary">Scan QR code</a>
-            </div>
-        </section>
-
         <section id="qr-generator" class="home-qr-section">
         <div class="qr-builder-card">
             <div class="home-qr-header">
@@ -100,11 +138,11 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="home-qr-title">QR Code Generator</h2>
-                    <p class="home-qr-subtitle">Create high-quality QR codes in three simple steps</p>
+                    <h1 class="home-qr-title">Free QR Code Generator</h1>
+                    <p class="home-qr-subtitle">Create static QR codes for URLs, text, WiFi, vCards, email and SMS. Customize colors, shapes, frames and logos, then download a high-quality PNG.</p>
                 </div>
             </div>
-            <p class="qr-benefits">Free <span>·</span> Private <span>·</span> No signup <span>·</span> Always free</p>
+            <p class="qr-benefits">Static QR codes <span>·</span> No embedded ads <span>·</span> Never expire <span>·</span> Always free</p>
 
             <div class="qr-builder-layout">
             <div class="qr-builder-editor">
@@ -335,102 +373,80 @@
                 <small>Optional</small>
             </summary>
             <div class="qr-design-content">
-            <div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label for="qr-size" class="block text-sm font-medium text-gray-700 mb-2">Size:</label>  
-                        <select id="qr-size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">  
-                            <option value="128">Small (128x128)</option>  
-                            <option value="200">Medium (200x200)</option>  
-                            <option value="256">Large (256x256)</option>  
-                            <option value="320">Extra Large (320x320)</option>  
+                <div class="qr-design-grid">
+                    <label class="qr-design-control" for="frame-style">
+                        <span>Frame</span>
+                        <select id="frame-style">
+                            <option value="none">No frame</option>
+                            <option value="style-1">Simple</option>
+                            <option value="style-2">Circle</option>
+                            <option value="style-3">Corner</option>
+                            <option value="style-4">Dashed</option>
+                            <option value="style-5">Double</option>
                         </select>
-                    </div>
-                    <div>
-                        <label for="qr-foreground" class="block text-sm font-medium text-gray-700 mb-2">QR Color:</label>  
-                        <input data-jscolor="{}" id="qr-foreground" value="#000000" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label for="qr-background" class="block text-sm font-medium text-gray-700 mb-2">Background Color:</label>  
-                        <input data-jscolor="{}" id="qr-background" value="#FFFFFF" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
+                    </label>
+                    <label class="qr-design-control" for="qr-shape">
+                        <span>Shape</span>
+                        <select id="qr-shape">
+                            <option value="square">Square</option>
+                            <option value="rounded">Rounded</option>
+                            <option value="dots">Dots</option>
+                            <option value="classy">Classy</option>
+                            <option value="classy-rounded">Classy rounded</option>
+                            <option value="extra-rounded">Extra rounded</option>
+                        </select>
+                    </label>
+                    <label class="qr-design-control" for="logo-upload">
+                        <span>Logo</span>
+                        <input id="logo-upload" type="file" accept="image/png,image/jpeg,image/svg+xml">
+                    </label>
+                    <label class="qr-design-control" for="error-level">
+                        <span>Error correction</span>
+                        <select id="error-level">
+                            <option value="L">Low (L)</option>
+                            <option value="M">Medium (M)</option>
+                            <option value="Q" selected>Quartile (Q)</option>
+                            <option value="H">High (H)</option>
+                        </select>
+                    </label>
+                    <label class="qr-design-control" for="qr-size">
+                        <span>Size</span>
+                        <select id="qr-size">
+                            <option value="200">200 × 200</option>
+                            <option value="256" selected>256 × 256</option>
+                            <option value="320">320 × 320</option>
+                            <option value="512">512 × 512</option>
+                            <option value="1024">1024 × 1024</option>
+                        </select>
+                    </label>
+                    <label class="qr-design-control" for="qr-foreground">
+                        <span>QR color</span>
+                        <input data-jscolor="{}" id="qr-foreground" value="#000000">
+                    </label>
+                    <label class="qr-design-control" for="qr-background">
+                        <span>Background</span>
+                        <input data-jscolor="{}" id="qr-background" value="#FFFFFF">
+                    </label>
+                    <label class="qr-design-control" for="frame-color">
+                        <span>Frame color</span>
+                        <input data-jscolor="{}" id="frame-color" value="#000000">
+                    </label>
                 </div>
-                
-                <div class="mt-6">
-                    <h4 class="text-md font-medium text-gray-800 mb-2">Frame Options</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-6 gap-2 mb-4">
-                        <div class="frame-option selected" data-frame-style="none">
-                            <div class="frame-preview">
-                                <div class="frame-preview-inner"></div>
-                            </div>
-                            <p class="text-xs text-center mt-1">No Frame</p>
-                        </div>
-                        <div class="frame-option" data-frame-style="style-1">
-                            <div class="frame-preview">
-                                <div class="frame-preview-inner qr-frame-style-1"></div>
-                            </div>
-                            <p class="text-xs text-center mt-1">Simple Frame</p>
-                        </div>
-                        <div class="frame-option" data-frame-style="style-2">
-                            <div class="frame-preview">
-                                <div class="frame-preview-inner qr-frame-style-2"></div>
-                            </div>
-                            <p class="text-xs text-center mt-1">Circular Frame</p>
-                        </div>
-                        <div class="frame-option" data-frame-style="style-3">
-                            <div class="frame-preview">
-                                <div class="frame-preview-inner qr-frame-style-3"></div>
-                            </div>
-                            <p class="text-xs text-center mt-1">Special Frame</p>
-                        </div>
-                        <div class="frame-option" data-frame-style="style-4">
-                            <div class="frame-preview">
-                                <div class="frame-preview-inner qr-frame-style-4"></div>
-                            </div>
-                            <p class="text-xs text-center mt-1">Dashed Frame</p>
-                        </div>
-                        <div class="frame-option" data-frame-style="style-5">
-                            <div class="frame-preview">
-                                <div class="frame-preview-inner qr-frame-style-5"></div>
-                            </div>
-                            <p class="text-xs text-center mt-1">Double Frame</p>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                        <div>
-                            <label for="frame-color" class="block text-sm font-medium text-gray-700 mb-2">Frame Color:</label>  
-                            <input data-jscolor="{}" id="frame-color" value="#000000" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="qr-caption" class="block text-sm font-medium text-gray-700 mb-2">Caption (optional):</label>  
-                            <input type="text" id="qr-caption" placeholder="Enter caption for QR code" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <label class="qr-design-control qr-design-caption" for="qr-caption">
+                    <span>Caption</span>
+                    <input type="text" id="qr-caption" placeholder="Optional caption">
+                </label>
             </div>
             </details>
             
-            <div class="qr-step-heading qr-step-heading--generate">
-                <span class="qr-step-number">3</span>
-                <strong>Generate QR code</strong>
-            </div>
-
-            <div class="qr-generate-action">
-                <button   
-                    id="generate-btn"   
-                    class="qr-primary-action"
-                >  
-                    Generate QR Code  
-                </button>  
-            </div>
+            <button id="generate-btn" type="button" hidden>Generate QR Code</button>
             </div>
 
             <aside class="qr-preview-panel" aria-label="QR code preview">
                 <div class="qr-preview-heading">
-                    <strong>Live preview</strong>
-                    <span>Ready when you are</span>
+                    <span class="qr-step-number">3</span>
+                    <strong>Preview &amp; download</strong>
+                    <span class="qr-preview-status">Updates automatically</span>
                 </div>
                 <div id="qrcode-container" class="qr-preview-stage">
                     <div id="qrcode" class="qr-preview-code">
@@ -458,16 +474,81 @@
         </div>
         </section>
 
+        <section class="qr-guide" aria-labelledby="qr-how-title">
+            <div class="qr-guide-intro">
+                <p class="qr-guide-kicker">Quick guide</p>
+                <h2 id="qr-how-title">How to create a QR code</h2>
+                <p>Make QR is a browser-based QR code creator for links, contact details and everyday sharing. The live preview updates as you type, so you can check the design before downloading.</p>
+            </div>
+            <ol class="qr-how-grid">
+                <li>
+                    <span>1</span>
+                    <h3>Choose a QR type</h3>
+                    <p>Select URL, text, WiFi, vCard, email, SMS or a small file.</p>
+                </li>
+                <li>
+                    <span>2</span>
+                    <h3>Add content and customize</h3>
+                    <p>Enter your content, then adjust colors, shape, frame, logo, size and error correction.</p>
+                </li>
+                <li>
+                    <span>3</span>
+                    <h3>Test and download</h3>
+                    <p>Scan the live preview with a phone, then download the high-quality PNG without a watermark.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section class="qr-knowledge" aria-labelledby="qr-knowledge-title">
+            <div class="qr-knowledge-main">
+                <h2 id="qr-knowledge-title">Create a QR code that scans reliably</h2>
+                <p>A QR code converts text or structured data into a square pattern that phone cameras can read. This QR code generator creates static codes: the destination is stored directly in the pattern, with no tracking redirect, embedded advertisement or expiration date.</p>
+                <p>For reliable scanning, use a dark QR color on a light background, keep the clear margin around the code and test the final image at its intended print size. When adding a logo, use High (H) error correction and avoid covering the three large corner markers.</p>
+            </div>
+            <div class="qr-use-cases">
+                <h3>Popular QR code uses</h3>
+                <ul>
+                    <li><strong>URL QR code:</strong> open a website, menu, form or social profile.</li>
+                    <li><strong>WiFi QR code:</strong> let guests join a network without typing the password.</li>
+                    <li><strong>vCard QR code:</strong> save a name, phone number and email as a contact.</li>
+                    <li><strong>QR code with logo:</strong> create a branded code for packaging, signs or business cards.</li>
+                </ul>
+                <a href="pages/scan-qr.html">Already have a code? Scan a QR code online →</a>
+            </div>
+        </section>
+
+        <section class="qr-faq" aria-labelledby="qr-faq-title">
+            <div class="qr-guide-intro">
+                <p class="qr-guide-kicker">Helpful answers</p>
+                <h2 id="qr-faq-title">QR code generator FAQ</h2>
+            </div>
+            <div class="qr-faq-list">
+                <details>
+                    <summary>Is this QR code generator free?</summary>
+                    <p>Yes. You can create and download unlimited static QR codes without an account, watermark or paid plan.</p>
+                </details>
+                <details>
+                    <summary>Do QR codes created here expire?</summary>
+                    <p>No. The generator creates static QR codes that store content directly in the pattern, so they do not depend on a paid redirect or subscription.</p>
+                </details>
+                <details>
+                    <summary>Can I add a logo to a QR code?</summary>
+                    <p>Yes. Upload a PNG, JPG or SVG logo. The generator automatically selects high error correction to improve scan reliability.</p>
+                </details>
+                <details>
+                    <summary>Is my QR code content uploaded?</summary>
+                    <p>The QR generator processes the content locally in your browser and does not upload the content for QR creation.</p>
+                </details>
+                <details>
+                    <summary>What do “QR gen” and other QR search terms mean?</summary>
+                    <p><strong>QR gen</strong> is informal shorthand for a QR code generator. Searches such as <strong>creator qr code</strong>, <strong>qr kód generator</strong> and <strong>qr code generátor</strong> are language or word-order variations for tools that create a scannable QR code.</p>
+                </details>
+            </div>
+        </section>
+
         <section class="home-tools" aria-label="Tools">
             <h2 class="home-section-title">All tools</h2>
             <div class="home-tools-grid">
-                <a href="#qr-generator" class="home-tool-card">
-                    <span class="home-tool-icon home-tool-icon--qr" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
-                    </span>
-                    <span class="home-tool-name">Generate QR</span>
-                    <span class="home-tool-desc">Text, URL, WiFi, vCard &amp; more</span>
-                </a>
                 <a href="pages/scan-qr.html" class="home-tool-card">
                     <span class="home-tool-icon home-tool-icon--scan" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>

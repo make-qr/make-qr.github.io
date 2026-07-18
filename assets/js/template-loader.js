@@ -3,6 +3,19 @@
  */
 let ROOT_PATH = '';
 
+(function applyInitialTheme() {
+    try {
+        const savedTheme = localStorage.getItem('make-qr-theme');
+        const useDark = savedTheme
+            ? savedTheme === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = useDark ? 'dark' : 'light';
+        document.documentElement.style.colorScheme = useDark ? 'dark' : 'light';
+    } catch (error) {
+        document.documentElement.dataset.theme = 'light';
+    }
+})();
+
 function computeRootPath() {
     const parts = window.location.pathname.split('/').filter(Boolean);
     if (parts.length && /\.[a-z0-9]+$/i.test(parts[parts.length - 1])) {
@@ -98,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         loadNavigationScript();
+        loadSiteAppScript();
         document.dispatchEvent(new CustomEvent('templatesLoaded'));
     })
     .catch(error => console.error('Error loading templates:', error));
@@ -135,5 +149,13 @@ function loadNavigationScript() {
     script.onload = function () {
         if (typeof initNavigation === 'function') initNavigation();
     };
+    document.body.appendChild(script);
+}
+
+function loadSiteAppScript() {
+    if (document.querySelector('script[data-site-app]')) return;
+    const script = document.createElement('script');
+    script.src = ROOT_PATH + 'assets/js/site-app.js?v=20260718-1';
+    script.setAttribute('data-site-app', 'true');
     document.body.appendChild(script);
 }
