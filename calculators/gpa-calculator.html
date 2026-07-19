@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/gpa-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   GPA Calculator - Calculate Grade Point Average | Make QR Calculators
+  </title>
+  <meta content="Free GPA calculator to calculate your Grade Point Average with support for different grading systems and credit hours." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .gpa-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .grading-system {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .system-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .system-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .system-option.selected {
+            border-color: #6f42c1;
+            background: rgba(111, 66, 193, 0.1);
+        }
+
+        .courses-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-add-course {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-course:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            border-color: #6f42c1;
+        }
+
+        .course-item input,
+        .course-item select {
+            padding: 0.8rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .course-item input:focus,
+        .course-item select:focus {
+            border-color: #6f42c1;
+            outline: none;
+        }
+
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remove:hover {
+            background: #c82333;
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .gpa-display {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .gpa-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .gpa-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats-display {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6f42c1;
+        }
+
+        .grade-scale {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .scale-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .scale-grade {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6f42c1;
+            margin-bottom: 0.5rem;
+        }
+
+        .scale-points {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .tips-section {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tips-section h4 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .tips-section ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .tips-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .results-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .system-selector {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "GPA Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online gpa calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "GPA Calculator", "item": "https://make-qr.github.io/calculators/gpa-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">GPA Calculator</span>
+            </nav>
+            <h1>GPA Calculator</h1>
+            <p>Calculate your Grade Point Average with ease</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="gpa-calculator">
+      <div class="grading-system">
+       <h3>
+        Select Grading System
+       </h3>
+       <div class="system-selector">
+        <div class="system-option selected" onclick="selectSystem('4.0')">
+         <strong>
+          4.0 Scale
+         </strong>
+         <div>
+          Standard US System
+         </div>
+        </div>
+        <div class="system-option" onclick="selectSystem('5.0')">
+         <strong>
+          5.0 Scale
+         </strong>
+         <div>
+          Weighted System
+         </div>
+        </div>
+        <div class="system-option" onclick="selectSystem('10.0')">
+         <strong>
+          10.0 Scale
+         </strong>
+         <div>
+          International System
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="courses-section">
+       <div class="course-header">
+        <h3>
+         Your Courses
+        </h3>
+        <button class="btn-add-course" onclick="addCourse()">
+         <i class="fas fa-plus">
+         </i>
+         Add Course
+        </button>
+       </div>
+       <div id="coursesContainer">
+        <!-- Courses will be added here -->
+       </div>
+      </div>
+      <div class="results-section">
+       <div class="gpa-display">
+        <div class="gpa-value" id="gpaValue">
+         0.00
+        </div>
+        <div class="gpa-label">
+         Your GPA
+        </div>
+       </div>
+       <div class="stats-display">
+        <div class="stat-item">
+         <span class="stat-label">
+          Total Courses
+         </span>
+         <span class="stat-value" id="totalCourses">
+          0
+         </span>
+        </div>
+        <div class="stat-item">
+         <span class="stat-label">
+          Total Credit Hours
+         </span>
+         <span class="stat-value" id="totalCredits">
+          0
+         </span>
+        </div>
+        <div class="stat-item">
+         <span class="stat-label">
+          Quality Points
+         </span>
+         <span class="stat-value" id="qualityPoints">
+          0.00
+         </span>
+        </div>
+        <div class="stat-item">
+         <span class="stat-label">
+          Letter Grade
+         </span>
+         <span class="stat-value" id="letterGrade">
+          -
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="grade-scale">
+       <h3>
+        Grade Scale
+       </h3>
+       <div class="scale-grid" id="gradeScale">
+        <!-- Grade scale will be populated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h4>
+        <i class="fas fa-graduation-cap">
+        </i>
+        GPA Tips
+       </h4>
+       <ul>
+        <li>
+         Focus on courses with higher credit hours for maximum GPA impact
+        </li>
+        <li>
+         Maintain consistent study habits throughout the semester
+        </li>
+        <li>
+         Seek help early if you're struggling with a course
+        </li>
+        <li>
+         Consider retaking courses if your institution allows grade replacement
+        </li>
+        <li>
+         Balance challenging courses with manageable ones
+        </li>
+        <li>
+         Use office hours and tutoring services when available
+        </li>
+        <li>
+         Keep track of your GPA regularly to stay on target
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentSystem = '4.0';
+        let courseCounter = 0;
+
+        const gradeScales = {
+            '4.0': {
+                'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+                'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+                'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+                'D+': 1.3, 'D': 1.0, 'F': 0.0
+            },
+            '5.0': {
+                'A+': 5.0, 'A': 4.5, 'A-': 4.0,
+                'B+': 3.5, 'B': 3.0, 'B-': 2.5,
+                'C+': 2.0, 'C': 1.5, 'C-': 1.0,
+                'D': 0.5, 'F': 0.0
+            },
+            '10.0': {
+                'A+': 10.0, 'A': 9.0, 'A-': 8.0,
+                'B+': 7.0, 'B': 6.0, 'B-': 5.0,
+                'C+': 4.0, 'C': 3.0, 'C-': 2.0,
+                'D': 1.0, 'F': 0.0
+            }
+        };
+
+        function selectSystem(system) {
+            currentSystem = system;
+            
+            // Update UI
+            document.querySelectorAll('.system-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            
+            // Update grade scale display
+            updateGradeScale();
+            
+            // Recalculate GPA
+            calculateGPA();
+        }
+
+        function updateGradeScale() {
+            const scaleContainer = document.getElementById('gradeScale');
+            const scale = gradeScales[currentSystem];
+            
+            scaleContainer.innerHTML = '';
+            
+            Object.entries(scale).forEach(([grade, points]) => {
+                const scaleItem = document.createElement('div');
+                scaleItem.className = 'scale-item';
+                scaleItem.innerHTML = `
+                    <div class="scale-grade">${grade}</div>
+                    <div class="scale-points">${points.toFixed(1)}</div>
+                `;
+                scaleContainer.appendChild(scaleItem);
+            });
+        }
+
+        function addCourse() {
+            courseCounter++;
+            const coursesContainer = document.getElementById('coursesContainer');
+            
+            const courseItem = document.createElement('div');
+            courseItem.className = 'course-item';
+            courseItem.id = `course-${courseCounter}`;
+            
+            const grades = Object.keys(gradeScales[currentSystem]);
+            const gradeOptions = grades.map(grade => 
+                `<option value="${grade}">${grade}</option>`
+            ).join('');
+            
+            courseItem.innerHTML = `
+                <input type="text" placeholder="Course Name" class="course-name">
+                <input type="number" placeholder="Credits" min="0" max="10" step="0.5" class="course-credits" value="3">
+                <select class="course-grade">
+                    <option value="">Select Grade</option>
+                    ${gradeOptions}
+                </select>
+                <div class="course-points">0.00</div>
+                <button class="btn-remove" onclick="removeCourse('course-${courseCounter}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            coursesContainer.appendChild(courseItem);
+            
+            // Add event listeners
+            const inputs = courseItem.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('change', calculateGPA);
+                input.addEventListener('input', calculateGPA);
+            });
+            
+            calculateGPA();
+        }
+
+        function removeCourse(courseId) {
+            const courseElement = document.getElementById(courseId);
+            if (courseElement) {
+                courseElement.remove();
+                calculateGPA();
+            }
+        }
+
+        function calculateGPA() {
+            const courses = document.querySelectorAll('.course-item');
+            let totalCredits = 0;
+            let totalQualityPoints = 0;
+            let validCourses = 0;
+            
+            courses.forEach(course => {
+                const credits = parseFloat(course.querySelector('.course-credits').value) || 0;
+                const grade = course.querySelector('.course-grade').value;
+                const pointsDisplay = course.querySelector('.course-points');
+                
+                if (credits > 0 && grade && gradeScales[currentSystem][grade] !== undefined) {
+                    const gradePoints = gradeScales[currentSystem][grade];
+                    const qualityPoints = credits * gradePoints;
+                    
+                    totalCredits += credits;
+                    totalQualityPoints += qualityPoints;
+                    validCourses++;
+                    
+                    pointsDisplay.textContent = qualityPoints.toFixed(2);
+                } else {
+                    pointsDisplay.textContent = '0.00';
+                }
+            });
+            
+            const gpa = totalCredits > 0 ? totalQualityPoints / totalCredits : 0;
+            const letterGrade = getLetterGrade(gpa);
+            
+            // Update display
+            document.getElementById('gpaValue').textContent = gpa.toFixed(2);
+            document.getElementById('totalCourses').textContent = validCourses;
+            document.getElementById('totalCredits').textContent = totalCredits.toFixed(1);
+            document.getElementById('qualityPoints').textContent = totalQualityPoints.toFixed(2);
+            document.getElementById('letterGrade').textContent = letterGrade;
+        }
+
+        function getLetterGrade(gpa) {
+            const scale = gradeScales[currentSystem];
+            const maxPoints = Math.max(...Object.values(scale));
+            const normalizedGPA = (gpa / maxPoints) * 4.0; // Normalize to 4.0 scale
+            
+            if (normalizedGPA >= 3.7) return 'A';
+            if (normalizedGPA >= 3.3) return 'B+';
+            if (normalizedGPA >= 3.0) return 'B';
+            if (normalizedGPA >= 2.7) return 'B-';
+            if (normalizedGPA >= 2.3) return 'C+';
+            if (normalizedGPA >= 2.0) return 'C';
+            if (normalizedGPA >= 1.7) return 'C-';
+            if (normalizedGPA >= 1.3) return 'D+';
+            if (normalizedGPA >= 1.0) return 'D';
+            return 'F';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateGradeScale();
+            addCourse(); // Add first course by default
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

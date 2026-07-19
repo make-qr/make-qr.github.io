@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/stair-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Stair Calculator - Calculate Stair Dimensions &amp; Materials | Make QR Calculators
+  </title>
+  <meta content="Calculate stair dimensions including rise, run, steps, angle, and materials needed for stair construction." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .stair-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #ff9800;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .stair-diagram {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom, #87ceeb 0%, #87ceeb 40%, #90ee90 40%, #90ee90 100%);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .stair-visual {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: 60%;
+        }
+
+        .step {
+            position: absolute;
+            background: #8b4513;
+            border: 2px solid #654321;
+        }
+
+        .stair-measurements {
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .code-compliance {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .compliance-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #4caf50;
+        }
+
+        .compliance-status {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .compliance-pass {
+            color: #4caf50;
+        }
+
+        .compliance-fail {
+            color: #f44336;
+        }
+
+        .compliance-warning {
+            color: #ff9800;
+        }
+
+        .material-breakdown {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Stair Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online stair calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Stair Calculator", "item": "https://make-qr.github.io/calculators/stair-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Stair Calculator</span>
+            </nav>
+            <h1>Stair Calculator</h1>
+            <p>Calculate stair dimensions, steps, rise, run, angle, and building code compliance</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="stair-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         Stair Dimensions
+        </h3>
+        <div class="input-group">
+         <label for="total-rise">
+          Total Rise (inches)
+         </label>
+         <input class="input-field" id="total-rise" min="0" placeholder="96" step="0.25" type="number"/>
+         <small style="color: #6c757d;">
+          Floor to floor height
+         </small>
+        </div>
+        <div class="input-group">
+         <label for="total-run">
+          Total Run (inches)
+         </label>
+         <input class="input-field" id="total-run" min="0" placeholder="120" step="0.25" type="number"/>
+         <small style="color: #6c757d;">
+          Horizontal distance available
+         </small>
+        </div>
+        <div class="input-group">
+         <label for="step-count">
+          Number of Steps
+         </label>
+         <input class="input-field" id="step-count" max="30" min="3" placeholder="12" step="1" type="number"/>
+         <small style="color: #6c757d;">
+          Leave blank to auto-calculate
+         </small>
+        </div>
+        <div class="input-group">
+         <label for="tread-thickness">
+          Tread Thickness (inches)
+         </label>
+         <select class="input-field" id="tread-thickness">
+          <option selected="" value="1">
+           1" - Standard lumber
+          </option>
+          <option value="1.5">
+           1.5" - Thick lumber
+          </option>
+          <option value="2">
+           2" - Extra thick
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="stringer-width">
+          Stringer Width (inches)
+         </label>
+         <select class="input-field" id="stringer-width">
+          <option value="9.25">
+           9.25" - 2x10
+          </option>
+          <option selected="" value="11.25">
+           11.25" - 2x12
+          </option>
+          <option value="13.25">
+           13.25" - 2x14
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="headroom">
+          Minimum Headroom (inches)
+         </label>
+         <input class="input-field" id="headroom" max="96" min="72" step="1" type="number" value="80"/>
+         <small style="color: #6c757d;">
+          Building code minimum: 80"
+         </small>
+        </div>
+        <div class="input-group">
+         <label for="stair-width">
+          Stair Width (inches)
+         </label>
+         <input class="input-field" id="stair-width" max="72" min="24" step="1" type="number" value="36"/>
+         <small style="color: #6c757d;">
+          Code minimum: 36"
+         </small>
+        </div>
+        <div class="input-group">
+         <label for="calculation-method">
+          Calculation Method
+         </label>
+         <select class="input-field" id="calculation-method">
+          <option selected="" value="auto">
+           Auto (optimal rise/run)
+          </option>
+          <option value="equal-rise">
+           Equal rise (specify steps)
+          </option>
+          <option value="equal-run">
+           Equal run (specify steps)
+          </option>
+         </select>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-clipboard-list">
+         </i>
+         Calculated Results
+        </h3>
+        <div class="input-group">
+         <label for="calculated-steps">
+          Number of Steps
+         </label>
+         <input class="input-field result-field" id="calculated-steps" placeholder="0 steps" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="unit-rise">
+          Unit Rise
+         </label>
+         <input class="input-field result-field" id="unit-rise" placeholder="0 inches" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="unit-run">
+          Unit Run (Tread)
+         </label>
+         <input class="input-field result-field" id="unit-run" placeholder="0 inches" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="stair-angle">
+          Stair Angle
+         </label>
+         <input class="input-field result-field" id="stair-angle" placeholder="0°" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="stringer-length">
+          Stringer Length
+         </label>
+         <input class="input-field result-field" id="stringer-length" placeholder="0 inches" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="total-tread-area">
+          Total Tread Area
+         </label>
+         <input class="input-field result-field" id="total-tread-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="riser-area">
+          Total Riser Area
+         </label>
+         <input class="input-field result-field" id="riser-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="recommended-stringers">
+          Recommended Stringers
+         </label>
+         <input class="input-field result-field" id="recommended-stringers" placeholder="0 stringers" readonly="" type="text"/>
+        </div>
+       </div>
+      </div>
+      <div class="stair-diagram">
+       <h3>
+        <i class="fas fa-drafting-compass">
+        </i>
+        Stair Profile Diagram
+       </h3>
+       <div class="diagram-container" id="diagram-container">
+        <div class="stair-visual" id="stair-visual">
+         <!-- Steps will be generated here -->
+        </div>
+       </div>
+      </div>
+      <div class="code-compliance" id="code-compliance-section">
+       <h3>
+        <i class="fas fa-check-circle">
+        </i>
+        Building Code Compliance
+       </h3>
+       <div class="compliance-grid" id="compliance-grid">
+        <!-- Compliance checks will be generated here -->
+       </div>
+      </div>
+      <div class="material-breakdown" id="material-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa=" clipboard-list"="">
+        </i>
+        Material Requirements
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Material breakdown will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Stair Construction Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          📐 Rise &amp; Run Formula
+         </h4>
+         <p>
+          Ideal ratio: 2 x Rise + Run = 24-25 inches. Common comfortable ratio is 7" rise with 11" run.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📏 Consistent Dimensions
+         </h4>
+         <p>
+          All rises should be identical within 3/8". Variation can cause tripping hazards.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🛠️ Stringer Placement
+         </h4>
+         <p>
+          Use 2x12 lumber for stringers. Space stringers max 16" on center for 5/4" treads.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔧 Secure Attachment
+         </h4>
+         <p>
+          Attach stringers with joist hangers or ledger board. Use appropriate fasteners for load.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🚪 Headroom Check
+         </h4>
+         <p>
+          Minimum 6'8" headroom throughout stair run. Check local codes for requirements.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🛡️ Safety Features
+         </h4>
+         <p>
+          Install handrails 34-38" high. Guardrails required for stairs over 30" high.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateStairs() {
+            const totalRise = parseFloat(document.getElementById('total-rise').value) || 0;
+            const totalRun = parseFloat(document.getElementById('total-run').value) || 0;
+            let stepCount = parseInt(document.getElementById('step-count').value) || 0;
+            const treadThickness = parseFloat(document.getElementById('tread-thickness').value) || 1;
+            const stringerWidth = parseFloat(document.getElementById('stringer-width').value) || 11.25;
+            const headroom = parseFloat(document.getElementById('headroom').value) || 80;
+            const stairWidth = parseFloat(document.getElementById('stair-width').value) || 36;
+            const calculationMethod = document.getElementById('calculation-method').value;
+
+            if (totalRise === 0) return;
+
+            // Calculate optimal number of steps if not specified
+            if (stepCount === 0 || calculationMethod === 'auto') {
+                // Ideal rise is 7-7.5 inches
+                stepCount = Math.round(totalRise / 7.25);
+                stepCount = Math.max(3, Math.min(30, stepCount)); // Limit to reasonable range
+            }
+
+            const unitRise = totalRise / stepCount;
+            const unitRun = totalRun > 0 ? totalRun / stepCount : 11; // Default 11" if no run specified
+            
+            // Adjust total run if calculated from unit run
+            const calculatedTotalRun = unitRun * stepCount;
+            
+            // Calculate stringer length using Pythagorean theorem
+            const stringerLength = Math.sqrt(Math.pow(totalRise, 2) + Math.pow(calculatedTotalRun, 2));
+            
+            // Calculate angle
+            const angle = Math.atan(totalRise / calculatedTotalRun) * (180 / Math.PI);
+            
+            // Calculate areas
+            const totalTreadArea = (stepCount * unitRun * stairWidth) / 144; // sq ft
+            const riserArea = (stepCount * unitRise * stairWidth) / 144; // sq ft
+            
+            // Recommended number of stringers based on width
+            const recommendedStringers = Math.max(2, Math.ceil(stairWidth / 16) + 1);
+
+            // Update results
+            document.getElementById('calculated-steps').value = stepCount + ' steps';
+            document.getElementById('unit-rise').value = unitRise.toFixed(2) + '"';
+            document.getElementById('unit-run').value = unitRun.toFixed(2) + '"';
+            document.getElementById('stair-angle').value = angle.toFixed(1) + '°';
+            document.getElementById('stringer-length').value = stringerLength.toFixed(1) + '"';
+            document.getElementById('total-tread-area').value = totalTreadArea.toFixed(1) + ' sq ft';
+            document.getElementById('riser-area').value = riserArea.toFixed(1) + ' sq ft';
+            document.getElementById('recommended-stringers').value = recommendedStringers + ' stringers';
+
+            // Generate visual diagram
+            generateStairDiagram(stepCount, unitRise, unitRun);
+            
+            // Check building code compliance
+            checkCodeCompliance(unitRise, unitRun, angle, headroom, stairWidth);
+            
+            // Generate material breakdown
+            generateMaterialBreakdown(stepCount, unitRun, unitRise, stairWidth, stringerLength, recommendedStringers);
+        }
+
+        function generateStairDiagram(steps, rise, run) {
+            const visual = document.getElementById('stair-visual');
+            visual.innerHTML = '';
+            
+            const containerWidth = visual.offsetWidth || 400;
+            const containerHeight = visual.offsetHeight || 180;
+            
+            const stepWidth = Math.min(containerWidth / steps, 60);
+            const stepHeight = Math.min(containerHeight / steps, 25);
+            
+            for (let i = 0; i < steps; i++) {
+                const step = document.createElement('div');
+                step.className = 'step';
+                step.style.left = (i * stepWidth) + 'px';
+                step.style.bottom = (i * stepHeight) + 'px';
+                step.style.width = stepWidth + 'px';
+                step.style.height = stepHeight + 'px';
+                visual.appendChild(step);
+                
+                // Add measurements for first few steps
+                if (i < 3) {
+                    const measurement = document.createElement('div');
+                    measurement.className = 'stair-measurements';
+                    measurement.textContent = rise.toFixed(1) + '" × ' + run.toFixed(1) + '"';
+                    measurement.style.left = (i * stepWidth + stepWidth/2) + 'px';
+                    measurement.style.bottom = (i * stepHeight + stepHeight + 5) + 'px';
+                    measurement.style.transform = 'translateX(-50%)';
+                    visual.appendChild(measurement);
+                }
+            }
+        }
+
+        function checkCodeCompliance(rise, run, angle, headroom, width) {
+            const compliance = [];
+            
+            // Rise compliance (typically 4-7.75 inches)
+            const risePass = rise >= 4 && rise <= 7.75;
+            compliance.push({
+                name: 'Rise Height',
+                value: rise.toFixed(2) + '"',
+                status: risePass ? 'pass' : 'fail',
+                requirement: '4" - 7.75"'
+            });
+            
+            // Run compliance (typically 11+ inches)
+            const runPass = run >= 11;
+            compliance.push({
+                name: 'Tread Depth',
+                value: run.toFixed(2) + '"',
+                status: runPass ? 'pass' : 'fail',
+                requirement: '11" minimum'
+            });
+            
+            // 2R + T formula (should be 24-25 inches)
+            const formula = 2 * rise + run;
+            const formulaPass = formula >= 24 && formula <= 25;
+            compliance.push({
+                name: '2R + T Formula',
+                value: formula.toFixed(1) + '"',
+                status: formulaPass ? 'pass' : 'warning',
+                requirement: '24" - 25"'
+            });
+            
+            // Angle compliance (typically 30-40 degrees)
+            const anglePass = angle >= 30 && angle <= 40;
+            compliance.push({
+                name: 'Stair Angle',
+                value: angle.toFixed(1) + '°',
+                status: anglePass ? 'pass' : 'warning',
+                requirement: '30° - 40°'
+            });
+            
+            // Headroom compliance
+            const headroomPass = headroom >= 80;
+            compliance.push({
+                name: 'Headroom',
+                value: headroom + '"',
+                status: headroomPass ? 'pass' : 'fail',
+                requirement: '80" minimum'
+            });
+            
+            // Width compliance
+            const widthPass = width >= 36;
+            compliance.push({
+                name: 'Stair Width',
+                value: width + '"',
+                status: widthPass ? 'pass' : 'fail',
+                requirement: '36" minimum'
+            });
+            
+            const complianceGrid = document.getElementById('compliance-grid');
+            complianceGrid.innerHTML = compliance.map(item => `
+                <div class="compliance-item">
+                    <div class="compliance-status compliance-${item.status}">
+                        ${item.status === 'pass' ? '✓' : item.status === 'warning' ? '⚠' : '✗'} ${item.name}
+                    </div>
+                    <div><strong>${item.value}</strong></div>
+                    <div style="font-size: 0.9rem; color: #6c757d;">${item.requirement}</div>
+                </div>
+            `).join('');
+        }
+
+        function generateMaterialBreakdown(steps, run, rise, width, stringerLength, stringers) {
+            // Calculate materials needed
+            const treadBoards = Math.ceil((steps * run * width) / 144 / 0.75); // Assuming 3/4" thick boards
+            const riserBoards = Math.ceil((steps * rise * width) / 144 / 0.75);
+            const stringerBoards = stringers; // Number of 2x12s needed
+            const handrailLength = Math.ceil(stringerLength / 12); // Linear feet
+            const screws = steps * 8; // Approximately 8 screws per step
+            const brackets = stringers * 2; // Joist hangers for stringers
+            
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${treadBoards}</div>
+                    <div class="breakdown-label">Tread Boards (3/4")</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${riserBoards}</div>
+                    <div class="breakdown-label">Riser Boards (3/4")</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${stringerBoards}</div>
+                    <div class="breakdown-label">Stringers (2x12)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${handrailLength}</div>
+                    <div class="breakdown-label">Handrail (lin ft)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${screws}</div>
+                    <div class="breakdown-label">Deck Screws</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${brackets}</div>
+                    <div class="breakdown-label">Joist Hangers</div>
+                </div>
+            `;
+            document.getElementById('material-breakdown-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['total-rise', 'total-run', 'step-count', 'tread-thickness', 'stringer-width',
+             'headroom', 'stair-width', 'calculation-method'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateStairs);
+                    element.addEventListener('change', calculateStairs);
+                }
+            });
+
+            // Set default values
+            document.getElementById('total-rise').value = 96;
+            document.getElementById('total-run').value = 120;
+            
+            // Initial calculation
+            setTimeout(calculateStairs, 100);
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

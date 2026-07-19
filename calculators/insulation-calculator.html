@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/insulation-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Insulation Calculator - Calculate Insulation Needed &amp; Costs | Make QR Calculators
+  </title>
+  <meta content="Calculate how much insulation you need for walls, attics, and basements. Estimate R-values, materials, and energy savings." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .insulation-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #ff9800;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .insulation-types {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .type-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #ff9800;
+        }
+
+        .type-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .type-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff9800;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-details {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .r-value-guide {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .guide-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .guide-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-label {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .savings-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .savings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .savings-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .savings-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .savings-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Insulation Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online insulation calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Insulation Calculator", "item": "https://make-qr.github.io/calculators/insulation-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Insulation Calculator</span>
+            </nav>
+            <h1>Insulation Calculator</h1>
+            <p>Calculate insulation needs for walls, attics, and basements to improve energy efficiency</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="insulation-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         Area &amp; Project Details
+        </h3>
+        <div class="input-group">
+         <label>
+          Area Dimensions
+         </label>
+         <div class="dimension-grid">
+          <input class="input-field" id="area-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+          <input class="input-field" id="area-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="insulation-location">
+          Insulation Location
+         </label>
+         <select class="input-field" id="insulation-location">
+          <option selected="" value="attic">
+           Attic/Ceiling
+          </option>
+          <option value="walls">
+           Exterior Walls
+          </option>
+          <option value="basement">
+           Basement/Crawl Space
+          </option>
+          <option value="floors">
+           Floors
+          </option>
+          <option value="rim-joist">
+           Rim Joist
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="climate-zone">
+          Climate Zone
+         </label>
+         <select class="input-field" id="climate-zone">
+          <option value="1">
+           Zone 1 (Hawaii, South FL)
+          </option>
+          <option value="2">
+           Zone 2 (South TX, South FL)
+          </option>
+          <option value="3">
+           Zone 3 (Deep South)
+          </option>
+          <option selected="" value="4">
+           Zone 4 (Mid-Atlantic)
+          </option>
+          <option value="5">
+           Zone 5 (Great Lakes)
+          </option>
+          <option value="6">
+           Zone 6 (Northern States)
+          </option>
+          <option value="7">
+           Zone 7 (Canada Border)
+          </option>
+          <option value="8">
+           Zone 8 (Alaska)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="insulation-type">
+          Insulation Type
+         </label>
+         <select class="input-field" id="insulation-type">
+          <option selected="" value="fiberglass-batts">
+           Fiberglass Batts
+          </option>
+          <option value="blown-fiberglass">
+           Blown Fiberglass
+          </option>
+          <option value="cellulose">
+           Cellulose (Blown)
+          </option>
+          <option value="spray-foam">
+           Spray Foam
+          </option>
+          <option value="rigid-foam">
+           Rigid Foam Boards
+          </option>
+          <option value="mineral-wool">
+           Mineral Wool
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="existing-r-value">
+          Existing R-Value
+         </label>
+         <input class="input-field" id="existing-r-value" max="100" min="0" placeholder="0" step="1" type="number"/>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Current insulation R-value (0 if none)
+         </p>
+        </div>
+        <div class="input-group">
+         <label for="cost-per-sqft">
+          Cost per Square Foot
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="cost-per-sqft" min="0" placeholder="1.50" step="0.01" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="energy-cost">
+          Current Energy Cost ($/month)
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="energy-cost" min="0" placeholder="150" step="1" type="number"/>
+         </div>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-thermometer-half">
+         </i>
+         Insulation Requirements
+        </h3>
+        <div class="input-group">
+         <label for="total-area">
+          Total Area
+         </label>
+         <input class="input-field result-field" id="total-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="recommended-r-value">
+          Recommended R-Value
+         </label>
+         <input class="input-field result-field" id="recommended-r-value" placeholder="R-0" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="additional-r-needed">
+          Additional R-Value Needed
+         </label>
+         <input class="input-field result-field" id="additional-r-needed" placeholder="R-0" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="insulation-thickness">
+          Insulation Thickness
+         </label>
+         <input class="input-field result-field" id="insulation-thickness" placeholder="0 inches" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="material-cost">
+          Material Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="material-cost" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="annual-savings">
+          Estimated Annual Savings
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="annual-savings" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="payback-period">
+          Payback Period
+         </label>
+         <input class="input-field result-field" id="payback-period" placeholder="0 years" readonly="" type="text"/>
+        </div>
+       </div>
+      </div>
+      <div class="r-value-guide">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Recommended R-Values by Climate Zone
+       </h3>
+       <div class="guide-grid" id="r-value-grid">
+        <!-- R-value recommendations will be generated here -->
+       </div>
+      </div>
+      <div class="insulation-types">
+       <h3>
+        <i class="fas fa-home">
+        </i>
+        Insulation Types &amp; R-Values
+       </h3>
+       <div class="types-grid">
+        <div class="type-card">
+         <div class="type-name">
+          🧶 Fiberglass Batts
+         </div>
+         <div class="type-price">
+          $0.64-1.19/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           R-Value:
+          </strong>
+          3.2-3.8 per inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Standard wall cavities
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          DIY friendly
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          💨 Blown Fiberglass
+         </div>
+         <div class="type-price">
+          $1.65-2.00/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           R-Value:
+          </strong>
+          2.2-2.7 per inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Attics, irregular spaces
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          Professional
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          📰 Cellulose
+         </div>
+         <div class="type-price">
+          $1.20-2.80/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           R-Value:
+          </strong>
+          3.1-3.8 per inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Eco-friendly option
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          Professional blown
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🫧 Spray Foam
+         </div>
+         <div class="type-price">
+          $3.00-7.00/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           R-Value:
+          </strong>
+          3.5-6.5 per inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Air sealing + insulation
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          Professional only
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          📋 Rigid Foam
+         </div>
+         <div class="type-price">
+          $1.00-1.50/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           R-Value:
+          </strong>
+          3.8-8.0 per inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Continuous insulation
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          Moderate DIY
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🪨 Mineral Wool
+         </div>
+         <div class="type-price">
+          $1.40-2.10/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           R-Value:
+          </strong>
+          3.0-3.3 per inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Fire resistance
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          DIY friendly
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="savings-section" id="savings-section" style="display: none;">
+       <h3>
+        <i class="fas fa-piggy-bank">
+        </i>
+        Energy Savings Analysis
+       </h3>
+       <div class="savings-grid" id="savings-grid">
+        <!-- Savings analysis will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Insulation Installation Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          🎯 Proper R-Value
+         </h4>
+         <p>
+          Choose R-value based on climate zone and location. More insulation isn't always better - follow recommendations.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔒 Air Sealing First
+         </h4>
+         <p>
+          Seal air leaks before adding insulation. Air sealing can be more important than adding more insulation.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🧤 Safety Equipment
+         </h4>
+         <p>
+          Wear protective gear: gloves, masks, long sleeves. Fiberglass particles can irritate skin and lungs.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💨 Ventilation
+         </h4>
+         <p>
+          Maintain proper ventilation in attics and crawl spaces. Don't block soffit or ridge vents with insulation.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📏 No Compression
+         </h4>
+         <p>
+          Don't compress insulation - it reduces R-value significantly. Cut batts to fit properly, don't stuff them in.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔌 Electrical Safety
+         </h4>
+         <p>
+          Turn off power when working near electrical. Use unfaced insulation around recessed lights and electrical.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateInsulation() {
+            const length = parseFloat(document.getElementById('area-length').value) || 0;
+            const width = parseFloat(document.getElementById('area-width').value) || 0;
+            const location = document.getElementById('insulation-location').value;
+            const climateZone = parseInt(document.getElementById('climate-zone').value) || 4;
+            const insulationType = document.getElementById('insulation-type').value;
+            const existingRValue = parseFloat(document.getElementById('existing-r-value').value) || 0;
+            const costPerSqFt = parseFloat(document.getElementById('cost-per-sqft').value) || 1.50;
+            const energyCost = parseFloat(document.getElementById('energy-cost').value) || 150;
+
+            if (length === 0 || width === 0) return;
+
+            const totalArea = length * width;
+
+            // Recommended R-values by climate zone and location
+            const rValueRecommendations = {
+                'attic': [30, 38, 38, 38, 49, 49, 60, 60],
+                'walls': [13, 13, 13, 13, 20, 20, 21, 21],
+                'basement': [0, 0, 5, 10, 10, 15, 15, 19],
+                'floors': [13, 13, 19, 19, 30, 30, 38, 38],
+                'rim-joist': [13, 13, 13, 13, 19, 19, 23, 23]
+            };
+
+            const recommendedR = rValueRecommendations[location][climateZone - 1];
+            const additionalR = Math.max(0, recommendedR - existingRValue);
+
+            // R-value per inch for different insulation types
+            const rPerInch = {
+                'fiberglass-batts': 3.5,
+                'blown-fiberglass': 2.5,
+                'cellulose': 3.5,
+                'spray-foam': 6.0,
+                'rigid-foam': 5.0,
+                'mineral-wool': 3.1
+            };
+
+            const thickness = additionalR / rPerInch[insulationType];
+            const materialCost = totalArea * costPerSqFt;
+
+            // Estimate energy savings (simplified calculation)
+            const savingsPercentage = Math.min(additionalR / recommendedR * 0.30, 0.30); // Max 30% savings
+            const annualSavings = energyCost * 12 * savingsPercentage;
+            const paybackPeriod = annualSavings > 0 ? materialCost / annualSavings : 0;
+
+            // Update results
+            document.getElementById('total-area').value = totalArea.toFixed(0) + ' sq ft';
+            document.getElementById('recommended-r-value').value = 'R-' + recommendedR;
+            document.getElementById('additional-r-needed').value = 'R-' + additionalR.toFixed(0);
+            document.getElementById('insulation-thickness').value = thickness.toFixed(1) + ' inches';
+            document.getElementById('material-cost').value = materialCost.toFixed(0);
+            document.getElementById('annual-savings').value = annualSavings.toFixed(0);
+            document.getElementById('payback-period').value = paybackPeriod.toFixed(1) + ' years';
+
+            // Generate R-value guide
+            generateRValueGuide(climateZone);
+            
+            // Generate savings analysis
+            generateSavingsAnalysis(annualSavings, materialCost, paybackPeriod, savingsPercentage);
+        }
+
+        function generateRValueGuide(currentZone) {
+            const grid = document.getElementById('r-value-grid');
+            const locations = ['Attic', 'Walls', 'Basement', 'Floors'];
+            const recommendations = {
+                'Attic': [30, 38, 38, 38, 49, 49, 60, 60],
+                'Walls': [13, 13, 13, 13, 20, 20, 21, 21],
+                'Basement': [0, 0, 5, 10, 10, 15, 15, 19],
+                'Floors': [13, 13, 19, 19, 30, 30, 38, 38]
+            };
+
+            grid.innerHTML = locations.map(location => `
+                <div class="guide-item">
+                    <div class="guide-value">R-${recommendations[location][currentZone - 1]}</div>
+                    <div class="guide-label">${location}</div>
+                    <div class="guide-description">Zone ${currentZone} Recommendation</div>
+                </div>
+            `).join('');
+        }
+
+        function generateSavingsAnalysis(annual, cost, payback, percentage) {
+            const lifetime = annual * 20; // 20-year lifetime
+            const roi = ((lifetime - cost) / cost * 100);
+            
+            const grid = document.getElementById('savings-grid');
+            grid.innerHTML = `
+                <div class="savings-item">
+                    <div class="savings-value">$${annual.toFixed(0)}</div>
+                    <div class="savings-label">Annual Savings</div>
+                </div>
+                <div class="savings-item">
+                    <div class="savings-value">${(percentage * 100).toFixed(0)}%</div>
+                    <div class="savings-label">Energy Reduction</div>
+                </div>
+                <div class="savings-item">
+                    <div class="savings-value">${payback.toFixed(1)}</div>
+                    <div class="savings-label">Payback (years)</div>
+                </div>
+                <div class="savings-item">
+                    <div class="savings-value">$${lifetime.toFixed(0)}</div>
+                    <div class="savings-label">20-Year Savings</div>
+                </div>
+                <div class="savings-item">
+                    <div class="savings-value">${roi.toFixed(0)}%</div>
+                    <div class="savings-label">ROI (20 years)</div>
+                </div>
+            `;
+            document.getElementById('savings-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['area-length', 'area-width', 'insulation-location', 'climate-zone', 
+             'insulation-type', 'existing-r-value', 'cost-per-sqft', 'energy-cost'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateInsulation);
+                    element.addEventListener('change', calculateInsulation);
+                }
+            });
+
+            // Set example values
+            document.getElementById('area-length').value = 30;
+            document.getElementById('area-width').value = 40;
+            document.getElementById('cost-per-sqft').value = 1.50;
+            document.getElementById('energy-cost').value = 150;
+            document.getElementById('existing-r-value').value = 10;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

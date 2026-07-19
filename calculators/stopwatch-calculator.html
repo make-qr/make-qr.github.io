@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Primary SEO Meta Tags -->
+  <title>
+   Stopwatch Calculator - Precision Timer with Lap Times | Make QR Calculators
+  </title>
+  <meta content="Stopwatch Calculator - Precision Timer with Lap Times | Make QR Calculators" name="title"/>
+  <meta content="Free online stopwatch calculator with precision timing, lap times, split times, and millisecond accuracy. Perfect for sports, workouts, and time tracking." name="description"/>
+  <meta content="stopwatch calculator, online stopwatch, lap timer, split timer, precision timer, sports timer, workout timer" name="keywords"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Make QR Calculators" name="author"/>
+  <!-- Open Graph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/stopwatch-calculator.html" property="og:url"/>
+  <meta content="Stopwatch Calculator - Precision Timer with Lap Times" property="og:title"/>
+  <meta content="Free online stopwatch calculator with precision timing, lap times, split times, and millisecond accuracy for sports and time tracking." property="og:description"/>
+  <meta content="https://make-qr.github.io/calculators/stopwatch-calculator-preview.jpg" property="og:image"/>
+  <meta content="Make QR Calculators" property="og:site_name"/>
+  <!-- Twitter -->
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://make-qr.github.io/calculators/stopwatch-calculator.html" property="twitter:url"/>
+  <meta content="Stopwatch Calculator - Precision Timer with Lap Times" property="twitter:title"/>
+  <meta content="Free online stopwatch with precision timing and lap times for sports and workouts." property="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/stopwatch-calculator-preview.jpg" property="twitter:image"/>
+  <!-- Canonical URL -->
+  <link href="https://make-qr.github.io/calculators/stopwatch-calculator.html" rel="canonical"/>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Stopwatch Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "Precision stopwatch calculator with lap times, split times, and millisecond accuracy",
+      "featureList": ["Stopwatch", "Lap Timer", "Split Timer", "Precision Timing", "Time Statistics"],
+      "url": "https://make-qr.github.io/calculators/stopwatch-calculator.html"
+    }
+  </script>
+  <style>
+   .stopwatch-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .stopwatch-display {
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            margin: 2rem 0;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            border: 3px solid #dee2e6;
+            position: relative;
+        }
+
+        .stopwatch-display.running {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #28a745;
+            color: #155724;
+            animation: pulse-border 2s infinite;
+        }
+
+        .stopwatch-display.paused {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: #28a745; }
+            50% { border-color: #20c997; }
+        }
+
+        .milliseconds {
+            font-size: 2rem;
+            color: #6c757d;
+            margin-left: 0.5rem;
+        }
+
+        .stopwatch-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .pause-btn {
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            color: white;
+        }
+
+        .lap-btn {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .lap-times-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .lap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .lap-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .lap-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .lap-item {
+            display: grid;
+            grid-template-columns: 60px 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            align-items: center;
+        }
+
+        .lap-item:hover {
+            background: #f8f9fa;
+        }
+
+        .lap-number {
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .lap-time {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        .split-time {
+            font-family: 'Courier New', monospace;
+            color: #6c757d;
+        }
+
+        .lap-diff {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .lap-diff.faster {
+            color: #28a745;
+        }
+
+        .lap-diff.slower {
+            color: #dc3545;
+        }
+
+        .fastest {
+            background: #d4edda !important;
+            border-left: 4px solid #28a745;
+        }
+
+        .slowest {
+            background: #f8d7da !important;
+            border-left: 4px solid #dc3545;
+        }
+
+        .export-section {
+            background: #e7f3ff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .export-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .precision-toggle {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #007bff;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        @media (max-width: 768px) {
+            .stopwatch-display {
+                font-size: 2.5rem;
+                padding: 2rem 1rem;
+            }
+            
+            .milliseconds {
+                font-size: 1.5rem;
+            }
+            
+            .stopwatch-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .lap-item {
+                grid-template-columns: 50px 1fr 1fr;
+                gap: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .lap-diff {
+                display: none;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Stopwatch Calculator - Precision Timer with Lap Times</span>
+            </nav>
+            <h1>Stopwatch Calculator - Precision Timer with Lap Times</h1>
+            <p>Free online stopwatch calculator - precision timer with lap times with instant, accurate results.</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="calculator-header">
+      <h2>
+       Stopwatch Calculator - Precision Timer with Lap Times
+      </h2>
+      <p>
+       Professional stopwatch with millisecond precision, lap timing, split times, and detailed statistics. Perfect for sports, workouts, and time tracking.
+      </p>
+     </div>
+     <div class="stopwatch-calculator">
+      <!-- Precision Toggle -->
+      <div class="precision-toggle">
+       <span>
+        Show Milliseconds:
+       </span>
+       <div class="toggle-switch active" id="precisionToggle" onclick="togglePrecision()">
+        <div class="toggle-slider">
+        </div>
+       </div>
+      </div>
+      <!-- Stopwatch Display -->
+      <div class="stopwatch-display" id="stopwatchDisplay">
+       00:00:00
+       <span class="milliseconds" id="millisecondsDisplay">
+        .000
+       </span>
+      </div>
+      <!-- Controls -->
+      <div class="stopwatch-controls">
+       <button class="control-btn start-btn" id="startBtn" onclick="startStopwatch()">
+        <i class="fas fa-play">
+        </i>
+        Start
+       </button>
+       <button class="control-btn pause-btn" disabled="" id="pauseBtn" onclick="pauseStopwatch()">
+        <i class="fas fa-pause">
+        </i>
+        Pause
+       </button>
+       <button class="control-btn lap-btn" disabled="" id="lapBtn" onclick="recordLap()">
+        <i class="fas fa-flag">
+        </i>
+        Lap
+       </button>
+       <button class="control-btn reset-btn" id="resetBtn" onclick="resetStopwatch()">
+        <i class="fas fa-redo">
+        </i>
+        Reset
+       </button>
+      </div>
+      <!-- Lap Times Section -->
+      <div class="lap-times-section" id="lapTimesSection" style="display: none;">
+       <div class="lap-header">
+        <h3>
+         <i class="fas fa-list">
+         </i>
+         Lap Times &amp; Statistics
+        </h3>
+        <button class="export-btn" onclick="clearLaps()">
+         <i class="fas fa-trash">
+         </i>
+         Clear Laps
+        </button>
+       </div>
+       <div class="lap-stats" id="lapStats">
+        <div class="stat-card">
+         <div class="stat-value" id="totalLaps">
+          0
+         </div>
+         <div class="stat-label">
+          Total Laps
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value" id="fastestLap">
+          --:--:--
+         </div>
+         <div class="stat-label">
+          Fastest Lap
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value" id="slowestLap">
+          --:--:--
+         </div>
+         <div class="stat-label">
+          Slowest Lap
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value" id="averageLap">
+          --:--:--
+         </div>
+         <div class="stat-label">
+          Average Lap
+         </div>
+        </div>
+       </div>
+       <div class="lap-list" id="lapList">
+        <div class="lap-item" style="font-weight: 700; background: #f8f9fa;">
+         <div>
+          Lap
+         </div>
+         <div>
+          Lap Time
+         </div>
+         <div>
+          Split Time
+         </div>
+         <div class="lap-diff">
+          Difference
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Export Section -->
+      <div class="export-section" id="exportSection" style="display: none;">
+       <h3>
+        <i class="fas fa-download">
+        </i>
+        Export Lap Times
+       </h3>
+       <div class="export-buttons">
+        <button class="export-btn" onclick="exportToCSV()">
+         <i class="fas fa-file-csv">
+         </i>
+         Export CSV
+        </button>
+        <button class="export-btn" onclick="exportToJSON()">
+         <i class="fas fa-file-code">
+         </i>
+         Export JSON
+        </button>
+        <button class="export-btn" onclick="copyToClipboard()">
+         <i class="fas fa-copy">
+         </i>
+         Copy to Clipboard
+        </button>
+        <button class="export-btn" onclick="printResults()">
+         <i class="fas fa-print">
+         </i>
+         Print Results
+        </button>
+       </div>
+      </div>
+     </div>
+     <!-- How to Use Section -->
+     <section class="how-to-section">
+      <div class="container">
+       <h2>
+        How to Use the Stopwatch Calculator
+       </h2>
+       <div class="how-to-grid">
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-play">
+          </i>
+          Basic Timing
+         </h3>
+         <p>
+          Click Start to begin timing, Pause to stop temporarily, and Reset to clear the timer. The display shows hours, minutes, seconds, and milliseconds.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-flag">
+          </i>
+          Lap Timing
+         </h3>
+         <p>
+          Use the Lap button while the timer is running to record split times. Perfect for tracking multiple rounds, laps, or intervals.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-chart-bar">
+          </i>
+          Statistics
+         </h3>
+         <p>
+          View detailed statistics including fastest lap, slowest lap, average lap time, and total number of laps recorded.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-download">
+          </i>
+          Export Data
+         </h3>
+         <p>
+          Export your lap times to CSV, JSON, copy to clipboard, or print results for record keeping and analysis.
+         </p>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Related Tools -->
+     <section class="related-calculators">
+      <div class="container">
+       <h2>
+        Related Time &amp; Date Tools
+       </h2>
+       <div class="related-grid">
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-clock">
+          </i>
+         </div>
+         <h3>
+          Timer Calculator
+         </h3>
+         <p>
+          Countdown timer with multiple timers and alarms
+         </p>
+         <a class="btn-link" href="timer-calculator.html" title="Timer Calculator">
+          Use Timer
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-globe">
+          </i>
+         </div>
+         <h3>
+          World Clock
+         </h3>
+         <p>
+          Current time in different time zones worldwide
+         </p>
+         <a class="btn-link" href="world-clock.html" title="World Clock">
+          View Clock
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calculator">
+          </i>
+         </div>
+         <h3>
+          Time Calculator
+         </h3>
+         <p>
+          Add, subtract, and calculate time durations
+         </p>
+         <a class="btn-link" href="time-calculator.html" title="Time Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calendar">
+          </i>
+         </div>
+         <h3>
+          Calendar Calculator
+         </h3>
+         <p>
+          Calculate dates and find day of the week
+         </p>
+         <a class="btn-link" href="calendar-calculator.html" title="Calendar Calculator">
+          Use Calculator
+         </a>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval = null;
+        let isRunning = false;
+        let showMilliseconds = true;
+        let lapTimes = [];
+        let lapCounter = 1;
+
+        function formatTime(milliseconds, includeMs = true) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const ms = milliseconds % 1000;
+
+            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (includeMs && showMilliseconds) {
+                return { time: timeString, ms: ms.toString().padStart(3, '0') };
+            }
+            return { time: timeString, ms: '' };
+        }
+
+        function updateDisplay() {
+            const currentTime = Date.now();
+            elapsedTime = currentTime - startTime;
+            
+            const formatted = formatTime(elapsedTime);
+            document.getElementById('stopwatchDisplay').querySelector('span:not(.milliseconds)') 
+                ? document.getElementById('stopwatchDisplay').firstChild.textContent = formatted.time
+                : document.getElementById('stopwatchDisplay').childNodes[0].textContent = formatted.time;
+            
+            const msDisplay = document.getElementById('millisecondsDisplay');
+            if (showMilliseconds) {
+                msDisplay.textContent = '.' + formatted.ms;
+                msDisplay.style.display = 'inline';
+            } else {
+                msDisplay.style.display = 'none';
+            }
+        }
+
+        function startStopwatch() {
+            if (!isRunning) {
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(updateDisplay, 10); // Update every 10ms for smooth animation
+                isRunning = true;
+                
+                document.getElementById('stopwatchDisplay').classList.add('running');
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('pauseBtn').disabled = false;
+                document.getElementById('lapBtn').disabled = false;
+            }
+        }
+
+        function pauseStopwatch() {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                isRunning = false;
+                
+                document.getElementById('stopwatchDisplay').classList.remove('running');
+                document.getElementById('stopwatchDisplay').classList.add('paused');
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('pauseBtn').disabled = true;
+                document.getElementById('lapBtn').disabled = true;
+                
+                // Update start button text
+                document.getElementById('startBtn').innerHTML = '<i class="fas fa-play"></i> Resume';
+            }
+        }
+
+        function resetStopwatch() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            elapsedTime = 0;
+            startTime = 0;
+            lapTimes = [];
+            lapCounter = 1;
+            
+            const formatted = formatTime(0);
+            document.getElementById('stopwatchDisplay').childNodes[0].textContent = formatted.time;
+            document.getElementById('millisecondsDisplay').textContent = '.' + formatted.ms;
+            
+            document.getElementById('stopwatchDisplay').classList.remove('running', 'paused');
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+            document.getElementById('lapBtn').disabled = true;
+            document.getElementById('startBtn').innerHTML = '<i class="fas fa-play"></i> Start';
+            
+            // Hide lap times section
+            document.getElementById('lapTimesSection').style.display = 'none';
+            document.getElementById('exportSection').style.display = 'none';
+            
+            // Clear lap list
+            const lapList = document.getElementById('lapList');
+            lapList.innerHTML = `
+                <div class="lap-item" style="font-weight: 700; background: #f8f9fa;">
+                    <div>Lap</div>
+                    <div>Lap Time</div>
+                    <div>Split Time</div>
+                    <div class="lap-diff">Difference</div>
+                </div>
+            `;
+        }
+
+        function recordLap() {
+            if (isRunning) {
+                const currentTime = Date.now();
+                const totalTime = currentTime - startTime;
+                const lapTime = lapTimes.length > 0 ? totalTime - lapTimes[lapTimes.length - 1].totalTime : totalTime;
+                
+                const lap = {
+                    number: lapCounter++,
+                    lapTime: lapTime,
+                    totalTime: totalTime,
+                    timestamp: new Date()
+                };
+                
+                lapTimes.push(lap);
+                updateLapDisplay();
+                updateLapStats();
+                
+                // Show lap times section
+                document.getElementById('lapTimesSection').style.display = 'block';
+                document.getElementById('exportSection').style.display = 'block';
+            }
+        }
+
+        function updateLapDisplay() {
+            const lapList = document.getElementById('lapList');
+            
+            // Keep header and add new lap at the top
+            const header = lapList.querySelector('.lap-item');
+            lapList.innerHTML = '';
+            lapList.appendChild(header);
+            
+            // Add laps in reverse order (newest first)
+            for (let i = lapTimes.length - 1; i >= 0; i--) {
+                const lap = lapTimes[i];
+                const lapItem = document.createElement('div');
+                lapItem.className = 'lap-item';
+                
+                const lapTimeFormatted = formatTime(lap.lapTime, false);
+                const totalTimeFormatted = formatTime(lap.totalTime, false);
+                
+                // Calculate difference from average
+                const avgLapTime = lapTimes.reduce((sum, l) => sum + l.lapTime, 0) / lapTimes.length;
+                const diff = lap.lapTime - avgLapTime;
+                const diffFormatted = formatTime(Math.abs(diff), false);
+                const diffClass = diff < 0 ? 'faster' : diff > 0 ? 'slower' : '';
+                const diffSymbol = diff < 0 ? '-' : diff > 0 ? '+' : '';
+                
+                lapItem.innerHTML = `
+                    <div class="lap-number">#${lap.number}</div>
+                    <div class="lap-time">${lapTimeFormatted.time}</div>
+                    <div class="split-time">${totalTimeFormatted.time}</div>
+                    <div class="lap-diff ${diffClass}">${diffSymbol}${diffFormatted.time}</div>
+                `;
+                
+                lapList.appendChild(lapItem);
+            }
+            
+            // Highlight fastest and slowest laps
+            if (lapTimes.length > 1) {
+                const fastestTime = Math.min(...lapTimes.map(l => l.lapTime));
+                const slowestTime = Math.max(...lapTimes.map(l => l.lapTime));
+                
+                const lapItems = lapList.querySelectorAll('.lap-item:not(:first-child)');
+                lapItems.forEach((item, index) => {
+                    const lapIndex = lapTimes.length - 1 - index;
+                    const lap = lapTimes[lapIndex];
+                    
+                    if (lap.lapTime === fastestTime) {
+                        item.classList.add('fastest');
+                    }
+                    if (lap.lapTime === slowestTime && fastestTime !== slowestTime) {
+                        item.classList.add('slowest');
+                    }
+                });
+            }
+        }
+
+        function updateLapStats() {
+            if (lapTimes.length === 0) return;
+            
+            const lapTimesOnly = lapTimes.map(l => l.lapTime);
+            const fastest = Math.min(...lapTimesOnly);
+            const slowest = Math.max(...lapTimesOnly);
+            const average = lapTimesOnly.reduce((sum, time) => sum + time, 0) / lapTimesOnly.length;
+            
+            document.getElementById('totalLaps').textContent = lapTimes.length;
+            document.getElementById('fastestLap').textContent = formatTime(fastest, false).time;
+            document.getElementById('slowestLap').textContent = formatTime(slowest, false).time;
+            document.getElementById('averageLap').textContent = formatTime(average, false).time;
+        }
+
+        function togglePrecision() {
+            showMilliseconds = !showMilliseconds;
+            const toggle = document.getElementById('precisionToggle');
+            
+            if (showMilliseconds) {
+                toggle.classList.add('active');
+                document.getElementById('millisecondsDisplay').style.display = 'inline';
+            } else {
+                toggle.classList.remove('active');
+                document.getElementById('millisecondsDisplay').style.display = 'none';
+            }
+        }
+
+        function clearLaps() {
+            if (confirm('Are you sure you want to clear all lap times?')) {
+                lapTimes = [];
+                lapCounter = 1;
+                document.getElementById('lapTimesSection').style.display = 'none';
+                document.getElementById('exportSection').style.display = 'none';
+            }
+        }
+
+        function exportToCSV() {
+            if (lapTimes.length === 0) return;
+            
+            let csv = 'Lap Number,Lap Time,Split Time,Timestamp\n';
+            lapTimes.forEach(lap => {
+                const lapTime = formatTime(lap.lapTime, false).time;
+                const splitTime = formatTime(lap.totalTime, false).time;
+                csv += `${lap.number},${lapTime},${splitTime},${lap.timestamp.toISOString()}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `stopwatch-laps-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function exportToJSON() {
+            if (lapTimes.length === 0) return;
+            
+            const data = {
+                exportDate: new Date().toISOString(),
+                totalLaps: lapTimes.length,
+                lapTimes: lapTimes.map(lap => ({
+                    number: lap.number,
+                    lapTime: formatTime(lap.lapTime, false).time,
+                    splitTime: formatTime(lap.totalTime, false).time,
+                    timestamp: lap.timestamp.toISOString()
+                }))
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `stopwatch-laps-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function copyToClipboard() {
+            if (lapTimes.length === 0) return;
+            
+            let text = 'Stopwatch Lap Times\n';
+            text += '==================\n\n';
+            text += `Total Laps: ${lapTimes.length}\n`;
+            text += `Fastest Lap: ${formatTime(Math.min(...lapTimes.map(l => l.lapTime)), false).time}\n`;
+            text += `Slowest Lap: ${formatTime(Math.max(...lapTimes.map(l => l.lapTime)), false).time}\n`;
+            text += `Average Lap: ${formatTime(lapTimes.reduce((sum, l) => sum + l.lapTime, 0) / lapTimes.length, false).time}\n\n`;
+            
+            text += 'Lap Details:\n';
+            lapTimes.forEach(lap => {
+                text += `Lap ${lap.number}: ${formatTime(lap.lapTime, false).time} (Split: ${formatTime(lap.totalTime, false).time})\n`;
+            });
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Lap times copied to clipboard!');
+            });
+        }
+
+        function printResults() {
+            if (lapTimes.length === 0) return;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Stopwatch Lap Times</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        table { border-collapse: collapse; width: 100%; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; }
+                        .stats { margin-bottom: 20px; }
+                    </style>
+                </head>
+  <body>
+   <h1>
+    Stopwatch Lap Times
+   </h1>
+   <div class="stats">
+    <p>
+     <strong>
+      Total Laps:
+     </strong>
+     ${lapTimes.length}
+    </p>
+    <p>
+     <strong>
+      Fastest Lap:
+     </strong>
+     ${formatTime(Math.min(...lapTimes.map(l => l.lapTime)), false).time}
+    </p>
+    <p>
+     <strong>
+      Slowest Lap:
+     </strong>
+     ${formatTime(Math.max(...lapTimes.map(l => l.lapTime)), false).time}
+    </p>
+    <p>
+     <strong>
+      Average Lap:
+     </strong>
+     ${formatTime(lapTimes.reduce((sum, l) => sum + l.lapTime, 0) / lapTimes.length, false).time}
+    </p>
+   </div>
+   <table>
+    <tr>
+     <th>
+      Lap
+     </th>
+     <th>
+      Lap Time
+     </th>
+     <th>
+      Split Time
+     </th>
+     <th>
+      Timestamp
+     </th>
+    </tr>
+    ${lapTimes.map(lap => `
+    <tr>
+     <td>
+      ${lap.number}
+     </td>
+     <td>
+      ${formatTime(lap.lapTime, false).time}
+     </td>
+     <td>
+      ${formatTime(lap.totalTime, false).time}
+     </td>
+     <td>
+      ${lap.timestamp.toLocaleString()}
+     </td>
+    </tr>
+    `).join('')}
+   </table>
+ </body>
+</html>
+`);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Initialize display
+        document.addEventListener('DOMContentLoaded', function() {
+            const formatted = formatTime(0);
+            document.getElementById('stopwatchDisplay').childNodes[0].textContent = formatted.time;
+            document.getElementById('millisecondsDisplay').textContent = '.' + formatted.ms;
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (isRunning) {
+                    pauseStopwatch();
+                } else {
+                    startStopwatch();
+                }
+            } else if (e.code === 'KeyL' && isRunning) {
+                e.preventDefault();
+                recordLap();
+            } else if (e.code === 'KeyR' && !isRunning) {
+                e.preventDefault();
+                resetStopwatch();
+            }
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

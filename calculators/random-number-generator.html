@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/random-number-generator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Random Number Generator - Generate Random Numbers | Make QR Calculators
+  </title>
+  <meta content="Free random number generator with customizable ranges, multiple numbers, and various formats." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .random-generator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .generator-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+        }
+
+        .generator-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #6f42c1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-display {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .result-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .result-number {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            min-width: 100px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .history-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-controls {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .clear-history-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-params {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .history-result {
+            font-weight: 600;
+            color: #6f42c1;
+        }
+
+        .presets-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .preset-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preset-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .preset-card i {
+            font-size: 2rem;
+            color: #6f42c1;
+            margin-bottom: 1rem;
+        }
+
+        .preset-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .preset-card p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .statistics-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6f42c1;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-numbers {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .result-number {
+                min-width: 80%;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Random Number Generator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online random number generator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Random Number Generator", "item": "https://make-qr.github.io/calculators/random-number-generator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--utilities">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link active" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#utilities">Utilities</a>
+                <span class="sep">/</span>
+                <span class="current">Random Number Generator</span>
+            </nav>
+            <h1>Random Number Generator</h1>
+            <p>Generate random numbers with customizable ranges and options</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="random-generator">
+      <div class="generator-tabs">
+       <button class="tab-button active" onclick="switchTab('integers')">
+        Integers
+       </button>
+       <button class="tab-button" onclick="switchTab('decimals')">
+        Decimals
+       </button>
+       <button class="tab-button" onclick="switchTab('list')">
+        From List
+       </button>
+       <button class="tab-button" onclick="switchTab('sequence')">
+        Sequence
+       </button>
+      </div>
+      <!-- Integer Generator -->
+      <div class="generator-section" id="integersTab">
+       <h3>
+        Integer Random Number Generator
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="intMin">
+          Minimum Value
+         </label>
+         <input id="intMin" type="number" value="1"/>
+        </div>
+        <div class="input-group">
+         <label for="intMax">
+          Maximum Value
+         </label>
+         <input id="intMax" type="number" value="100"/>
+        </div>
+        <div class="input-group">
+         <label for="intCount">
+          How Many Numbers?
+         </label>
+         <input id="intCount" max="1000" min="1" type="number" value="1"/>
+        </div>
+        <div class="input-group">
+         <label for="intDuplicates">
+          Allow Duplicates?
+         </label>
+         <select id="intDuplicates">
+          <option value="true">
+           Yes
+          </option>
+          <option value="false">
+           No
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="generate-btn" onclick="generateIntegers()">
+        <i class="fas fa-dice">
+        </i>
+        Generate Random Integers
+       </button>
+      </div>
+      <!-- Decimal Generator -->
+      <div class="generator-section" id="decimalsTab" style="display: none;">
+       <h3>
+        Decimal Random Number Generator
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="decMin">
+          Minimum Value
+         </label>
+         <input id="decMin" step="0.01" type="number" value="0"/>
+        </div>
+        <div class="input-group">
+         <label for="decMax">
+          Maximum Value
+         </label>
+         <input id="decMax" step="0.01" type="number" value="1"/>
+        </div>
+        <div class="input-group">
+         <label for="decCount">
+          How Many Numbers?
+         </label>
+         <input id="decCount" max="100" min="1" type="number" value="1"/>
+        </div>
+        <div class="input-group">
+         <label for="decPlaces">
+          Decimal Places
+         </label>
+         <input id="decPlaces" max="10" min="1" type="number" value="2"/>
+        </div>
+       </div>
+       <button class="generate-btn" onclick="generateDecimals()">
+        <i class="fas fa-dice">
+        </i>
+        Generate Random Decimals
+       </button>
+      </div>
+      <!-- List Generator -->
+      <div class="generator-section" id="listTab" style="display: none;">
+       <h3>
+        Random Selection from List
+       </h3>
+       <div class="input-grid">
+        <div class="input-group" style="grid-column: 1 / -1;">
+         <label for="itemList">
+          Enter Items (one per line or comma-separated)
+         </label>
+         <textarea id="itemList" placeholder="Apple
+Banana
+Orange
+Grape
+Strawberry" rows="5" style="resize: vertical; padding: 0.8rem; border: 2px solid #e9ecef; border-radius: 10px;"></textarea>
+        </div>
+        <div class="input-group">
+         <label for="listCount">
+          How Many to Select?
+         </label>
+         <input id="listCount" min="1" type="number" value="1"/>
+        </div>
+        <div class="input-group">
+         <label for="listDuplicates">
+          Allow Duplicates?
+         </label>
+         <select id="listDuplicates">
+          <option value="true">
+           Yes
+          </option>
+          <option value="false">
+           No
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="generate-btn" onclick="generateFromList()">
+        <i class="fas fa-list">
+        </i>
+        Select Random Items
+       </button>
+      </div>
+      <!-- Sequence Generator -->
+      <div class="generator-section" id="sequenceTab" style="display: none;">
+       <h3>
+        Random Sequence Generator
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="seqLength">
+          Sequence Length
+         </label>
+         <input id="seqLength" max="1000" min="1" type="number" value="10"/>
+        </div>
+        <div class="input-group">
+         <label for="seqType">
+          Sequence Type
+         </label>
+         <select id="seqType">
+          <option value="binary">
+           Binary (0,1)
+          </option>
+          <option value="coin">
+           Coin Flip (H,T)
+          </option>
+          <option value="dice">
+           Dice Roll (1-6)
+          </option>
+          <option value="custom">
+           Custom Range
+          </option>
+         </select>
+        </div>
+        <div class="input-group" id="customRangeGroup" style="display: none;">
+         <label for="customRange">
+          Custom Range (min-max)
+         </label>
+         <input id="customRange" placeholder="1-10" type="text"/>
+        </div>
+       </div>
+       <button class="generate-btn" onclick="generateSequence()">
+        <i class="fas fa-random">
+        </i>
+        Generate Sequence
+       </button>
+      </div>
+      <!-- Results Display -->
+      <div class="result-display">
+       <h3>
+        Generated Results
+       </h3>
+       <div id="resultsContainer">
+        <div class="result-numbers">
+         <div class="result-number" id="placeholderResult">
+          Click Generate!
+         </div>
+        </div>
+       </div>
+       <div id="copyButtons" style="display: none;">
+        <button class="copy-btn" onclick="copyResults('comma')">
+         Copy (Comma Separated)
+        </button>
+        <button class="copy-btn" onclick="copyResults('space')">
+         Copy (Space Separated)
+        </button>
+        <button class="copy-btn" onclick="copyResults('newline')">
+         Copy (New Lines)
+        </button>
+       </div>
+      </div>
+      <!-- Presets -->
+      <div class="presets-section">
+       <div class="preset-card" onclick="loadPreset('dice')">
+        <i class="fas fa-dice">
+        </i>
+        <h4>
+         Dice Roll
+        </h4>
+        <p>
+         Roll a 6-sided die
+        </p>
+       </div>
+       <div class="preset-card" onclick="loadPreset('coin')">
+        <i class="fas fa-coins">
+        </i>
+        <h4>
+         Coin Flip
+        </h4>
+        <p>
+         Heads or Tails
+        </p>
+       </div>
+       <div class="preset-card" onclick="loadPreset('lottery')">
+        <i class="fas fa-ticket-alt">
+        </i>
+        <h4>
+         Lottery Numbers
+        </h4>
+        <p>
+         6 numbers (1-49)
+        </p>
+       </div>
+       <div class="preset-card" onclick="loadPreset('password')">
+        <i class="fas fa-key">
+        </i>
+        <h4>
+         Random PIN
+        </h4>
+        <p>
+         4-digit PIN code
+        </p>
+       </div>
+      </div>
+      <!-- Statistics -->
+      <div class="statistics-section" id="statisticsSection" style="display: none;">
+       <h3>
+        Statistics
+       </h3>
+       <div class="stats-grid">
+        <div class="stat-item">
+         <div class="stat-value" id="statMin">
+          -
+         </div>
+         <div class="stat-label">
+          Minimum
+         </div>
+        </div>
+        <div class="stat-item">
+         <div class="stat-value" id="statMax">
+          -
+         </div>
+         <div class="stat-label">
+          Maximum
+         </div>
+        </div>
+        <div class="stat-item">
+         <div class="stat-value" id="statAvg">
+          -
+         </div>
+         <div class="stat-label">
+          Average
+         </div>
+        </div>
+        <div class="stat-item">
+         <div class="stat-value" id="statSum">
+          -
+         </div>
+         <div class="stat-label">
+          Sum
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- History -->
+      <div class="history-section">
+       <div class="history-controls">
+        <h3>
+         Generation History
+        </h3>
+        <button class="clear-history-btn" onclick="clearHistory()">
+         Clear History
+        </button>
+       </div>
+       <div class="history-list" id="historyList">
+        <p style="text-align: center; color: #6c757d;">
+         No history yet
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="conversion-calculator.html"><i class="fas fa-arrow-right"></i> Unit Conversion</a>
+                <a class="related-link" href="tip-calculator.html"><i class="fas fa-arrow-right"></i> Tip Calculator</a>
+                <a class="related-link" href="password-generator.html"><i class="fas fa-arrow-right"></i> Password Generator</a>
+                <a class="related-link" href="ip-subnet-calculator.html"><i class="fas fa-arrow-right"></i> IP Subnet</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'integers';
+        let generationHistory = [];
+        let currentResults = [];
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide tab content
+            document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            
+            // Show custom range for sequence if needed
+            if (tab === 'sequence') {
+                document.getElementById('seqType').addEventListener('change', function() {
+                    document.getElementById('customRangeGroup').style.display = 
+                        this.value === 'custom' ? 'block' : 'none';
+                });
+            }
+        }
+
+        function generateIntegers() {
+            const min = parseInt(document.getElementById('intMin').value);
+            const max = parseInt(document.getElementById('intMax').value);
+            const count = parseInt(document.getElementById('intCount').value);
+            const allowDuplicates = document.getElementById('intDuplicates').value === 'true';
+
+            if (min >= max) {
+                alert('Minimum value must be less than maximum value!');
+                return;
+            }
+
+            if (!allowDuplicates && count > (max - min + 1)) {
+                alert('Cannot generate more unique numbers than the range allows!');
+                return;
+            }
+
+            const results = [];
+            const used = new Set();
+
+            for (let i = 0; i < count; i++) {
+                let num;
+                let attempts = 0;
+                do {
+                    num = Math.floor(Math.random() * (max - min + 1)) + min;
+                    attempts++;
+                } while (!allowDuplicates && used.has(num) && attempts < 1000);
+
+                if (!allowDuplicates && used.has(num)) {
+                    break; // Prevent infinite loop
+                }
+
+                results.push(num);
+                used.add(num);
+            }
+
+            currentResults = results;
+            displayResults(results);
+            addToHistory('Integers', `${min} to ${max}, Count: ${count}`, results);
+            showStatistics(results);
+        }
+
+        function generateDecimals() {
+            const min = parseFloat(document.getElementById('decMin').value);
+            const max = parseFloat(document.getElementById('decMax').value);
+            const count = parseInt(document.getElementById('decCount').value);
+            const places = parseInt(document.getElementById('decPlaces').value);
+
+            if (min >= max) {
+                alert('Minimum value must be less than maximum value!');
+                return;
+            }
+
+            const results = [];
+            for (let i = 0; i < count; i++) {
+                const num = Math.random() * (max - min) + min;
+                results.push(parseFloat(num.toFixed(places)));
+            }
+
+            currentResults = results;
+            displayResults(results);
+            addToHistory('Decimals', `${min} to ${max}, Count: ${count}, Decimal places: ${places}`, results);
+            showStatistics(results);
+        }
+
+        function generateFromList() {
+            const itemsText = document.getElementById('itemList').value.trim();
+            const count = parseInt(document.getElementById('listCount').value);
+            const allowDuplicates = document.getElementById('listDuplicates').value === 'true';
+
+            if (!itemsText) {
+                alert('Please enter some items to select from!');
+                return;
+            }
+
+            // Parse items (handle both newline and comma separation)
+            let items = itemsText.includes('\n') 
+                ? itemsText.split('\n').map(item => item.trim()).filter(item => item)
+                : itemsText.split(',').map(item => item.trim()).filter(item => item);
+
+            if (items.length === 0) {
+                alert('No valid items found!');
+                return;
+            }
+
+            if (!allowDuplicates && count > items.length) {
+                alert('Cannot select more unique items than available!');
+                return;
+            }
+
+            const results = [];
+            const usedIndices = new Set();
+
+            for (let i = 0; i < count; i++) {
+                let index;
+                let attempts = 0;
+                do {
+                    index = Math.floor(Math.random() * items.length);
+                    attempts++;
+                } while (!allowDuplicates && usedIndices.has(index) && attempts < 1000);
+
+                if (!allowDuplicates && usedIndices.has(index)) {
+                    break;
+                }
+
+                results.push(items[index]);
+                usedIndices.add(index);
+            }
+
+            currentResults = results;
+            displayResults(results, true);
+            addToHistory('From List', `${items.length} items, Count: ${count}`, results);
+            document.getElementById('statisticsSection').style.display = 'none';
+        }
+
+        function generateSequence() {
+            const length = parseInt(document.getElementById('seqLength').value);
+            const type = document.getElementById('seqType').value;
+
+            const results = [];
+
+            for (let i = 0; i < length; i++) {
+                let value;
+                switch (type) {
+                    case 'binary':
+                        value = Math.random() < 0.5 ? 0 : 1;
+                        break;
+                    case 'coin':
+                        value = Math.random() < 0.5 ? 'H' : 'T';
+                        break;
+                    case 'dice':
+                        value = Math.floor(Math.random() * 6) + 1;
+                        break;
+                    case 'custom':
+                        const range = document.getElementById('customRange').value;
+                        const [min, max] = range.split('-').map(n => parseInt(n.trim()));
+                        if (isNaN(min) || isNaN(max)) {
+                            alert('Invalid custom range format! Use format: min-max (e.g., 1-10)');
+                            return;
+                        }
+                        value = Math.floor(Math.random() * (max - min + 1)) + min;
+                        break;
+                }
+                results.push(value);
+            }
+
+            currentResults = results;
+            displaySequence(results);
+            addToHistory('Sequence', `${type}, Length: ${length}`, results);
+            
+            if (['dice', 'custom'].includes(type) && !isNaN(results[0])) {
+                showStatistics(results);
+            } else {
+                document.getElementById('statisticsSection').style.display = 'none';
+            }
+        }
+
+        function displayResults(results, isText = false) {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = '<div class="result-numbers"></div>';
+            
+            const numbersDiv = container.querySelector('.result-numbers');
+            results.forEach((result, index) => {
+                const numberDiv = document.createElement('div');
+                numberDiv.className = 'result-number';
+                numberDiv.textContent = result;
+                numberDiv.style.animationDelay = `${index * 0.1}s`;
+                numbersDiv.appendChild(numberDiv);
+            });
+
+            document.getElementById('copyButtons').style.display = 'block';
+        }
+
+        function displaySequence(results) {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = `
+                <div style="background: white; border-radius: 10px; padding: 1.5rem; margin: 1rem 0; font-family: monospace; font-size: 1.2rem; word-break: break-all; line-height: 1.8;">
+                    ${results.join(' ')}
+                </div>
+            `;
+            document.getElementById('copyButtons').style.display = 'block';
+        }
+
+        function copyResults(format) {
+            let text;
+            switch (format) {
+                case 'comma':
+                    text = currentResults.join(', ');
+                    break;
+                case 'space':
+                    text = currentResults.join(' ');
+                    break;
+                case 'newline':
+                    text = currentResults.join('\n');
+                    break;
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#28a745';
+                }, 2000);
+            });
+        }
+
+        function showStatistics(results) {
+            const numbers = results.filter(n => !isNaN(n)).map(n => parseFloat(n));
+            if (numbers.length === 0) return;
+
+            const min = Math.min(...numbers);
+            const max = Math.max(...numbers);
+            const avg = numbers.reduce((a, b) => a + b, 0) / numbers.length;
+            const sum = numbers.reduce((a, b) => a + b, 0);
+
+            document.getElementById('statMin').textContent = min;
+            document.getElementById('statMax').textContent = max;
+            document.getElementById('statAvg').textContent = avg.toFixed(2);
+            document.getElementById('statSum').textContent = sum;
+            document.getElementById('statisticsSection').style.display = 'block';
+        }
+
+        function addToHistory(type, params, results) {
+            const historyItem = {
+                timestamp: new Date().toLocaleString(),
+                type: type,
+                params: params,
+                results: results.slice(0, 10) // Limit display to first 10 results
+            };
+
+            generationHistory.unshift(historyItem);
+            if (generationHistory.length > 50) {
+                generationHistory = generationHistory.slice(0, 50);
+            }
+
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('historyList');
+            
+            if (generationHistory.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: #6c757d;">No history yet</p>';
+                return;
+            }
+
+            historyList.innerHTML = generationHistory.map(item => `
+                <div class="history-item">
+                    <div>
+                        <div><strong>${item.type}</strong> - ${item.timestamp}</div>
+                        <div class="history-params">${item.params}</div>
+                    </div>
+                    <div class="history-result">
+                        ${item.results.join(', ')}${item.results.length > 10 ? '...' : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory() {
+            generationHistory = [];
+            updateHistoryDisplay();
+        }
+
+        function loadPreset(preset) {
+            switch (preset) {
+                case 'dice':
+                    switchTab('integers');
+                    document.getElementById('intMin').value = 1;
+                    document.getElementById('intMax').value = 6;
+                    document.getElementById('intCount').value = 1;
+                    break;
+                case 'coin':
+                    switchTab('list');
+                    document.getElementById('itemList').value = 'Heads\nTails';
+                    document.getElementById('listCount').value = 1;
+                    break;
+                case 'lottery':
+                    switchTab('integers');
+                    document.getElementById('intMin').value = 1;
+                    document.getElementById('intMax').value = 49;
+                    document.getElementById('intCount').value = 6;
+                    document.getElementById('intDuplicates').value = 'false';
+                    break;
+                case 'password':
+                    switchTab('integers');
+                    document.getElementById('intMin').value = 1000;
+                    document.getElementById('intMax').value = 9999;
+                    document.getElementById('intCount').value = 1;
+                    break;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default values for list
+            document.getElementById('itemList').value = 'Apple\nBanana\nOrange\nGrape\nStrawberry';
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/binary-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Binary Calculator - Binary Decimal Hex Converter | Make QR Calculators
+  </title>
+  <meta content="Convert between Binary, Decimal, Octal, and Hexadecimal number systems. Perform binary arithmetic operations with step-by-step explanations." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .binary-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .converter-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .number-system {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .system-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .binary-title { color: #28a745; }
+        .decimal-title { color: #007bff; }
+        .octal-title { color: #ffc107; }
+        .hex-title { color: #dc3545; }
+
+        .number-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .number-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .binary-input { border-color: #28a745; }
+        .decimal-input { border-color: #007bff; }
+        .octal-input { border-color: #ffc107; }
+        .hex-input { border-color: #dc3545; }
+
+        .base-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .binary-arithmetic {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .arithmetic-inputs {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .binary-input-field {
+            padding: 1rem;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .operation-select {
+            padding: 1rem;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: white;
+        }
+
+        .equals-sign {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin-bottom: 1rem;
+            word-break: break-all;
+        }
+
+        .result-conversions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .conversion-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .conversion-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .conversion-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            word-break: break-all;
+        }
+
+        .bitwise-operations {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .bitwise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .bitwise-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .bitwise-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .bitwise-result {
+            font-size: 1.2rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .reference-tables {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .reference-table {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .conversion-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .conversion-table th,
+        .conversion-table td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .conversion-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .converter-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .arithmetic-inputs {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Binary Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online binary calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Binary Calculator", "item": "https://make-qr.github.io/calculators/binary-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Binary Calculator</span>
+            </nav>
+            <h1>Binary Calculator</h1>
+            <p>Convert between number systems and perform binary arithmetic operations</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="binary-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('converter')">
+        <i class="fas fa-exchange-alt">
+        </i>
+        Number Converter
+       </button>
+       <button class="tab-button" onclick="switchTab('arithmetic')">
+        <i class="fas fa-calculator">
+        </i>
+        Binary Arithmetic
+       </button>
+       <button class="tab-button" onclick="switchTab('reference')">
+        <i class="fas fa-table">
+        </i>
+        Reference Tables
+       </button>
+      </div>
+      <!-- Number Converter Tab -->
+      <div class="tab-content active" id="converter">
+       <div class="converter-section">
+        <div class="number-system">
+         <h3 class="system-title binary-title">
+          Binary (Base 2)
+         </h3>
+         <input class="number-input binary-input" id="binary-input" pattern="[01]*" placeholder="1010101" type="text"/>
+         <div class="base-label">
+          Only 0 and 1
+         </div>
+        </div>
+        <div class="number-system">
+         <h3 class="system-title decimal-title">
+          Decimal (Base 10)
+         </h3>
+         <input class="number-input decimal-input" id="decimal-input" min="0" placeholder="85" type="number"/>
+         <div class="base-label">
+          0-9
+         </div>
+        </div>
+        <div class="number-system">
+         <h3 class="system-title octal-title">
+          Octal (Base 8)
+         </h3>
+         <input class="number-input octal-input" id="octal-input" pattern="[0-7]*" placeholder="125" type="text"/>
+         <div class="base-label">
+          0-7
+         </div>
+        </div>
+        <div class="number-system">
+         <h3 class="system-title hex-title">
+          Hexadecimal (Base 16)
+         </h3>
+         <input class="number-input hex-input" id="hex-input" pattern="[0-9A-Fa-f]*" placeholder="55" type="text"/>
+         <div class="base-label">
+          0-9, A-F
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Binary Arithmetic Tab -->
+      <div class="tab-content" id="arithmetic">
+       <div class="binary-arithmetic">
+        <h3>
+         <i class="fas fa-calculator">
+         </i>
+         Binary Arithmetic Calculator
+        </h3>
+        <div class="arithmetic-inputs">
+         <input class="binary-input-field" id="binary-a" pattern="[01]*" placeholder="1010" type="text"/>
+         <select class="operation-select" id="operation">
+          <option value="add">
+           +
+          </option>
+          <option value="subtract">
+           -
+          </option>
+          <option value="multiply">
+           ×
+          </option>
+          <option value="divide">
+           ÷
+          </option>
+          <option value="and">
+           AND
+          </option>
+          <option value="or">
+           OR
+          </option>
+          <option value="xor">
+           XOR
+          </option>
+         </select>
+         <input class="binary-input-field" id="binary-b" pattern="[01]*" placeholder="0110" type="text"/>
+         <span class="equals-sign">
+          =
+         </span>
+         <div class="binary-input-field" id="arithmetic-result" style="background: #f0f8ff; font-weight: bold;">
+          Result
+         </div>
+        </div>
+        <div class="result-display" id="result-display" style="display: none;">
+         <div>
+          Binary Result
+         </div>
+         <div class="result-value" id="binary-result">
+          0
+         </div>
+         <div class="result-conversions">
+          <div class="conversion-item">
+           <div class="conversion-label">
+            Decimal
+           </div>
+           <div class="conversion-value" id="decimal-result">
+            0
+           </div>
+          </div>
+          <div class="conversion-item">
+           <div class="conversion-label">
+            Octal
+           </div>
+           <div class="conversion-value" id="octal-result">
+            0
+           </div>
+          </div>
+          <div class="conversion-item">
+           <div class="conversion-label">
+            Hexadecimal
+           </div>
+           <div class="conversion-value" id="hex-result">
+            0
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="bitwise-operations" id="bitwise-section" style="display: none;">
+        <h3>
+         <i class="fas fa-cogs">
+         </i>
+         Bitwise Operations
+        </h3>
+        <div class="bitwise-grid" id="bitwise-grid">
+         <!-- Bitwise operations will be generated here -->
+        </div>
+       </div>
+      </div>
+      <!-- Reference Tables Tab -->
+      <div class="tab-content" id="reference">
+       <div class="reference-tables">
+        <div class="reference-table">
+         <h3 class="table-title">
+          Number System Conversions (0-15)
+         </h3>
+         <table class="conversion-table">
+          <thead>
+           <tr>
+            <th>
+             Decimal
+            </th>
+            <th>
+             Binary
+            </th>
+            <th>
+             Octal
+            </th>
+            <th>
+             Hex
+            </th>
+           </tr>
+          </thead>
+          <tbody id="conversion-table-body">
+           <!-- Table rows will be generated -->
+          </tbody>
+         </table>
+        </div>
+        <div class="reference-table">
+         <h3 class="table-title">
+          Powers of 2
+         </h3>
+         <table class="conversion-table">
+          <thead>
+           <tr>
+            <th>
+             2
+             <sup>
+              n
+             </sup>
+            </th>
+            <th>
+             Binary
+            </th>
+            <th>
+             Decimal
+            </th>
+           </tr>
+          </thead>
+          <tbody id="powers-table-body">
+           <!-- Powers table will be generated -->
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Binary &amp; Number Systems Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          🔢 Binary Basics
+         </h4>
+         <p>
+          Binary uses only 0 and 1. Each position represents a power of 2: 1, 2, 4, 8, 16, 32, 64, 128...
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📊 Quick Conversion
+         </h4>
+         <p>
+          To convert decimal to binary, divide by 2 repeatedly and read remainders bottom-up.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎯 Hex Shorthand
+         </h4>
+         <p>
+          Hexadecimal is often used as shorthand for binary. Each hex digit = 4 binary digits.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          ⚡ Bitwise Operations
+         </h4>
+         <p>
+          AND (&amp;): both bits 1. OR (|): at least one bit 1. XOR (^): exactly one bit 1.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💻 Programming Use
+         </h4>
+         <p>
+          Binary operations are fundamental in programming, especially for flags, masks, and bit manipulation.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🧮 Memory Units
+         </h4>
+         <p>
+          Computer memory: 1 byte = 8 bits, 1 KB = 1024 bytes, 1 MB = 1024 KB, etc.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'converter';
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+        }
+
+        // Number conversion functions
+        function decimalToBinary(decimal) {
+            return parseInt(decimal).toString(2);
+        }
+
+        function decimalToOctal(decimal) {
+            return parseInt(decimal).toString(8);
+        }
+
+        function decimalToHex(decimal) {
+            return parseInt(decimal).toString(16).toUpperCase();
+        }
+
+        function binaryToDecimal(binary) {
+            return parseInt(binary, 2);
+        }
+
+        function octalToDecimal(octal) {
+            return parseInt(octal, 8);
+        }
+
+        function hexToDecimal(hex) {
+            return parseInt(hex, 16);
+        }
+
+        // Update all number systems when one changes
+        function updateFromBinary(binary) {
+            if (!/^[01]*$/.test(binary) || binary === '') return;
+            
+            const decimal = binaryToDecimal(binary);
+            document.getElementById('decimal-input').value = decimal;
+            document.getElementById('octal-input').value = decimalToOctal(decimal);
+            document.getElementById('hex-input').value = decimalToHex(decimal);
+        }
+
+        function updateFromDecimal(decimal) {
+            if (isNaN(decimal) || decimal === '') return;
+            
+            document.getElementById('binary-input').value = decimalToBinary(decimal);
+            document.getElementById('octal-input').value = decimalToOctal(decimal);
+            document.getElementById('hex-input').value = decimalToHex(decimal);
+        }
+
+        function updateFromOctal(octal) {
+            if (!/^[0-7]*$/.test(octal) || octal === '') return;
+            
+            const decimal = octalToDecimal(octal);
+            document.getElementById('decimal-input').value = decimal;
+            document.getElementById('binary-input').value = decimalToBinary(decimal);
+            document.getElementById('hex-input').value = decimalToHex(decimal);
+        }
+
+        function updateFromHex(hex) {
+            if (!/^[0-9A-Fa-f]*$/.test(hex) || hex === '') return;
+            
+            const decimal = hexToDecimal(hex);
+            document.getElementById('decimal-input').value = decimal;
+            document.getElementById('binary-input').value = decimalToBinary(decimal);
+            document.getElementById('octal-input').value = decimalToOctal(decimal);
+        }
+
+        // Binary arithmetic functions
+        function performBinaryArithmetic() {
+            const binaryA = document.getElementById('binary-a').value;
+            const binaryB = document.getElementById('binary-b').value;
+            const operation = document.getElementById('operation').value;
+
+            if (!binaryA || !binaryB) return;
+            if (!/^[01]+$/.test(binaryA) || !/^[01]+$/.test(binaryB)) {
+                alert('Please enter valid binary numbers (only 0 and 1).');
+                return;
+            }
+
+            const decimalA = binaryToDecimal(binaryA);
+            const decimalB = binaryToDecimal(binaryB);
+            let result;
+
+            switch(operation) {
+                case 'add':
+                    result = decimalA + decimalB;
+                    break;
+                case 'subtract':
+                    result = decimalA - decimalB;
+                    break;
+                case 'multiply':
+                    result = decimalA * decimalB;
+                    break;
+                case 'divide':
+                    result = Math.floor(decimalA / decimalB);
+                    break;
+                case 'and':
+                    result = decimalA & decimalB;
+                    break;
+                case 'or':
+                    result = decimalA | decimalB;
+                    break;
+                case 'xor':
+                    result = decimalA ^ decimalB;
+                    break;
+                default:
+                    result = 0;
+            }
+
+            if (result < 0) result = 0; // Handle negative results
+
+            const binaryResult = decimalToBinary(result);
+            
+            // Update display
+            document.getElementById('arithmetic-result').textContent = binaryResult;
+            document.getElementById('binary-result').textContent = binaryResult;
+            document.getElementById('decimal-result').textContent = result;
+            document.getElementById('octal-result').textContent = decimalToOctal(result);
+            document.getElementById('hex-result').textContent = decimalToHex(result);
+
+            document.getElementById('result-display').style.display = 'block';
+
+            // Show bitwise operations if applicable
+            if (['and', 'or', 'xor'].includes(operation)) {
+                showBitwiseOperations(binaryA, binaryB, operation, binaryResult);
+            } else {
+                document.getElementById('bitwise-section').style.display = 'none';
+            }
+        }
+
+        function showBitwiseOperations(binaryA, binaryB, operation, result) {
+            const maxLength = Math.max(binaryA.length, binaryB.length, result.length);
+            const paddedA = binaryA.padStart(maxLength, '0');
+            const paddedB = binaryB.padStart(maxLength, '0');
+            const paddedResult = result.padStart(maxLength, '0');
+
+            const bitwiseGrid = document.getElementById('bitwise-grid');
+            bitwiseGrid.innerHTML = `
+                <div class="bitwise-item">
+                    <div class="bitwise-title">Input A</div>
+                    <div class="bitwise-result">${paddedA}</div>
+                </div>
+                <div class="bitwise-item">
+                    <div class="bitwise-title">${operation.toUpperCase()}</div>
+                    <div class="bitwise-result">${operation === 'and' ? '&' : operation === 'or' ? '|' : '^'}</div>
+                </div>
+                <div class="bitwise-item">
+                    <div class="bitwise-title">Input B</div>
+                    <div class="bitwise-result">${paddedB}</div>
+                </div>
+                <div class="bitwise-item">
+                    <div class="bitwise-title">Result</div>
+                    <div class="bitwise-result">${paddedResult}</div>
+                </div>
+            `;
+            
+            document.getElementById('bitwise-section').style.display = 'block';
+        }
+
+        // Generate reference tables
+        function generateReferenceTables() {
+            // Conversion table (0-15)
+            const conversionTableBody = document.getElementById('conversion-table-body');
+            conversionTableBody.innerHTML = '';
+            
+            for (let i = 0; i <= 15; i++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${i}</td>
+                    <td>${decimalToBinary(i).padStart(4, '0')}</td>
+                    <td>${decimalToOctal(i)}</td>
+                    <td>${decimalToHex(i)}</td>
+                `;
+                conversionTableBody.appendChild(row);
+            }
+
+            // Powers of 2 table
+            const powersTableBody = document.getElementById('powers-table-body');
+            powersTableBody.innerHTML = '';
+            
+            for (let i = 0; i <= 10; i++) {
+                const power = Math.pow(2, i);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>2<sup>${i}</sup></td>
+                    <td>${decimalToBinary(power)}</td>
+                    <td>${power}</td>
+                `;
+                powersTableBody.appendChild(row);
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Number converter event listeners
+            document.getElementById('binary-input').addEventListener('input', function() {
+                updateFromBinary(this.value);
+            });
+
+            document.getElementById('decimal-input').addEventListener('input', function() {
+                updateFromDecimal(this.value);
+            });
+
+            document.getElementById('octal-input').addEventListener('input', function() {
+                updateFromOctal(this.value);
+            });
+
+            document.getElementById('hex-input').addEventListener('input', function() {
+                updateFromHex(this.value);
+            });
+
+            // Binary arithmetic event listeners
+            ['binary-a', 'binary-b', 'operation'].forEach(id => {
+                document.getElementById(id).addEventListener('input', performBinaryArithmetic);
+                document.getElementById(id).addEventListener('change', performBinaryArithmetic);
+            });
+
+            // Input validation
+            document.getElementById('binary-input').addEventListener('input', function() {
+                this.value = this.value.replace(/[^01]/g, '');
+            });
+
+            document.getElementById('octal-input').addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-7]/g, '');
+            });
+
+            document.getElementById('hex-input').addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9A-Fa-f]/g, '');
+            });
+
+            document.getElementById('binary-a').addEventListener('input', function() {
+                this.value = this.value.replace(/[^01]/g, '');
+            });
+
+            document.getElementById('binary-b').addEventListener('input', function() {
+                this.value = this.value.replace(/[^01]/g, '');
+            });
+
+            // Generate reference tables
+            generateReferenceTables();
+
+            // Set example values
+            document.getElementById('decimal-input').value = 85;
+            updateFromDecimal(85);
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

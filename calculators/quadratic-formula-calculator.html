@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Primary SEO Meta Tags -->
+  <title>
+   Quadratic Formula Calculator - Solve ax²+bx+c=0 with Steps | Make QR Calculators
+  </title>
+  <meta content="Quadratic Formula Calculator - Solve ax²+bx+c=0 with Steps | Make QR Calculators" name="title"/>
+  <meta content="Solve quadratic equations using the quadratic formula with step-by-step solutions. Calculate discriminant, roots, vertex, and graph parabolas. Free with detailed explanations." name="description"/>
+  <meta content="quadratic formula calculator, quadratic equation solver, discriminant calculator, parabola calculator, roots calculator, vertex calculator" name="keywords"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Make QR Calculators" name="author"/>
+  <!-- Open Graph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/quadratic-formula-calculator.html" property="og:url"/>
+  <meta content="Quadratic Formula Calculator - Solve Quadratic Equations with Steps" property="og:title"/>
+  <meta content="Solve quadratic equations using the quadratic formula with step-by-step solutions. Calculate discriminant, roots, vertex, and graph parabolas." property="og:description"/>
+  <meta content="https://make-qr.github.io/calculators/quadratic-formula-calculator-preview.jpg" property="og:image"/>
+  <meta content="Make QR Calculators" property="og:site_name"/>
+  <!-- Twitter -->
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://make-qr.github.io/calculators/quadratic-formula-calculator.html" property="twitter:url"/>
+  <meta content="Quadratic Formula Calculator - Solve Quadratic Equations" property="twitter:title"/>
+  <meta content="Solve quadratic equations using the quadratic formula with step-by-step solutions and graphing." property="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/quadratic-formula-calculator-preview.jpg" property="twitter:image"/>
+  <!-- Canonical URL -->
+  <link href="https://make-qr.github.io/calculators/quadratic-formula-calculator.html" rel="canonical"/>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Quadratic Formula Calculator",
+      "applicationCategory": "EducationalApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "Solve quadratic equations using the quadratic formula with step-by-step solutions, discriminant calculation, and graphing",
+      "featureList": ["Quadratic Formula", "Discriminant Calculator", "Vertex Calculator", "Root Finder", "Step-by-step Solutions"],
+      "url": "https://make-qr.github.io/calculators/quadratic-formula-calculator.html"
+    }
+  </script>
+  <style>
+   .quadratic-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .equation-display {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border: 2px solid #dee2e6;
+        }
+
+        .coefficient-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .input-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .coefficient-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .coefficient-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .results-section {
+            display: none;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .discriminant-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-steps {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .step {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .graph-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .graph-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .vertex-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .examples-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .quick-examples {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .example-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .example-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .equation-display {
+                font-size: 1.8rem;
+            }
+            
+            .coefficient-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-examples {
+                justify-content: center;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Quadratic Formula Calculator - Solve ax²+bx+c=0 with Steps</span>
+            </nav>
+            <h1>Quadratic Formula Calculator - Solve ax²+bx+c=0 with Steps</h1>
+            <p>Free online quadratic formula calculator - solve ax²+bx+c=0 with steps with instant, accurate results.</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="calculator-header">
+      <h2>
+       Quadratic Formula Calculator - Solve ax² + bx + c = 0
+      </h2>
+      <p>
+       Solve quadratic equations step-by-step using the quadratic formula. Calculate discriminant, find roots, determine vertex, and visualize the parabola graph.
+      </p>
+     </div>
+     <div class="quadratic-calculator">
+      <div class="equation-display" id="equationDisplay">
+       ax² + bx + c = 0
+      </div>
+      <div class="coefficient-inputs">
+       <div class="input-group">
+        <label class="input-label" for="coefficientA">
+         Coefficient a
+        </label>
+        <input aria-label="Coefficient a (cannot be zero)" class="coefficient-input" id="coefficientA" oninput="updateEquation()" step="any" type="number" value="1"/>
+        <small>
+         Cannot be zero for quadratic
+        </small>
+       </div>
+       <div class="input-group">
+        <label class="input-label" for="coefficientB">
+         Coefficient b
+        </label>
+        <input aria-label="Coefficient b" class="coefficient-input" id="coefficientB" oninput="updateEquation()" step="any" type="number" value="-5"/>
+        <small>
+         Linear coefficient
+        </small>
+       </div>
+       <div class="input-group">
+        <label class="input-label" for="coefficientC">
+         Coefficient c
+        </label>
+        <input aria-label="Coefficient c" class="coefficient-input" id="coefficientC" oninput="updateEquation()" step="any" type="number" value="6"/>
+        <small>
+         Constant term
+        </small>
+       </div>
+      </div>
+      <div class="quick-examples">
+       <button class="example-btn" onclick="loadExample(1, -5, 6)">
+        x² - 5x + 6 = 0
+       </button>
+       <button class="example-btn" onclick="loadExample(1, -4, 4)">
+        x² - 4x + 4 = 0
+       </button>
+       <button class="example-btn" onclick="loadExample(1, 0, -4)">
+        x² - 4 = 0
+       </button>
+       <button class="example-btn" onclick="loadExample(2, 3, 1)">
+        2x² + 3x + 1 = 0
+       </button>
+       <button class="example-btn" onclick="loadExample(1, 2, 5)">
+        x² + 2x + 5 = 0
+       </button>
+      </div>
+      <button class="calculate-btn" onclick="solveQuadratic()">
+       <i class="fas fa-calculator">
+       </i>
+       Solve Quadratic Equation
+      </button>
+      <div class="error-message" id="errorMessage">
+      </div>
+      <div class="results-section" id="resultsSection">
+       <h2>
+        <i class="fas fa-chart-line">
+        </i>
+        Solution Results
+       </h2>
+       <div class="discriminant-info" id="discriminantInfo">
+        <h3>
+         Discriminant Analysis
+        </h3>
+        <div id="discriminantDetails">
+        </div>
+       </div>
+       <div class="results-grid">
+        <div class="result-card">
+         <div class="result-title">
+          Root 1 (x₁)
+         </div>
+         <div class="result-value" id="root1">
+          -
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-title">
+          Root 2 (x₂)
+         </div>
+         <div class="result-value" id="root2">
+          -
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-title">
+          Vertex
+         </div>
+         <div class="result-value" id="vertex">
+          -
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-title">
+          Discriminant (Δ)
+         </div>
+         <div class="result-value" id="discriminant">
+          -
+         </div>
+        </div>
+       </div>
+       <div class="vertex-info">
+        <h3>
+         <i class="fas fa-crosshairs">
+         </i>
+         Vertex Information
+        </h3>
+        <div id="vertexDetails">
+        </div>
+       </div>
+      </div>
+      <div class="solution-steps" id="solutionSteps" style="display: none;">
+       <h2>
+        <i class="fas fa-list-ol">
+        </i>
+        Step-by-Step Solution
+       </h2>
+       <div id="stepsContainer">
+       </div>
+      </div>
+      <div class="graph-section" id="graphSection" style="display: none;">
+       <h2>
+        <i class="fas fa-chart-area">
+        </i>
+        Parabola Graph
+       </h2>
+       <div class="graph-placeholder">
+        <div>
+         <i class="fas fa-chart-line fa-3x">
+         </i>
+         <br/>
+         Parabola graph will be displayed here
+         <br/>
+         <small>
+          Showing roots, vertex, and axis of symmetry
+         </small>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- Examples Section -->
+     <section class="examples-section">
+      <h2>
+       <i class="fas fa-graduation-cap">
+       </i>
+       Understanding Quadratic Equations
+      </h2>
+      <div class="example-card">
+       <h3>
+        The Quadratic Formula
+       </h3>
+       <p>
+        For any quadratic equation ax² + bx + c = 0, the solutions are given by:
+       </p>
+       <div class="formula">
+        x = (-b ± √(b² - 4ac)) / (2a)
+       </div>
+       <p>
+        <strong>
+         Where:
+        </strong>
+        a, b, c are coefficients and a ≠ 0
+       </p>
+      </div>
+      <div class="example-card">
+       <h3>
+        Discriminant (Δ = b² - 4ac)
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Δ &gt; 0:
+         </strong>
+         Two distinct real roots
+        </li>
+        <li>
+         <strong>
+          Δ = 0:
+         </strong>
+         One repeated real root (perfect square)
+        </li>
+        <li>
+         <strong>
+          Δ &lt; 0:
+         </strong>
+         No real roots (complex conjugate pair)
+        </li>
+       </ul>
+      </div>
+      <div class="example-card">
+       <h3>
+        Vertex Formula
+       </h3>
+       <p>
+        The vertex of the parabola y = ax² + bx + c is at:
+       </p>
+       <div class="formula">
+        x = -b/(2a)
+                        y = f(-b/(2a))
+       </div>
+       <p>
+        The vertex represents the minimum (if a &gt; 0) or maximum (if a &lt; 0) point of the parabola.
+       </p>
+      </div>
+     </section>
+     <!-- How to Use Section -->
+     <section class="how-to-section">
+      <div class="container">
+       <h2>
+        How to Use the Quadratic Formula Calculator
+       </h2>
+       <div class="how-to-grid">
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-edit">
+          </i>
+          Step 1: Enter Coefficients
+         </h3>
+         <p>
+          Input the values for coefficients a, b, and c from your quadratic equation ax² + bx + c = 0. Note that 'a' cannot be zero.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calculator">
+          </i>
+          Step 2: Calculate
+         </h3>
+         <p>
+          Click the solve button to calculate the discriminant, roots, and vertex using the quadratic formula.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-list-ol">
+          </i>
+          Step 3: Review Steps
+         </h3>
+         <p>
+          Examine the detailed step-by-step solution showing how the quadratic formula is applied to your equation.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-chart-line">
+          </i>
+          Step 4: Visualize
+         </h3>
+         <p>
+          View the parabola graph showing the roots, vertex, and axis of symmetry for better understanding.
+         </p>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Related Calculators -->
+     <section class="related-calculators">
+      <div class="container">
+       <h2>
+        Related Mathematical Calculators
+       </h2>
+       <div class="related-grid">
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calculator">
+          </i>
+         </div>
+         <h3>
+          Scientific Calculator
+         </h3>
+         <p>
+          Advanced mathematical functions and operations
+         </p>
+         <a class="btn-link" href="scientific-calculator.html" title="Scientific Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-chart-bar">
+          </i>
+         </div>
+         <h3>
+          Standard Deviation Calculator
+         </h3>
+         <p>
+          Statistical analysis and data calculations
+         </p>
+         <a class="btn-link" href="standard-deviation-calculator.html" title="Standard Deviation Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-percentage">
+          </i>
+         </div>
+         <h3>
+          Percentage Calculator
+         </h3>
+         <p>
+          Calculate percentages and percentage changes
+         </p>
+         <a class="btn-link" href="percentage-calculator.html" title="Percentage Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-shapes">
+          </i>
+         </div>
+         <h3>
+          Triangle Calculator
+         </h3>
+         <p>
+          Calculate triangle area, perimeter, and angles
+         </p>
+         <a class="btn-link" href="triangle-calculator.html" title="Triangle Calculator">
+          Use Calculator
+         </a>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function updateEquation() {
+            const a = parseFloat(document.getElementById('coefficientA').value) || 1;
+            const b = parseFloat(document.getElementById('coefficientB').value) || 0;
+            const c = parseFloat(document.getElementById('coefficientC').value) || 0;
+            
+            let equation = '';
+            
+            // Build equation string
+            if (a === 1) {
+                equation += 'x²';
+            } else if (a === -1) {
+                equation += '-x²';
+            } else {
+                equation += a + 'x²';
+            }
+            
+            if (b > 0) {
+                equation += b === 1 ? ' + x' : ' + ' + b + 'x';
+            } else if (b < 0) {
+                equation += b === -1 ? ' - x' : ' - ' + Math.abs(b) + 'x';
+            }
+            
+            if (c > 0) {
+                equation += ' + ' + c;
+            } else if (c < 0) {
+                equation += ' - ' + Math.abs(c);
+            }
+            
+            equation += ' = 0';
+            document.getElementById('equationDisplay').textContent = equation;
+        }
+
+        function loadExample(a, b, c) {
+            document.getElementById('coefficientA').value = a;
+            document.getElementById('coefficientB').value = b;
+            document.getElementById('coefficientC').value = c;
+            updateEquation();
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Hide result sections
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('solutionSteps').style.display = 'none';
+            document.getElementById('graphSection').style.display = 'none';
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function solveQuadratic() {
+            hideError();
+            
+            const a = parseFloat(document.getElementById('coefficientA').value);
+            const b = parseFloat(document.getElementById('coefficientB').value) || 0;
+            const c = parseFloat(document.getElementById('coefficientC').value) || 0;
+            
+            // Validation
+            if (isNaN(a) || a === 0) {
+                showError('Coefficient "a" must be a non-zero number for a quadratic equation.');
+                return;
+            }
+            
+            // Calculate discriminant
+            const discriminant = b * b - 4 * a * c;
+            
+            // Calculate vertex
+            const vertexX = -b / (2 * a);
+            const vertexY = a * vertexX * vertexX + b * vertexX + c;
+            
+            // Display discriminant info
+            let discriminantText = '';
+            let rootsText = '';
+            
+            if (discriminant > 0) {
+                const sqrt_discriminant = Math.sqrt(discriminant);
+                const root1 = (-b + sqrt_discriminant) / (2 * a);
+                const root2 = (-b - sqrt_discriminant) / (2 * a);
+                
+                discriminantText = `Δ = ${discriminant.toFixed(4)} > 0<br>Two distinct real roots`;
+                rootsText = 'Two Real Roots';
+                
+                document.getElementById('root1').textContent = root1.toFixed(6);
+                document.getElementById('root2').textContent = root2.toFixed(6);
+                
+            } else if (discriminant === 0) {
+                const root = -b / (2 * a);
+                
+                discriminantText = `Δ = 0<br>One repeated real root (perfect square)`;
+                rootsText = 'One Repeated Root';
+                
+                document.getElementById('root1').textContent = root.toFixed(6);
+                document.getElementById('root2').textContent = 'Same as x₁';
+                
+            } else {
+                const realPart = -b / (2 * a);
+                const imaginaryPart = Math.sqrt(-discriminant) / (2 * a);
+                
+                discriminantText = `Δ = ${discriminant.toFixed(4)} < 0<br>No real roots (complex conjugate pair)`;
+                rootsText = 'Complex Roots';
+                
+                document.getElementById('root1').textContent = `${realPart.toFixed(4)} + ${imaginaryPart.toFixed(4)}i`;
+                document.getElementById('root2').textContent = `${realPart.toFixed(4)} - ${imaginaryPart.toFixed(4)}i`;
+            }
+            
+            // Update results
+            document.getElementById('discriminantDetails').innerHTML = discriminantText;
+            document.getElementById('discriminant').textContent = discriminant.toFixed(4);
+            document.getElementById('vertex').textContent = `(${vertexX.toFixed(4)}, ${vertexY.toFixed(4)})`;
+            
+            // Vertex details
+            const parabola_direction = a > 0 ? 'upward (minimum)' : 'downward (maximum)';
+            document.getElementById('vertexDetails').innerHTML = 
+                `Vertex: (${vertexX.toFixed(4)}, ${vertexY.toFixed(4)})<br>
+                Axis of symmetry: x = ${vertexX.toFixed(4)}<br>
+                Parabola opens ${parabola_direction}`;
+            
+            // Generate solution steps
+            generateSolutionSteps(a, b, c, discriminant);
+            
+            // Show results
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('solutionSteps').style.display = 'block';
+            document.getElementById('graphSection').style.display = 'block';
+        }
+
+        function generateSolutionSteps(a, b, c, discriminant) {
+            const stepsContainer = document.getElementById('stepsContainer');
+            stepsContainer.innerHTML = '';
+            
+            // Step 1: Identify coefficients
+            const step1 = document.createElement('div');
+            step1.className = 'step';
+            step1.innerHTML = `
+                <div class="step-title">Step 1: Identify the coefficients</div>
+                <p>From the equation: a = ${a}, b = ${b}, c = ${c}</p>
+            `;
+            stepsContainer.appendChild(step1);
+            
+            // Step 2: Quadratic formula
+            const step2 = document.createElement('div');
+            step2.className = 'step';
+            step2.innerHTML = `
+                <div class="step-title">Step 2: Apply the quadratic formula</div>
+                <div class="formula">x = (-b ± √(b² - 4ac)) / (2a)</div>
+                <p>Substituting our values:</p>
+                <div class="formula">x = (-${b} ± √(${b}² - 4×${a}×${c})) / (2×${a})</div>
+            `;
+            stepsContainer.appendChild(step2);
+            
+            // Step 3: Calculate discriminant
+            const step3 = document.createElement('div');
+            step3.className = 'step';
+            step3.innerHTML = `
+                <div class="step-title">Step 3: Calculate the discriminant</div>
+                <div class="formula">Δ = b² - 4ac = ${b}² - 4×${a}×${c} = ${b*b} - ${4*a*c} = ${discriminant}</div>
+            `;
+            stepsContainer.appendChild(step3);
+            
+            // Step 4: Find roots
+            const step4 = document.createElement('div');
+            step4.className = 'step';
+            if (discriminant >= 0) {
+                const sqrt_discriminant = Math.sqrt(discriminant);
+                step4.innerHTML = `
+                    <div class="step-title">Step 4: Calculate the roots</div>
+                    <div class="formula">x = (-${b} ± √${discriminant}) / ${2*a} = (-${b} ± ${sqrt_discriminant.toFixed(6)}) / ${2*a}</div>
+                    <p>Therefore:</p>
+                    <div class="formula">
+                    x₁ = (-${b} + ${sqrt_discriminant.toFixed(6)}) / ${2*a} = ${((-b + sqrt_discriminant) / (2*a)).toFixed(6)}
+                    x₂ = (-${b} - ${sqrt_discriminant.toFixed(6)}) / ${2*a} = ${((-b - sqrt_discriminant) / (2*a)).toFixed(6)}
+                    </div>
+                `;
+            } else {
+                const realPart = -b / (2 * a);
+                const imaginaryPart = Math.sqrt(-discriminant) / (2 * a);
+                step4.innerHTML = `
+                    <div class="step-title">Step 4: Calculate the complex roots</div>
+                    <p>Since the discriminant is negative, we have complex roots:</p>
+                    <div class="formula">
+                    x₁ = ${realPart.toFixed(4)} + ${imaginaryPart.toFixed(4)}i
+                    x₂ = ${realPart.toFixed(4)} - ${imaginaryPart.toFixed(4)}i
+                    </div>
+                `;
+            }
+            stepsContainer.appendChild(step4);
+        }
+
+        // Initialize the equation display
+        document.addEventListener('DOMContentLoaded', function() {
+            updateEquation();
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

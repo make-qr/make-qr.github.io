@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/average-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Average Calculator - Mean, Median, Mode &amp; Range | Make QR Calculators
+  </title>
+  <meta content="Calculate average, mean, median, mode, and range of numbers. Free statistical calculator with step-by-step explanations." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .average-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-method {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-method h4 {
+            margin-bottom: 1rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .number-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .number-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .textarea-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+
+        .add-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        .numbers-display {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .numbers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .number-tag {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remove-number {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .numbers-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .clear-all-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-all-btn:hover {
+            background: #c82333;
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-description {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .steps-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-calculation {
+            font-family: 'Courier New', monospace;
+            background: #e9ecef;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+        .examples-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .example-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #28a745;
+        }
+
+        @media (max-width: 768px) {
+            .input-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .numbers-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Average Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online average calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Average Calculator", "item": "https://make-qr.github.io/calculators/average-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Average Calculator</span>
+            </nav>
+            <h1>Average Calculator</h1>
+            <p>Calculate mean, median, mode, and range of your data set</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="average-calculator">
+      <div class="input-section">
+       <h3>
+        Enter Your Numbers
+       </h3>
+       <div class="input-methods">
+        <div class="input-method">
+         <h4>
+          <i class="fas fa-plus">
+          </i>
+          Add One by One
+         </h4>
+         <input class="number-input" id="singleNumber" placeholder="Enter a number" step="any" type="number"/>
+         <button class="add-btn" onclick="addSingleNumber()">
+          Add Number
+         </button>
+        </div>
+        <div class="input-method">
+         <h4>
+          <i class="fas fa-list">
+          </i>
+          Enter Multiple Numbers
+         </h4>
+         <textarea class="textarea-input" id="multipleNumbers" placeholder="Enter numbers separated by commas, spaces, or new lines
+Example: 1, 2, 3, 4, 5
+or
+1 2 3 4 5"></textarea>
+         <button class="add-btn" onclick="addMultipleNumbers()">
+          Add All Numbers
+         </button>
+        </div>
+       </div>
+      </div>
+      <div class="numbers-display" id="numbersDisplay" style="display: none;">
+       <h4>
+        Your Numbers:
+       </h4>
+       <div class="numbers-list" id="numbersList">
+       </div>
+       <div class="numbers-info">
+        <span>
+         Count:
+         <strong id="numberCount">
+          0
+         </strong>
+        </span>
+        <span>
+         Sum:
+         <strong id="numberSum">
+          0
+         </strong>
+        </span>
+        <span>
+         Sorted:
+         <strong id="sortedNumbers">
+          -
+         </strong>
+        </span>
+       </div>
+       <button class="clear-all-btn" onclick="clearAllNumbers()">
+        Clear All
+       </button>
+      </div>
+      <div class="results-section" id="resultsSection" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Statistical Results
+       </h3>
+       <div class="results-grid">
+        <div class="result-card">
+         <div class="result-label">
+          Mean (Average)
+         </div>
+         <div class="result-value" id="meanResult">
+          0
+         </div>
+         <div class="result-description">
+          Sum ÷ Count
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          Median
+         </div>
+         <div class="result-value" id="medianResult">
+          0
+         </div>
+         <div class="result-description">
+          Middle value
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          Mode
+         </div>
+         <div class="result-value" id="modeResult">
+          -
+         </div>
+         <div class="result-description">
+          Most frequent
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          Range
+         </div>
+         <div class="result-value" id="rangeResult">
+          0
+         </div>
+         <div class="result-description">
+          Max - Min
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="steps-section" id="stepsSection" style="display: none;">
+       <h3>
+        <i class="fas fa-list-ol">
+        </i>
+        Step-by-Step Calculations
+       </h3>
+       <div id="calculationSteps">
+       </div>
+      </div>
+     </div>
+     <div class="examples-section">
+      <h3>
+       <i class="fas fa-lightbulb">
+       </i>
+       Examples &amp; Tips
+      </h3>
+      <div class="example-item">
+       <h4>
+        Example 1: Test Scores
+       </h4>
+       <p>
+        <strong>
+         Numbers:
+        </strong>
+        85, 92, 78, 96, 89, 85
+       </p>
+       <p>
+        <strong>
+         Mean:
+        </strong>
+        (85+92+78+96+89+85) ÷ 6 = 87.5
+       </p>
+       <p>
+        <strong>
+         Median:
+        </strong>
+        85, 85, 89, 92, 96 → (87) = 87
+       </p>
+       <p>
+        <strong>
+         Mode:
+        </strong>
+        85 (appears twice)
+       </p>
+       <p>
+        <strong>
+         Range:
+        </strong>
+        96 - 78 = 18
+       </p>
+      </div>
+      <div class="example-item">
+       <h4>
+        Example 2: Sales Data
+       </h4>
+       <p>
+        <strong>
+         Numbers:
+        </strong>
+        1200, 1500, 1100, 1800, 1300
+       </p>
+       <p>
+        <strong>
+         Mean:
+        </strong>
+        (1200+1500+1100+1800+1300) ÷ 5 = 1380
+       </p>
+       <p>
+        <strong>
+         Median:
+        </strong>
+        1100, 1200, 1300, 1500, 1800 → 1300
+       </p>
+       <p>
+        <strong>
+         Mode:
+        </strong>
+        No mode (all values unique)
+       </p>
+       <p>
+        <strong>
+         Range:
+        </strong>
+        1800 - 1100 = 700
+       </p>
+      </div>
+      <div class="example-item">
+       <h4>
+        Quick Tips:
+       </h4>
+       <ul>
+        <li>
+         <strong>
+          Mean:
+         </strong>
+         Best for normally distributed data
+        </li>
+        <li>
+         <strong>
+          Median:
+         </strong>
+         Better for skewed data or with outliers
+        </li>
+        <li>
+         <strong>
+          Mode:
+         </strong>
+         Useful for categorical data or finding most common value
+        </li>
+        <li>
+         <strong>
+          Range:
+         </strong>
+         Shows the spread of your data
+        </li>
+        <li>
+         You can enter decimal numbers, negative numbers, and zero
+        </li>
+        <li>
+         Use comma, space, or new line to separate multiple numbers
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let numbers = [];
+
+        function addSingleNumber() {
+            const input = document.getElementById('singleNumber');
+            const value = parseFloat(input.value);
+            
+            if (!isNaN(value)) {
+                numbers.push(value);
+                input.value = '';
+                updateDisplay();
+                calculateResults();
+            } else {
+                alert('Please enter a valid number');
+            }
+        }
+
+        function addMultipleNumbers() {
+            const input = document.getElementById('multipleNumbers');
+            const text = input.value.trim();
+            
+            if (text) {
+                // Split by comma, space, or newline
+                const values = text.split(/[,\s\n]+/).filter(s => s.length > 0);
+                const newNumbers = [];
+                
+                for (let value of values) {
+                    const num = parseFloat(value);
+                    if (!isNaN(num)) {
+                        newNumbers.push(num);
+                    }
+                }
+                
+                if (newNumbers.length > 0) {
+                    numbers.push(...newNumbers);
+                    input.value = '';
+                    updateDisplay();
+                    calculateResults();
+                } else {
+                    alert('Please enter valid numbers separated by commas, spaces, or new lines');
+                }
+            }
+        }
+
+        function removeNumber(index) {
+            numbers.splice(index, 1);
+            updateDisplay();
+            if (numbers.length > 0) {
+                calculateResults();
+            } else {
+                hideResults();
+            }
+        }
+
+        function clearAllNumbers() {
+            numbers = [];
+            updateDisplay();
+            hideResults();
+        }
+
+        function updateDisplay() {
+            const display = document.getElementById('numbersDisplay');
+            const list = document.getElementById('numbersList');
+            const count = document.getElementById('numberCount');
+            const sum = document.getElementById('numberSum');
+            const sorted = document.getElementById('sortedNumbers');
+            
+            if (numbers.length === 0) {
+                display.style.display = 'none';
+                return;
+            }
+            
+            display.style.display = 'block';
+            
+            // Update numbers list
+            list.innerHTML = numbers.map((num, index) => 
+                `<span class="number-tag">
+                    ${num}
+                    <button class="remove-number" onclick="removeNumber(${index})">×</button>
+                </span>`
+            ).join('');
+            
+            // Update info
+            count.textContent = numbers.length;
+            sum.textContent = numbers.reduce((a, b) => a + b, 0).toFixed(2);
+            sorted.textContent = [...numbers].sort((a, b) => a - b).join(', ');
+        }
+
+        function calculateResults() {
+            if (numbers.length === 0) return;
+            
+            const mean = calculateMean();
+            const median = calculateMedian();
+            const mode = calculateMode();
+            const range = calculateRange();
+            
+            // Update results
+            document.getElementById('meanResult').textContent = mean.toFixed(3);
+            document.getElementById('medianResult').textContent = median.toFixed(3);
+            document.getElementById('modeResult').textContent = mode;
+            document.getElementById('rangeResult').textContent = range.toFixed(3);
+            
+            // Show results
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Update steps
+            updateCalculationSteps(mean, median, mode, range);
+            document.getElementById('stepsSection').style.display = 'block';
+        }
+
+        function calculateMean() {
+            const sum = numbers.reduce((a, b) => a + b, 0);
+            return sum / numbers.length;
+        }
+
+        function calculateMedian() {
+            const sorted = [...numbers].sort((a, b) => a - b);
+            const middle = Math.floor(sorted.length / 2);
+            
+            if (sorted.length % 2 === 0) {
+                return (sorted[middle - 1] + sorted[middle]) / 2;
+            } else {
+                return sorted[middle];
+            }
+        }
+
+        function calculateMode() {
+            const frequency = {};
+            let maxFreq = 0;
+            
+            // Count frequencies
+            numbers.forEach(num => {
+                frequency[num] = (frequency[num] || 0) + 1;
+                maxFreq = Math.max(maxFreq, frequency[num]);
+            });
+            
+            // Find modes
+            const modes = Object.keys(frequency).filter(num => frequency[num] === maxFreq);
+            
+            if (maxFreq === 1) {
+                return "No mode";
+            } else if (modes.length === 1) {
+                return modes[0];
+            } else {
+                return modes.join(', ');
+            }
+        }
+
+        function calculateRange() {
+            const min = Math.min(...numbers);
+            const max = Math.max(...numbers);
+            return max - min;
+        }
+
+        function updateCalculationSteps(mean, median, mode, range) {
+            const sorted = [...numbers].sort((a, b) => a - b);
+            const sum = numbers.reduce((a, b) => a + b, 0);
+            
+            const stepsHtml = `
+                <div class="step-item">
+                    <div class="step-title">1. Mean Calculation</div>
+                    <div class="step-calculation">Sum = ${numbers.join(' + ')} = ${sum}</div>
+                    <div class="step-calculation">Mean = ${sum} ÷ ${numbers.length} = ${mean.toFixed(3)}</div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-title">2. Median Calculation</div>
+                    <div class="step-calculation">Sorted: ${sorted.join(', ')}</div>
+                    <div class="step-calculation">
+                        ${sorted.length % 2 === 0 ? 
+                            `Middle values: ${sorted[Math.floor(sorted.length/2) - 1]} and ${sorted[Math.floor(sorted.length/2)]}<br>
+                             Median = (${sorted[Math.floor(sorted.length/2) - 1]} + ${sorted[Math.floor(sorted.length/2)]}) ÷ 2 = ${median.toFixed(3)}` :
+                            `Middle value (position ${Math.floor(sorted.length/2) + 1}): ${median}`
+                        }
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-title">3. Mode Calculation</div>
+                    <div class="step-calculation">
+                        ${Object.entries(numbers.reduce((freq, num) => {
+                            freq[num] = (freq[num] || 0) + 1;
+                            return freq;
+                        }, {})).map(([num, freq]) => `${num}: ${freq} time${freq > 1 ? 's' : ''}`).join(', ')}
+                    </div>
+                    <div class="step-calculation">Mode: ${mode}</div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-title">4. Range Calculation</div>
+                    <div class="step-calculation">Range = Maximum - Minimum = ${Math.max(...numbers)} - ${Math.min(...numbers)} = ${range.toFixed(3)}</div>
+                </div>
+            `;
+            
+            document.getElementById('calculationSteps').innerHTML = stepsHtml;
+        }
+
+        function hideResults() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('stepsSection').style.display = 'none';
+        }
+
+        // Keyboard support
+        document.getElementById('singleNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addSingleNumber();
+            }
+        });
+
+        document.getElementById('multipleNumbers').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                addMultipleNumbers();
+            }
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

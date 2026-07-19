@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/triangle-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Triangle Calculator - Area, Perimeter &amp; Angles | Make QR Calculators
+  </title>
+  <meta content="Free triangle calculator to find area, perimeter, angles, and missing sides using various triangle formulas." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .triangle-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+            color: white;
+        }
+
+        .calculator-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #20c997;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(32, 201, 151, 0.1);
+        }
+
+        .triangle-display {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .triangle-svg {
+            width: 100%;
+            height: 300px;
+            margin: 1rem auto;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #20c997;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .formula-display {
+            background: #e8f5e8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .formula-text {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .triangle-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .type-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .type-card i {
+            font-size: 2rem;
+            color: #20c997;
+            margin-bottom: 1rem;
+        }
+
+        .type-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-card p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .triangle-svg {
+                width: 100%;
+                height: 280px;
+            }
+            
+            .triangle-display {
+                margin-top: 1rem;
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                padding: 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Triangle Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online triangle calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Triangle Calculator", "item": "https://make-qr.github.io/calculators/triangle-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Triangle Calculator</span>
+            </nav>
+            <h1>Triangle Calculator</h1>
+            <p>Calculate triangle area, perimeter, angles, and missing sides</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="triangle-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('sss')">
+        SSS
+       </button>
+       <button class="tab-button" onclick="switchTab('sas')">
+        SAS
+       </button>
+       <button class="tab-button" onclick="switchTab('asa')">
+        ASA
+       </button>
+       <button class="tab-button" onclick="switchTab('right')">
+        Right Triangle
+       </button>
+      </div>
+      <!-- SSS Calculator -->
+      <div class="calculator-section" id="sssTab">
+       <h3>
+        SSS Triangle Calculator (Side-Side-Side)
+       </h3>
+       <div class="input-grid">
+        <div class="input-section">
+         <div class="input-group">
+          <label for="sssA">
+           Side A
+          </label>
+          <input id="sssA" step="0.01" type="number" value="3"/>
+         </div>
+         <div class="input-group">
+          <label for="sssB">
+           Side B
+          </label>
+          <input id="sssB" step="0.01" type="number" value="4"/>
+         </div>
+         <div class="input-group">
+          <label for="sssC">
+           Side C
+          </label>
+          <input id="sssC" step="0.01" type="number" value="5"/>
+         </div>
+         <button class="calculate-btn" onclick="calculateSSS()">
+          <i class="fas fa-calculator">
+          </i>
+          Calculate Triangle
+         </button>
+        </div>
+        <div class="triangle-display">
+         <svg class="triangle-svg" id="triangleSVG" viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triangle will be drawn here -->
+         </svg>
+        </div>
+       </div>
+      </div>
+      <!-- SAS Calculator -->
+      <div class="calculator-section" id="sasTab" style="display: none;">
+       <h3>
+        SAS Triangle Calculator (Side-Angle-Side)
+       </h3>
+       <div class="input-grid">
+        <div class="input-section">
+         <div class="input-group">
+          <label for="sasA">
+           Side A
+          </label>
+          <input id="sasA" step="0.01" type="number" value="5"/>
+         </div>
+         <div class="input-group">
+          <label for="sasAngleC">
+           Angle C (degrees)
+          </label>
+          <input id="sasAngleC" step="0.01" type="number" value="60"/>
+         </div>
+         <div class="input-group">
+          <label for="sasB">
+           Side B
+          </label>
+          <input id="sasB" step="0.01" type="number" value="5"/>
+         </div>
+         <button class="calculate-btn" onclick="calculateSAS()">
+          <i class="fas fa-calculator">
+          </i>
+          Calculate Triangle
+         </button>
+        </div>
+        <div class="triangle-display">
+         <svg class="triangle-svg" id="triangleSVG2" viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triangle will be drawn here -->
+         </svg>
+        </div>
+       </div>
+      </div>
+      <!-- ASA Calculator -->
+      <div class="calculator-section" id="asaTab" style="display: none;">
+       <h3>
+        ASA Triangle Calculator (Angle-Side-Angle)
+       </h3>
+       <div class="input-grid">
+        <div class="input-section">
+         <div class="input-group">
+          <label for="asaAngleA">
+           Angle A (degrees)
+          </label>
+          <input id="asaAngleA" step="0.01" type="number" value="60"/>
+         </div>
+         <div class="input-group">
+          <label for="asaSideC">
+           Side C
+          </label>
+          <input id="asaSideC" step="0.01" type="number" value="10"/>
+         </div>
+         <div class="input-group">
+          <label for="asaAngleB">
+           Angle B (degrees)
+          </label>
+          <input id="asaAngleB" step="0.01" type="number" value="60"/>
+         </div>
+         <button class="calculate-btn" onclick="calculateASA()">
+          <i class="fas fa-calculator">
+          </i>
+          Calculate Triangle
+         </button>
+        </div>
+        <div class="triangle-display">
+         <svg class="triangle-svg" id="triangleSVG3" viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triangle will be drawn here -->
+         </svg>
+        </div>
+       </div>
+      </div>
+      <!-- Right Triangle Calculator -->
+      <div class="calculator-section" id="rightTab" style="display: none;">
+       <h3>
+        Right Triangle Calculator
+       </h3>
+       <div class="input-grid">
+        <div class="input-section">
+         <div class="input-group">
+          <label for="rightA">
+           Side A (leg)
+          </label>
+          <input id="rightA" step="0.01" type="number" value="3"/>
+         </div>
+         <div class="input-group">
+          <label for="rightB">
+           Side B (leg)
+          </label>
+          <input id="rightB" step="0.01" type="number" value="4"/>
+         </div>
+         <div class="input-group">
+          <label for="rightC">
+           Hypotenuse C
+          </label>
+          <input id="rightC" placeholder="Auto-calculated" step="0.01" type="number"/>
+         </div>
+         <button class="calculate-btn" onclick="calculateRight()">
+          <i class="fas fa-calculator">
+          </i>
+          Calculate Triangle
+         </button>
+        </div>
+        <div class="triangle-display">
+         <svg class="triangle-svg" id="triangleSVG4" viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triangle will be drawn here -->
+         </svg>
+        </div>
+       </div>
+      </div>
+      <!-- Results Display -->
+      <div class="results-grid" id="resultsGrid" style="display: none;">
+       <!-- Results will be populated here -->
+      </div>
+      <!-- Formula Display -->
+      <div class="formula-display" id="formulaDisplay" style="display: none;">
+       <div class="formula-title">
+        Formula Used:
+       </div>
+       <div class="formula-text" id="formulaText">
+       </div>
+      </div>
+      <!-- Triangle Types -->
+      <div class="triangle-types">
+       <div class="type-card" onclick="loadExample('equilateral')">
+        <i class="fas fa-equals">
+        </i>
+        <h4>
+         Equilateral
+        </h4>
+        <p>
+         All sides equal (3, 3, 3)
+        </p>
+       </div>
+       <div class="type-card" onclick="loadExample('isosceles')">
+        <i class="fas fa-balance-scale">
+        </i>
+        <h4>
+         Isosceles
+        </h4>
+        <p>
+         Two sides equal (5, 5, 6)
+        </p>
+       </div>
+       <div class="type-card" onclick="loadExample('scalene')">
+        <i class="fas fa-chart-line">
+        </i>
+        <h4>
+         Scalene
+        </h4>
+        <p>
+         All sides different (3, 4, 5)
+        </p>
+       </div>
+       <div class="type-card" onclick="loadExample('right')">
+        <i class="fas fa-square">
+        </i>
+        <h4>
+         Right Triangle
+        </h4>
+        <p>
+         90-degree angle (3, 4, 5)
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'sss';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide tab content
+            document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            
+            // Hide results initially
+            document.getElementById('resultsGrid').style.display = 'none';
+            document.getElementById('formulaDisplay').style.display = 'none';
+            
+            // Auto-calculate for the active tab
+            setTimeout(() => {
+                switch(tab) {
+                    case 'sss':
+                        calculateSSS();
+                        break;
+                    case 'sas':
+                        calculateSAS();
+                        break;
+                    case 'asa':
+                        calculateASA();
+                        break;
+                    case 'right':
+                        calculateRight();
+                        break;
+                }
+            }, 100); // Small delay to ensure DOM is updated
+        }
+
+        function calculateSSS() {
+            const a = parseFloat(document.getElementById('sssA').value);
+            const b = parseFloat(document.getElementById('sssB').value);
+            const c = parseFloat(document.getElementById('sssC').value);
+
+            if (!a || !b || !c || a <= 0 || b <= 0 || c <= 0) {
+                alert('Please enter valid positive values for all sides!');
+                return;
+            }
+
+            // Check triangle inequality
+            if (a + b <= c || a + c <= b || b + c <= a) {
+                alert('These sides cannot form a valid triangle!');
+                return;
+            }
+
+            // Calculate area using Heron's formula
+            const s = (a + b + c) / 2;
+            const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+            const perimeter = a + b + c;
+
+            // Calculate angles using law of cosines
+            const angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c)) * 180 / Math.PI;
+            const angleB = Math.acos((a * a + c * c - b * b) / (2 * a * c)) * 180 / Math.PI;
+            const angleC = 180 - angleA - angleB;
+
+            displayResults(a, b, c, angleA, angleB, angleC, area, perimeter);
+            showFormula("Heron's Formula: Area = √(s(s-a)(s-b)(s-c)) where s = (a+b+c)/2");
+            drawTriangle(a, b, c);
+        }
+
+        function calculateSAS() {
+            const a = parseFloat(document.getElementById('sasA').value);
+            const angleC = parseFloat(document.getElementById('sasAngleC').value);
+            const b = parseFloat(document.getElementById('sasB').value);
+
+            if (!a || !angleC || !b || a <= 0 || b <= 0 || angleC <= 0 || angleC >= 180) {
+                alert('Please enter valid values!');
+                return;
+            }
+
+            const angleC_rad = angleC * Math.PI / 180;
+            
+            // Calculate third side using law of cosines
+            const c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(angleC_rad));
+            
+            // Calculate other angles
+            const angleA = Math.asin(a * Math.sin(angleC_rad) / c) * 180 / Math.PI;
+            const angleB = 180 - angleA - angleC;
+            
+            // Calculate area
+            const area = 0.5 * a * b * Math.sin(angleC_rad);
+            const perimeter = a + b + c;
+
+            displayResults(a, b, c, angleA, angleB, angleC, area, perimeter);
+            showFormula("SAS Formula: c² = a² + b² - 2ab*cos(C), Area = ½ab*sin(C)");
+            drawTriangle(a, b, c);
+        }
+
+        function calculateASA() {
+            const angleA = parseFloat(document.getElementById('asaAngleA').value);
+            const c = parseFloat(document.getElementById('asaSideC').value);
+            const angleB = parseFloat(document.getElementById('asaAngleB').value);
+
+            if (!angleA || !c || !angleB || c <= 0 || angleA <= 0 || angleB <= 0 || angleA + angleB >= 180) {
+                alert('Please enter valid values!');
+                return;
+            }
+
+            const angleC = 180 - angleA - angleB;
+            
+            const angleA_rad = angleA * Math.PI / 180;
+            const angleB_rad = angleB * Math.PI / 180;
+            const angleC_rad = angleC * Math.PI / 180;
+            
+            // Calculate other sides using law of sines
+            const a = c * Math.sin(angleA_rad) / Math.sin(angleC_rad);
+            const b = c * Math.sin(angleB_rad) / Math.sin(angleC_rad);
+            
+            // Calculate area
+            const area = 0.5 * a * b * Math.sin(angleC_rad);
+            const perimeter = a + b + c;
+
+            displayResults(a, b, c, angleA, angleB, angleC, area, perimeter);
+            showFormula("ASA Formula: a/sin(A) = b/sin(B) = c/sin(C)");
+            drawTriangle(a, b, c);
+        }
+
+        function calculateRight() {
+            let a = parseFloat(document.getElementById('rightA').value);
+            let b = parseFloat(document.getElementById('rightB').value);
+            let c = parseFloat(document.getElementById('rightC').value);
+
+            // Count how many values we have
+            const hasA = !isNaN(a) && a > 0;
+            const hasB = !isNaN(b) && b > 0;
+            const hasC = !isNaN(c) && c > 0;
+            const count = (hasA ? 1 : 0) + (hasB ? 1 : 0) + (hasC ? 1 : 0);
+
+            // If we have default values, calculate
+            if (count >= 2) {
+                if (hasA && hasB && !hasC) {
+                    // Calculate hypotenuse
+                    c = Math.sqrt(a * a + b * b);
+                    document.getElementById('rightC').value = c.toFixed(2);
+                } else if (hasA && hasC && !hasB) {
+                    // Calculate side b
+                    if (c > a) {
+                        b = Math.sqrt(c * c - a * a);
+                        document.getElementById('rightB').value = b.toFixed(2);
+                    } else {
+                        return; // Invalid: hypotenuse must be longer than leg
+                    }
+                } else if (hasB && hasC && !hasA) {
+                    // Calculate side a
+                    if (c > b) {
+                        a = Math.sqrt(c * c - b * b);
+                        document.getElementById('rightA').value = a.toFixed(2);
+                    } else {
+                        return; // Invalid: hypotenuse must be longer than leg
+                    }
+                }
+            }
+
+            // Re-check values after potential calculations
+            a = parseFloat(document.getElementById('rightA').value);
+            b = parseFloat(document.getElementById('rightB').value);
+            c = parseFloat(document.getElementById('rightC').value);
+
+            if (!a || !b || !c || a <= 0 || b <= 0 || c <= 0) {
+                // If we don't have enough values, use defaults for visualization
+                if (!a || a <= 0) a = 3;
+                if (!b || b <= 0) b = 4;
+                if (!c || c <= 0) c = 5;
+            }
+
+            // Check if it's close to a valid right triangle (with tolerance)
+            const tolerance = 0.5;
+            const isValidRight = Math.abs(a * a + b * b - c * c) <= tolerance;
+
+            const angleA = Math.atan(a / b) * 180 / Math.PI;
+            const angleB = Math.atan(b / a) * 180 / Math.PI;
+            const angleC = 90;
+            
+            const area = 0.5 * a * b;
+            const perimeter = a + b + c;
+
+            displayResults(a, b, c, angleA, angleB, angleC, area, perimeter);
+            showFormula("Pythagorean Theorem: c² = a² + b², Area = ½ab");
+            drawTriangle(a, b, c);
+        }
+
+        function displayResults(a, b, c, angleA, angleB, angleC, area, perimeter) {
+            const resultsGrid = document.getElementById('resultsGrid');
+            resultsGrid.innerHTML = `
+                <div class="result-card">
+                    <div class="result-value">${area.toFixed(2)}</div>
+                    <div class="result-label">Area</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${perimeter.toFixed(2)}</div>
+                    <div class="result-label">Perimeter</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${a.toFixed(2)}</div>
+                    <div class="result-label">Side A</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${b.toFixed(2)}</div>
+                    <div class="result-label">Side B</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${c.toFixed(2)}</div>
+                    <div class="result-label">Side C</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${angleA.toFixed(1)}°</div>
+                    <div class="result-label">Angle A</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${angleB.toFixed(1)}°</div>
+                    <div class="result-label">Angle B</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">${angleC.toFixed(1)}°</div>
+                    <div class="result-label">Angle C</div>
+                </div>
+            `;
+            resultsGrid.style.display = 'grid';
+        }
+
+        function showFormula(formula) {
+            document.getElementById('formulaText').textContent = formula;
+            document.getElementById('formulaDisplay').style.display = 'block';
+        }
+
+        function drawTriangle(a, b, c) {
+            // Find the correct SVG based on current tab
+            let svg;
+            switch(currentTab) {
+                case 'sss':
+                    svg = document.getElementById('triangleSVG');
+                    break;
+                case 'sas':
+                    svg = document.getElementById('triangleSVG2');
+                    break;
+                case 'asa':
+                    svg = document.getElementById('triangleSVG3');
+                    break;
+                case 'right':
+                    svg = document.getElementById('triangleSVG4');
+                    break;
+                default:
+                    svg = document.querySelector('.triangle-svg');
+            }
+            
+            if (!svg) return;
+
+            svg.innerHTML = '';
+            
+            // Scale the triangle to fit in the larger SVG (with good margin)
+            const maxDimension = Math.max(a, b, c);
+            const scale = 180 / maxDimension; // Use 180 for better fit in 400x300 viewBox
+            
+            // Calculate coordinates using law of cosines - with validation
+            let angleC_rad;
+            try {
+                const cosC = (a * a + b * b - c * c) / (2 * a * b);
+                if (cosC < -1 || cosC > 1) {
+                    // Invalid triangle, use a default triangle
+                    angleC_rad = Math.PI / 3; // 60 degrees
+                } else {
+                    angleC_rad = Math.acos(cosC);
+                }
+            } catch (e) {
+                angleC_rad = Math.PI / 3; // Default to 60 degrees
+            }
+            
+            // Position triangle in center of SVG with more space
+            const centerX = 200; // Center of 400px width
+            const centerY = 150; // Center of 300px height
+            
+            // Calculate triangle vertices with safe coordinates
+            const x1 = centerX - (c * scale) / 2; // Bottom left
+            const y1 = centerY + 60; // Bottom (lower to give space for labels)
+            const x2 = centerX + (c * scale) / 2; // Bottom right  
+            const y2 = y1; // Bottom
+            
+            // Calculate third vertex more safely
+            let x3, y3;
+            if (isNaN(angleC_rad) || !isFinite(angleC_rad)) {
+                // Fallback coordinates for invalid calculations
+                x3 = centerX;
+                y3 = centerY - 50;
+            } else {
+                x3 = x1 + (b * scale) * Math.cos(Math.PI - angleC_rad); // Top vertex
+                y3 = y1 - (b * scale) * Math.sin(Math.PI - angleC_rad);
+            }
+            
+            // Final validation of coordinates
+            if (isNaN(x3) || isNaN(y3) || !isFinite(x3) || !isFinite(y3)) {
+                x3 = centerX;
+                y3 = centerY - 50;
+            }
+            
+            // Draw triangle
+            const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            triangle.setAttribute('points', `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
+            triangle.setAttribute('fill', 'rgba(32, 201, 151, 0.2)');
+            triangle.setAttribute('stroke', '#20c997');
+            triangle.setAttribute('stroke-width', '2');
+            svg.appendChild(triangle);
+            
+            // Add background rectangles for side labels to improve readability
+            const sideLabels = [
+                { text: `a = ${a.toFixed(1)}`, x: (x2 + x3) / 2 + 20, y: (y2 + y3) / 2 },
+                { text: `b = ${b.toFixed(1)}`, x: (x1 + x3) / 2 - 35, y: (y1 + y3) / 2 },
+                { text: `c = ${c.toFixed(1)}`, x: (x1 + x2) / 2, y: y1 + 35 }
+            ];
+            
+            sideLabels.forEach(label => {
+                // Add background rectangle for better readability
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('x', label.x - 25);
+                rect.setAttribute('y', label.y - 12);
+                rect.setAttribute('width', '50');
+                rect.setAttribute('height', '18');
+                rect.setAttribute('fill', 'white');
+                rect.setAttribute('stroke', '#20c997');
+                rect.setAttribute('stroke-width', '1');
+                rect.setAttribute('rx', '3');
+                svg.appendChild(rect);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', label.x);
+                text.setAttribute('y', label.y + 3);
+                text.setAttribute('fill', '#20c997');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('font-weight', 'bold');
+                text.setAttribute('text-anchor', 'middle');
+                text.textContent = label.text;
+                svg.appendChild(text);
+            });
+            
+            // Add vertex labels with background circles
+            const vertexLabels = [
+                { text: 'A', x: x1 - 25, y: y1 + 5 },
+                { text: 'B', x: x2 + 25, y: y2 + 5 },
+                { text: 'C', x: x3, y: y3 - 20 }
+            ];
+            
+            vertexLabels.forEach(label => {
+                // Add background circle for vertex label
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', label.x);
+                circle.setAttribute('cy', label.y - 3);
+                circle.setAttribute('r', '12');
+                circle.setAttribute('fill', '#fd7e14');
+                circle.setAttribute('stroke', 'white');
+                circle.setAttribute('stroke-width', '2');
+                svg.appendChild(circle);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', label.x);
+                text.setAttribute('y', label.y);
+                text.setAttribute('fill', 'white');
+                text.setAttribute('font-size', '14');
+                text.setAttribute('font-weight', 'bold');
+                text.setAttribute('text-anchor', 'middle');
+                text.textContent = label.text;
+                svg.appendChild(text);
+            });
+        }
+
+        function loadExample(type) {
+            switch (type) {
+                case 'equilateral':
+                    // Switch to SSS tab and set values
+                    currentTab = 'sss';
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-button')[0].classList.add('active');
+                    document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+                    document.getElementById('sssTab').style.display = 'block';
+                    
+                    document.getElementById('sssA').value = 3;
+                    document.getElementById('sssB').value = 3;
+                    document.getElementById('sssC').value = 3;
+                    calculateSSS();
+                    break;
+                case 'isosceles':
+                    currentTab = 'sss';
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-button')[0].classList.add('active');
+                    document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+                    document.getElementById('sssTab').style.display = 'block';
+                    
+                    document.getElementById('sssA').value = 5;
+                    document.getElementById('sssB').value = 5;
+                    document.getElementById('sssC').value = 6;
+                    calculateSSS();
+                    break;
+                case 'scalene':
+                    currentTab = 'sss';
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-button')[0].classList.add('active');
+                    document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+                    document.getElementById('sssTab').style.display = 'block';
+                    
+                    document.getElementById('sssA').value = 3;
+                    document.getElementById('sssB').value = 4;
+                    document.getElementById('sssC').value = 5;
+                    calculateSSS();
+                    break;
+                case 'right':
+                    currentTab = 'right';
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-button')[3].classList.add('active');
+                    document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+                    document.getElementById('rightTab').style.display = 'block';
+                    
+                    document.getElementById('rightA').value = 3;
+                    document.getElementById('rightB').value = 4;
+                    document.getElementById('rightC').value = '';
+                    calculateRight();
+                    break;
+            }
+        }
+
+        // Auto-calculate on input change
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial calculation
+            calculateSSS();
+            
+            // Add event listeners for auto-calculation
+            ['sssA', 'sssB', 'sssC'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateSSS);
+            });
+            
+            ['sasA', 'sasAngleC', 'sasB'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateSAS);
+            });
+            
+            ['asaAngleA', 'asaSideC', 'asaAngleB'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateASA);
+            });
+            
+            ['rightA', 'rightB', 'rightC'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateRight);
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

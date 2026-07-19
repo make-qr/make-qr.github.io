@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/roof-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Roof Calculator - Calculate Roofing Materials &amp; Costs | Make QR Calculators
+  </title>
+  <meta content="Calculate roof area, shingles needed, and roofing costs. Plan your roofing project with accurate material estimates and labor costs." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .roof-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #6f42c1 0%, #5a359a 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #6f42c1;
+            box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .roof-types {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .type-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #6f42c1;
+        }
+
+        .type-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .type-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6f42c1;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-details {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .cost-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Roof Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online roof calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Roof Calculator", "item": "https://make-qr.github.io/calculators/roof-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Roof Calculator</span>
+            </nav>
+            <h1>Roof Calculator</h1>
+            <p>Calculate roof area, shingles needed, and roofing project costs</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="roof-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         Roof Measurements
+        </h3>
+        <div class="input-group">
+         <label>
+          House Dimensions (Ground Level)
+         </label>
+         <div class="dimension-grid">
+          <input class="input-field" id="house-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+          <input class="input-field" id="house-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="roof-pitch">
+          Roof Pitch
+         </label>
+         <select class="input-field" id="roof-pitch">
+          <option value="1.00">
+           Flat (0°)
+          </option>
+          <option value="1.02">
+           1/12 Pitch (4.8°)
+          </option>
+          <option value="1.04">
+           2/12 Pitch (9.5°)
+          </option>
+          <option value="1.06">
+           3/12 Pitch (14°)
+          </option>
+          <option selected="" value="1.08">
+           4/12 Pitch (18.4°)
+          </option>
+          <option value="1.12">
+           5/12 Pitch (22.6°)
+          </option>
+          <option value="1.15">
+           6/12 Pitch (26.6°)
+          </option>
+          <option value="1.20">
+           7/12 Pitch (30.3°)
+          </option>
+          <option value="1.25">
+           8/12 Pitch (33.7°)
+          </option>
+          <option value="1.30">
+           9/12 Pitch (36.9°)
+          </option>
+          <option value="1.36">
+           10/12 Pitch (39.8°)
+          </option>
+          <option value="1.42">
+           11/12 Pitch (42.5°)
+          </option>
+          <option value="1.50">
+           12/12 Pitch (45°)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="roof-complexity">
+          Roof Complexity
+         </label>
+         <select class="input-field" id="roof-complexity">
+          <option value="1.0">
+           Simple (Rectangle)
+          </option>
+          <option selected="" value="1.1">
+           Standard (Few peaks)
+          </option>
+          <option value="1.2">
+           Complex (Many peaks/valleys)
+          </option>
+          <option value="1.3">
+           Very Complex (Dormers/skylights)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="shingle-type">
+          Shingle Type
+         </label>
+         <select class="input-field" id="shingle-type">
+          <option value="3">
+           3-Tab Asphalt Shingles
+          </option>
+          <option selected="" value="3.33">
+           Architectural Shingles
+          </option>
+          <option value="4">
+           Luxury Shingles
+          </option>
+          <option value="1">
+           Metal Roofing (per sq ft)
+          </option>
+          <option value="1">
+           Tile Roofing (per sq ft)
+          </option>
+          <option value="1">
+           Slate Roofing (per sq ft)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="material-cost">
+          Material Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="material-cost" min="0" placeholder="150" step="1" type="number"/>
+         </div>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Cost per square (100 sq ft) or per sq ft for metal/tile
+         </p>
+        </div>
+        <div class="input-group">
+         <label for="labor-cost">
+          Labor Cost per Square
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="labor-cost" min="0" placeholder="200" step="1" type="number"/>
+         </div>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-calculator">
+         </i>
+         Roofing Results
+        </h3>
+        <div class="input-group">
+         <label for="roof-area">
+          Total Roof Area
+         </label>
+         <input class="input-field result-field" id="roof-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="roof-squares">
+          Roofing Squares
+         </label>
+         <input class="input-field result-field" id="roof-squares" placeholder="0 squares" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="bundles-needed">
+          Shingle Bundles Needed
+         </label>
+         <input class="input-field result-field" id="bundles-needed" placeholder="0 bundles" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="material-total">
+          Material Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="material-total" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="labor-total">
+          Labor Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="labor-total" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="project-total">
+          Total Project Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="project-total" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="roof-types">
+       <h3>
+        <i class="fas fa-home">
+        </i>
+        Roofing Material Types &amp; Costs
+       </h3>
+       <div class="types-grid">
+        <div class="type-card">
+         <div class="type-name">
+          🏠 3-Tab Asphalt
+         </div>
+         <div class="type-price">
+          $80-150
+         </div>
+         <div class="type-details">
+          <strong>
+           Lifespan:
+          </strong>
+          15-20 years
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Budget projects
+          <br/>
+          <strong>
+           Bundles per square:
+          </strong>
+          3
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🏘️ Architectural
+         </div>
+         <div class="type-price">
+          $120-250
+         </div>
+         <div class="type-details">
+          <strong>
+           Lifespan:
+          </strong>
+          20-30 years
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Most homes
+          <br/>
+          <strong>
+           Bundles per square:
+          </strong>
+          3-4
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          ⭐ Luxury Shingles
+         </div>
+         <div class="type-price">
+          $200-400
+         </div>
+         <div class="type-details">
+          <strong>
+           Lifespan:
+          </strong>
+          30-50 years
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Premium homes
+          <br/>
+          <strong>
+           Bundles per square:
+          </strong>
+          4-5
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🔧 Metal Roofing
+         </div>
+         <div class="type-price">
+          $3-12/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Lifespan:
+          </strong>
+          40-70 years
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Durability
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          Specialized
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🏺 Clay/Concrete Tile
+         </div>
+         <div class="type-price">
+          $2-8/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Lifespan:
+          </strong>
+          50-100 years
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Hot climates
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          Heavy (structure req'd)
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🗿 Slate
+         </div>
+         <div class="type-price">
+          $8-20/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Lifespan:
+          </strong>
+          75-150 years
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Historic homes
+          <br/>
+          <strong>
+           Installation:
+          </strong>
+          Specialist required
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="cost-breakdown" id="cost-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Project Cost Breakdown
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Cost breakdown items will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Roofing Project Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          📏 Accurate Measurements
+         </h4>
+         <p>
+          Measure your home's footprint and account for overhangs. Use pitch multipliers to calculate true roof area.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🌦️ Weather Planning
+         </h4>
+         <p>
+          Plan roofing projects during dry seasons. Allow 1-3 days for completion depending on roof size.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📦 Order Extra Materials
+         </h4>
+         <p>
+          Order 10-15% extra shingles for waste, cuts, and future repairs. Keep leftover shingles for later use.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔍 Inspect Before Starting
+         </h4>
+         <p>
+          Check roof deck for damage. Replace any rotten or damaged decking before installing new roofing.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🛡️ Safety First
+         </h4>
+         <p>
+          Roofing is dangerous work. Consider hiring professionals for steep roofs or if you're uncomfortable with heights.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💰 Get Multiple Quotes
+         </h4>
+         <p>
+          Get at least 3 quotes from licensed contractors. Check references and verify insurance coverage.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+                <a class="related-link" href="flooring-calculator.html"><i class="fas fa-arrow-right"></i> Flooring Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateRoof() {
+            const houseLength = parseFloat(document.getElementById('house-length').value) || 0;
+            const houseWidth = parseFloat(document.getElementById('house-width').value) || 0;
+            const pitchMultiplier = parseFloat(document.getElementById('roof-pitch').value) || 1.08;
+            const complexityFactor = parseFloat(document.getElementById('roof-complexity').value) || 1.1;
+            const bundlesPerSquare = parseFloat(document.getElementById('shingle-type').value) || 3.33;
+            const materialCost = parseFloat(document.getElementById('material-cost').value) || 150;
+            const laborCost = parseFloat(document.getElementById('labor-cost').value) || 200;
+
+            if (houseLength === 0 || houseWidth === 0) return;
+
+            // Calculate roof area
+            const baseArea = houseLength * houseWidth;
+            const roofArea = baseArea * pitchMultiplier * complexityFactor;
+            
+            // Calculate squares (100 sq ft each)
+            const squares = roofArea / 100;
+            
+            // Calculate bundles needed
+            const bundlesNeeded = Math.ceil(squares * bundlesPerSquare);
+            
+            // Calculate costs
+            let materialTotal, laborTotal;
+            const shingleType = document.getElementById('shingle-type').value;
+            
+            if (shingleType == "1") { // Metal, tile, slate (per sq ft pricing)
+                materialTotal = roofArea * materialCost;
+            } else { // Shingles (per square pricing)
+                materialTotal = squares * materialCost;
+            }
+            
+            laborTotal = squares * laborCost;
+            const projectTotal = materialTotal + laborTotal;
+
+            // Update results
+            document.getElementById('roof-area').value = roofArea.toFixed(0) + ' sq ft';
+            document.getElementById('roof-squares').value = squares.toFixed(1) + ' squares';
+            document.getElementById('bundles-needed').value = bundlesNeeded + ' bundles';
+            document.getElementById('material-total').value = materialTotal.toFixed(0);
+            document.getElementById('labor-total').value = laborTotal.toFixed(0);
+            document.getElementById('project-total').value = projectTotal.toFixed(0);
+
+            // Generate cost breakdown
+            generateCostBreakdown(roofArea, squares, bundlesNeeded, materialTotal, laborTotal, projectTotal);
+        }
+
+        function generateCostBreakdown(area, squares, bundles, materialCost, laborCost, total) {
+            const costPerSqFt = total / area;
+            const wasteAllowance = bundles * 0.1; // 10% waste
+            
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${area.toFixed(0)}</div>
+                    <div class="breakdown-label">Roof Area (sq ft)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${squares.toFixed(1)}</div>
+                    <div class="breakdown-label">Roofing Squares</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${bundles}</div>
+                    <div class="breakdown-label">Shingle Bundles</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${materialCost.toFixed(0)}</div>
+                    <div class="breakdown-label">Material Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${laborCost.toFixed(0)}</div>
+                    <div class="breakdown-label">Labor Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${costPerSqFt.toFixed(2)}</div>
+                    <div class="breakdown-label">Cost per Sq Ft</div>
+                </div>
+            `;
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['house-length', 'house-width', 'roof-pitch', 'roof-complexity', 
+             'shingle-type', 'material-cost', 'labor-cost'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateRoof);
+                    element.addEventListener('change', calculateRoof);
+                }
+            });
+
+            // Set example values
+            document.getElementById('house-length').value = 40;
+            document.getElementById('house-width').value = 30;
+            document.getElementById('material-cost').value = 150;
+            document.getElementById('labor-cost').value = 200;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

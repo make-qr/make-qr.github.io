@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/date-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Date Calculator - Calculate Days, Dates &amp; Time Differences | Make QR Calculators
+  </title>
+  <meta content="Free date calculator to find date differences, add/subtract days, and calculate business days." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .date-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #17a2b8, #28a745);
+            color: white;
+        }
+
+        .calculator-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #17a2b8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #17a2b8, #28a745);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-display {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-main {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #17a2b8;
+            margin-bottom: 1rem;
+        }
+
+        .result-label {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .detail-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #17a2b8;
+        }
+
+        .detail-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .calendar-view {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .month-nav {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .calendar-day {
+            background: white;
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day.header {
+            background: #17a2b8;
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.other-month {
+            color: #adb5bd;
+        }
+
+        .calendar-day.today {
+            background: #28a745;
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.selected {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .quick-dates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-date-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-date-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick-date-card i {
+            font-size: 2rem;
+            color: #17a2b8;
+            margin-bottom: 1rem;
+        }
+
+        .quick-date-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-date-card p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .date-tips {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .date-tips h4 {
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .date-tips ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .date-tips li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Date Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online date calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Date Calculator", "item": "https://make-qr.github.io/calculators/date-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Date Calculator</span>
+            </nav>
+            <h1>Date Calculator</h1>
+            <p>Calculate date differences, add/subtract days, and find business days</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="date-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('difference')">
+        Date Difference
+       </button>
+       <button class="tab-button" onclick="switchTab('add')">
+        Add/Subtract Days
+       </button>
+       <button class="tab-button" onclick="switchTab('business')">
+        Business Days
+       </button>
+       <button class="tab-button" onclick="switchTab('weekday')">
+        Day of Week
+       </button>
+      </div>
+      <!-- Date Difference Calculator -->
+      <div id="differenceTab">
+       <h3>
+        Calculate Date Difference
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="startDate">
+          Start Date
+         </label>
+         <input id="startDate" type="date"/>
+        </div>
+        <div class="input-group">
+         <label for="endDate">
+          End Date
+         </label>
+         <input id="endDate" type="date"/>
+        </div>
+        <div class="input-group">
+         <label for="includeEndDate">
+          Include End Date
+         </label>
+         <select id="includeEndDate">
+          <option value="false">
+           No
+          </option>
+          <option value="true">
+           Yes
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateDifference()">
+        <i class="fas fa-calendar-alt">
+        </i>
+        Calculate Difference
+       </button>
+      </div>
+      <!-- Add/Subtract Days Calculator -->
+      <div class="calculator-section" id="addTab" style="display: none;">
+       <h3>
+        Add or Subtract Days
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="baseDate">
+          Base Date
+         </label>
+         <input id="baseDate" type="date"/>
+        </div>
+        <div class="input-group">
+         <label for="daysToAdd">
+          Days to Add/Subtract
+         </label>
+         <input id="daysToAdd" type="number" value="30"/>
+        </div>
+        <div class="input-group">
+         <label for="operation">
+          Operation
+         </label>
+         <select id="operation">
+          <option value="add">
+           Add Days
+          </option>
+          <option value="subtract">
+           Subtract Days
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateAddSubtract()">
+        <i class="fas fa-plus-minus">
+        </i>
+        Calculate New Date
+       </button>
+      </div>
+      <!-- Business Days Calculator -->
+      <div class="calculator-section" id="businessTab" style="display: none;">
+       <h3>
+        Business Days Calculator
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="businessStartDate">
+          Start Date
+         </label>
+         <input id="businessStartDate" type="date"/>
+        </div>
+        <div class="input-group">
+         <label for="businessEndDate">
+          End Date
+         </label>
+         <input id="businessEndDate" type="date"/>
+        </div>
+        <div class="input-group">
+         <label for="excludeWeekends">
+          Exclude Weekends
+         </label>
+         <select id="excludeWeekends">
+          <option value="true">
+           Yes
+          </option>
+          <option value="false">
+           No
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateBusinessDays()">
+        <i class="fas fa-briefcase">
+        </i>
+        Calculate Business Days
+       </button>
+      </div>
+      <!-- Day of Week Calculator -->
+      <div class="calculator-section" id="weekdayTab" style="display: none;">
+       <h3>
+        Find Day of Week
+       </h3>
+       <div class="input-grid">
+        <div class="input-group">
+         <label for="weekdayDate">
+          Date
+         </label>
+         <input id="weekdayDate" type="date"/>
+        </div>
+        <div class="input-group">
+         <label for="dateFormat">
+          Date Format
+         </label>
+         <select id="dateFormat">
+          <option value="full">
+           Full Format
+          </option>
+          <option value="short">
+           Short Format
+          </option>
+          <option value="iso">
+           ISO Format
+          </option>
+          <option value="custom">
+           Custom Format
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateWeekday()">
+        <i class="fas fa-calendar-day">
+        </i>
+        Find Day of Week
+       </button>
+      </div>
+      <!-- Results Display -->
+      <div class="result-display" id="resultsDisplay" style="display: none;">
+       <div class="result-main">
+        <div class="result-value" id="resultValue">
+         -
+        </div>
+        <div class="result-label" id="resultLabel">
+         Result
+        </div>
+       </div>
+       <div class="result-details" id="resultDetails">
+        <!-- Details will be populated here -->
+       </div>
+      </div>
+      <!-- Quick Date Calculations -->
+      <div class="quick-dates">
+       <div class="quick-date-card" onclick="quickCalculation('today')">
+        <i class="fas fa-calendar-day">
+        </i>
+        <h4>
+         Today
+        </h4>
+        <p>
+         Current date and day info
+        </p>
+       </div>
+       <div class="quick-date-card" onclick="quickCalculation('tomorrow')">
+        <i class="fas fa-arrow-right">
+        </i>
+        <h4>
+         Tomorrow
+        </h4>
+        <p>
+         Next day information
+        </p>
+       </div>
+       <div class="quick-date-card" onclick="quickCalculation('nextWeek')">
+        <i class="fas fa-calendar-week">
+        </i>
+        <h4>
+         Next Week
+        </h4>
+        <p>
+         Date after 7 days
+        </p>
+       </div>
+       <div class="quick-date-card" onclick="quickCalculation('nextMonth')">
+        <i class="fas fa-calendar">
+        </i>
+        <h4>
+         Next Month
+        </h4>
+        <p>
+         Date after 30 days
+        </p>
+       </div>
+      </div>
+      <!-- Calendar View -->
+      <div class="calendar-view" id="calendarView" style="display: none;">
+       <div class="calendar-header">
+        <button class="month-nav" onclick="changeMonth(-1)">
+         ‹
+        </button>
+        <h3 id="calendarTitle">
+         January 2024
+        </h3>
+        <button class="month-nav" onclick="changeMonth(1)">
+         ›
+        </button>
+       </div>
+       <div class="calendar-grid" id="calendarGrid">
+        <!-- Calendar will be populated here -->
+       </div>
+      </div>
+      <div class="date-tips">
+       <h4>
+        <i class="fas fa-lightbulb">
+        </i>
+        Date Calculation Tips
+       </h4>
+       <ul>
+        <li>
+         Business days typically exclude weekends (Saturday and Sunday)
+        </li>
+        <li>
+         Leap years occur every 4 years, except for years divisible by 100 but not 400
+        </li>
+        <li>
+         February has 28 days in regular years and 29 days in leap years
+        </li>
+        <li>
+         Use ISO format (YYYY-MM-DD) for international date standards
+        </li>
+        <li>
+         Time zones can affect date calculations for global applications
+        </li>
+        <li>
+         Consider holidays when calculating business days for specific regions
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+                <a class="related-link" href="world-clock.html"><i class="fas fa-arrow-right"></i> World Clock</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'difference';
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide tab content
+            document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            
+            // Hide results when switching tabs
+            document.getElementById('resultsDisplay').style.display = 'none';
+        }
+
+        function calculateDifference() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const includeEnd = document.getElementById('includeEndDate').value === 'true';
+
+            if (!document.getElementById('startDate').value || !document.getElementById('endDate').value) {
+                alert('Please select both start and end dates!');
+                return;
+            }
+
+            if (startDate > endDate) {
+                alert('Start date cannot be after end date!');
+                return;
+            }
+
+            const timeDiff = endDate.getTime() - startDate.getTime();
+            let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            
+            if (includeEnd) {
+                daysDiff += 1;
+            }
+
+            const years = Math.floor(daysDiff / 365.25);
+            const months = Math.floor((daysDiff % 365.25) / 30.44);
+            const days = Math.floor(daysDiff % 30.44);
+            
+            const hours = daysDiff * 24;
+            const minutes = hours * 60;
+            const seconds = minutes * 60;
+
+            document.getElementById('resultValue').textContent = daysDiff;
+            document.getElementById('resultLabel').textContent = daysDiff === 1 ? 'Day' : 'Days';
+
+            document.getElementById('resultDetails').innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-value">${years}</div>
+                    <div class="detail-label">Years</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${months}</div>
+                    <div class="detail-label">Months</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${days}</div>
+                    <div class="detail-label">Days</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${hours.toLocaleString()}</div>
+                    <div class="detail-label">Hours</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${minutes.toLocaleString()}</div>
+                    <div class="detail-label">Minutes</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${seconds.toLocaleString()}</div>
+                    <div class="detail-label">Seconds</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function calculateAddSubtract() {
+            const baseDate = new Date(document.getElementById('baseDate').value);
+            const daysToAdd = parseInt(document.getElementById('daysToAdd').value);
+            const operation = document.getElementById('operation').value;
+
+            if (!document.getElementById('baseDate').value) {
+                alert('Please select a base date!');
+                return;
+            }
+
+            const multiplier = operation === 'add' ? 1 : -1;
+            const resultDate = new Date(baseDate.getTime() + (daysToAdd * multiplier * 24 * 60 * 60 * 1000));
+
+            document.getElementById('resultValue').textContent = resultDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('resultLabel').textContent = 'Calculated Date';
+
+            const dayOfYear = Math.floor((resultDate - new Date(resultDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const weekOfYear = Math.ceil(dayOfYear / 7);
+
+            document.getElementById('resultDetails').innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-value">${resultDate.toLocaleDateString()}</div>
+                    <div class="detail-label">Short Format</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${resultDate.toISOString().split('T')[0]}</div>
+                    <div class="detail-label">ISO Format</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${dayOfYear}</div>
+                    <div class="detail-label">Day of Year</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${weekOfYear}</div>
+                    <div class="detail-label">Week of Year</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${resultDate.getDay() === 0 || resultDate.getDay() === 6 ? 'No' : 'Yes'}</div>
+                    <div class="detail-label">Business Day</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${isLeapYear(resultDate.getFullYear()) ? 'Yes' : 'No'}</div>
+                    <div class="detail-label">Leap Year</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function calculateBusinessDays() {
+            const startDate = new Date(document.getElementById('businessStartDate').value);
+            const endDate = new Date(document.getElementById('businessEndDate').value);
+            const excludeWeekends = document.getElementById('excludeWeekends').value === 'true';
+
+            if (!document.getElementById('businessStartDate').value || !document.getElementById('businessEndDate').value) {
+                alert('Please select both start and end dates!');
+                return;
+            }
+
+            if (startDate > endDate) {
+                alert('Start date cannot be after end date!');
+                return;
+            }
+
+            let businessDays = 0;
+            let totalDays = 0;
+            let weekends = 0;
+
+            const currentDate = new Date(startDate);
+            while (currentDate <= endDate) {
+                totalDays++;
+                const dayOfWeek = currentDate.getDay();
+                
+                if (excludeWeekends && (dayOfWeek === 0 || dayOfWeek === 6)) {
+                    weekends++;
+                } else {
+                    businessDays++;
+                }
+                
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            document.getElementById('resultValue').textContent = businessDays;
+            document.getElementById('resultLabel').textContent = businessDays === 1 ? 'Business Day' : 'Business Days';
+
+            document.getElementById('resultDetails').innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-value">${totalDays}</div>
+                    <div class="detail-label">Total Days</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${businessDays}</div>
+                    <div class="detail-label">Business Days</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${weekends}</div>
+                    <div class="detail-label">Weekend Days</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${Math.round((businessDays / totalDays) * 100)}%</div>
+                    <div class="detail-label">Business %</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${Math.ceil(businessDays / 5)}</div>
+                    <div class="detail-label">Work Weeks</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${Math.round(businessDays / 20)}</div>
+                    <div class="detail-label">Work Months</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function calculateWeekday() {
+            const inputDate = new Date(document.getElementById('weekdayDate').value);
+            const format = document.getElementById('dateFormat').value;
+
+            if (!document.getElementById('weekdayDate').value) {
+                alert('Please select a date!');
+                return;
+            }
+
+            const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+
+            let formattedDate;
+            switch (format) {
+                case 'full':
+                    formattedDate = inputDate.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    break;
+                case 'short':
+                    formattedDate = inputDate.toLocaleDateString();
+                    break;
+                case 'iso':
+                    formattedDate = inputDate.toISOString().split('T')[0];
+                    break;
+                case 'custom':
+                    formattedDate = `${weekdays[inputDate.getDay()]}, ${months[inputDate.getMonth()]} ${inputDate.getDate()}, ${inputDate.getFullYear()}`;
+                    break;
+            }
+
+            document.getElementById('resultValue').textContent = weekdays[inputDate.getDay()];
+            document.getElementById('resultLabel').textContent = 'Day of Week';
+
+            const dayOfYear = Math.floor((inputDate - new Date(inputDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const weekOfYear = Math.ceil(dayOfYear / 7);
+
+            document.getElementById('resultDetails').innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-value">${formattedDate}</div>
+                    <div class="detail-label">Formatted Date</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${dayOfYear}</div>
+                    <div class="detail-label">Day of Year</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${weekOfYear}</div>
+                    <div class="detail-label">Week of Year</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${inputDate.getDay() === 0 || inputDate.getDay() === 6 ? 'Weekend' : 'Weekday'}</div>
+                    <div class="detail-label">Day Type</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${isLeapYear(inputDate.getFullYear()) ? 'Yes' : 'No'}</div>
+                    <div class="detail-label">Leap Year</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value">${inputDate.getTimezoneOffset() / -60}</div>
+                    <div class="detail-label">UTC Offset</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function quickCalculation(type) {
+            const today = new Date();
+            let targetDate;
+
+            switch (type) {
+                case 'today':
+                    targetDate = today;
+                    break;
+                case 'tomorrow':
+                    targetDate = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+                    break;
+                case 'nextWeek':
+                    targetDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+                    break;
+                case 'nextMonth':
+                    targetDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+                    break;
+            }
+
+            document.getElementById('weekdayDate').value = targetDate.toISOString().split('T')[0];
+            switchTab('weekday');
+            calculateWeekday();
+        }
+
+        function isLeapYear(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+
+        // Initialize with today's date
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            document.getElementById('endDate').value = today;
+            document.getElementById('baseDate').value = today;
+            document.getElementById('businessStartDate').value = today;
+            document.getElementById('businessEndDate').value = today;
+            document.getElementById('weekdayDate').value = today;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

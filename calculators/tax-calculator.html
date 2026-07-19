@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/tax-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Tax Calculator - Calculate Income Tax &amp; Take-Home Pay | Make QR Calculators
+  </title>
+  <meta content="Calculate federal and state income tax, FICA taxes, and take-home pay with our comprehensive tax calculator for 2024." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .tax-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .calculate-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .calculate-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-description {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .tax-breakdown {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            align-items: center;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .breakdown-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .breakdown-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .tax-brackets {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .bracket-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .bracket-table th,
+        .bracket-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .bracket-table th {
+            background: #28a745;
+            color: white;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Tax Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online tax calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Tax Calculator", "item": "https://make-qr.github.io/calculators/tax-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Tax Calculator</span>
+            </nav>
+            <h1>Tax Calculator</h1>
+            <p>Calculate your federal and state income taxes and take-home pay for 2024</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="tax-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('income')">
+        <i class="fas fa-dollar-sign">
+        </i>
+        Income Tax
+       </button>
+       <button class="tab-button" onclick="switchTab('payroll')">
+        <i class="fas fa-user-tie">
+        </i>
+        Payroll Tax
+       </button>
+       <button class="tab-button" onclick="switchTab('brackets')">
+        <i class="fas fa-chart-bar">
+        </i>
+        Tax Brackets
+       </button>
+      </div>
+      <!-- Income Tax Tab -->
+      <div class="tab-content active" id="income">
+       <div class="input-section">
+        <div class="input-group">
+         <label for="annual-income">
+          Annual Income
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="annual-income" min="0" placeholder="75000" step="1000" type="number"/>
+         </div>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Gross annual income before taxes
+         </p>
+        </div>
+        <div class="input-group">
+         <label for="filing-status">
+          Filing Status
+         </label>
+         <select class="input-field" id="filing-status">
+          <option value="single">
+           Single
+          </option>
+          <option value="married-jointly">
+           Married Filing Jointly
+          </option>
+          <option value="married-separately">
+           Married Filing Separately
+          </option>
+          <option value="head-of-household">
+           Head of Household
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="state">
+          State
+         </label>
+         <select class="input-field" id="state">
+          <option value="no-tax">
+           No State Tax
+          </option>
+          <option value="california">
+           California
+          </option>
+          <option value="new-york">
+           New York
+          </option>
+          <option value="texas">
+           Texas
+          </option>
+          <option value="florida">
+           Florida
+          </option>
+          <option value="illinois">
+           Illinois
+          </option>
+          <option value="other">
+           Other State (5%)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="deductions">
+          Standard/Itemized Deductions
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="deductions" min="0" placeholder="14600" step="100" type="number"/>
+         </div>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          2024 standard deduction: Single $14,600, MFJ $29,200
+         </p>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateTax()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Tax
+       </button>
+       <div class="results-section" id="tax-results" style="display: none;">
+        <h3>
+         <i class="fas fa-chart-pie">
+         </i>
+         Tax Calculation Results
+        </h3>
+        <div class="results-grid">
+         <div class="result-card">
+          <div class="result-label">
+           Gross Income
+          </div>
+          <div class="result-value" id="gross-income">
+           $0
+          </div>
+          <div class="result-description">
+           Before taxes
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Total Tax
+          </div>
+          <div class="result-value" id="total-tax">
+           $0
+          </div>
+          <div class="result-description">
+           Federal + State + FICA
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Take-Home Pay
+          </div>
+          <div class="result-value" id="take-home">
+           $0
+          </div>
+          <div class="result-description">
+           After all taxes
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Effective Tax Rate
+          </div>
+          <div class="result-value" id="effective-rate">
+           0%
+          </div>
+          <div class="result-description">
+           Total tax percentage
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="tax-breakdown" id="tax-breakdown-section" style="display: none;">
+        <h3>
+         <i class="fas fa-list">
+         </i>
+         Tax Breakdown
+        </h3>
+        <div id="tax-breakdown">
+         <!-- Breakdown items will be generated here -->
+        </div>
+       </div>
+      </div>
+      <!-- Tax Brackets Tab -->
+      <div class="tab-content" id="brackets">
+       <div class="tax-brackets">
+        <h3>
+         <i class="fas fa-chart-bar">
+         </i>
+         2024 Federal Tax Brackets
+        </h3>
+        <table class="bracket-table">
+         <thead>
+          <tr>
+           <th>
+            Tax Rate
+           </th>
+           <th>
+            Single
+           </th>
+           <th>
+            Married Filing Jointly
+           </th>
+           <th>
+            Head of Household
+           </th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr>
+           <td>
+            10%
+           </td>
+           <td>
+            $0 - $11,600
+           </td>
+           <td>
+            $0 - $23,200
+           </td>
+           <td>
+            $0 - $16,550
+           </td>
+          </tr>
+          <tr>
+           <td>
+            12%
+           </td>
+           <td>
+            $11,601 - $47,150
+           </td>
+           <td>
+            $23,201 - $94,300
+           </td>
+           <td>
+            $16,551 - $63,100
+           </td>
+          </tr>
+          <tr>
+           <td>
+            22%
+           </td>
+           <td>
+            $47,151 - $100,525
+           </td>
+           <td>
+            $94,301 - $201,050
+           </td>
+           <td>
+            $63,101 - $100,500
+           </td>
+          </tr>
+          <tr>
+           <td>
+            24%
+           </td>
+           <td>
+            $100,526 - $191,625
+           </td>
+           <td>
+            $201,051 - $383,250
+           </td>
+           <td>
+            $100,501 - $191,650
+           </td>
+          </tr>
+          <tr>
+           <td>
+            32%
+           </td>
+           <td>
+            $191,626 - $243,725
+           </td>
+           <td>
+            $383,251 - $487,450
+           </td>
+           <td>
+            $191,651 - $243,700
+           </td>
+          </tr>
+          <tr>
+           <td>
+            35%
+           </td>
+           <td>
+            $243,726 - $609,350
+           </td>
+           <td>
+            $487,451 - $731,200
+           </td>
+           <td>
+            $243,701 - $609,350
+           </td>
+          </tr>
+          <tr>
+           <td>
+            37%
+           </td>
+           <td>
+            $609,351+
+           </td>
+           <td>
+            $731,201+
+           </td>
+           <td>
+            $609,351+
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Tax Planning Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          💰 Maximize Deductions
+         </h4>
+         <p>
+          Consider itemizing deductions if they exceed the standard deduction. Include mortgage interest, state taxes, and charitable donations.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📊 Progressive Tax System
+         </h4>
+         <p>
+          Higher tax rates only apply to income above each bracket threshold. Your entire income isn't taxed at your highest rate.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💼 Retirement Contributions
+         </h4>
+         <p>
+          401(k) and traditional IRA contributions reduce your taxable income, potentially lowering your tax bracket.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🏠 Tax Credits vs Deductions
+         </h4>
+         <p>
+          Tax credits directly reduce your tax owed dollar-for-dollar. Deductions reduce your taxable income.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📅 Tax Planning Year-Round
+         </h4>
+         <p>
+          Don't wait until tax season. Plan throughout the year to optimize your tax situation and avoid surprises.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎯 Estimated Payments
+         </h4>
+         <p>
+          If you're self-employed or have significant non-wage income, make quarterly estimated tax payments to avoid penalties.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'income';
+
+        // Tax brackets for 2024
+        const taxBrackets = {
+            single: [
+                { min: 0, max: 11600, rate: 0.10 },
+                { min: 11601, max: 47150, rate: 0.12 },
+                { min: 47151, max: 100525, rate: 0.22 },
+                { min: 100526, max: 191625, rate: 0.24 },
+                { min: 191626, max: 243725, rate: 0.32 },
+                { min: 243726, max: 609350, rate: 0.35 },
+                { min: 609351, max: Infinity, rate: 0.37 }
+            ],
+            'married-jointly': [
+                { min: 0, max: 23200, rate: 0.10 },
+                { min: 23201, max: 94300, rate: 0.12 },
+                { min: 94301, max: 201050, rate: 0.22 },
+                { min: 201051, max: 383250, rate: 0.24 },
+                { min: 383251, max: 487450, rate: 0.32 },
+                { min: 487451, max: 731200, rate: 0.35 },
+                { min: 731201, max: Infinity, rate: 0.37 }
+            ],
+            'head-of-household': [
+                { min: 0, max: 16550, rate: 0.10 },
+                { min: 16551, max: 63100, rate: 0.12 },
+                { min: 63101, max: 100500, rate: 0.22 },
+                { min: 100501, max: 191650, rate: 0.24 },
+                { min: 191651, max: 243700, rate: 0.32 },
+                { min: 243701, max: 609350, rate: 0.35 },
+                { min: 609351, max: Infinity, rate: 0.37 }
+            ]
+        };
+
+        const stateTaxRates = {
+            'no-tax': 0,
+            'california': 0.09,
+            'new-york': 0.065,
+            'texas': 0,
+            'florida': 0,
+            'illinois': 0.0495,
+            'other': 0.05
+        };
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+        }
+
+        function calculateFederalTax(income, filingStatus, deductions) {
+            const taxableIncome = Math.max(0, income - deductions);
+            const brackets = taxBrackets[filingStatus] || taxBrackets.single;
+            let tax = 0;
+            let remainingIncome = taxableIncome;
+
+            for (const bracket of brackets) {
+                if (remainingIncome <= 0) break;
+                
+                const taxableAtThisBracket = Math.min(remainingIncome, bracket.max - bracket.min + 1);
+                if (taxableAtThisBracket > 0) {
+                    tax += taxableAtThisBracket * bracket.rate;
+                    remainingIncome -= taxableAtThisBracket;
+                }
+            }
+
+            return tax;
+        }
+
+        function calculateTax() {
+            const income = parseFloat(document.getElementById('annual-income').value) || 0;
+            const filingStatus = document.getElementById('filing-status').value;
+            const state = document.getElementById('state').value;
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+
+            if (income === 0) {
+                alert('Please enter your annual income.');
+                return;
+            }
+
+            // Calculate federal tax
+            const federalTax = calculateFederalTax(income, filingStatus, deductions);
+            
+            // Calculate state tax
+            const stateTaxRate = stateTaxRates[state] || 0.05;
+            const stateTax = (income - deductions) * stateTaxRate;
+            
+            // Calculate FICA taxes (Social Security + Medicare)
+            const socialSecurityTax = Math.min(income * 0.062, 160200 * 0.062); // 2024 wage base
+            const medicareTax = income * 0.0145;
+            const additionalMedicareTax = income > 200000 ? (income - 200000) * 0.009 : 0;
+            const ficaTax = socialSecurityTax + medicareTax + additionalMedicareTax;
+            
+            // Calculate totals
+            const totalTax = federalTax + Math.max(0, stateTax) + ficaTax;
+            const takeHomePay = income - totalTax;
+            const effectiveRate = (totalTax / income) * 100;
+
+            // Update results
+            document.getElementById('gross-income').textContent = formatCurrency(income);
+            document.getElementById('total-tax').textContent = formatCurrency(totalTax);
+            document.getElementById('take-home').textContent = formatCurrency(takeHomePay);
+            document.getElementById('effective-rate').textContent = effectiveRate.toFixed(1) + '%';
+
+            // Generate breakdown
+            generateTaxBreakdown({
+                income,
+                federalTax,
+                stateTax: Math.max(0, stateTax),
+                socialSecurityTax,
+                medicareTax,
+                additionalMedicareTax,
+                totalTax,
+                takeHomePay,
+                deductions
+            });
+
+            // Show results
+            document.getElementById('tax-results').style.display = 'block';
+            document.getElementById('tax-breakdown-section').style.display = 'block';
+        }
+
+        function generateTaxBreakdown(taxes) {
+            const breakdown = document.getElementById('tax-breakdown');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Gross Income</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.income)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Less: Deductions</span>
+                    <span class="breakdown-value">-${formatCurrency(taxes.deductions)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Taxable Income</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.income - taxes.deductions)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Federal Income Tax</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.federalTax)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">State Income Tax</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.stateTax)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Social Security Tax (6.2%)</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.socialSecurityTax)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Medicare Tax (1.45%)</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.medicareTax)}</span>
+                </div>
+                ${taxes.additionalMedicareTax > 0 ? `
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Additional Medicare Tax (0.9%)</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.additionalMedicareTax)}</span>
+                </div>
+                ` : ''}
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Total Taxes</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.totalTax)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Take-Home Pay</span>
+                    <span class="breakdown-value">${formatCurrency(taxes.takeHomePay)}</span>
+                </div>
+            `;
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Set default deductions based on filing status
+        document.getElementById('filing-status').addEventListener('change', function() {
+            const filingStatus = this.value;
+            const deductionsField = document.getElementById('deductions');
+            
+            switch(filingStatus) {
+                case 'single':
+                    deductionsField.value = 14600;
+                    break;
+                case 'married-jointly':
+                    deductionsField.value = 29200;
+                    break;
+                case 'married-separately':
+                    deductionsField.value = 14600;
+                    break;
+                case 'head-of-household':
+                    deductionsField.value = 21900;
+                    break;
+            }
+        });
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            ['annual-income', 'filing-status', 'state', 'deductions'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', function() {
+                        const income = document.getElementById('annual-income').value;
+                        if (income) {
+                            calculateTax();
+                        }
+                    });
+                }
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

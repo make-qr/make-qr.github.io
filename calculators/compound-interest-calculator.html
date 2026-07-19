@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/compound-interest-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Compound Interest Calculator - Calculate Growth Over Time | Make QR Calculators
+  </title>
+  <meta content="Calculate compound interest with different compounding frequencies. See how your money grows over time with detailed breakdowns and charts." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .compound-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-modes {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mode-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .mode-button.active {
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .compound-frequency {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .frequency-option {
+            padding: 0.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .frequency-option.active {
+            border-color: #007bff;
+            background: #007bff;
+            color: white;
+        }
+
+        .calculate-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .calculate-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-description {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .comparison-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .comparison-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid #007bff;
+        }
+
+        .comparison-title {
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breakdown-table {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .breakdown-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .breakdown-table th,
+        .breakdown-table td {
+            padding: 0.75rem;
+            text-align: right;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breakdown-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .breakdown-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .year-column {
+            text-align: center !important;
+            font-weight: 600;
+        }
+
+        .interest-earned {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .chart-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .formula-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #28a745;
+        }
+
+        .formula-display {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .formula-explanation {
+            font-size: 0.9rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .scenarios-section {
+            background: #f0f8ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-btn:hover {
+            background: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .input-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .compound-frequency {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-modes {
+                flex-direction: column;
+            }
+            
+            .scenario-buttons {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Compound Interest Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online compound interest calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Compound Interest Calculator", "item": "https://make-qr.github.io/calculators/compound-interest-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Compound Interest Calculator</span>
+            </nav>
+            <h1>Compound Interest Calculator</h1>
+            <p>Calculate the power of compound interest with different frequencies and contributions</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="compound-calculator">
+      <div class="calculator-modes">
+       <button class="mode-button active" onclick="switchMode('basic')">
+        <i class="fas fa-calculator">
+        </i>
+        Basic Compound Interest
+       </button>
+       <button class="mode-button" onclick="switchMode('contributions')">
+        <i class="fas fa-plus-circle">
+        </i>
+        With Regular Contributions
+       </button>
+       <button class="mode-button" onclick="switchMode('comparison')">
+        <i class="fas fa-balance-scale">
+        </i>
+        Compare Scenarios
+       </button>
+      </div>
+      <div class="mode-content" id="basic-mode">
+       <div class="input-section">
+        <div class="input-group">
+         <label for="principal">
+          Principal Amount
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="principal" min="0" placeholder="10000" step="100" type="number"/>
+         </div>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Initial amount to invest
+         </p>
+        </div>
+        <div class="input-group">
+         <label for="interest-rate">
+          Annual Interest Rate (%)
+         </label>
+         <input class="input-field" id="interest-rate" max="50" min="0" placeholder="5" step="0.1" type="number"/>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Expected annual return rate
+         </p>
+        </div>
+        <div class="input-group">
+         <label for="time-period">
+          Time Period (Years)
+         </label>
+         <input class="input-field" id="time-period" max="50" min="1" placeholder="10" step="1" type="number"/>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          How long to invest
+         </p>
+        </div>
+        <div class="input-group">
+         <label>
+          Compounding Frequency
+         </label>
+         <div class="compound-frequency">
+          <div class="frequency-option active" data-frequency="1">
+           Annually
+          </div>
+          <div class="frequency-option" data-frequency="2">
+           Semi-Annually
+          </div>
+          <div class="frequency-option" data-frequency="4">
+           Quarterly
+          </div>
+          <div class="frequency-option" data-frequency="12">
+           Monthly
+          </div>
+          <div class="frequency-option" data-frequency="52">
+           Weekly
+          </div>
+          <div class="frequency-option" data-frequency="365">
+           Daily
+          </div>
+         </div>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateCompoundInterest()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Compound Interest
+       </button>
+      </div>
+      <div class="scenarios-section">
+       <h3>
+        <i class="fas fa-lightbulb">
+        </i>
+        Quick Scenarios
+       </h3>
+       <div class="scenario-buttons">
+        <button class="scenario-btn" onclick="loadScenario('retirement')">
+         Retirement (30 years, 7%)
+        </button>
+        <button class="scenario-btn" onclick="loadScenario('college')">
+         College Fund (18 years, 6%)
+        </button>
+        <button class="scenario-btn" onclick="loadScenario('emergency')">
+         Emergency Fund (5 years, 4%)
+        </button>
+        <button class="scenario-btn" onclick="loadScenario('house')">
+         House Down Payment (10 years, 5%)
+        </button>
+       </div>
+      </div>
+      <div class="results-section" id="results-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Compound Interest Results
+       </h3>
+       <div class="results-grid">
+        <div class="result-card">
+         <div class="result-label">
+          Final Amount
+         </div>
+         <div class="result-value" id="final-amount">
+          $0
+         </div>
+         <div class="result-description">
+          Total value after interest
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          Principal
+         </div>
+         <div class="result-value" id="total-principal">
+          $0
+         </div>
+         <div class="result-description">
+          Your initial investment
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          Interest Earned
+         </div>
+         <div class="result-value" id="interest-earned">
+          $0
+         </div>
+         <div class="result-description">
+          Money earned from interest
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          Growth Multiple
+         </div>
+         <div class="result-value" id="growth-multiple">
+          0x
+         </div>
+         <div class="result-description">
+          How much money multiplied
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="comparison-section" id="comparison-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-pie">
+        </i>
+        Frequency Comparison
+       </h3>
+       <div class="comparison-grid" id="frequency-comparison">
+        <!-- Comparison cards will be generated here -->
+       </div>
+      </div>
+      <div class="breakdown-table" id="breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-table">
+        </i>
+        Year-by-Year Breakdown
+       </h3>
+       <div class="table-container">
+        <table id="breakdown-table">
+         <thead>
+          <tr>
+           <th>
+            Year
+           </th>
+           <th>
+            Starting Balance
+           </th>
+           <th>
+            Interest Earned
+           </th>
+           <th>
+            Ending Balance
+           </th>
+           <th>
+            Total Interest
+           </th>
+          </tr>
+         </thead>
+         <tbody id="breakdown-tbody">
+          <!-- Table rows will be generated here -->
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <div class="formula-section">
+       <h3>
+        <i class="fas fa-square-root-alt">
+        </i>
+        Compound Interest Formula
+       </h3>
+       <div class="formula-display">
+        A = P(1 + r/n)^(nt)
+       </div>
+       <div class="formula-explanation">
+        <p>
+         <strong>
+          Where:
+         </strong>
+        </p>
+        <ul>
+         <li>
+          <strong>
+           A
+          </strong>
+          = Final amount
+         </li>
+         <li>
+          <strong>
+           P
+          </strong>
+          = Principal (initial amount)
+         </li>
+         <li>
+          <strong>
+           r
+          </strong>
+          = Annual interest rate (decimal)
+         </li>
+         <li>
+          <strong>
+           n
+          </strong>
+          = Number of times interest compounds per year
+         </li>
+         <li>
+          <strong>
+           t
+          </strong>
+          = Number of years
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Compound Interest Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          ⏰ Start Early
+         </h4>
+         <p>
+          The earlier you start, the more time your money has to grow. Even small amounts can become substantial over time.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔄 Frequency Matters
+         </h4>
+         <p>
+          More frequent compounding (daily vs. annually) can increase your returns, but the difference diminishes at higher frequencies.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💰 Rule of 72
+         </h4>
+         <p>
+          Divide 72 by your interest rate to estimate how many years it takes to double your money. Example: At 8%, money doubles in 9 years.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📈 Reinvest Returns
+         </h4>
+         <p>
+          Always reinvest your interest earnings to maximize the compounding effect. Don't withdraw earnings if possible.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎯 Set Realistic Rates
+         </h4>
+         <p>
+          Stock market averages 7-10% annually over long periods. Be conservative with return assumptions for planning.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💸 Avoid Debt
+         </h4>
+         <p>
+          High-interest debt compounds against you. Pay off credit cards before investing for better net returns.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="finance-calculator.html"><i class="fas fa-arrow-right"></i> Finance (All-in-One)</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let selectedFrequency = 1;
+
+        // Frequency selection
+        document.querySelectorAll('.frequency-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.frequency-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                selectedFrequency = parseInt(this.dataset.frequency);
+                
+                // Auto-calculate if all fields are filled
+                autoCalculate();
+            });
+        });
+
+        function switchMode(mode) {
+            document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function loadScenario(type) {
+            const scenarios = {
+                retirement: { principal: 10000, rate: 7, years: 30, frequency: 12 },
+                college: { principal: 5000, rate: 6, years: 18, frequency: 12 },
+                emergency: { principal: 1000, rate: 4, years: 5, frequency: 12 },
+                house: { principal: 20000, rate: 5, years: 10, frequency: 4 }
+            };
+
+            const scenario = scenarios[type];
+            if (scenario) {
+                document.getElementById('principal').value = scenario.principal;
+                document.getElementById('interest-rate').value = scenario.rate;
+                document.getElementById('time-period').value = scenario.years;
+                
+                // Update frequency selection
+                document.querySelectorAll('.frequency-option').forEach(opt => opt.classList.remove('active'));
+                document.querySelector(`[data-frequency="${scenario.frequency}"]`).classList.add('active');
+                selectedFrequency = scenario.frequency;
+                
+                calculateCompoundInterest();
+            }
+        }
+
+        function calculateCompoundInterest() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const rate = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const years = parseInt(document.getElementById('time-period').value) || 0;
+
+            if (principal === 0 || rate === 0 || years === 0) {
+                alert('Please enter valid values for principal, interest rate, and time period.');
+                return;
+            }
+
+            // Calculate compound interest: A = P(1 + r/n)^(nt)
+            const r = rate / 100;
+            const n = selectedFrequency;
+            const t = years;
+            
+            const finalAmount = principal * Math.pow(1 + r/n, n*t);
+            const interestEarned = finalAmount - principal;
+            const growthMultiple = finalAmount / principal;
+
+            // Update results
+            document.getElementById('final-amount').textContent = formatCurrency(finalAmount);
+            document.getElementById('total-principal').textContent = formatCurrency(principal);
+            document.getElementById('interest-earned').textContent = formatCurrency(interestEarned);
+            document.getElementById('growth-multiple').textContent = growthMultiple.toFixed(2) + 'x';
+
+            // Show results
+            document.getElementById('results-section').style.display = 'block';
+
+            // Generate comparison
+            generateFrequencyComparison(principal, rate, years);
+            document.getElementById('comparison-section').style.display = 'block';
+
+            // Generate breakdown table
+            generateBreakdownTable(principal, rate, years, selectedFrequency);
+            document.getElementById('breakdown-section').style.display = 'block';
+        }
+
+        function generateFrequencyComparison(principal, rate, years) {
+            const frequencies = [
+                { name: 'Annually', value: 1 },
+                { name: 'Semi-Annually', value: 2 },
+                { name: 'Quarterly', value: 4 },
+                { name: 'Monthly', value: 12 },
+                { name: 'Weekly', value: 52 },
+                { name: 'Daily', value: 365 }
+            ];
+
+            const container = document.getElementById('frequency-comparison');
+            container.innerHTML = '';
+
+            frequencies.forEach(freq => {
+                const r = rate / 100;
+                const finalAmount = principal * Math.pow(1 + r/freq.value, freq.value * years);
+                const interestEarned = finalAmount - principal;
+                const difference = finalAmount - (principal * Math.pow(1 + r/1, 1 * years)); // vs annual
+
+                const card = document.createElement('div');
+                card.className = 'comparison-card';
+                if (freq.value === selectedFrequency) {
+                    card.style.borderLeftColor = '#28a745';
+                }
+                
+                card.innerHTML = `
+                    <div class="comparison-title">${freq.name} Compounding</div>
+                    <div class="comparison-detail">
+                        <span>Final Amount:</span>
+                        <span>${formatCurrency(finalAmount)}</span>
+                    </div>
+                    <div class="comparison-detail">
+                        <span>Interest Earned:</span>
+                        <span>${formatCurrency(interestEarned)}</span>
+                    </div>
+                    <div class="comparison-detail">
+                        <span>vs Annual:</span>
+                        <span style="color: ${difference >= 0 ? '#28a745' : '#dc3545'}">
+                            ${difference >= 0 ? '+' : ''}${formatCurrency(difference)}
+                        </span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function generateBreakdownTable(principal, rate, years, frequency) {
+            const tbody = document.getElementById('breakdown-tbody');
+            tbody.innerHTML = '';
+
+            let currentBalance = principal;
+            let totalInterest = 0;
+            const r = rate / 100;
+
+            for (let year = 1; year <= years; year++) {
+                const startingBalance = currentBalance;
+                
+                // Calculate interest for the year with selected frequency
+                const yearEndBalance = startingBalance * Math.pow(1 + r/frequency, frequency);
+                const yearInterest = yearEndBalance - startingBalance;
+                
+                currentBalance = yearEndBalance;
+                totalInterest += yearInterest;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="year-column">${year}</td>
+                    <td>${formatCurrency(startingBalance)}</td>
+                    <td class="interest-earned">${formatCurrency(yearInterest)}</td>
+                    <td>${formatCurrency(currentBalance)}</td>
+                    <td class="interest-earned">${formatCurrency(totalInterest)}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function autoCalculate() {
+            const principal = document.getElementById('principal').value;
+            const rate = document.getElementById('interest-rate').value;
+            const years = document.getElementById('time-period').value;
+
+            if (principal && rate && years) {
+                calculateCompoundInterest();
+            }
+        }
+
+        // Add event listeners for auto-calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['principal', 'interest-rate', 'time-period'].forEach(id => {
+                document.getElementById(id).addEventListener('input', autoCalculate);
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/inflation-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Inflation Calculator - Calculate Impact of Inflation Over Time | Make QR Calculators
+  </title>
+  <meta content="Calculate how inflation affects purchasing power over time. See what your money will be worth in the future and historical inflation impact." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .inflation-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .tab-container {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 140px;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #fd7e14 0%, #e85d04 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(253, 126, 20, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #fd7e14 0%, #e85d04 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #fd7e14;
+            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .inflation-comparison {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .comparison-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .comparison-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fd7e14;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .historical-data {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .year-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .year-button {
+            padding: 0.5rem 1rem;
+            border: 2px solid #fd7e14;
+            border-radius: 20px;
+            background: white;
+            color: #fd7e14;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .year-button.selected {
+            background: #fd7e14;
+            color: white;
+        }
+
+        .inflation-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .rate-positive {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .rate-negative {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .purchasing-power {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .power-visualization {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .power-bar {
+            flex: 1;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            margin: 0 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .power-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #ffc107, #dc3545);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+
+        .tips-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            color: #fd7e14;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+            
+            .year-selector {
+                justify-content: center;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Inflation Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online inflation calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Inflation Calculator", "item": "https://make-qr.github.io/calculators/inflation-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Inflation Calculator</span>
+            </nav>
+            <h1>Inflation Calculator</h1>
+            <p>Calculate the impact of inflation on purchasing power over time</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="inflation-calculator">
+      <div class="tab-container">
+       <button class="tab-button active" onclick="switchTab('future')">
+        📈 Future Value
+       </button>
+       <button class="tab-button" onclick="switchTab('historical')">
+        📊 Historical Impact
+       </button>
+       <button class="tab-button" onclick="switchTab('comparison')">
+        ⚖️ Year Comparison
+       </button>
+      </div>
+      <!-- Future Value Tab -->
+      <div class="tab-content active" id="future">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-money-bill-wave">
+          </i>
+          Current Money Value
+         </h3>
+         <div class="input-group">
+          <label for="current-amount">
+           Current Amount
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field" id="current-amount" min="1" placeholder="10000" step="100" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="inflation-rate">
+           Annual Inflation Rate (%)
+          </label>
+          <input class="input-field" id="inflation-rate" max="20" min="0" placeholder="3.5" step="0.1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="time-period">
+           Time Period (Years)
+          </label>
+          <input class="input-field" id="time-period" max="50" min="1" placeholder="10" step="1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="calculation-type">
+           Calculation Type
+          </label>
+          <select class="input-field" id="calculation-type">
+           <option value="future">
+            Future Value Needed
+           </option>
+           <option value="purchasing">
+            Purchasing Power Lost
+           </option>
+           <option value="real">
+            Real Value Today
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-calculator">
+          </i>
+          Inflation Impact
+         </h3>
+         <div class="input-group">
+          <label for="future-value">
+           Future Value Needed
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="future-value" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="purchasing-power">
+           Purchasing Power
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="purchasing-power" placeholder="0" readonly="" type="text"/>
+          </div>
+          <small style="color: rgba(255,255,255,0.8);">
+           What $10,000 will buy
+          </small>
+         </div>
+         <div class="input-group">
+          <label for="value-lost">
+           Value Lost to Inflation
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="value-lost" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="percentage-lost">
+           Percentage Lost
+          </label>
+          <input class="input-field result-field" id="percentage-lost" placeholder="0%" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="inflation-comparison" id="comparison-section" style="display: none;">
+       <h3>
+        <i class="fas fa-balance-scale">
+        </i>
+        Inflation Impact Comparison
+       </h3>
+       <div class="comparison-grid" id="comparison-grid">
+        <!-- Comparison items will be generated here -->
+       </div>
+      </div>
+      <div class="purchasing-power">
+       <h3>
+        <i class="fas fa-shopping-cart">
+        </i>
+        Purchasing Power Visualization
+       </h3>
+       <div class="power-visualization">
+        <div style="font-weight: 600;">
+         Today
+        </div>
+        <div class="power-bar">
+         <div class="power-fill" id="power-fill" style="width: 100%;">
+         </div>
+        </div>
+        <div style="font-weight: 600;">
+         Future
+        </div>
+       </div>
+       <p style="text-align: center; margin-top: 1rem; color: #6c757d;">
+        <strong id="power-text">
+         Your money will have 70% of its current purchasing power
+        </strong>
+       </p>
+      </div>
+      <div class="historical-data">
+       <h3>
+        <i class="fas fa-history">
+        </i>
+        Historical Inflation Data (US)
+       </h3>
+       <div class="year-selector">
+        <div class="year-button selected" onclick="selectPeriod('recent')">
+         Recent Years
+        </div>
+        <div class="year-button" onclick="selectPeriod('2010s')">
+         2010s
+        </div>
+        <div class="year-button" onclick="selectPeriod('2000s')">
+         2000s
+        </div>
+        <div class="year-button" onclick="selectPeriod('1990s')">
+         1990s
+        </div>
+        <div class="year-button" onclick="selectPeriod('1980s')">
+         1980s
+        </div>
+       </div>
+       <div class="inflation-table">
+        <table id="historical-table">
+         <thead>
+          <tr>
+           <th>
+            Year
+           </th>
+           <th>
+            Inflation Rate
+           </th>
+           <th>
+            $100 in that year equals
+           </th>
+           <th>
+            Economic Context
+           </th>
+          </tr>
+         </thead>
+         <tbody id="historical-body">
+          <tr>
+           <td>
+            2023
+           </td>
+           <td class="rate-positive">
+            +3.2%
+           </td>
+           <td>
+            $103.20 today
+           </td>
+           <td>
+            Post-pandemic recovery
+           </td>
+          </tr>
+          <tr>
+           <td>
+            2022
+           </td>
+           <td class="rate-positive">
+            +8.0%
+           </td>
+           <td>
+            $108.00 today
+           </td>
+           <td>
+            Supply chain disruptions
+           </td>
+          </tr>
+          <tr>
+           <td>
+            2021
+           </td>
+           <td class="rate-positive">
+            +4.7%
+           </td>
+           <td>
+            $104.70 today
+           </td>
+           <td>
+            Pandemic stimulus effects
+           </td>
+          </tr>
+          <tr>
+           <td>
+            2020
+           </td>
+           <td class="rate-positive">
+            +1.2%
+           </td>
+           <td>
+            $101.20 today
+           </td>
+           <td>
+            COVID-19 pandemic
+           </td>
+          </tr>
+          <tr>
+           <td>
+            2019
+           </td>
+           <td class="rate-positive">
+            +1.8%
+           </td>
+           <td>
+            $101.80 today
+           </td>
+           <td>
+            Pre-pandemic stability
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-lightbulb">
+        </i>
+        Inflation Protection Strategies
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-chart-line">
+          </i>
+         </div>
+         <h4>
+          Invest in Assets
+         </h4>
+         <p>
+          Consider stocks, real estate, and commodities that historically outpace inflation over time.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-shield-alt">
+          </i>
+         </div>
+         <h4>
+          TIPS Bonds
+         </h4>
+         <p>
+          Treasury Inflation-Protected Securities adjust their principal based on inflation rates.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-coins">
+          </i>
+         </div>
+         <h4>
+          Precious Metals
+         </h4>
+         <p>
+          Gold and silver have traditionally been hedges against inflation and currency devaluation.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-home">
+          </i>
+         </div>
+         <h4>
+          Real Estate
+         </h4>
+         <p>
+          Property values and rental income often increase with inflation, providing protection.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-piggy-bank">
+          </i>
+         </div>
+         <h4>
+          Fixed Debt
+         </h4>
+         <p>
+          Fixed-rate debt becomes cheaper to repay during inflationary periods.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-dollar-sign">
+          </i>
+         </div>
+         <h4>
+          Income Growth
+         </h4>
+         <p>
+          Focus on careers and investments that provide income growth above inflation rates.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Calculate for the active tab
+            calculateInflation();
+        }
+
+        function calculateInflation() {
+            const currentAmount = parseFloat(document.getElementById('current-amount').value) || 0;
+            const inflationRate = parseFloat(document.getElementById('inflation-rate').value) || 0;
+            const timePeriod = parseFloat(document.getElementById('time-period').value) || 0;
+
+            if (currentAmount === 0 || inflationRate === 0 || timePeriod === 0) return;
+
+            // Calculate future value needed to maintain purchasing power
+            const futureValue = currentAmount * Math.pow(1 + inflationRate / 100, timePeriod);
+            
+            // Calculate purchasing power (what current amount will be worth)
+            const purchasingPower = currentAmount / Math.pow(1 + inflationRate / 100, timePeriod);
+            
+            // Calculate value lost
+            const valueLost = currentAmount - purchasingPower;
+            
+            // Calculate percentage lost
+            const percentageLost = (valueLost / currentAmount) * 100;
+
+            // Update results
+            document.getElementById('future-value').value = futureValue.toFixed(2);
+            document.getElementById('purchasing-power').value = purchasingPower.toFixed(2);
+            document.getElementById('value-lost').value = valueLost.toFixed(2);
+            document.getElementById('percentage-lost').value = percentageLost.toFixed(1) + '%';
+
+            // Update purchasing power visualization
+            const powerPercentage = Math.max(0, 100 - percentageLost);
+            document.getElementById('power-fill').style.width = powerPercentage + '%';
+            document.getElementById('power-text').textContent = 
+                `Your money will have ${powerPercentage.toFixed(1)}% of its current purchasing power`;
+
+            // Generate comparison
+            generateComparison(currentAmount, inflationRate, timePeriod);
+            
+            document.getElementById('comparison-section').style.display = 'block';
+        }
+
+        function generateComparison(amount, rate, years) {
+            const scenarios = [
+                { name: 'Low Inflation (2%)', rate: 2 },
+                { name: 'Current Rate', rate: rate },
+                { name: 'High Inflation (6%)', rate: 6 },
+                { name: 'Very High (10%)', rate: 10 }
+            ];
+
+            const comparison = document.getElementById('comparison-grid');
+            comparison.innerHTML = scenarios.map(scenario => {
+                const futureValue = amount * Math.pow(1 + scenario.rate / 100, years);
+                const purchasingPower = amount / Math.pow(1 + scenario.rate / 100, years);
+                const valueLost = amount - purchasingPower;
+                
+                return `
+                    <div class="comparison-item">
+                        <div class="comparison-value">$${purchasingPower.toFixed(0)}</div>
+                        <div class="comparison-label">${scenario.name}</div>
+                        <div style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+                            Lost: $${valueLost.toFixed(0)} (${((valueLost/amount)*100).toFixed(1)}%)
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectPeriod(period) {
+            // Update button selection
+            document.querySelectorAll('.year-button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+
+            // Historical data by period
+            const historicalData = {
+                recent: [
+                    { year: 2023, rate: 3.2, context: 'Post-pandemic recovery' },
+                    { year: 2022, rate: 8.0, context: 'Supply chain disruptions' },
+                    { year: 2021, rate: 4.7, context: 'Pandemic stimulus effects' },
+                    { year: 2020, rate: 1.2, context: 'COVID-19 pandemic' },
+                    { year: 2019, rate: 1.8, context: 'Pre-pandemic stability' }
+                ],
+                '2010s': [
+                    { year: 2018, rate: 2.4, context: 'Economic expansion' },
+                    { year: 2017, rate: 2.1, context: 'Steady growth' },
+                    { year: 2016, rate: 1.3, context: 'Low oil prices' },
+                    { year: 2015, rate: 0.1, context: 'Near-zero inflation' },
+                    { year: 2014, rate: 0.1, context: 'Oil price collapse' }
+                ],
+                '2000s': [
+                    { year: 2008, rate: 3.8, context: 'Financial crisis' },
+                    { year: 2007, rate: 2.8, context: 'Pre-crisis peak' },
+                    { year: 2006, rate: 3.2, context: 'Housing bubble' },
+                    { year: 2005, rate: 3.4, context: 'Energy price surge' },
+                    { year: 2004, rate: 2.7, context: 'Economic recovery' }
+                ],
+                '1990s': [
+                    { year: 1995, rate: 2.8, context: 'Tech boom beginning' },
+                    { year: 1992, rate: 3.0, context: 'Economic recession' },
+                    { year: 1990, rate: 5.4, context: 'Gulf War impact' },
+                    { year: 1991, rate: 4.2, context: 'Recession year' },
+                    { year: 1999, rate: 2.2, context: 'Dot-com boom' }
+                ],
+                '1980s': [
+                    { year: 1980, rate: 13.5, context: 'Volcker shock' },
+                    { year: 1981, rate: 10.3, context: 'High interest rates' },
+                    { year: 1985, rate: 3.6, context: 'Oil price drop' },
+                    { year: 1988, rate: 4.1, context: 'Economic expansion' },
+                    { year: 1989, rate: 4.8, context: 'Late 80s growth' }
+                ]
+            };
+
+            // Update table
+            const tbody = document.getElementById('historical-body');
+            tbody.innerHTML = historicalData[period].map(data => `
+                <tr>
+                    <td>${data.year}</td>
+                    <td class="${data.rate > 0 ? 'rate-positive' : 'rate-negative'}">
+                        ${data.rate > 0 ? '+' : ''}${data.rate}%
+                    </td>
+                    <td>$${(100 + data.rate).toFixed(2)} today</td>
+                    <td>${data.context}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['current-amount', 'inflation-rate', 'time-period', 'calculation-type'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateInflation);
+                    element.addEventListener('change', calculateInflation);
+                }
+            });
+
+            // Set default values
+            document.getElementById('current-amount').value = 10000;
+            document.getElementById('inflation-rate').value = 3.5;
+            document.getElementById('time-period').value = 10;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

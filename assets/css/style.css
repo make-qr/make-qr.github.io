@@ -74,7 +74,7 @@
 }
 @media (min-width: 768px) {
     .site-footer-inner {
-        grid-template-columns: 1.2fr 1.8fr;
+        grid-template-columns: minmax(13rem, 0.9fr) minmax(0, 2.7fr);
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
@@ -97,7 +97,8 @@
 }
 @media (min-width: 1024px) {
     .site-footer-grid {
-        grid-template-columns: 1fr 1fr 1.4fr;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2rem;
     }
 }
 .site-footer-list--cols {
@@ -278,7 +279,7 @@
 .nav-dropdown-content {
     display: none;
     position: absolute;
-    top: calc(100% + 4px);
+    top: 100%;
     left: 0;
     background-color: white;
     min-width: 210px;
@@ -287,6 +288,10 @@
     z-index: 300;
     padding: 0.35rem 0;
     border: 1px solid #e5e7eb;
+}
+.nav-dropdown:last-child .nav-dropdown-content {
+    right: 0;
+    left: auto;
 }
 .nav-dropdown:hover .nav-dropdown-content,
 .nav-dropdown.is-open .nav-dropdown-content {
@@ -691,6 +696,7 @@
 }
 .home-tool-icon--qr { background: #dbeafe; color: #2563eb; }
 .home-tool-icon--scan { background: #dcfce7; color: #16a34a; }
+.home-tool-icon--calculator { background: #cffafe; color: #0891b2; }
 .home-tool-icon--image { background: #fef3c7; color: #d97706; }
 .home-tool-icon--pdf { background: #fee2e2; color: #dc2626; }
 .home-tool-icon--device { background: #ede9fe; color: #7c3aed; }

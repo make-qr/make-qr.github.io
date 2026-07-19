@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/water-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Water Calculator - Daily Water Intake Calculator | Make QR Calculators
+  </title>
+  <meta content="Calculate your daily water intake needs based on weight, activity level, and climate. Stay hydrated with personalized recommendations." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .water-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #00bcd4;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .hydration-tips {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #00bcd4;
+        }
+
+        .tip-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .tip-content {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .water-tracking {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tracking-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .tracking-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .tracking-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .benefits-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .benefit-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Water Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online water calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Water Calculator", "item": "https://make-qr.github.io/calculators/water-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--health">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link active" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#health">Health & Fitness</a>
+                <span class="sep">/</span>
+                <span class="current">Water Calculator</span>
+            </nav>
+            <h1>Water Calculator</h1>
+            <p>Calculate your daily water intake needs for optimal health and hydration</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="water-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-user">
+         </i>
+         Your Information
+        </h3>
+        <div class="input-group">
+         <label>
+          Personal Details
+         </label>
+         <div class="dimension-grid">
+          <div>
+           <input class="input-field" id="weight" max="500" min="50" placeholder="Weight (lbs)" step="1" type="number"/>
+          </div>
+          <div>
+           <select class="input-field" id="gender">
+            <option value="male">
+             Male
+            </option>
+            <option value="female">
+             Female
+            </option>
+           </select>
+          </div>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="age">
+          Age
+         </label>
+         <input class="input-field" id="age" max="120" min="1" placeholder="25" step="1" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="activity-level">
+          Activity Level
+         </label>
+         <select class="input-field" id="activity-level">
+          <option value="sedentary">
+           Sedentary (little/no exercise)
+          </option>
+          <option selected="" value="light">
+           Light (light exercise 1-3 days/week)
+          </option>
+          <option value="moderate">
+           Moderate (moderate exercise 3-5 days/week)
+          </option>
+          <option value="active">
+           Active (hard exercise 6-7 days/week)
+          </option>
+          <option value="very-active">
+           Very Active (physical job + exercise)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="climate">
+          Climate/Environment
+         </label>
+         <select class="input-field" id="climate">
+          <option selected="" value="temperate">
+           Temperate (65-75°F)
+          </option>
+          <option value="hot">
+           Hot/Humid (75-85°F)
+          </option>
+          <option value="very-hot">
+           Very Hot (85°F+)
+          </option>
+          <option value="cold">
+           Cold (below 65°F)
+          </option>
+          <option value="high-altitude">
+           High Altitude
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="special-conditions">
+          Special Conditions
+         </label>
+         <select class="input-field" id="special-conditions">
+          <option selected="" value="none">
+           None
+          </option>
+          <option value="pregnant">
+           Pregnant
+          </option>
+          <option value="breastfeeding">
+           Breastfeeding
+          </option>
+          <option value="illness">
+           Illness/Fever
+          </option>
+          <option value="athlete">
+           Competitive Athlete
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="caffeine-alcohol">
+          Caffeine/Alcohol Intake (cups/day)
+         </label>
+         <input class="input-field" id="caffeine-alcohol" max="20" min="0" placeholder="2" step="1" type="number"/>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-tint">
+         </i>
+         Daily Water Needs
+        </h3>
+        <div class="input-group">
+         <label for="total-water">
+          Total Daily Water
+         </label>
+         <input class="input-field result-field" id="total-water" placeholder="0 fl oz" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="water-cups">
+          Water in Cups
+         </label>
+         <input class="input-field result-field" id="water-cups" placeholder="0 cups" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="water-liters">
+          Water in Liters
+         </label>
+         <input class="input-field result-field" id="water-liters" placeholder="0 L" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="water-bottles">
+          Standard Bottles (16.9 fl oz)
+         </label>
+         <input class="input-field result-field" id="water-bottles" placeholder="0 bottles" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="water-glasses">
+          Glasses (8 fl oz)
+         </label>
+         <input class="input-field result-field" id="water-glasses" placeholder="0 glasses" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="hourly-intake">
+          Per Hour (awake 16h)
+         </label>
+         <input class="input-field result-field" id="hourly-intake" placeholder="0 fl oz/hr" readonly="" type="text"/>
+        </div>
+       </div>
+      </div>
+      <div class="hydration-tips">
+       <h3>
+        <i class="fas fa-lightbulb">
+        </i>
+        Hydration Tips &amp; Guidelines
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-card">
+         <div class="tip-title">
+          💧 Start Early
+         </div>
+         <div class="tip-content">
+          Drink a glass of water as soon as you wake up to kickstart hydration after hours without fluid intake.
+         </div>
+        </div>
+        <div class="tip-card">
+         <div class="tip-title">
+          ⏰ Spread Throughout Day
+         </div>
+         <div class="tip-content">
+          Don't wait until you're thirsty. Sip water consistently throughout the day for optimal hydration.
+         </div>
+        </div>
+        <div class="tip-card">
+         <div class="tip-title">
+          🏃‍♂️ Exercise Hydration
+         </div>
+         <div class="tip-content">
+          Drink 17-20 oz of water 2-3 hours before exercise, and 6-8 oz every 15-20 minutes during activity.
+         </div>
+        </div>
+        <div class="tip-card">
+         <div class="tip-title">
+          🍎 Food Sources
+         </div>
+         <div class="tip-content">
+          About 20% of daily fluid comes from food. Fruits and vegetables are excellent sources of water.
+         </div>
+        </div>
+        <div class="tip-card">
+         <div class="tip-title">
+          🌡️ Hot Weather
+         </div>
+         <div class="tip-content">
+          Increase intake by 12-16 oz for every hour of activity in hot weather to replace sweat losses.
+         </div>
+        </div>
+        <div class="tip-card">
+         <div class="tip-title">
+          💛 Urine Color
+         </div>
+         <div class="tip-content">
+          Pale yellow indicates good hydration. Dark yellow suggests you need more fluids.
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="water-tracking" id="water-tracking-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-line">
+        </i>
+        Hydration Breakdown
+       </h3>
+       <div class="tracking-grid" id="tracking-grid">
+        <!-- Tracking items will be generated here -->
+       </div>
+      </div>
+      <div class="benefits-section">
+       <h3>
+        <i class="fas fa-heart">
+        </i>
+        Benefits of Proper Hydration
+       </h3>
+       <div class="benefits-grid">
+        <div class="benefit-item">
+         <h4>
+          🧠 Brain Function
+         </h4>
+         <p>
+          Improves concentration, alertness, and memory. Even mild dehydration can affect cognitive performance.
+         </p>
+        </div>
+        <div class="benefit-item">
+         <h4>
+          💪 Physical Performance
+         </h4>
+         <p>
+          Maintains muscle function and prevents fatigue. Proper hydration is crucial for athletic performance.
+         </p>
+        </div>
+        <div class="benefit-item">
+         <h4>
+          🌟 Skin Health
+         </h4>
+         <p>
+          Keeps skin moisturized and elastic. Adequate water intake helps maintain a healthy complexion.
+         </p>
+        </div>
+        <div class="benefit-item">
+         <h4>
+          🫀 Heart Health
+         </h4>
+         <p>
+          Helps maintain blood volume and circulation. Proper hydration reduces strain on the heart.
+         </p>
+        </div>
+        <div class="benefit-item">
+         <h4>
+          🔄 Detoxification
+         </h4>
+         <p>
+          Supports kidney function and helps flush toxins from the body through urine production.
+         </p>
+        </div>
+        <div class="benefit-item">
+         <h4>
+          🌡️ Temperature Control
+         </h4>
+         <p>
+          Enables proper sweating and body temperature regulation, especially important during exercise.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="bmi-calculator.html"><i class="fas fa-arrow-right"></i> BMI Calculator</a>
+                <a class="related-link" href="calorie-calculator.html"><i class="fas fa-arrow-right"></i> Calorie Calculator</a>
+                <a class="related-link" href="body-fat-calculator.html"><i class="fas fa-arrow-right"></i> Body Fat Calculator</a>
+                <a class="related-link" href="bmr-calculator.html"><i class="fas fa-arrow-right"></i> BMR Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateWater() {
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const gender = document.getElementById('gender').value;
+            const age = parseFloat(document.getElementById('age').value) || 25;
+            const activityLevel = document.getElementById('activity-level').value;
+            const climate = document.getElementById('climate').value;
+            const specialConditions = document.getElementById('special-conditions').value;
+            const caffeineAlcohol = parseFloat(document.getElementById('caffeine-alcohol').value) || 0;
+
+            if (weight === 0) return;
+
+            // Base water calculation: 0.5-1 oz per pound of body weight
+            let baseWater = weight * 0.67; // Average 0.67 oz per pound
+
+            // Gender adjustment
+            if (gender === 'female') {
+                baseWater *= 0.95; // Women generally need slightly less
+            }
+
+            // Age adjustment
+            if (age > 65) {
+                baseWater *= 1.1; // Older adults need more due to decreased kidney function
+            } else if (age < 18) {
+                baseWater *= 1.15; // Growing bodies need more
+            }
+
+            // Activity level adjustment
+            const activityMultipliers = {
+                'sedentary': 1.0,
+                'light': 1.1,
+                'moderate': 1.2,
+                'active': 1.4,
+                'very-active': 1.6
+            };
+            baseWater *= activityMultipliers[activityLevel];
+
+            // Climate adjustment
+            const climateMultipliers = {
+                'temperate': 1.0,
+                'hot': 1.2,
+                'very-hot': 1.4,
+                'cold': 0.95,
+                'high-altitude': 1.3
+            };
+            baseWater *= climateMultipliers[climate];
+
+            // Special conditions adjustment
+            const conditionMultipliers = {
+                'none': 1.0,
+                'pregnant': 1.3,
+                'breastfeeding': 1.6,
+                'illness': 1.5,
+                'athlete': 1.8
+            };
+            baseWater *= conditionMultipliers[specialConditions];
+
+            // Caffeine/alcohol adjustment (additional 8 oz per cup)
+            baseWater += caffeineAlcohol * 8;
+
+            // Convert to different units
+            const totalOunces = Math.round(baseWater);
+            const cups = Math.round(totalOunces / 8 * 10) / 10;
+            const liters = Math.round(totalOunces * 0.0295735 * 10) / 10;
+            const bottles = Math.ceil(totalOunces / 16.9);
+            const glasses = Math.ceil(totalOunces / 8);
+            const hourly = Math.round(totalOunces / 16); // Assuming 16 waking hours
+
+            // Update results
+            document.getElementById('total-water').value = totalOunces + ' fl oz';
+            document.getElementById('water-cups').value = cups + ' cups';
+            document.getElementById('water-liters').value = liters + ' L';
+            document.getElementById('water-bottles').value = bottles + ' bottles';
+            document.getElementById('water-glasses').value = glasses + ' glasses';
+            document.getElementById('hourly-intake').value = hourly + ' fl oz/hr';
+
+            // Generate tracking breakdown
+            generateTracking(totalOunces, cups, liters, bottles, glasses, hourly);
+        }
+
+        function generateTracking(ounces, cups, liters, bottles, glasses, hourly) {
+            const morningWater = Math.round(ounces * 0.25);
+            const afternoonWater = Math.round(ounces * 0.35);
+            const eveningWater = Math.round(ounces * 0.25);
+            const nightWater = ounces - morningWater - afternoonWater - eveningWater;
+
+            const tracking = document.getElementById('tracking-grid');
+            tracking.innerHTML = `
+                <div class="tracking-item">
+                    <div class="tracking-value">${morningWater}</div>
+                    <div class="tracking-label">Morning (6-12pm)</div>
+                </div>
+                <div class="tracking-item">
+                    <div class="tracking-value">${afternoonWater}</div>
+                    <div class="tracking-label">Afternoon (12-6pm)</div>
+                </div>
+                <div class="tracking-item">
+                    <div class="tracking-value">${eveningWater}</div>
+                    <div class="tracking-label">Evening (6-9pm)</div>
+                </div>
+                <div class="tracking-item">
+                    <div class="tracking-value">${nightWater}</div>
+                    <div class="tracking-label">Before Bed (9pm+)</div>
+                </div>
+                <div class="tracking-item">
+                    <div class="tracking-value">${Math.round(ounces * 0.2)}</div>
+                    <div class="tracking-label">Pre-Exercise</div>
+                </div>
+                <div class="tracking-item">
+                    <div class="tracking-value">${Math.round(ounces * 0.15)}</div>
+                    <div class="tracking-label">During Exercise</div>
+                </div>
+            `;
+            document.getElementById('water-tracking-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['weight', 'gender', 'age', 'activity-level', 'climate', 'special-conditions', 'caffeine-alcohol'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateWater);
+                    element.addEventListener('change', calculateWater);
+                }
+            });
+
+            // Set example values
+            document.getElementById('weight').value = 150;
+            document.getElementById('age').value = 30;
+            document.getElementById('caffeine-alcohol').value = 2;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

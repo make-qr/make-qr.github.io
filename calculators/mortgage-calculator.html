@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="index, follow" name="robots"/>
+  <title>
+   Mortgage Calculator - Calculate Home Loan Payments | Make QR Calculators
+  </title>
+  <meta content="Calculate your monthly mortgage payments with our free mortgage calculator. Estimate home loan payments including principal, interest, taxes, and insurance." name="description"/>
+  <link href="https://make-qr.github.io/calculators/mortgage-calculator.html" rel="canonical"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Mortgage Calculator",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "Calculate monthly mortgage payments and see loan breakdown with our free mortgage calculator"
+    }
+  </script>
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://make-qr.github.io/calculators/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Financial Calculators",
+        "item": "https://make-qr.github.io/calculators/#financial"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Mortgage Calculator",
+        "item": "https://make-qr.github.io/calculators/mortgage-calculator.html"
+      }]
+    }
+  </script>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <style>
+   .mortgage-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result-section {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .monthly-payment {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .breakdown-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .breakdown-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .breakdown-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .summary-table th,
+        .summary-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .summary-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Mortgage Calculator</span>
+            </nav>
+            <h1>Mortgage Calculator</h1>
+            <p>Calculate your monthly mortgage payments and see loan breakdown</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="mortgage-calculator">
+      <form id="mortgageForm">
+       <div class="input-row">
+        <div class="input-group">
+         <label for="homePrice">
+          Home Price ($)
+         </label>
+         <input id="homePrice" placeholder="500000" required="" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="downPayment">
+          Down Payment ($)
+         </label>
+         <input id="downPayment" placeholder="100000" required="" type="number"/>
+        </div>
+       </div>
+       <div class="input-row">
+        <div class="input-group">
+         <label for="loanTerm">
+          Loan Term (years)
+         </label>
+         <input id="loanTerm" placeholder="30" required="" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="interestRate">
+          Interest Rate (%)
+         </label>
+         <input id="interestRate" placeholder="3.5" required="" step="0.01" type="number"/>
+        </div>
+       </div>
+       <div class="input-row">
+        <div class="input-group">
+         <label for="propertyTax">
+          Property Tax ($/year)
+         </label>
+         <input id="propertyTax" placeholder="5000" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="homeInsurance">
+          Home Insurance ($/year)
+         </label>
+         <input id="homeInsurance" placeholder="1200" type="number"/>
+        </div>
+       </div>
+       <div class="input-group">
+        <label for="pmi">
+         PMI ($/month)
+        </label>
+        <input id="pmi" placeholder="200" type="number"/>
+       </div>
+       <button class="calculate-btn" type="submit">
+        Calculate Mortgage
+       </button>
+      </form>
+      <div class="result-section" id="resultSection">
+       <div class="monthly-payment">
+        <div class="payment-amount" id="monthlyPayment">
+         $0
+        </div>
+        <div>
+         Monthly Payment
+        </div>
+       </div>
+       <div class="payment-breakdown">
+        <div class="breakdown-item">
+         <div class="breakdown-label">
+          Principal &amp; Interest
+         </div>
+         <div class="breakdown-value" id="principalInterest">
+          $0
+         </div>
+        </div>
+        <div class="breakdown-item">
+         <div class="breakdown-label">
+          Property Tax
+         </div>
+         <div class="breakdown-value" id="monthlyTax">
+          $0
+         </div>
+        </div>
+        <div class="breakdown-item">
+         <div class="breakdown-label">
+          Home Insurance
+         </div>
+         <div class="breakdown-value" id="monthlyInsurance">
+          $0
+         </div>
+        </div>
+        <div class="breakdown-item">
+         <div class="breakdown-label">
+          PMI
+         </div>
+         <div class="breakdown-value" id="monthlyPMI">
+          $0
+         </div>
+        </div>
+       </div>
+       <div class="result-card">
+        <h3>
+         Loan Summary
+        </h3>
+        <table class="summary-table">
+         <tr>
+          <th>
+           Total Loan Amount
+          </th>
+          <td id="loanAmount">
+           $0
+          </td>
+         </tr>
+         <tr>
+          <th>
+           Total Interest Paid
+          </th>
+          <td id="totalInterest">
+           $0
+          </td>
+         </tr>
+         <tr>
+          <th>
+           Total Payments
+          </th>
+          <td id="totalPayments">
+           $0
+          </td>
+         </tr>
+         <tr>
+          <th>
+           Monthly P&amp;I Payment
+          </th>
+          <td id="piPayment">
+           $0
+          </td>
+         </tr>
+        </table>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+                <a class="related-link" href="finance-calculator.html"><i class="fas fa-arrow-right"></i> Finance (All-in-One)</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+<script>
+   document.getElementById('mortgageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const homePrice = parseFloat(document.getElementById('homePrice').value);
+            const downPayment = parseFloat(document.getElementById('downPayment').value);
+            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const propertyTax = parseFloat(document.getElementById('propertyTax').value) || 0;
+            const homeInsurance = parseFloat(document.getElementById('homeInsurance').value) || 0;
+            const pmi = parseFloat(document.getElementById('pmi').value) || 0;
+            
+            if (homePrice > 0 && downPayment >= 0 && loanTerm > 0 && interestRate >= 0) {
+                calculateMortgage(homePrice, downPayment, loanTerm, interestRate, propertyTax, homeInsurance, pmi);
+            }
+        });
+
+        function calculateMortgage(homePrice, downPayment, loanTerm, interestRate, propertyTax, homeInsurance, pmi) {
+            const loanAmount = homePrice - downPayment;
+            const monthlyRate = interestRate / 100 / 12;
+            const numberOfPayments = loanTerm * 12;
+            
+            // Calculate monthly principal and interest
+            let monthlyPI = 0;
+            if (monthlyRate > 0) {
+                monthlyPI = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+                           (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+            } else {
+                monthlyPI = loanAmount / numberOfPayments;
+            }
+            
+            const monthlyTax = propertyTax / 12;
+            const monthlyInsurance = homeInsurance / 12;
+            const totalMonthlyPayment = monthlyPI + monthlyTax + monthlyInsurance + pmi;
+            
+            const totalInterest = (monthlyPI * numberOfPayments) - loanAmount;
+            const totalPayments = monthlyPI * numberOfPayments;
+            
+            displayMortgageResults({
+                monthlyPayment: totalMonthlyPayment,
+                principalInterest: monthlyPI,
+                monthlyTax: monthlyTax,
+                monthlyInsurance: monthlyInsurance,
+                monthlyPMI: pmi,
+                loanAmount: loanAmount,
+                totalInterest: totalInterest,
+                totalPayments: totalPayments
+            });
+        }
+
+        function displayMortgageResults(results) {
+            document.getElementById('monthlyPayment').textContent = '$' + results.monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('principalInterest').textContent = '$' + results.principalInterest.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('monthlyTax').textContent = '$' + results.monthlyTax.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('monthlyInsurance').textContent = '$' + results.monthlyInsurance.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('monthlyPMI').textContent = '$' + results.monthlyPMI.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('loanAmount').textContent = '$' + results.loanAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('totalInterest').textContent = '$' + results.totalInterest.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('totalPayments').textContent = '$' + results.totalPayments.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('piPayment').textContent = '$' + results.principalInterest.toLocaleString('en-US', {maximumFractionDigits: 0});
+            
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

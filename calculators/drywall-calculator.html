@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/drywall-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Drywall Calculator - Calculate Drywall Sheets &amp; Materials | Make QR Calculators
+  </title>
+  <meta content="Calculate how many drywall sheets, screws, compound, and tape you need for your construction project. Include costs and installation estimates." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .drywall-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #9e9e9e 0%, #616161 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #9e9e9e;
+            box-shadow: 0 0 0 3px rgba(158, 158, 158, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .room-list {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .room-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .room-item:last-child {
+            border-bottom: none;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .add-room-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-room-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .materials-breakdown {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #9e9e9e;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .cost-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cost-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .cost-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .cost-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .cost-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Drywall Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online drywall calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Drywall Calculator", "item": "https://make-qr.github.io/calculators/drywall-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Drywall Calculator</span>
+            </nav>
+            <h1>Drywall Calculator</h1>
+            <p>Calculate drywall sheets, screws, compound, and tape needed for your construction project</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="drywall-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         Room Dimensions
+        </h3>
+        <div class="input-group">
+         <label>
+          Room Dimensions
+         </label>
+         <div class="dimension-grid">
+          <input class="input-field" id="room-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+          <input class="input-field" id="room-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="ceiling-height">
+          Ceiling Height (ft)
+         </label>
+         <select class="input-field" id="ceiling-height">
+          <option selected="" value="8">
+           8 feet
+          </option>
+          <option value="9">
+           9 feet
+          </option>
+          <option value="10">
+           10 feet
+          </option>
+          <option value="12">
+           12 feet
+          </option>
+          <option value="custom">
+           Custom height
+          </option>
+         </select>
+        </div>
+        <div class="input-group" id="custom-height-group" style="display: none;">
+         <label for="custom-height">
+          Custom Height (ft)
+         </label>
+         <input class="input-field" id="custom-height" max="20" min="6" placeholder="8.5" step="0.1" type="number"/>
+        </div>
+        <div class="input-group">
+         <label>
+          Openings (Doors &amp; Windows)
+         </label>
+         <div class="dimension-grid">
+          <input class="input-field" id="door-count" min="0" placeholder="Doors (count)" step="1" type="number"/>
+          <input class="input-field" id="window-count" min="0" placeholder="Windows (count)" step="1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <button class="add-room-btn" onclick="addRoom()" type="button">
+          <i class="fas fa-plus">
+          </i>
+          Add Room
+         </button>
+        </div>
+        <div class="input-group">
+         <label>
+          Added Rooms:
+         </label>
+         <div class="room-list" id="room-list">
+          <div style="color: #6c757d; text-align: center; padding: 1rem;">
+           No rooms added yet
+          </div>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="drywall-size">
+          Drywall Sheet Size
+         </label>
+         <select class="input-field" id="drywall-size">
+          <option selected="" value="4x8">
+           4' x 8' (32 sq ft)
+          </option>
+          <option value="4x10">
+           4' x 10' (40 sq ft)
+          </option>
+          <option value="4x12">
+           4' x 12' (48 sq ft)
+          </option>
+          <option value="4x16">
+           4' x 16' (64 sq ft)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="drywall-thickness">
+          Drywall Thickness
+         </label>
+         <select class="input-field" id="drywall-thickness">
+          <option value="1/4">
+           1/4" (6.4mm) - Curved surfaces
+          </option>
+          <option value="3/8">
+           3/8" (9.5mm) - Over existing walls
+          </option>
+          <option selected="" value="1/2">
+           1/2" (12.7mm) - Standard walls
+          </option>
+          <option value="5/8">
+           5/8" (15.9mm) - Ceilings/fire rated
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="waste-factor">
+          Waste Factor
+         </label>
+         <select class="input-field" id="waste-factor">
+          <option value="0.05">
+           5% - Experienced installer
+          </option>
+          <option selected="" value="0.10">
+           10% - Standard allowance
+          </option>
+          <option value="0.15">
+           15% - Complex layout
+          </option>
+          <option value="0.20">
+           20% - DIY/beginner
+          </option>
+         </select>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-clipboard-list">
+         </i>
+         Materials Needed
+        </h3>
+        <div class="input-group">
+         <label for="total-area">
+          Total Wall Area
+         </label>
+         <input class="input-field result-field" id="total-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="drywall-sheets">
+          Drywall Sheets
+         </label>
+         <input class="input-field result-field" id="drywall-sheets" placeholder="0 sheets" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="drywall-screws">
+          Drywall Screws (lbs)
+         </label>
+         <input class="input-field result-field" id="drywall-screws" placeholder="0 lbs" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="joint-compound">
+          Joint Compound
+         </label>
+         <input class="input-field result-field" id="joint-compound" placeholder="0 gallons" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="drywall-tape">
+          Drywall Tape
+         </label>
+         <input class="input-field result-field" id="drywall-tape" placeholder="0 feet" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="corner-bead">
+          Corner Bead
+         </label>
+         <input class="input-field result-field" id="corner-bead" placeholder="0 pieces" readonly="" type="text"/>
+        </div>
+       </div>
+      </div>
+      <div class="materials-breakdown">
+       <h3>
+        <i class="fas fa-tools">
+        </i>
+        Material Quantities Breakdown
+       </h3>
+       <div class="breakdown-grid" id="materials-grid">
+        <!-- Materials breakdown will be generated here -->
+       </div>
+      </div>
+      <div class="cost-breakdown" id="cost-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-dollar-sign">
+        </i>
+        Cost Estimate
+       </h3>
+       <div class="input-group">
+        <label>
+         Material Costs (Optional)
+        </label>
+        <div class="dimension-grid">
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="sheet-cost" min="0" placeholder="15" step="0.01" type="number"/>
+         </div>
+         <label style="margin: 0; font-size: 0.9rem; color: #6c757d;">
+          Per Sheet
+         </label>
+        </div>
+       </div>
+       <div class="cost-grid" id="cost-grid">
+        <!-- Cost breakdown will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Drywall Installation Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          📏 Measuring Accurately
+         </h4>
+         <p>
+          Measure twice, cut once. Account for electrical outlets, switches, and fixtures when planning layout.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔧 Proper Fastening
+         </h4>
+         <p>
+          Use 1¼" screws for ½" drywall on wood studs. Space screws 12" on center for walls, 8" for ceilings.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎯 Joint Finishing
+         </h4>
+         <p>
+          Apply 3 coats of compound: embedding, filling, and finishing. Sand lightly between coats.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📐 Sheet Orientation
+         </h4>
+         <p>
+          Install sheets horizontally when possible to minimize joints and improve strength.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💡 Tool Requirements
+         </h4>
+         <p>
+          Essential tools: utility knife, T-square, screw gun, taping knives, and sanding blocks.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🌡️ Environmental Conditions
+         </h4>
+         <p>
+          Maintain temperature 55-70°F and humidity below 70% during installation and drying.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let rooms = [];
+
+        function addRoom() {
+            const length = parseFloat(document.getElementById('room-length').value) || 0;
+            const width = parseFloat(document.getElementById('room-width').value) || 0;
+            const height = document.getElementById('ceiling-height').value === 'custom' ? 
+                          parseFloat(document.getElementById('custom-height').value) || 8 : 
+                          parseFloat(document.getElementById('ceiling-height').value) || 8;
+            const doors = parseInt(document.getElementById('door-count').value) || 0;
+            const windows = parseInt(document.getElementById('window-count').value) || 0;
+
+            if (length === 0 || width === 0) {
+                alert('Please enter room length and width');
+                return;
+            }
+
+            const room = {
+                id: Date.now(),
+                length: length,
+                width: width,
+                height: height,
+                doors: doors,
+                windows: windows
+            };
+
+            rooms.push(room);
+            updateRoomList();
+            calculateDrywall();
+
+            // Clear inputs
+            document.getElementById('room-length').value = '';
+            document.getElementById('room-width').value = '';
+            document.getElementById('door-count').value = '';
+            document.getElementById('window-count').value = '';
+        }
+
+        function removeRoom(id) {
+            rooms = rooms.filter(room => room.id !== id);
+            updateRoomList();
+            calculateDrywall();
+        }
+
+        function updateRoomList() {
+            const roomList = document.getElementById('room-list');
+            
+            if (rooms.length === 0) {
+                roomList.innerHTML = '<div style="color: #6c757d; text-align: center; padding: 1rem;">No rooms added yet</div>';
+                return;
+            }
+
+            roomList.innerHTML = rooms.map(room => `
+                <div class="room-item">
+                    <span>${room.length}' × ${room.width}' × ${room.height}' (${room.doors}D, ${room.windows}W)</span>
+                    <button class="remove-btn" onclick="removeRoom(${room.id})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function calculateDrywall() {
+            if (rooms.length === 0) return;
+
+            const drywallSize = document.getElementById('drywall-size').value;
+            const wasteFactor = parseFloat(document.getElementById('waste-factor').value) || 0.10;
+
+            // Calculate sheet area
+            const sheetAreas = {
+                '4x8': 32,
+                '4x10': 40,
+                '4x12': 48,
+                '4x16': 64
+            };
+            const sheetArea = sheetAreas[drywallSize];
+
+            let totalWallArea = 0;
+            let totalPerimeter = 0;
+
+            rooms.forEach(room => {
+                // Wall area = perimeter × height
+                const perimeter = 2 * (room.length + room.width);
+                const wallArea = perimeter * room.height;
+                
+                // Subtract door and window openings
+                const doorArea = room.doors * 21; // 3' × 7' = 21 sq ft per door
+                const windowArea = room.windows * 15; // 3' × 5' = 15 sq ft per window
+                
+                const netWallArea = wallArea - doorArea - windowArea;
+                totalWallArea += Math.max(0, netWallArea);
+                totalPerimeter += perimeter;
+            });
+
+            // Apply waste factor
+            const adjustedArea = totalWallArea * (1 + wasteFactor);
+            
+            // Calculate materials
+            const drywallSheets = Math.ceil(adjustedArea / sheetArea);
+            const screwsPerSheet = 30; // Average screws per sheet
+            const totalScrews = drywallSheets * screwsPerSheet;
+            const screwsPounds = Math.ceil(totalScrews / 144); // ~144 screws per pound
+            
+            // Joint compound: ~1 gallon per 100 sq ft
+            const jointCompound = Math.ceil(adjustedArea / 100);
+            
+            // Tape: ~1.1 feet per sq ft of drywall
+            const drywallTape = Math.ceil(adjustedArea * 1.1);
+            
+            // Corner bead: estimate based on room count and perimeter
+            const cornerBead = Math.ceil(rooms.length * 8 + totalPerimeter * 0.1);
+
+            // Update results
+            document.getElementById('total-area').value = adjustedArea.toFixed(0) + ' sq ft';
+            document.getElementById('drywall-sheets').value = drywallSheets + ' sheets';
+            document.getElementById('drywall-screws').value = screwsPounds + ' lbs';
+            document.getElementById('joint-compound').value = jointCompound + ' gallons';
+            document.getElementById('drywall-tape').value = drywallTape + ' feet';
+            document.getElementById('corner-bead').value = cornerBead + ' pieces';
+
+            // Generate materials breakdown
+            generateMaterialsBreakdown(drywallSheets, screwsPounds, jointCompound, drywallTape, cornerBead, adjustedArea);
+            
+            // Show cost section
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        function generateMaterialsBreakdown(sheets, screws, compound, tape, bead, area) {
+            const grid = document.getElementById('materials-grid');
+            grid.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${sheets}</div>
+                    <div class="breakdown-label">Drywall Sheets</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${screws}</div>
+                    <div class="breakdown-label">Screws (lbs)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${compound}</div>
+                    <div class="breakdown-label">Joint Compound (gal)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${tape}</div>
+                    <div class="breakdown-label">Tape (feet)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${bead}</div>
+                    <div class="breakdown-label">Corner Bead</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${area.toFixed(0)}</div>
+                    <div class="breakdown-label">Total Area (sq ft)</div>
+                </div>
+            `;
+        }
+
+        function calculateCosts() {
+            const sheetCost = parseFloat(document.getElementById('sheet-cost').value) || 15;
+            const sheets = parseInt(document.getElementById('drywall-sheets').value) || 0;
+            
+            if (sheets === 0) return;
+
+            // Estimated costs
+            const drywallCost = sheets * sheetCost;
+            const screwCost = Math.ceil(sheets * 30 / 144) * 8; // $8 per lb of screws
+            const compoundCost = Math.ceil(sheets / 3) * 25; // ~$25 per gallon
+            const tapeCost = Math.ceil(sheets * 35 / 250) * 15; // ~$15 per 250ft roll
+            const beadCost = Math.ceil(sheets / 4) * 5; // ~$5 per 8ft piece
+            
+            const totalMaterialCost = drywallCost + screwCost + compoundCost + tapeCost + beadCost;
+            const laborCost = sheets * 45; // ~$45 labor per sheet
+            const totalCost = totalMaterialCost + laborCost;
+
+            const grid = document.getElementById('cost-grid');
+            grid.innerHTML = `
+                <div class="cost-item">
+                    <div class="cost-value">$${drywallCost.toFixed(0)}</div>
+                    <div class="cost-label">Drywall Sheets</div>
+                </div>
+                <div class="cost-item">
+                    <div class="cost-value">$${screwCost.toFixed(0)}</div>
+                    <div class="cost-label">Screws & Fasteners</div>
+                </div>
+                <div class="cost-item">
+                    <div class="cost-value">$${compoundCost.toFixed(0)}</div>
+                    <div class="cost-label">Joint Compound</div>
+                </div>
+                <div class="cost-item">
+                    <div class="cost-value">$${tapeCost.toFixed(0)}</div>
+                    <div class="cost-label">Tape & Bead</div>
+                </div>
+                <div class="cost-item">
+                    <div class="cost-value">$${totalMaterialCost.toFixed(0)}</div>
+                    <div class="cost-label">Total Materials</div>
+                </div>
+                <div class="cost-item">
+                    <div class="cost-value">$${laborCost.toFixed(0)}</div>
+                    <div class="cost-label">Estimated Labor</div>
+                </div>
+                <div class="cost-item">
+                    <div class="cost-value">$${totalCost.toFixed(0)}</div>
+                    <div class="cost-label">Total Project Cost</div>
+                </div>
+            `;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            ['drywall-size', 'drywall-thickness', 'waste-factor'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', calculateDrywall);
+                }
+            });
+
+            // Handle custom height visibility
+            document.getElementById('ceiling-height').addEventListener('change', function() {
+                const customHeightGroup = document.getElementById('custom-height-group');
+                if (this.value === 'custom') {
+                    customHeightGroup.style.display = 'block';
+                } else {
+                    customHeightGroup.style.display = 'none';
+                }
+                calculateDrywall();
+            });
+
+            // Handle cost calculation
+            document.getElementById('sheet-cost').addEventListener('input', calculateCosts);
+
+            // Set default values
+            document.getElementById('sheet-cost').value = 15;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

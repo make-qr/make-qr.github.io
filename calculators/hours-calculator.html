@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/hours-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Hours Calculator - Calculate Work Hours &amp; Overtime | Make QR Calculators
+  </title>
+  <meta content="Calculate work hours, overtime pay, time between dates, and manage your timesheet with our comprehensive hours calculator." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .hours-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 120px;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .time-input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .time-input-group {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .time-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .time-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .time-field {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .time-field:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .time-separator {
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .am-pm-selector {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .calculate-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .calculate-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-unit {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .timesheet-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timesheet-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .entry-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .entry-input-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .entry-input {
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .remove-entry-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .add-entry-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timesheet-summary {
+            background: #e8f5e8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .pay-calculator {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pay-input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pay-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pay-input-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .pay-field {
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .pay-results {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .pay-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .pay-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .pay-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .pay-description {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .presets-section {
+            background: #f0f8ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .preset-btn {
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .preset-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .preset-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .preset-details {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .preset-btn:hover .preset-details {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .time-input-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .timesheet-entry {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                min-width: auto;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Hours Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online hours calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Hours Calculator", "item": "https://make-qr.github.io/calculators/hours-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Hours Calculator</span>
+            </nav>
+            <h1>Hours Calculator</h1>
+            <p>Calculate work hours, overtime pay, and manage your timesheet efficiently</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="hours-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('basic')">
+        <i class="fas fa-clock">
+        </i>
+        Basic Hours
+       </button>
+       <button class="tab-button" onclick="switchTab('timesheet')">
+        <i class="fas fa-table">
+        </i>
+        Timesheet
+       </button>
+       <button class="tab-button" onclick="switchTab('overtime')">
+        <i class="fas fa-money-bill-wave">
+        </i>
+        Overtime Pay
+       </button>
+       <button class="tab-button" onclick="switchTab('duration')">
+        <i class="fas fa-stopwatch">
+        </i>
+        Time Duration
+       </button>
+      </div>
+      <!-- Basic Hours Tab -->
+      <div class="tab-content active" id="basic">
+       <div class="presets-section">
+        <h3>
+         <i class="fas fa-magic">
+         </i>
+         Quick Presets
+        </h3>
+        <div class="preset-buttons">
+         <div class="preset-btn" onclick="setPreset('fulltime')">
+          <div class="preset-title">
+           Full-time (8 hours)
+          </div>
+          <div class="preset-details">
+           9:00 AM - 5:00 PM
+          </div>
+         </div>
+         <div class="preset-btn" onclick="setPreset('parttime')">
+          <div class="preset-title">
+           Part-time (4 hours)
+          </div>
+          <div class="preset-details">
+           1:00 PM - 5:00 PM
+          </div>
+         </div>
+         <div class="preset-btn" onclick="setPreset('night')">
+          <div class="preset-title">
+           Night Shift
+          </div>
+          <div class="preset-details">
+           11:00 PM - 7:00 AM
+          </div>
+         </div>
+         <div class="preset-btn" onclick="setPreset('weekend')">
+          <div class="preset-title">
+           Weekend Shift
+          </div>
+          <div class="preset-details">
+           10:00 AM - 6:00 PM
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="time-input-section">
+        <div class="time-input-group">
+         <label for="start-time">
+          Start Time
+         </label>
+         <div class="time-input">
+          <input class="time-field" id="start-hour" max="12" min="1" placeholder="9" style="width: 60px;" type="number"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input class="time-field" id="start-minute" max="59" min="0" placeholder="00" style="width: 60px;" type="number"/>
+          <select class="am-pm-selector" id="start-ampm">
+           <option value="AM">
+            AM
+           </option>
+           <option value="PM">
+            PM
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label for="end-time">
+          End Time
+         </label>
+         <div class="time-input">
+          <input class="time-field" id="end-hour" max="12" min="1" placeholder="5" style="width: 60px;" type="number"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input class="time-field" id="end-minute" max="59" min="0" placeholder="00" style="width: 60px;" type="number"/>
+          <select class="am-pm-selector" id="end-ampm">
+           <option value="AM">
+            AM
+           </option>
+           <option selected="" value="PM">
+            PM
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label for="break-time">
+          Break Time (minutes)
+         </label>
+         <input class="time-field" id="break-time" min="0" placeholder="30" style="width: 100%;" type="number"/>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Total break time (lunch, coffee breaks, etc.)
+         </p>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateBasicHours()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Work Hours
+       </button>
+       <div class="results-section" id="basic-results" style="display: none;">
+        <h3>
+         <i class="fas fa-chart-bar">
+         </i>
+         Work Hours Results
+        </h3>
+        <div class="results-grid">
+         <div class="result-card">
+          <div class="result-label">
+           Total Hours
+          </div>
+          <div class="result-value" id="total-hours">
+           0.00
+          </div>
+          <div class="result-unit">
+           hours
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Hours &amp; Minutes
+          </div>
+          <div class="result-value" id="hours-minutes">
+           0h 0m
+          </div>
+          <div class="result-unit">
+           formatted time
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Decimal Hours
+          </div>
+          <div class="result-value" id="decimal-hours">
+           0.00
+          </div>
+          <div class="result-unit">
+           for payroll
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Break Time
+          </div>
+          <div class="result-value" id="break-hours">
+           0
+          </div>
+          <div class="result-unit">
+           minutes
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Timesheet Tab -->
+      <div class="tab-content" id="timesheet">
+       <div class="timesheet-section">
+        <h3>
+         <i class="fas fa-calendar-week">
+         </i>
+         Weekly Timesheet
+        </h3>
+        <button class="add-entry-btn" onclick="addTimesheetEntry()">
+         <i class="fas fa-plus">
+         </i>
+         Add Entry
+        </button>
+        <div id="timesheet-entries">
+         <!-- Timesheet entries will be generated here -->
+        </div>
+        <div class="timesheet-summary" id="timesheet-summary" style="display: none;">
+         <h4>
+          Weekly Summary
+         </h4>
+         <div class="summary-grid">
+          <div class="summary-item">
+           <div class="summary-value" id="weekly-hours">
+            0.00
+           </div>
+           <div class="summary-label">
+            Total Hours
+           </div>
+          </div>
+          <div class="summary-item">
+           <div class="summary-value" id="regular-hours">
+            0.00
+           </div>
+           <div class="summary-label">
+            Regular Hours
+           </div>
+          </div>
+          <div class="summary-item">
+           <div class="summary-value" id="overtime-hours">
+            0.00
+           </div>
+           <div class="summary-label">
+            Overtime Hours
+           </div>
+          </div>
+          <div class="summary-item">
+           <div class="summary-value" id="total-breaks">
+            0
+           </div>
+           <div class="summary-label">
+            Break Minutes
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Overtime Pay Tab -->
+      <div class="tab-content" id="overtime">
+       <div class="pay-calculator">
+        <h3>
+         <i class="fas fa-dollar-sign">
+         </i>
+         Overtime Pay Calculator
+        </h3>
+        <div class="pay-input-grid">
+         <div class="pay-input-group">
+          <label for="hourly-rate">
+           Hourly Rate ($)
+          </label>
+          <input class="pay-field" id="hourly-rate" min="0" placeholder="15.00" step="0.01" type="number"/>
+         </div>
+         <div class="pay-input-group">
+          <label for="regular-hours-worked">
+           Regular Hours
+          </label>
+          <input class="pay-field" id="regular-hours-worked" min="0" placeholder="40" step="0.1" type="number"/>
+         </div>
+         <div class="pay-input-group">
+          <label for="overtime-hours-worked">
+           Overtime Hours
+          </label>
+          <input class="pay-field" id="overtime-hours-worked" min="0" placeholder="5" step="0.1" type="number"/>
+         </div>
+         <div class="pay-input-group">
+          <label for="overtime-rate">
+           Overtime Rate
+          </label>
+          <select class="pay-field" id="overtime-rate">
+           <option value="1.5">
+            1.5x (Time and a Half)
+           </option>
+           <option value="2">
+            2x (Double Time)
+           </option>
+           <option value="1.25">
+            1.25x
+           </option>
+           <option value="1.75">
+            1.75x
+           </option>
+          </select>
+         </div>
+        </div>
+        <button class="calculate-btn" onclick="calculateOvertimePay()">
+         <i class="fas fa-calculator">
+         </i>
+         Calculate Pay
+        </button>
+        <div class="pay-results" id="pay-results" style="display: none;">
+         <h4>
+          Pay Breakdown
+         </h4>
+         <div class="pay-breakdown">
+          <div class="pay-item">
+           <div class="pay-amount" id="regular-pay">
+            $0.00
+           </div>
+           <div class="pay-description">
+            Regular Pay
+           </div>
+          </div>
+          <div class="pay-item">
+           <div class="pay-amount" id="overtime-pay">
+            $0.00
+           </div>
+           <div class="pay-description">
+            Overtime Pay
+           </div>
+          </div>
+          <div class="pay-item">
+           <div class="pay-amount" id="total-pay">
+            $0.00
+           </div>
+           <div class="pay-description">
+            Total Pay
+           </div>
+          </div>
+          <div class="pay-item">
+           <div class="pay-amount" id="effective-rate">
+            $0.00
+           </div>
+           <div class="pay-description">
+            Effective Rate
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Duration Tab -->
+      <div class="tab-content" id="duration">
+       <div class="time-input-section">
+        <div class="time-input-group">
+         <label>
+          Start Date &amp; Time
+         </label>
+         <input class="time-field" id="start-datetime" style="width: 100%; margin-bottom: 1rem;" type="datetime-local"/>
+        </div>
+        <div class="time-input-group">
+         <label>
+          End Date &amp; Time
+         </label>
+         <input class="time-field" id="end-datetime" style="width: 100%; margin-bottom: 1rem;" type="datetime-local"/>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateDuration()">
+        <i class="fas fa-stopwatch">
+        </i>
+        Calculate Duration
+       </button>
+       <div class="results-section" id="duration-results" style="display: none;">
+        <h3>
+         <i class="fas fa-hourglass-half">
+         </i>
+         Duration Results
+        </h3>
+        <div class="results-grid">
+         <div class="result-card">
+          <div class="result-label">
+           Total Days
+          </div>
+          <div class="result-value" id="total-days">
+           0
+          </div>
+          <div class="result-unit">
+           days
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Total Hours
+          </div>
+          <div class="result-value" id="duration-hours">
+           0
+          </div>
+          <div class="result-unit">
+           hours
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Total Minutes
+          </div>
+          <div class="result-value" id="duration-minutes">
+           0
+          </div>
+          <div class="result-unit">
+           minutes
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-label">
+           Formatted Time
+          </div>
+          <div class="result-value" id="formatted-duration">
+           0d 0h 0m
+          </div>
+          <div class="result-unit">
+           detailed
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'basic';
+        let timesheetEntries = [];
+
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+        }
+
+        function setPreset(type) {
+            const presets = {
+                fulltime: { startHour: 9, startMinute: 0, startAmPm: 'AM', endHour: 5, endMinute: 0, endAmPm: 'PM', breakTime: 60 },
+                parttime: { startHour: 1, startMinute: 0, startAmPm: 'PM', endHour: 5, endMinute: 0, endAmPm: 'PM', breakTime: 15 },
+                night: { startHour: 11, startMinute: 0, startAmPm: 'PM', endHour: 7, endMinute: 0, endAmPm: 'AM', breakTime: 30 },
+                weekend: { startHour: 10, startMinute: 0, startAmPm: 'AM', endHour: 6, endMinute: 0, endAmPm: 'PM', breakTime: 45 }
+            };
+
+            const preset = presets[type];
+            if (preset) {
+                document.getElementById('start-hour').value = preset.startHour;
+                document.getElementById('start-minute').value = preset.startMinute;
+                document.getElementById('start-ampm').value = preset.startAmPm;
+                document.getElementById('end-hour').value = preset.endHour;
+                document.getElementById('end-minute').value = preset.endMinute;
+                document.getElementById('end-ampm').value = preset.endAmPm;
+                document.getElementById('break-time').value = preset.breakTime;
+                
+                calculateBasicHours();
+            }
+        }
+
+        function calculateBasicHours() {
+            const startHour = parseInt(document.getElementById('start-hour').value) || 0;
+            const startMinute = parseInt(document.getElementById('start-minute').value) || 0;
+            const startAmPm = document.getElementById('start-ampm').value;
+            const endHour = parseInt(document.getElementById('end-hour').value) || 0;
+            const endMinute = parseInt(document.getElementById('end-minute').value) || 0;
+            const endAmPm = document.getElementById('end-ampm').value;
+            const breakTime = parseInt(document.getElementById('break-time').value) || 0;
+
+            if (startHour === 0 || endHour === 0) {
+                alert('Please enter valid start and end times.');
+                return;
+            }
+
+            // Convert to 24-hour format
+            let startHour24 = startHour;
+            if (startAmPm === 'PM' && startHour !== 12) startHour24 += 12;
+            if (startAmPm === 'AM' && startHour === 12) startHour24 = 0;
+
+            let endHour24 = endHour;
+            if (endAmPm === 'PM' && endHour !== 12) endHour24 += 12;
+            if (endAmPm === 'AM' && endHour === 12) endHour24 = 0;
+
+            // Create date objects for calculation
+            const startTime = new Date();
+            startTime.setHours(startHour24, startMinute, 0, 0);
+
+            const endTime = new Date();
+            endTime.setHours(endHour24, endMinute, 0, 0);
+
+            // Handle overnight shifts
+            if (endTime <= startTime) {
+                endTime.setDate(endTime.getDate() + 1);
+            }
+
+            // Calculate total minutes
+            const totalMinutes = (endTime - startTime) / (1000 * 60) - breakTime;
+            const totalHours = totalMinutes / 60;
+
+            // Update results
+            document.getElementById('total-hours').textContent = totalHours.toFixed(2);
+            document.getElementById('hours-minutes').textContent = `${Math.floor(totalHours)}h ${Math.round((totalHours % 1) * 60)}m`;
+            document.getElementById('decimal-hours').textContent = totalHours.toFixed(2);
+            document.getElementById('break-hours').textContent = breakTime;
+
+            document.getElementById('basic-results').style.display = 'block';
+        }
+
+        function addTimesheetEntry() {
+            const entryId = Date.now();
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'timesheet-entry';
+            entryDiv.innerHTML = `
+                <div class="entry-input-group">
+                    <label>Date</label>
+                    <input type="date" class="entry-input" data-field="date">
+                </div>
+                <div class="entry-input-group">
+                    <label>Start Time</label>
+                    <input type="time" class="entry-input" data-field="start">
+                </div>
+                <div class="entry-input-group">
+                    <label>End Time</label>
+                    <input type="time" class="entry-input" data-field="end">
+                </div>
+                <button class="remove-entry-btn" onclick="removeTimesheetEntry(this)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            document.getElementById('timesheet-entries').appendChild(entryDiv);
+            
+            // Add event listeners for auto-calculation
+            entryDiv.querySelectorAll('.entry-input').forEach(input => {
+                input.addEventListener('change', updateTimesheetSummary);
+            });
+        }
+
+        function removeTimesheetEntry(button) {
+            button.parentElement.remove();
+            updateTimesheetSummary();
+        }
+
+        function updateTimesheetSummary() {
+            const entries = document.querySelectorAll('.timesheet-entry');
+            let totalHours = 0;
+            let totalEntries = 0;
+
+            entries.forEach(entry => {
+                const startTime = entry.querySelector('[data-field="start"]').value;
+                const endTime = entry.querySelector('[data-field="end"]').value;
+                
+                if (startTime && endTime) {
+                    const start = new Date(`2000-01-01T${startTime}`);
+                    const end = new Date(`2000-01-01T${endTime}`);
+                    
+                    if (end < start) {
+                        end.setDate(end.getDate() + 1);
+                    }
+                    
+                    const hours = (end - start) / (1000 * 60 * 60);
+                    totalHours += hours;
+                    totalEntries++;
+                }
+            });
+
+            if (totalEntries > 0) {
+                const regularHours = Math.min(totalHours, 40);
+                const overtimeHours = Math.max(0, totalHours - 40);
+
+                document.getElementById('weekly-hours').textContent = totalHours.toFixed(2);
+                document.getElementById('regular-hours').textContent = regularHours.toFixed(2);
+                document.getElementById('overtime-hours').textContent = overtimeHours.toFixed(2);
+                document.getElementById('total-breaks').textContent = '0'; // Simplified for this example
+                
+                document.getElementById('timesheet-summary').style.display = 'block';
+            } else {
+                document.getElementById('timesheet-summary').style.display = 'none';
+            }
+        }
+
+        function calculateOvertimePay() {
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
+            const regularHours = parseFloat(document.getElementById('regular-hours-worked').value) || 0;
+            const overtimeHours = parseFloat(document.getElementById('overtime-hours-worked').value) || 0;
+            const overtimeRate = parseFloat(document.getElementById('overtime-rate').value) || 1.5;
+
+            if (hourlyRate === 0) {
+                alert('Please enter a valid hourly rate.');
+                return;
+            }
+
+            const regularPay = regularHours * hourlyRate;
+            const overtimePay = overtimeHours * hourlyRate * overtimeRate;
+            const totalPay = regularPay + overtimePay;
+            const totalHours = regularHours + overtimeHours;
+            const effectiveRate = totalHours > 0 ? totalPay / totalHours : 0;
+
+            document.getElementById('regular-pay').textContent = `$${regularPay.toFixed(2)}`;
+            document.getElementById('overtime-pay').textContent = `$${overtimePay.toFixed(2)}`;
+            document.getElementById('total-pay').textContent = `$${totalPay.toFixed(2)}`;
+            document.getElementById('effective-rate').textContent = `$${effectiveRate.toFixed(2)}`;
+
+            document.getElementById('pay-results').style.display = 'block';
+        }
+
+        function calculateDuration() {
+            const startDateTime = document.getElementById('start-datetime').value;
+            const endDateTime = document.getElementById('end-datetime').value;
+
+            if (!startDateTime || !endDateTime) {
+                alert('Please enter both start and end date/time.');
+                return;
+            }
+
+            const start = new Date(startDateTime);
+            const end = new Date(endDateTime);
+            
+            if (end <= start) {
+                alert('End date/time must be after start date/time.');
+                return;
+            }
+
+            const diffMs = end - start;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffMinutes = Math.floor(diffMs / (1000 * 60));
+            
+            const remainingHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const remainingMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById('total-days').textContent = diffDays;
+            document.getElementById('duration-hours').textContent = diffHours;
+            document.getElementById('duration-minutes').textContent = diffMinutes;
+            document.getElementById('formatted-duration').textContent = `${diffDays}d ${remainingHours}h ${remainingMinutes}m`;
+
+            document.getElementById('duration-results').style.display = 'block';
+        }
+
+        // Initialize with one timesheet entry
+        document.addEventListener('DOMContentLoaded', function() {
+            addTimesheetEntry();
+            
+            // Auto-calculate basic hours when inputs change
+            ['start-hour', 'start-minute', 'start-ampm', 'end-hour', 'end-minute', 'end-ampm', 'break-time'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', function() {
+                        const startHour = document.getElementById('start-hour').value;
+                        const endHour = document.getElementById('end-hour').value;
+                        if (startHour && endHour) {
+                            calculateBasicHours();
+                        }
+                    });
+                }
+            });
+
+            // Auto-calculate overtime pay when inputs change
+            ['hourly-rate', 'regular-hours-worked', 'overtime-hours-worked', 'overtime-rate'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', function() {
+                        const rate = document.getElementById('hourly-rate').value;
+                        const regular = document.getElementById('regular-hours-worked').value;
+                        if (rate && regular) {
+                            calculateOvertimePay();
+                        }
+                    });
+                }
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

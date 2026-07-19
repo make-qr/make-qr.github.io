@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/fuel-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Fuel Calculator - Gas Mileage &amp; Trip Cost Calculator | Make QR Calculators
+  </title>
+  <meta content="Calculate fuel efficiency, gas mileage, trip costs, and annual fuel expenses. Plan your travel budget with accurate fuel consumption calculations." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .fuel-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .tab-button.active {
+            background: #fd7e14;
+            color: white;
+            box-shadow: 0 2px 8px rgba(253, 126, 20, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #fd7e14 0%, #ff6b35 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #fd7e14;
+            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .result-field::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .fuel-comparison {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .comparison-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #fd7e14;
+        }
+
+        .vehicle-type {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .mpg-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fd7e14;
+            margin-bottom: 0.5rem;
+        }
+
+        .mpg-label {
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .cost-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .efficiency-tips {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .trip-planner {
+            background: #f0f8ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .planner-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .route-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid #007bff;
+        }
+
+        .route-title {
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .route-details {
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Fuel Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online fuel calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Fuel Calculator", "item": "https://make-qr.github.io/calculators/fuel-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Fuel Calculator</span>
+            </nav>
+            <h1>Fuel Calculator</h1>
+            <p>Calculate fuel costs, mileage efficiency, and trip expenses for your vehicle</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="fuel-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('trip-cost')">
+        <i class="fas fa-route">
+        </i>
+        Trip Cost
+       </button>
+       <button class="tab-button" onclick="switchTab('fuel-efficiency')">
+        <i class="fas fa-tachometer-alt">
+        </i>
+        Fuel Efficiency
+       </button>
+       <button class="tab-button" onclick="switchTab('annual-cost')">
+        <i class="fas fa-calendar-alt">
+        </i>
+        Annual Cost
+       </button>
+      </div>
+      <!-- Trip Cost Tab -->
+      <div class="tab-content active" id="trip-cost">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-map-marked-alt">
+          </i>
+          Trip Details
+         </h3>
+         <div class="input-group">
+          <label for="trip-distance">
+           Distance
+          </label>
+          <input class="input-field" id="trip-distance" min="0" placeholder="300" step="0.1" type="number"/>
+          <select id="distance-unit" style="margin-top: 0.5rem; width: 100%; padding: 0.5rem; border-radius: 5px;">
+           <option value="miles">
+            Miles
+           </option>
+           <option value="km">
+            Kilometers
+           </option>
+          </select>
+         </div>
+         <div class="input-group">
+          <label for="vehicle-mpg">
+           Vehicle Fuel Efficiency
+          </label>
+          <input class="input-field" id="vehicle-mpg" min="0" placeholder="25" step="0.1" type="number"/>
+          <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+           Miles per gallon (MPG) or L/100km
+          </p>
+         </div>
+         <div class="input-group">
+          <label for="fuel-price">
+           Fuel Price
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field" id="fuel-price" min="0" placeholder="3.50" step="0.01" type="number"/>
+          </div>
+          <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+           Price per gallon or liter
+          </p>
+         </div>
+         <div class="input-group">
+          <label for="round-trip">
+           Trip Type
+          </label>
+          <select class="input-field" id="round-trip">
+           <option value="one-way">
+            One Way
+           </option>
+           <option value="round-trip">
+            Round Trip
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-calculator">
+          </i>
+          Trip Costs
+         </h3>
+         <div class="input-group">
+          <label for="fuel-needed">
+           Fuel Needed
+          </label>
+          <input class="input-field result-field" id="fuel-needed" placeholder="0.0 gal" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="fuel-cost">
+           Fuel Cost
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="fuel-cost" placeholder="0.00" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="cost-per-mile">
+           Cost per Mile
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="cost-per-mile" placeholder="0.00" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="total-distance">
+           Total Distance
+          </label>
+          <input class="input-field result-field" id="total-distance" placeholder="0 miles" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Fuel Efficiency Tab -->
+      <div class="tab-content" id="fuel-efficiency">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-car">
+          </i>
+          Calculate MPG
+         </h3>
+         <div class="input-group">
+          <label for="miles-driven">
+           Miles Driven
+          </label>
+          <input class="input-field" id="miles-driven" min="0" placeholder="350" step="0.1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="gallons-used">
+           Gallons Used
+          </label>
+          <input class="input-field" id="gallons-used" min="0" placeholder="14.5" step="0.01" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="tank-capacity">
+           Tank Capacity (Optional)
+          </label>
+          <input class="input-field" id="tank-capacity" min="0" placeholder="16" step="0.1" type="number"/>
+          <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+           Used for range calculation
+          </p>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-chart-line">
+          </i>
+          Efficiency Results
+         </h3>
+         <div class="input-group">
+          <label for="calculated-mpg">
+           Miles per Gallon
+          </label>
+          <input class="input-field result-field" id="calculated-mpg" placeholder="0.0 MPG" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="kilometers-per-liter">
+           Kilometers per Liter
+          </label>
+          <input class="input-field result-field" id="kilometers-per-liter" placeholder="0.0 km/L" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="liters-per-100km">
+           Liters per 100km
+          </label>
+          <input class="input-field result-field" id="liters-per-100km" placeholder="0.0 L/100km" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="driving-range">
+           Driving Range
+          </label>
+          <input class="input-field result-field" id="driving-range" placeholder="0 miles" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Annual Cost Tab -->
+      <div class="tab-content" id="annual-cost">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-calendar">
+          </i>
+          Annual Driving
+         </h3>
+         <div class="input-group">
+          <label for="annual-miles">
+           Annual Miles Driven
+          </label>
+          <input class="input-field" id="annual-miles" min="0" placeholder="12000" step="100" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="car-mpg">
+           Vehicle MPG
+          </label>
+          <input class="input-field" id="car-mpg" min="0" placeholder="25" step="0.1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="gas-price">
+           Average Gas Price
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field" id="gas-price" min="0" placeholder="3.50" step="0.01" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="driving-pattern">
+           Driving Pattern
+          </label>
+          <select class="input-field" id="driving-pattern">
+           <option value="1.0">
+            Mostly Highway
+           </option>
+           <option selected="" value="0.85">
+            Mixed Driving
+           </option>
+           <option value="0.7">
+            Mostly City
+           </option>
+           <option value="0.6">
+            Heavy Traffic
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-chart-pie">
+          </i>
+          Annual Costs
+         </h3>
+         <div class="input-group">
+          <label for="annual-fuel-cost">
+           Annual Fuel Cost
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="annual-fuel-cost" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="monthly-fuel-cost">
+           Monthly Fuel Cost
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="monthly-fuel-cost" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="gallons-per-year">
+           Gallons per Year
+          </label>
+          <input class="input-field result-field" id="gallons-per-year" placeholder="0" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="cost-per-mile-annual">
+           Cost per Mile
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="cost-per-mile-annual" placeholder="0.00" readonly="" type="text"/>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="fuel-comparison">
+       <h3>
+        <i class="fas fa-car">
+        </i>
+        Vehicle Fuel Efficiency Comparison
+       </h3>
+       <div class="comparison-grid">
+        <div class="comparison-card">
+         <div class="vehicle-type">
+          🚗 Compact Car
+         </div>
+         <div class="mpg-value">
+          28-35
+         </div>
+         <div class="mpg-label">
+          MPG
+         </div>
+         <p>
+          Honda Civic, Toyota Corolla
+         </p>
+        </div>
+        <div class="comparison-card">
+         <div class="vehicle-type">
+          🚙 Mid-Size SUV
+         </div>
+         <div class="mpg-value">
+          22-28
+         </div>
+         <div class="mpg-label">
+          MPG
+         </div>
+         <p>
+          Toyota RAV4, Honda CR-V
+         </p>
+        </div>
+        <div class="comparison-card">
+         <div class="vehicle-type">
+          🚛 Pickup Truck
+         </div>
+         <div class="mpg-value">
+          18-25
+         </div>
+         <div class="mpg-label">
+          MPG
+         </div>
+         <p>
+          Ford F-150, Chevy Silverado
+         </p>
+        </div>
+        <div class="comparison-card">
+         <div class="vehicle-type">
+          ⚡ Electric Vehicle
+         </div>
+         <div class="mpg-value">
+          100+
+         </div>
+         <div class="mpg-label">
+          MPGe
+         </div>
+         <p>
+          Tesla Model 3, Nissan Leaf
+         </p>
+        </div>
+        <div class="comparison-card">
+         <div class="vehicle-type">
+          🔋 Hybrid
+         </div>
+         <div class="mpg-value">
+          40-55
+         </div>
+         <div class="mpg-label">
+          MPG
+         </div>
+         <p>
+          Toyota Prius, Honda Insight
+         </p>
+        </div>
+        <div class="comparison-card">
+         <div class="vehicle-type">
+          🏎️ Sports Car
+         </div>
+         <div class="mpg-value">
+          15-25
+         </div>
+         <div class="mpg-label">
+          MPG
+         </div>
+         <p>
+          BMW M3, Porsche 911
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="cost-breakdown" id="cost-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Cost Breakdown Analysis
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Cost breakdown items will be generated here -->
+       </div>
+      </div>
+      <div class="trip-planner">
+       <h3>
+        <i class="fas fa-map-marked-alt">
+        </i>
+        Popular Trip Routes
+       </h3>
+       <div class="comparison-grid">
+        <div class="route-card">
+         <div class="route-title">
+          🗽 NYC to Washington DC
+         </div>
+         <div class="route-details">
+          <strong>
+           Distance:
+          </strong>
+          225 miles
+          <br/>
+          <strong>
+           Driving Time:
+          </strong>
+          ~4 hours
+          <br/>
+          <strong>
+           Est. Fuel Cost:
+          </strong>
+          $25-35
+         </div>
+        </div>
+        <div class="route-card">
+         <div class="route-title">
+          🌉 LA to San Francisco
+         </div>
+         <div class="route-details">
+          <strong>
+           Distance:
+          </strong>
+          380 miles
+          <br/>
+          <strong>
+           Driving Time:
+          </strong>
+          ~6 hours
+          <br/>
+          <strong>
+           Est. Fuel Cost:
+          </strong>
+          $42-58
+         </div>
+        </div>
+        <div class="route-card">
+         <div class="route-title">
+          🏙️ Chicago to Detroit
+         </div>
+         <div class="route-details">
+          <strong>
+           Distance:
+          </strong>
+          280 miles
+          <br/>
+          <strong>
+           Driving Time:
+          </strong>
+          ~4.5 hours
+          <br/>
+          <strong>
+           Est. Fuel Cost:
+          </strong>
+          $31-43
+         </div>
+        </div>
+        <div class="route-card">
+         <div class="route-title">
+          🏛️ Boston to Philadelphia
+         </div>
+         <div class="route-details">
+          <strong>
+           Distance:
+          </strong>
+          300 miles
+          <br/>
+          <strong>
+           Driving Time:
+          </strong>
+          ~5 hours
+          <br/>
+          <strong>
+           Est. Fuel Cost:
+          </strong>
+          $33-46
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="efficiency-tips">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Fuel Efficiency Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          🚗 Driving Habits
+         </h4>
+         <p>
+          Maintain steady speeds, avoid rapid acceleration and hard braking. Use cruise control on highways.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔧 Vehicle Maintenance
+         </h4>
+         <p>
+          Keep tires properly inflated, change air filters regularly, and get tune-ups as scheduled.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📦 Reduce Weight
+         </h4>
+         <p>
+          Remove unnecessary items from your car. Every 100 pounds can reduce efficiency by 1-2%.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🌡️ Temperature Control
+         </h4>
+         <p>
+          Use A/C efficiently. At low speeds, windows down is better. At highway speeds, use A/C.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🛣️ Route Planning
+         </h4>
+         <p>
+          Combine errands into one trip. Plan routes to avoid heavy traffic and construction zones.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          ⛽ Fuel Quality
+         </h4>
+         <p>
+          Use the recommended octane level. Higher octane doesn't improve efficiency unless required.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'trip-cost';
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Calculate based on current tab
+            if (tabName === 'trip-cost') {
+                calculateTripCost();
+            } else if (tabName === 'fuel-efficiency') {
+                calculateFuelEfficiency();
+            } else if (tabName === 'annual-cost') {
+                calculateAnnualCost();
+            }
+        }
+
+        function calculateTripCost() {
+            const distance = parseFloat(document.getElementById('trip-distance').value) || 0;
+            const mpg = parseFloat(document.getElementById('vehicle-mpg').value) || 0;
+            const fuelPrice = parseFloat(document.getElementById('fuel-price').value) || 0;
+            const isRoundTrip = document.getElementById('round-trip').value === 'round-trip';
+            const distanceUnit = document.getElementById('distance-unit').value;
+
+            if (distance === 0 || mpg === 0 || fuelPrice === 0) return;
+
+            // Convert km to miles if needed
+            const distanceInMiles = distanceUnit === 'km' ? distance * 0.621371 : distance;
+            const totalDistance = isRoundTrip ? distanceInMiles * 2 : distanceInMiles;
+            
+            const fuelNeeded = totalDistance / mpg;
+            const fuelCost = fuelNeeded * fuelPrice;
+            const costPerMile = fuelCost / totalDistance;
+
+            // Update results
+            document.getElementById('fuel-needed').value = fuelNeeded.toFixed(1) + ' gal';
+            document.getElementById('fuel-cost').value = fuelCost.toFixed(2);
+            document.getElementById('cost-per-mile').value = costPerMile.toFixed(3);
+            document.getElementById('total-distance').value = totalDistance.toFixed(1) + ' miles';
+
+            // Generate cost breakdown
+            generateCostBreakdown(fuelCost, totalDistance, fuelNeeded, fuelPrice);
+        }
+
+        function calculateFuelEfficiency() {
+            const milesDriven = parseFloat(document.getElementById('miles-driven').value) || 0;
+            const gallonsUsed = parseFloat(document.getElementById('gallons-used').value) || 0;
+            const tankCapacity = parseFloat(document.getElementById('tank-capacity').value) || 0;
+
+            if (milesDriven === 0 || gallonsUsed === 0) return;
+
+            const mpg = milesDriven / gallonsUsed;
+            const kmPerLiter = mpg * 0.425144; // Convert MPG to km/L
+            const litersPer100km = 235.214 / mpg; // Convert MPG to L/100km
+            const range = tankCapacity > 0 ? mpg * tankCapacity : 0;
+
+            // Update results
+            document.getElementById('calculated-mpg').value = mpg.toFixed(1) + ' MPG';
+            document.getElementById('kilometers-per-liter').value = kmPerLiter.toFixed(1) + ' km/L';
+            document.getElementById('liters-per-100km').value = litersPer100km.toFixed(1) + ' L/100km';
+            
+            if (range > 0) {
+                document.getElementById('driving-range').value = range.toFixed(0) + ' miles';
+            } else {
+                document.getElementById('driving-range').value = 'N/A';
+            }
+        }
+
+        function calculateAnnualCost() {
+            const annualMiles = parseFloat(document.getElementById('annual-miles').value) || 0;
+            const mpg = parseFloat(document.getElementById('car-mpg').value) || 0;
+            const gasPrice = parseFloat(document.getElementById('gas-price').value) || 0;
+            const drivingPattern = parseFloat(document.getElementById('driving-pattern').value) || 1;
+
+            if (annualMiles === 0 || mpg === 0 || gasPrice === 0) return;
+
+            // Adjust MPG based on driving pattern
+            const adjustedMpg = mpg * drivingPattern;
+            const gallonsPerYear = annualMiles / adjustedMpg;
+            const annualFuelCost = gallonsPerYear * gasPrice;
+            const monthlyFuelCost = annualFuelCost / 12;
+            const costPerMile = annualFuelCost / annualMiles;
+
+            // Update results
+            document.getElementById('annual-fuel-cost').value = annualFuelCost.toFixed(0);
+            document.getElementById('monthly-fuel-cost').value = monthlyFuelCost.toFixed(0);
+            document.getElementById('gallons-per-year').value = gallonsPerYear.toFixed(0) + ' gal';
+            document.getElementById('cost-per-mile-annual').value = costPerMile.toFixed(3);
+
+            // Generate cost breakdown
+            generateAnnualBreakdown(annualFuelCost, monthlyFuelCost, gallonsPerYear, costPerMile);
+        }
+
+        function generateCostBreakdown(totalCost, distance, fuel, pricePerGallon) {
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${totalCost.toFixed(2)}</div>
+                    <div class="breakdown-label">Total Fuel Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${fuel.toFixed(1)} gal</div>
+                    <div class="breakdown-label">Fuel Needed</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${distance.toFixed(0)} mi</div>
+                    <div class="breakdown-label">Total Distance</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${pricePerGallon.toFixed(2)}</div>
+                    <div class="breakdown-label">Price per Gallon</div>
+                </div>
+            `;
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        function generateAnnualBreakdown(annual, monthly, gallons, costPerMile) {
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${annual.toFixed(0)}</div>
+                    <div class="breakdown-label">Annual Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${monthly.toFixed(0)}</div>
+                    <div class="breakdown-label">Monthly Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${gallons.toFixed(0)} gal</div>
+                    <div class="breakdown-label">Annual Gallons</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${costPerMile.toFixed(3)}</div>
+                    <div class="breakdown-label">Cost per Mile</div>
+                </div>
+            `;
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trip cost inputs
+            ['trip-distance', 'vehicle-mpg', 'fuel-price', 'round-trip', 'distance-unit'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        if (currentTab === 'trip-cost') calculateTripCost();
+                    });
+                    element.addEventListener('change', () => {
+                        if (currentTab === 'trip-cost') calculateTripCost();
+                    });
+                }
+            });
+
+            // Fuel efficiency inputs
+            ['miles-driven', 'gallons-used', 'tank-capacity'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        if (currentTab === 'fuel-efficiency') calculateFuelEfficiency();
+                    });
+                }
+            });
+
+            // Annual cost inputs
+            ['annual-miles', 'car-mpg', 'gas-price', 'driving-pattern'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        if (currentTab === 'annual-cost') calculateAnnualCost();
+                    });
+                    element.addEventListener('change', () => {
+                        if (currentTab === 'annual-cost') calculateAnnualCost();
+                    });
+                }
+            });
+
+            // Set example values
+            document.getElementById('trip-distance').value = 300;
+            document.getElementById('vehicle-mpg').value = 25;
+            document.getElementById('fuel-price').value = 3.50;
+            
+            document.getElementById('miles-driven').value = 350;
+            document.getElementById('gallons-used').value = 14;
+            document.getElementById('tank-capacity').value = 16;
+            
+            document.getElementById('annual-miles').value = 12000;
+            document.getElementById('car-mpg').value = 25;
+            document.getElementById('gas-price').value = 3.50;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

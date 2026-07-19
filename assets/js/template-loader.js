@@ -6,9 +6,7 @@ let ROOT_PATH = '';
 (function applyInitialTheme() {
     try {
         const savedTheme = localStorage.getItem('make-qr-theme');
-        const useDark = savedTheme
-            ? savedTheme === 'dark'
-            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = savedTheme === 'dark';
         document.documentElement.dataset.theme = useDark ? 'dark' : 'light';
         document.documentElement.style.colorScheme = useDark ? 'dark' : 'light';
     } catch (error) {
@@ -78,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const headContent = document.head.innerHTML;
 
     Promise.all([
-        fetch(ROOT_PATH + 'assets/shared/header.html').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260719-2').then(r => {
             if (!r.ok) throw new Error('Failed to fetch header');
             return r.text();
         }),
-        fetch(ROOT_PATH + 'assets/shared/footer.html').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260719-2').then(r => {
             if (!r.ok) throw new Error('Failed to fetch footer');
             return r.text();
         })
@@ -144,7 +142,7 @@ function getCustomScripts() {
 function loadNavigationScript() {
     if (document.querySelector('script[data-nav-script]')) return;
     const script = document.createElement('script');
-    script.src = ROOT_PATH + 'assets/js/navigation.js';
+    script.src = ROOT_PATH + 'assets/js/navigation.js?v=20260719-2';
     script.setAttribute('data-nav-script', 'true');
     script.onload = function () {
         if (typeof initNavigation === 'function') initNavigation();
@@ -155,7 +153,7 @@ function loadNavigationScript() {
 function loadSiteAppScript() {
     if (document.querySelector('script[data-site-app]')) return;
     const script = document.createElement('script');
-    script.src = ROOT_PATH + 'assets/js/site-app.js?v=20260718-1';
+    script.src = ROOT_PATH + 'assets/js/site-app.js?v=20260719-1';
     script.setAttribute('data-site-app', 'true');
     document.body.appendChild(script);
 }

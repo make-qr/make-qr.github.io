@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Protein Calculator - Daily Protein Intake Calculator | Free Online Tool
+  </title>
+  <meta content="Calculate your daily protein needs based on weight, activity level, and fitness goals. Free protein calculator for muscle building, weight loss, and maintenance with personalized recommendations." name="description"/>
+  <meta content="protein calculator, daily protein intake, protein needs, muscle building protein, weight loss protein, protein requirements, fitness nutrition" name="keywords"/>
+  <meta content="Calculator Tools" name="author"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/protein-calculator.html" rel="canonical"/>
+  <!-- Open Graph Tags -->
+  <meta content="Protein Calculator - Daily Protein Intake Calculator" property="og:title"/>
+  <meta content="Calculate your daily protein needs based on weight, activity level, and fitness goals. Free protein calculator for muscle building and weight loss." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/protein-calculator.html" property="og:url"/>
+  <meta content="https://make-qr.github.io/calculators/images/protein-calculator.jpg" property="og:image"/>
+  <meta content="Calculator Tools" property="og:site_name"/>
+  <!-- Twitter Card Tags -->
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Protein Calculator - Daily Protein Intake Calculator" name="twitter:title"/>
+  <meta content="Calculate your daily protein needs based on weight, activity level, and fitness goals. Free protein calculator." name="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/images/protein-calculator.jpg" name="twitter:image"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Protein Calculator",
+        "description": "Calculate daily protein intake requirements based on individual needs and fitness goals",
+        "url": "https://make-qr.github.io/calculators/protein-calculator.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Calculator Tools"
+        }
+    }
+  </script>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+  <style>
+   .calculator-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .input-group input, .input-group select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .unit-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .unit-btn {
+            padding: 8px 16px;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .unit-btn.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .calculate-btn {
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .calculate-btn:hover {
+            background: #0056b3;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .protein-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .protein-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .protein-method {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .meal-distribution {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .meal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .meal-row:last-child {
+            border-bottom: none;
+        }
+        
+        .food-sources {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .source-category {
+            margin-bottom: 15px;
+        }
+        
+        .source-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        
+        .source-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .source-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .tips-section {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .calculator-container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .input-section {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .source-list {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--health">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link active" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><span class="sep">/</span>
+                <a href="index.html#health">Health & Fitness</a><span class="sep">/</span>
+                <span class="current">Protein Calculator</span>
+            </nav>
+            <h1>Protein Calculator</h1>
+            <p>Calculate your daily protein requirements based on your weight, activity level, and fitness goals.</p>
+        </div>
+    </section>
+<div class="container">
+   <header>
+    <h2>
+     Protein Calculator
+    </h2>
+    <p>
+     Calculate your daily protein requirements based on your weight, activity level, and fitness goals.
+    </p>
+   </header>
+   <div class="calculator-container">
+    <div class="unit-toggle">
+     <button class="unit-btn active" onclick="toggleUnits('metric')">
+      Metric (kg)
+     </button>
+     <button class="unit-btn" onclick="toggleUnits('imperial')">
+      Imperial (lbs)
+     </button>
+    </div>
+    <div class="input-section">
+     <div class="input-group">
+      <label for="weight">
+       Body Weight:
+      </label>
+      <input id="weight" placeholder="Enter your weight" step="0.1" type="number"/>
+      <small id="weight-unit">
+       kg
+      </small>
+     </div>
+     <div class="input-group">
+      <label for="age">
+       Age:
+      </label>
+      <input id="age" max="100" min="15" placeholder="Enter your age" type="number"/>
+     </div>
+     <div class="input-group">
+      <label for="gender">
+       Gender:
+      </label>
+      <select id="gender">
+       <option value="male">
+        Male
+       </option>
+       <option value="female">
+        Female
+       </option>
+      </select>
+     </div>
+     <div class="input-group">
+      <label for="activity">
+       Activity Level:
+      </label>
+      <select id="activity">
+       <option value="sedentary">
+        Sedentary (little/no exercise)
+       </option>
+       <option value="light">
+        Lightly Active (light exercise 1-3 days/week)
+       </option>
+       <option value="moderate">
+        Moderately Active (moderate exercise 3-5 days/week)
+       </option>
+       <option value="very">
+        Very Active (hard exercise 6-7 days/week)
+       </option>
+       <option value="extreme">
+        Extremely Active (very hard exercise, physical job)
+       </option>
+      </select>
+     </div>
+     <div class="input-group">
+      <label for="goal">
+       Primary Goal:
+      </label>
+      <select id="goal">
+       <option value="maintenance">
+        Maintain Weight/Health
+       </option>
+       <option value="muscle">
+        Build Muscle
+       </option>
+       <option value="weight-loss">
+        Lose Weight
+       </option>
+       <option value="athletic">
+        Athletic Performance
+       </option>
+       <option value="elderly">
+        Active Aging (65+)
+       </option>
+      </select>
+     </div>
+     <div class="input-group">
+      <label for="bodyFat">
+       Body Fat % (optional):
+      </label>
+      <input id="bodyFat" max="50" min="5" placeholder="Enter body fat percentage" type="number"/>
+     </div>
+    </div>
+    <button class="calculate-btn" onclick="calculateProtein()">
+     Calculate Protein Needs
+    </button>
+    <div class="results" id="results" style="display: none;">
+     <h3>
+      Your Daily Protein Requirements
+     </h3>
+     <div id="protein-recommendations">
+     </div>
+     <div id="meal-distribution">
+     </div>
+     <div id="food-sources">
+     </div>
+    </div>
+   </div>
+   <div class="tips-section">
+    <h3>
+     Protein Requirements by Goal
+    </h3>
+    <h4>
+     General Guidelines (per kg body weight):
+    </h4>
+    <ul>
+     <li>
+      <strong>
+       Sedentary Adults:
+      </strong>
+      0.8-1.0g/kg
+     </li>
+     <li>
+      <strong>
+       Active Individuals:
+      </strong>
+      1.2-1.4g/kg
+     </li>
+     <li>
+      <strong>
+       Muscle Building:
+      </strong>
+      1.6-2.2g/kg
+     </li>
+     <li>
+      <strong>
+       Weight Loss:
+      </strong>
+      1.2-1.6g/kg
+     </li>
+     <li>
+      <strong>
+       Athletes:
+      </strong>
+      1.4-2.0g/kg
+     </li>
+     <li>
+      <strong>
+       Elderly (65+):
+      </strong>
+      1.0-1.2g/kg
+     </li>
+    </ul>
+    <h4>
+     Timing Considerations:
+    </h4>
+    <ul>
+     <li>
+      <strong>
+       Post-Workout:
+      </strong>
+      20-40g within 2 hours
+     </li>
+     <li>
+      <strong>
+       Before Bed:
+      </strong>
+      20-30g casein protein
+     </li>
+     <li>
+      <strong>
+       Throughout Day:
+      </strong>
+      20-30g per meal
+     </li>
+     <li>
+      <strong>
+       Breakfast:
+      </strong>
+      Include protein to start metabolism
+     </li>
+    </ul>
+    <h4>
+     Quality Matters:
+    </h4>
+    <ul>
+     <li>
+      <strong>
+       Complete Proteins:
+      </strong>
+      Contain all essential amino acids
+     </li>
+     <li>
+      <strong>
+       Variety:
+      </strong>
+      Combine different protein sources
+     </li>
+     <li>
+      <strong>
+       Leucine:
+      </strong>
+      Key amino acid for muscle synthesis (2.5-3g per meal)
+     </li>
+     <li>
+      <strong>
+       Digestibility:
+      </strong>
+      Animal proteins generally more bioavailable
+     </li>
+    </ul>
+   </div>
+   <div class="tips-section">
+    <h3>
+     Special Considerations
+    </h3>
+    <h4>
+     Increased Protein Needs:
+    </h4>
+    <ul>
+     <li>
+      Pregnancy and breastfeeding
+     </li>
+     <li>
+      Recovery from illness or injury
+     </li>
+     <li>
+      High training volume athletes
+     </li>
+     <li>
+      Older adults (sarcopenia prevention)
+     </li>
+     <li>
+      Caloric restriction/weight loss
+     </li>
+    </ul>
+    <h4>
+     Signs of Adequate Protein Intake:
+    </h4>
+    <ul>
+     <li>
+      Stable energy levels throughout the day
+     </li>
+     <li>
+      Satisfying fullness after meals
+     </li>
+     <li>
+      Maintenance or growth of muscle mass
+     </li>
+     <li>
+      Good recovery from workouts
+     </li>
+     <li>
+      Healthy hair, skin, and nails
+     </li>
+    </ul>
+    <h4>
+     Potential Risks of Excessive Protein:
+    </h4>
+    <ul>
+     <li>
+      Kidney strain (in those with existing kidney issues)
+     </li>
+     <li>
+      Digestive discomfort
+     </li>
+     <li>
+      Dehydration (increased water needs)
+     </li>
+     <li>
+      Nutrient imbalance (crowding out other macros)
+     </li>
+    </ul>
+   </div>
+  </div>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="bmi-calculator.html"><i class="fas fa-arrow-right"></i> BMI Calculator</a>
+                <a class="related-link" href="calorie-calculator.html"><i class="fas fa-arrow-right"></i> Calorie Calculator</a>
+                <a class="related-link" href="body-fat-calculator.html"><i class="fas fa-arrow-right"></i> Body Fat Calculator</a>
+                <a class="related-link" href="bmr-calculator.html"><i class="fas fa-arrow-right"></i> BMR Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let isMetric = true;
+
+        function toggleUnits(unit) {
+            isMetric = unit === 'metric';
+            
+            // Update button appearance
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update unit labels and placeholders
+            document.getElementById('weight-unit').textContent = isMetric ? 'kg' : 'lbs';
+            document.getElementById('weight').placeholder = isMetric ? 'Enter weight in kg' : 'Enter weight in lbs';
+        }
+
+        function calculateProtein() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const activity = document.getElementById('activity').value;
+            const goal = document.getElementById('goal').value;
+            const bodyFat = parseFloat(document.getElementById('bodyFat').value) || null;
+            
+            if (!weight || !age) {
+                alert('Please enter your weight and age.');
+                return;
+            }
+            
+            // Convert to kg if needed
+            let weightKg = weight;
+            if (!isMetric) {
+                weightKg = weight * 0.453592;
+            }
+            
+            // Calculate lean body mass if body fat is provided
+            let leanBodyMass = weightKg;
+            if (bodyFat) {
+                leanBodyMass = weightKg * (1 - bodyFat / 100);
+            }
+            
+            // Determine protein requirements based on goal and activity
+            let proteinMultipliers = {
+                maintenance: { sedentary: 0.8, light: 1.0, moderate: 1.2, very: 1.4, extreme: 1.6 },
+                muscle: { sedentary: 1.6, light: 1.8, moderate: 2.0, very: 2.2, extreme: 2.4 },
+                'weight-loss': { sedentary: 1.2, light: 1.4, moderate: 1.6, very: 1.8, extreme: 2.0 },
+                athletic: { sedentary: 1.4, light: 1.6, moderate: 1.8, very: 2.0, extreme: 2.2 },
+                elderly: { sedentary: 1.0, light: 1.2, moderate: 1.4, very: 1.6, extreme: 1.8 }
+            };
+            
+            // Age adjustments
+            let ageMultiplier = 1.0;
+            if (age >= 65) {
+                ageMultiplier = 1.1; // Increased needs for elderly
+            }
+            
+            // Gender adjustments (minimal difference)
+            let genderMultiplier = gender === 'male' ? 1.0 : 0.95;
+            
+            const baseMultiplier = proteinMultipliers[goal][activity];
+            const finalMultiplier = baseMultiplier * ageMultiplier * genderMultiplier;
+            
+            // Calculate protein needs
+            const proteinGrams = bodyFat ? leanBodyMass * finalMultiplier * 1.1 : weightKg * finalMultiplier;
+            const proteinGramsMin = proteinGrams * 0.9;
+            const proteinGramsMax = proteinGrams * 1.1;
+            
+            // Convert to display units
+            const displayUnit = isMetric ? 'kg' : 'lbs';
+            const displayWeight = isMetric ? weightKg : weight;
+            
+            // Calculate protein per pound/kg
+            const proteinPerUnit = proteinGrams / weightKg;
+            
+            // Generate recommendations
+            displayResults(proteinGramsMin, proteinGramsMax, proteinPerUnit, displayWeight, displayUnit, goal, activity);
+        }
+
+        function displayResults(minProtein, maxProtein, proteinPerUnit, weight, unit, goal, activity) {
+            let recommendationsHTML = `
+                <div class="protein-card">
+                    <div class="protein-amount">${minProtein.toFixed(0)} - ${maxProtein.toFixed(0)}g per day</div>
+                    <div class="protein-method">${proteinPerUnit.toFixed(1)}g per ${unit} body weight</div>
+                    <div style="color: #666; margin-top: 10px;">
+                        Based on: ${goal.replace('-', ' ')} goal with ${activity} activity level
+                    </div>
+                </div>
+            `;
+            
+            // Meal distribution
+            const avgProtein = (minProtein + maxProtein) / 2;
+            const perMeal = avgProtein / 3;
+            const snackProtein = avgProtein * 0.1;
+            
+            let mealHTML = `
+                <div class="meal-distribution">
+                    <h4>Suggested Daily Distribution</h4>
+                    <div class="meal-row">
+                        <span><strong>Breakfast:</strong></span>
+                        <span>${(perMeal * 1.1).toFixed(0)}g</span>
+                    </div>
+                    <div class="meal-row">
+                        <span><strong>Lunch:</strong></span>
+                        <span>${perMeal.toFixed(0)}g</span>
+                    </div>
+                    <div class="meal-row">
+                        <span><strong>Dinner:</strong></span>
+                        <span>${(perMeal * 1.1).toFixed(0)}g</span>
+                    </div>
+                    <div class="meal-row">
+                        <span><strong>Snacks:</strong></span>
+                        <span>${(snackProtein * 2).toFixed(0)}g</span>
+                    </div>
+                    <div class="meal-row" style="border-top: 2px solid #007bff; padding-top: 8px; margin-top: 8px; font-weight: bold;">
+                        <span>Total:</span>
+                        <span>${avgProtein.toFixed(0)}g</span>
+                    </div>
+                </div>
+            `;
+            
+            // Food sources
+            let sourcesHTML = `
+                <div class="food-sources">
+                    <h4>High-Quality Protein Sources</h4>
+                    
+                    <div class="source-category">
+                        <div class="source-title">Animal Proteins (Complete)</div>
+                        <div class="source-list">
+                            <div class="source-item">Chicken breast (25g/100g)</div>
+                            <div class="source-item">Lean beef (26g/100g)</div>
+                            <div class="source-item">Fish/salmon (25g/100g)</div>
+                            <div class="source-item">Eggs (13g/2 large)</div>
+                            <div class="source-item">Greek yogurt (15g/150g)</div>
+                            <div class="source-item">Cottage cheese (14g/100g)</div>
+                            <div class="source-item">Milk (8g/250ml)</div>
+                            <div class="source-item">Tuna (25g/100g)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="source-category">
+                        <div class="source-title">Plant Proteins</div>
+                        <div class="source-list">
+                            <div class="source-item">Lentils (9g/100g cooked)</div>
+                            <div class="source-item">Chickpeas (8g/100g cooked)</div>
+                            <div class="source-item">Quinoa (4.5g/100g cooked)</div>
+                            <div class="source-item">Tofu (8g/100g)</div>
+                            <div class="source-item">Almonds (21g/100g)</div>
+                            <div class="source-item">Peanut butter (25g/100g)</div>
+                            <div class="source-item">Chia seeds (17g/100g)</div>
+                            <div class="source-item">Hemp seeds (31g/100g)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="source-category">
+                        <div class="source-title">Protein Supplements</div>
+                        <div class="source-list">
+                            <div class="source-item">Whey protein (25g/scoop)</div>
+                            <div class="source-item">Casein protein (24g/scoop)</div>
+                            <div class="source-item">Plant protein blend (20g/scoop)</div>
+                            <div class="source-item">Protein bars (10-20g/bar)</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('protein-recommendations').innerHTML = recommendationsHTML;
+            document.getElementById('meal-distribution').innerHTML = mealHTML;
+            document.getElementById('food-sources').innerHTML = sourcesHTML;
+            document.getElementById('results').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+        
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateProtein();
+            }
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

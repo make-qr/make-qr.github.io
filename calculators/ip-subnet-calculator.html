@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/ip-subnet-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   IP Subnet Calculator - CIDR, Network Analysis &amp; Subnet Planning | Make QR Calculators
+  </title>
+  <meta content="Calculate IP subnets, CIDR blocks, network addresses, and subnet masks. Plan network infrastructure with comprehensive subnet analysis tools." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .subnet-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1400px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+        }
+
+        .ip-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .octet-input {
+            width: 70px;
+            text-align: center;
+            padding: 0.8rem 0.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        .subnet-results {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .subnet-table {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table th {
+            background: #f8f9fa;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .binary-display {
+            background: #2d3748;
+            color: #68d391;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+        }
+
+        .binary-label {
+            color: #90cdf4;
+            font-weight: 600;
+        }
+
+        .quick-presets {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            background: white;
+            color: #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .preset-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .info-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .vlsm-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .subnet-input {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .add-subnet-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-subnet-btn:hover {
+            background: #218838;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ip-input {
+                flex-wrap: wrap;
+            }
+        }
+  </style>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "IP Subnet Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online ip subnet calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "IP Subnet Calculator", "item": "https://make-qr.github.io/calculators/ip-subnet-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--utilities">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link active" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#utilities">Utilities</a>
+                <span class="sep">/</span>
+                <span class="current">IP Subnet Calculator</span>
+            </nav>
+            <h1>IP Subnet Calculator</h1>
+            <p>Calculate IP subnets, CIDR blocks, and plan your network infrastructure</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="subnet-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-btn active" onclick="showTab('basic')">
+        <i class="fas fa-calculator">
+        </i>
+        Basic Calculator
+       </button>
+       <button class="tab-btn" onclick="showTab('vlsm')">
+        <i class="fas fa-sitemap">
+        </i>
+        VLSM Planning
+       </button>
+       <button class="tab-btn" onclick="showTab('binary')">
+        <i class="fas fa-code">
+        </i>
+        Binary View
+       </button>
+      </div>
+      <!-- Basic Calculator Tab -->
+      <div class="tab-content active" id="basic-tab">
+       <div class="input-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-edit">
+          </i>
+          Network Input
+         </h3>
+         <div class="input-group">
+          <label>
+           IP Address
+          </label>
+          <div class="ip-input">
+           <input class="octet-input" id="ip1" max="255" min="0" placeholder="192" type="number"/>
+           <span>
+            .
+           </span>
+           <input class="octet-input" id="ip2" max="255" min="0" placeholder="168" type="number"/>
+           <span>
+            .
+           </span>
+           <input class="octet-input" id="ip3" max="255" min="0" placeholder="1" type="number"/>
+           <span>
+            .
+           </span>
+           <input class="octet-input" id="ip4" max="255" min="0" placeholder="1" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="cidr">
+           CIDR Notation (/24)
+          </label>
+          <input class="input-field" id="cidr" max="32" min="1" placeholder="24" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="subnet-mask">
+           Subnet Mask
+          </label>
+          <input class="input-field" id="subnet-mask" placeholder="255.255.255.0" readonly="" type="text"/>
+         </div>
+         <div class="quick-presets">
+          <button class="preset-btn" onclick="loadPreset('192.168.1.0', 24)">
+           Class C /24
+          </button>
+          <button class="preset-btn" onclick="loadPreset('10.0.0.0', 8)">
+           Class A /8
+          </button>
+          <button class="preset-btn" onclick="loadPreset('172.16.0.0', 16)">
+           Class B /16
+          </button>
+          <button class="preset-btn" onclick="loadPreset('192.168.0.0', 16)">
+           /16 Network
+          </button>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-info-circle">
+          </i>
+          Network Summary
+         </h3>
+         <div class="input-group">
+          <label>
+           Network Address
+          </label>
+          <input class="input-field result-field" id="network-addr" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label>
+           Broadcast Address
+          </label>
+          <input class="input-field result-field" id="broadcast-addr" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label>
+           First Host
+          </label>
+          <input class="input-field result-field" id="first-host" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label>
+           Last Host
+          </label>
+          <input class="input-field result-field" id="last-host" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label>
+           Total Hosts
+          </label>
+          <input class="input-field result-field" id="total-hosts" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label>
+           Usable Hosts
+          </label>
+          <input class="input-field result-field" id="usable-hosts" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+       <div class="subnet-results">
+        <h3>
+         <i class="fas fa-chart-bar">
+         </i>
+         Detailed Analysis
+        </h3>
+        <div class="results-grid">
+         <div class="result-card">
+          <div class="result-value" id="network-class">
+           --
+          </div>
+          <div class="result-label">
+           Network Class
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="network-type">
+           --
+          </div>
+          <div class="result-label">
+           Network Type
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="wildcard-mask">
+           --
+          </div>
+          <div class="result-label">
+           Wildcard Mask
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="max-subnets">
+           --
+          </div>
+          <div class="result-label">
+           Max Subnets
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- VLSM Planning Tab -->
+      <div class="tab-content" id="vlsm-tab">
+       <div class="vlsm-section">
+        <h3>
+         <i class="fas fa-sitemap">
+         </i>
+         VLSM Subnet Planning
+        </h3>
+        <div class="input-group">
+         <label>
+          Base Network
+         </label>
+         <input class="input-field" id="base-network" placeholder="192.168.1.0/24" type="text"/>
+        </div>
+        <div id="subnet-requirements">
+         <div class="subnet-input">
+          <input class="input-field" placeholder="Subnet Name" style="flex: 1;" type="text"/>
+          <input class="input-field" placeholder="Required Hosts" style="width: 150px;" type="number"/>
+          <button class="add-subnet-btn" onclick="addSubnetRequirement()">
+           <i class="fas fa-plus">
+           </i>
+           Add
+          </button>
+         </div>
+        </div>
+        <div class="quick-presets">
+         <button class="preset-btn" onclick="loadVLSMExample()">
+          Load Example
+         </button>
+         <button class="preset-btn" onclick="calculateVLSM()">
+          Calculate VLSM
+         </button>
+         <button class="preset-btn" onclick="clearVLSM()">
+          Clear All
+         </button>
+        </div>
+       </div>
+       <div class="subnet-table" id="vlsm-results" style="display: none;">
+        <h3>
+         <i class="fas fa-table">
+         </i>
+         VLSM Allocation Results
+        </h3>
+        <table class="table">
+         <thead>
+          <tr>
+           <th>
+            Subnet Name
+           </th>
+           <th>
+            Required Hosts
+           </th>
+           <th>
+            Allocated Hosts
+           </th>
+           <th>
+            Network Address
+           </th>
+           <th>
+            CIDR
+           </th>
+           <th>
+            Subnet Mask
+           </th>
+           <th>
+            Host Range
+           </th>
+          </tr>
+         </thead>
+         <tbody id="vlsm-table-body">
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <!-- Binary View Tab -->
+      <div class="tab-content" id="binary-tab">
+       <div class="subnet-results">
+        <h3>
+         <i class="fas fa-code">
+         </i>
+         Binary Representation
+        </h3>
+        <div class="binary-display" id="binary-display">
+         <div class="binary-label">
+          IP Address (Binary):
+         </div>
+         <div id="ip-binary">
+          Enter IP address to see binary representation
+         </div>
+         <div class="binary-label" style="margin-top: 1rem;">
+          Subnet Mask (Binary):
+         </div>
+         <div id="mask-binary">
+          Enter subnet mask to see binary representation
+         </div>
+         <div class="binary-label" style="margin-top: 1rem;">
+          Network Address (Binary):
+         </div>
+         <div id="network-binary">
+          Network calculation will appear here
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="info-section">
+       <h3>
+        <i class="fas fa-info-circle">
+        </i>
+        IP Subnetting Guide
+       </h3>
+       <div class="results-grid">
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           Class A Networks
+          </strong>
+         </div>
+         <div>
+          1.0.0.0 - 126.255.255.255
+         </div>
+         <div>
+          Default mask: /8 (255.0.0.0)
+         </div>
+         <div>
+          16,777,214 hosts per network
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           Class B Networks
+          </strong>
+         </div>
+         <div>
+          128.0.0.0 - 191.255.255.255
+         </div>
+         <div>
+          Default mask: /16 (255.255.0.0)
+         </div>
+         <div>
+          65,534 hosts per network
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           Class C Networks
+          </strong>
+         </div>
+         <div>
+          192.0.0.0 - 223.255.255.255
+         </div>
+         <div>
+          Default mask: /24 (255.255.255.0)
+         </div>
+         <div>
+          254 hosts per network
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           Private Networks
+          </strong>
+         </div>
+         <div>
+          10.0.0.0/8
+         </div>
+         <div>
+          172.16.0.0/12
+         </div>
+         <div>
+          192.168.0.0/16
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="info-section">
+       <h3>
+        <i class="fas fa-link">
+        </i>
+        Related Network Tools
+       </h3>
+       <div class="results-grid">
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           <a href="conversion-calculator.html">
+            Conversion Calculator
+           </a>
+          </strong>
+         </div>
+         <div>
+          Convert between different units
+         </div>
+         <div>
+          Length, weight, temperature, volume
+         </div>
+         <div>
+          Perfect for network measurements
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           <a href="password-generator.html">
+            Password Generator
+           </a>
+          </strong>
+         </div>
+         <div>
+          Generate secure passwords
+         </div>
+         <div>
+          Network security essentials
+         </div>
+         <div>
+          Customizable length and complexity
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           <a href="binary-calculator.html">
+            Binary Calculator
+           </a>
+          </strong>
+         </div>
+         <div>
+          Binary, decimal, hex conversions
+         </div>
+         <div>
+          Essential for network calculations
+         </div>
+         <div>
+          Bitwise operations and more
+         </div>
+        </div>
+        <div class="result-card">
+         <div class="result-label">
+          <strong>
+           <a href="scientific-calculator.html">
+            Scientific Calculator
+           </a>
+          </strong>
+         </div>
+         <div>
+          Advanced mathematical functions
+         </div>
+         <div>
+          Logarithms, powers, trigonometry
+         </div>
+         <div>
+          Perfect for network engineering
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="conversion-calculator.html"><i class="fas fa-arrow-right"></i> Unit Conversion</a>
+                <a class="related-link" href="tip-calculator.html"><i class="fas fa-arrow-right"></i> Tip Calculator</a>
+                <a class="related-link" href="password-generator.html"><i class="fas fa-arrow-right"></i> Password Generator</a>
+                <a class="related-link" href="random-number-generator.html"><i class="fas fa-arrow-right"></i> Random Number</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // IP address validation and calculation
+        function validateIP(ip) {
+            return ip >= 0 && ip <= 255;
+        }
+
+        function ipToBinary(ip) {
+            return ip.toString(2).padStart(8, '0');
+        }
+
+        function binaryToIP(binary) {
+            return parseInt(binary, 2);
+        }
+
+        function calculateSubnetMask(cidr) {
+            const mask = [];
+            let remaining = cidr;
+            
+            for (let i = 0; i < 4; i++) {
+                if (remaining >= 8) {
+                    mask.push(255);
+                    remaining -= 8;
+                } else if (remaining > 0) {
+                    mask.push(256 - Math.pow(2, 8 - remaining));
+                    remaining = 0;
+                } else {
+                    mask.push(0);
+                }
+            }
+            
+            return mask;
+        }
+
+        function getNetworkClass(firstOctet) {
+            if (firstOctet >= 1 && firstOctet <= 126) return 'A';
+            if (firstOctet >= 128 && firstOctet <= 191) return 'B';
+            if (firstOctet >= 192 && firstOctet <= 223) return 'C';
+            if (firstOctet >= 224 && firstOctet <= 239) return 'D (Multicast)';
+            return 'E (Experimental)';
+        }
+
+        function getNetworkType(ip) {
+            const [a, b] = ip;
+            if (a === 10) return 'Private';
+            if (a === 172 && b >= 16 && b <= 31) return 'Private';
+            if (a === 192 && b === 168) return 'Private';
+            if (a === 127) return 'Loopback';
+            if (a >= 224) return 'Multicast/Reserved';
+            return 'Public';
+        }
+
+        function calculateNetwork() {
+            // Get IP address
+            const ip = [
+                parseInt(document.getElementById('ip1').value) || 0,
+                parseInt(document.getElementById('ip2').value) || 0,
+                parseInt(document.getElementById('ip3').value) || 0,
+                parseInt(document.getElementById('ip4').value) || 0
+            ];
+
+            // Validate IP
+            if (!ip.every(validateIP)) {
+                clearResults();
+                return;
+            }
+
+            const cidr = parseInt(document.getElementById('cidr').value) || 24;
+            if (cidr < 1 || cidr > 32) {
+                clearResults();
+                return;
+            }
+
+            // Calculate subnet mask
+            const subnetMask = calculateSubnetMask(cidr);
+            document.getElementById('subnet-mask').value = subnetMask.join('.');
+
+            // Calculate network address
+            const networkAddr = ip.map((octet, i) => octet & subnetMask[i]);
+            document.getElementById('network-addr').value = networkAddr.join('.') + '/' + cidr;
+
+            // Calculate broadcast address
+            const wildcardMask = subnetMask.map(octet => 255 - octet);
+            const broadcastAddr = networkAddr.map((octet, i) => octet | wildcardMask[i]);
+            document.getElementById('broadcast-addr').value = broadcastAddr.join('.');
+
+            // Calculate first and last host
+            const firstHost = [...networkAddr];
+            firstHost[3]++;
+            document.getElementById('first-host').value = firstHost.join('.');
+
+            const lastHost = [...broadcastAddr];
+            lastHost[3]--;
+            document.getElementById('last-host').value = lastHost.join('.');
+
+            // Calculate host counts
+            const totalHosts = Math.pow(2, 32 - cidr);
+            const usableHosts = totalHosts - 2;
+            document.getElementById('total-hosts').value = totalHosts.toLocaleString();
+            document.getElementById('usable-hosts').value = usableHosts.toLocaleString();
+
+            // Additional info
+            document.getElementById('network-class').textContent = 'Class ' + getNetworkClass(ip[0]);
+            document.getElementById('network-type').textContent = getNetworkType(ip);
+            document.getElementById('wildcard-mask').textContent = wildcardMask.join('.');
+            document.getElementById('max-subnets').textContent = Math.pow(2, cidr - getDefaultCIDR(ip[0])).toLocaleString();
+
+            // Update binary view
+            updateBinaryView(ip, subnetMask, networkAddr);
+        }
+
+        function getDefaultCIDR(firstOctet) {
+            if (firstOctet <= 126) return 8;
+            if (firstOctet <= 191) return 16;
+            return 24;
+        }
+
+        function updateBinaryView(ip, mask, network) {
+            const ipBinary = ip.map(ipToBinary).join('.');
+            const maskBinary = mask.map(ipToBinary).join('.');
+            const networkBinary = network.map(ipToBinary).join('.');
+
+            document.getElementById('ip-binary').textContent = ipBinary;
+            document.getElementById('mask-binary').textContent = maskBinary;
+            document.getElementById('network-binary').textContent = networkBinary;
+        }
+
+        function loadPreset(network, cidr) {
+            const [ip1, ip2, ip3, ip4] = network.split('.');
+            document.getElementById('ip1').value = ip1;
+            document.getElementById('ip2').value = ip2;
+            document.getElementById('ip3').value = ip3;
+            document.getElementById('ip4').value = ip4;
+            document.getElementById('cidr').value = cidr;
+            calculateNetwork();
+        }
+
+        function clearResults() {
+            ['network-addr', 'broadcast-addr', 'first-host', 'last-host', 'total-hosts', 'usable-hosts'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            ['network-class', 'network-type', 'wildcard-mask', 'max-subnets'].forEach(id => {
+                document.getElementById(id).textContent = '--';
+            });
+        }
+
+        // VLSM functions
+        let subnetRequirements = [];
+
+        function addSubnetRequirement() {
+            const inputs = document.querySelector('.subnet-input');
+            const name = inputs.children[0].value.trim();
+            const hosts = parseInt(inputs.children[1].value);
+
+            if (name && hosts > 0) {
+                subnetRequirements.push({ name, hosts });
+                inputs.children[0].value = '';
+                inputs.children[1].value = '';
+                
+                // Add to display
+                const div = document.createElement('div');
+                div.className = 'subnet-input';
+                div.innerHTML = `
+                    <span style="flex: 1; padding: 0.8rem; background: #e9ecef; border-radius: 8px;">${name}</span>
+                    <span style="width: 150px; padding: 0.8rem; background: #e9ecef; border-radius: 8px; text-align: center;">${hosts} hosts</span>
+                    <button class="add-subnet-btn" style="background: #dc3545;" onclick="removeSubnet(${subnetRequirements.length - 1})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                document.getElementById('subnet-requirements').appendChild(div);
+            }
+        }
+
+        function removeSubnet(index) {
+            subnetRequirements.splice(index, 1);
+            refreshSubnetDisplay();
+        }
+
+        function refreshSubnetDisplay() {
+            const container = document.getElementById('subnet-requirements');
+            container.innerHTML = `
+                <div class="subnet-input">
+                    <input type="text" class="input-field" placeholder="Subnet Name" style="flex: 1;">
+                    <input type="number" class="input-field" placeholder="Required Hosts" style="width: 150px;">
+                    <button class="add-subnet-btn" onclick="addSubnetRequirement()">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+            `;
+            
+            subnetRequirements.forEach((req, index) => {
+                const div = document.createElement('div');
+                div.className = 'subnet-input';
+                div.innerHTML = `
+                    <span style="flex: 1; padding: 0.8rem; background: #e9ecef; border-radius: 8px;">${req.name}</span>
+                    <span style="width: 150px; padding: 0.8rem; background: #e9ecef; border-radius: 8px; text-align: center;">${req.hosts} hosts</span>
+                    <button class="add-subnet-btn" style="background: #dc3545;" onclick="removeSubnet(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function loadVLSMExample() {
+            subnetRequirements = [
+                { name: 'Sales Department', hosts: 50 },
+                { name: 'Engineering', hosts: 30 },
+                { name: 'Marketing', hosts: 20 },
+                { name: 'HR Department', hosts: 10 },
+                { name: 'Management', hosts: 5 }
+            ];
+            document.getElementById('base-network').value = '192.168.1.0/24';
+            refreshSubnetDisplay();
+        }
+
+        function calculateVLSM() {
+            const baseNetwork = document.getElementById('base-network').value;
+            if (!baseNetwork || subnetRequirements.length === 0) return;
+
+            // Sort requirements by host count (descending)
+            const sorted = [...subnetRequirements].sort((a, b) => b.hosts - a.hosts);
+            
+            // Calculate subnets
+            const results = [];
+            let currentNetwork = baseNetwork.split('/')[0];
+            let availableBits = 32 - parseInt(baseNetwork.split('/')[1]);
+            
+            sorted.forEach(req => {
+                const neededHosts = req.hosts + 2; // +2 for network and broadcast
+                const neededBits = Math.ceil(Math.log2(neededHosts));
+                const subnetBits = availableBits - neededBits;
+                const cidr = 32 - neededBits;
+                
+                results.push({
+                    name: req.name,
+                    requiredHosts: req.hosts,
+                    allocatedHosts: Math.pow(2, neededBits) - 2,
+                    network: currentNetwork,
+                    cidr: cidr,
+                    mask: calculateSubnetMask(cidr).join('.'),
+                    range: `${currentNetwork.split('.').slice(0, 3).join('.')}.1 - ${currentNetwork.split('.').slice(0, 3).join('.')}.${Math.pow(2, neededBits) - 2}`
+                });
+                
+                // Calculate next network
+                const octets = currentNetwork.split('.').map(Number);
+                octets[3] += Math.pow(2, neededBits);
+                if (octets[3] > 255) {
+                    octets[2]++;
+                    octets[3] = 0;
+                }
+                currentNetwork = octets.join('.');
+            });
+            
+            displayVLSMResults(results);
+        }
+
+        function displayVLSMResults(results) {
+            const tbody = document.getElementById('vlsm-table-body');
+            tbody.innerHTML = '';
+            
+            results.forEach(result => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = result.name;
+                row.insertCell(1).textContent = result.requiredHosts;
+                row.insertCell(2).textContent = result.allocatedHosts;
+                row.insertCell(3).textContent = result.network;
+                row.insertCell(4).textContent = '/' + result.cidr;
+                row.insertCell(5).textContent = result.mask;
+                row.insertCell(6).textContent = result.range;
+            });
+            
+            document.getElementById('vlsm-results').style.display = 'block';
+        }
+
+        function clearVLSM() {
+            subnetRequirements = [];
+            document.getElementById('base-network').value = '';
+            document.getElementById('vlsm-results').style.display = 'none';
+            refreshSubnetDisplay();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            ['ip1', 'ip2', 'ip3', 'ip4', 'cidr'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateNetwork);
+            });
+            
+            // Load default example
+            loadPreset('192.168.1.0', 24);
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

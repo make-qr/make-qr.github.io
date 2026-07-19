@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/time-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Time Calculator - Add, Subtract &amp; Convert Time | Make QR Calculators
+  </title>
+  <meta content="Free time calculator to add, subtract time, calculate duration, and convert between time zones." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .time-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #fd7e14, #e83e8c);
+            color: white;
+        }
+
+        .calculator-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .time-input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .time-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .time-input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .time-input-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .time-input-container input {
+            width: 60px;
+            padding: 0.8rem 0.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        .time-input-container input:focus {
+            border-color: #fd7e14;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
+        }
+
+        .time-separator {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fd7e14;
+        }
+
+        .time-select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .time-select:focus {
+            border-color: #fd7e14;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #fd7e14, #e83e8c);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-display {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-main {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-time {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fd7e14;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result-label {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .result-conversions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .conversion-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .conversion-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fd7e14;
+        }
+
+        .conversion-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .world-clocks {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .clock-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .clock-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .clock-time {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fd7e14;
+            font-family: 'Courier New', monospace;
+        }
+
+        .clock-timezone {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .clock-city {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .stopwatch-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stopwatch-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fd7e14;
+            font-family: 'Courier New', monospace;
+            margin: 2rem 0;
+        }
+
+        .stopwatch-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stopwatch-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stopwatch-btn.start {
+            background: #28a745;
+            color: white;
+        }
+
+        .stopwatch-btn.stop {
+            background: #dc3545;
+            color: white;
+        }
+
+        .stopwatch-btn.reset {
+            background: #6c757d;
+            color: white;
+        }
+
+        .stopwatch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-times {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-time-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-time-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick-time-card i {
+            font-size: 2rem;
+            color: #fd7e14;
+            margin-bottom: 1rem;
+        }
+
+        .quick-time-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-time-card p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .time-tips {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .time-tips h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        .time-tips ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .time-tips li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+            
+            .time-input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-time {
+                font-size: 2rem;
+            }
+            
+            .stopwatch-display {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .time-calculator {
+                margin: 1rem auto;
+                padding: 1rem;
+                border-radius: 15px;
+            }
+
+            .calculator-tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .tab-button {
+                font-size: 0.85rem;
+                padding: 1rem;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .tab-button:last-child {
+                border-bottom: none;
+            }
+            
+            .calculator-section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .time-input-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .time-input-container {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+
+            .time-input-container input {
+                width: 70px;
+                padding: 1rem 0.5rem;
+                font-size: 1.1rem;
+                border-radius: 10px;
+            }
+
+            .time-separator {
+                font-size: 1.4rem;
+            }
+
+            .time-select {
+                padding: 1rem;
+                font-size: 1rem;
+                border-radius: 10px;
+                width: 100%;
+            }
+
+            .calculate-btn {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+                border-radius: 15px;
+                margin-top: 1rem;
+            }
+
+            .result-display {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .result-time {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .result-label {
+                font-size: 1.1rem;
+            }
+
+            .result-conversions {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .conversion-item {
+                padding: 1rem;
+            }
+
+            .conversion-value {
+                font-size: 1.3rem;
+            }
+
+            .conversion-label {
+                font-size: 0.85rem;
+            }
+
+            .world-clocks {
+                padding: 1rem;
+            }
+
+            .clock-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .clock-item {
+                padding: 1rem;
+            }
+
+            .clock-time {
+                font-size: 1.3rem;
+            }
+
+            .clock-city {
+                font-size: 0.9rem;
+            }
+
+            .clock-timezone {
+                font-size: 0.8rem;
+            }
+            
+            .stopwatch-section {
+                padding: 1.5rem;
+            }
+
+            .stopwatch-display {
+                font-size: 2.8rem;
+                margin: 1.5rem 0;
+            }
+
+            .stopwatch-controls {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .stopwatch-btn {
+                padding: 1rem;
+                font-size: 1rem;
+                border-radius: 12px;
+                width: 100%;
+            }
+
+            .quick-times {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .quick-time-card {
+                padding: 1rem;
+            }
+
+            .quick-time-card i {
+                font-size: 1.5rem;
+            }
+
+            .quick-time-card h4 {
+                font-size: 0.9rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .quick-time-card p {
+                font-size: 0.8rem;
+            }
+
+            .time-tips {
+                padding: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .time-tips h4 {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .time-tips ul {
+                padding-left: 1rem;
+            }
+
+            .time-tips li {
+                font-size: 0.9rem;
+                margin-bottom: 0.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .time-calculator {
+                margin: 0.5rem;
+                padding: 0.8rem;
+            }
+
+            .calculator-section {
+                padding: 1rem;
+            }
+
+            .tab-button {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+
+            .time-input-container {
+                gap: 0.5rem;
+            }
+
+            .time-input-container input {
+                width: 60px;
+                padding: 0.8rem 0.3rem;
+                font-size: 1rem;
+            }
+
+            .time-separator {
+                font-size: 1.2rem;
+            }
+
+            .result-time {
+                font-size: 1.8rem;
+            }
+
+            .result-conversions {
+                grid-template-columns: 1fr;
+            }
+
+            .clock-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-times {
+                grid-template-columns: 1fr;
+            }
+
+            .stopwatch-display {
+                font-size: 2.2rem;
+            }
+
+            .calculate-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .calculate-btn,
+            .tab-button,
+            .stopwatch-btn,
+            .quick-time-card {
+                min-height: 44px;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+
+            .time-input-container input {
+                min-height: 44px;
+            }
+
+            .time-select {
+                min-height: 44px;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Time Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online time calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Time Calculator", "item": "https://make-qr.github.io/calculators/time-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Time Calculator</span>
+            </nav>
+            <h1>Time Calculator</h1>
+            <p>Add, subtract, and convert time with precision</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="time-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('duration')">
+        Duration
+       </button>
+       <button class="tab-button" onclick="switchTab('addsubtract')">
+        Add/Subtract
+       </button>
+       <button class="tab-button" onclick="switchTab('timezone')">
+        Time Zones
+       </button>
+       <button class="tab-button" onclick="switchTab('stopwatch')">
+        Stopwatch
+       </button>
+      </div>
+      <!-- Duration Calculator -->
+      <div id="durationTab">
+       <h3>
+        Calculate Time Duration
+       </h3>
+       <div class="time-input-grid">
+        <div class="time-input-group">
+         <label>
+          Start Time
+         </label>
+         <div class="time-input-container">
+          <input id="startHours" max="23" min="0" type="number" value="9"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="startMinutes" max="59" min="0" type="number" value="0"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="startSeconds" max="59" min="0" type="number" value="0"/>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label>
+          End Time
+         </label>
+         <div class="time-input-container">
+          <input id="endHours" max="23" min="0" type="number" value="17"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="endMinutes" max="59" min="0" type="number" value="30"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="endSeconds" max="59" min="0" type="number" value="0"/>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label>
+          Time Format
+         </label>
+         <select class="time-select" id="timeFormat">
+          <option value="24">
+           24-hour format
+          </option>
+          <option value="12">
+           12-hour format
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateDuration()">
+        <i class="fas fa-clock">
+        </i>
+        Calculate Duration
+       </button>
+      </div>
+      <!-- Add/Subtract Time Calculator -->
+      <div class="calculator-section" id="addsubtractTab" style="display: none;">
+       <h3>
+        Add or Subtract Time
+       </h3>
+       <div class="time-input-grid">
+        <div class="time-input-group">
+         <label>
+          Base Time
+         </label>
+         <div class="time-input-container">
+          <input id="baseHours" max="23" min="0" type="number" value="12"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="baseMinutes" max="59" min="0" type="number" value="0"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="baseSeconds" max="59" min="0" type="number" value="0"/>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label>
+          Time to Add/Subtract
+         </label>
+         <div class="time-input-container">
+          <input id="addHours" min="0" type="number" value="2"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="addMinutes" min="0" type="number" value="30"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="addSeconds" min="0" type="number" value="0"/>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label>
+          Operation
+         </label>
+         <select class="time-select" id="timeOperation">
+          <option value="add">
+           Add Time
+          </option>
+          <option value="subtract">
+           Subtract Time
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateAddSubtract()">
+        <i class="fas fa-plus-minus">
+        </i>
+        Calculate New Time
+       </button>
+      </div>
+      <!-- Time Zone Calculator -->
+      <div class="calculator-section" id="timezoneTab" style="display: none;">
+       <h3>
+        Time Zone Converter
+       </h3>
+       <div class="time-input-grid">
+        <div class="time-input-group">
+         <label>
+          Time
+         </label>
+         <div class="time-input-container">
+          <input id="tzHours" max="23" min="0" type="number" value="12"/>
+          <span class="time-separator">
+           :
+          </span>
+          <input id="tzMinutes" max="59" min="0" type="number" value="0"/>
+         </div>
+        </div>
+        <div class="time-input-group">
+         <label>
+          From Time Zone
+         </label>
+         <select class="time-select" id="fromTimezone">
+          <option value="0">
+           UTC (GMT+0)
+          </option>
+          <option value="-5">
+           EST (GMT-5)
+          </option>
+          <option value="-8">
+           PST (GMT-8)
+          </option>
+          <option value="1">
+           CET (GMT+1)
+          </option>
+          <option value="8">
+           CST (GMT+8)
+          </option>
+          <option value="9">
+           JST (GMT+9)
+          </option>
+          <option value="10">
+           AEST (GMT+10)
+          </option>
+         </select>
+        </div>
+        <div class="time-input-group">
+         <label>
+          To Time Zone
+         </label>
+         <select class="time-select" id="toTimezone">
+          <option value="0">
+           UTC (GMT+0)
+          </option>
+          <option value="-5">
+           EST (GMT-5)
+          </option>
+          <option value="-8">
+           PST (GMT-8)
+          </option>
+          <option value="1">
+           CET (GMT+1)
+          </option>
+          <option value="8">
+           CST (GMT+8)
+          </option>
+          <option value="9">
+           JST (GMT+9)
+          </option>
+          <option value="10">
+           AEST (GMT+10)
+          </option>
+         </select>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="convertTimezone()">
+        <i class="fas fa-globe">
+        </i>
+        Convert Time Zone
+       </button>
+      </div>
+      <!-- Stopwatch -->
+      <div class="calculator-section" id="stopwatchTab" style="display: none;">
+       <h3>
+        Stopwatch
+       </h3>
+       <div class="stopwatch-section">
+        <div class="stopwatch-display" id="stopwatchDisplay">
+         00:00:00
+        </div>
+        <div class="stopwatch-controls">
+         <button class="stopwatch-btn start" onclick="startStopwatch()">
+          Start
+         </button>
+         <button class="stopwatch-btn stop" onclick="stopStopwatch()">
+          Stop
+         </button>
+         <button class="stopwatch-btn reset" onclick="resetStopwatch()">
+          Reset
+         </button>
+        </div>
+       </div>
+      </div>
+      <!-- Results Display -->
+      <div class="result-display" id="resultsDisplay" style="display: none;">
+       <div class="result-main">
+        <div class="result-time" id="resultTime">
+         00:00:00
+        </div>
+        <div class="result-label" id="resultLabel">
+         Result
+        </div>
+       </div>
+       <div class="result-conversions" id="resultConversions">
+        <!-- Conversions will be populated here -->
+       </div>
+      </div>
+      <!-- World Clocks -->
+      <div class="world-clocks">
+       <h3>
+        World Clocks
+       </h3>
+       <div class="clock-grid" id="clockGrid">
+        <!-- World clocks will be populated here -->
+       </div>
+      </div>
+      <!-- Quick Time Calculations -->
+      <div class="quick-times">
+       <div class="quick-time-card" onclick="quickTime('workday')">
+        <i class="fas fa-briefcase">
+        </i>
+        <h4>
+         Standard Work Day
+        </h4>
+        <p>
+         8-hour work day duration
+        </p>
+       </div>
+       <div class="quick-time-card" onclick="quickTime('lunch')">
+        <i class="fas fa-utensils">
+        </i>
+        <h4>
+         Lunch Break
+        </h4>
+        <p>
+         1-hour lunch break
+        </p>
+       </div>
+       <div class="quick-time-card" onclick="quickTime('movie')">
+        <i class="fas fa-film">
+        </i>
+        <h4>
+         Average Movie
+        </h4>
+        <p>
+         2-hour movie duration
+        </p>
+       </div>
+       <div class="quick-time-card" onclick="quickTime('flight')">
+        <i class="fas fa-plane">
+        </i>
+        <h4>
+         Short Flight
+        </h4>
+        <p>
+         3-hour flight duration
+        </p>
+       </div>
+      </div>
+      <div class="time-tips">
+       <h4>
+        <i class="fas fa-clock">
+        </i>
+        Time Calculation Tips
+       </h4>
+       <ul>
+        <li>
+         Always consider time zone differences for global scheduling
+        </li>
+        <li>
+         Remember that duration calculations can span multiple days
+        </li>
+        <li>
+         Use 24-hour format to avoid AM/PM confusion
+        </li>
+        <li>
+         Account for daylight saving time changes when applicable
+        </li>
+        <li>
+         Break times and overtime should be factored into work calculations
+        </li>
+        <li>
+         Different countries may have different work week standards
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+                <a class="related-link" href="world-clock.html"><i class="fas fa-arrow-right"></i> World Clock</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'duration';
+        let stopwatchInterval;
+        let stopwatchTime = 0;
+        let stopwatchRunning = false;
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide tab content
+            document.querySelectorAll('[id$="Tab"]').forEach(section => section.style.display = 'none');
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            
+            // Hide results when switching tabs
+            if (tab !== 'stopwatch') {
+                document.getElementById('resultsDisplay').style.display = 'none';
+            }
+            
+            // Scroll to top of calculator on mobile
+            if (window.innerWidth <= 768) {
+                document.querySelector('.time-calculator').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function calculateDuration() {
+            const startH = parseInt(document.getElementById('startHours').value) || 0;
+            const startM = parseInt(document.getElementById('startMinutes').value) || 0;
+            const startS = parseInt(document.getElementById('startSeconds').value) || 0;
+            
+            const endH = parseInt(document.getElementById('endHours').value) || 0;
+            const endM = parseInt(document.getElementById('endMinutes').value) || 0;
+            const endS = parseInt(document.getElementById('endSeconds').value) || 0;
+
+            // Convert to total seconds
+            const startTotal = startH * 3600 + startM * 60 + startS;
+            const endTotal = endH * 3600 + endM * 60 + endS;
+            
+            let duration = endTotal - startTotal;
+            
+            // Handle next day scenario
+            if (duration < 0) {
+                duration += 24 * 3600; // Add 24 hours
+            }
+
+            const hours = Math.floor(duration / 3600);
+            const minutes = Math.floor((duration % 3600) / 60);
+            const seconds = duration % 60;
+
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            document.getElementById('resultTime').textContent = formattedTime;
+            document.getElementById('resultLabel').textContent = 'Duration';
+
+            // Convert to other units
+            const totalMinutes = Math.floor(duration / 60);
+            const totalHours = Math.floor(duration / 3600);
+            const decimalHours = (duration / 3600).toFixed(2);
+
+            document.getElementById('resultConversions').innerHTML = `
+                <div class="conversion-item">
+                    <div class="conversion-value">${duration}</div>
+                    <div class="conversion-label">Total Seconds</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${totalMinutes}</div>
+                    <div class="conversion-label">Total Minutes</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${totalHours}</div>
+                    <div class="conversion-label">Total Hours</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${decimalHours}</div>
+                    <div class="conversion-label">Decimal Hours</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${(duration / 86400).toFixed(2)}</div>
+                    <div class="conversion-label">Days</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${(duration / 604800).toFixed(2)}</div>
+                    <div class="conversion-label">Weeks</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function calculateAddSubtract() {
+            const baseH = parseInt(document.getElementById('baseHours').value) || 0;
+            const baseM = parseInt(document.getElementById('baseMinutes').value) || 0;
+            const baseS = parseInt(document.getElementById('baseSeconds').value) || 0;
+            
+            const addH = parseInt(document.getElementById('addHours').value) || 0;
+            const addM = parseInt(document.getElementById('addMinutes').value) || 0;
+            const addS = parseInt(document.getElementById('addSeconds').value) || 0;
+            
+            const operation = document.getElementById('timeOperation').value;
+
+            // Convert to total seconds
+            const baseTotal = baseH * 3600 + baseM * 60 + baseS;
+            const addTotal = addH * 3600 + addM * 60 + addS;
+            
+            let result = operation === 'add' ? baseTotal + addTotal : baseTotal - addTotal;
+            
+            // Handle negative results
+            if (result < 0) {
+                result += 24 * 3600; // Add 24 hours
+            }
+            
+            // Handle results over 24 hours
+            result = result % (24 * 3600);
+
+            const hours = Math.floor(result / 3600);
+            const minutes = Math.floor((result % 3600) / 60);
+            const seconds = result % 60;
+
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            document.getElementById('resultTime').textContent = formattedTime;
+            document.getElementById('resultLabel').textContent = operation === 'add' ? 'Added Time' : 'Subtracted Time';
+
+            // Show conversions
+            document.getElementById('resultConversions').innerHTML = `
+                <div class="conversion-item">
+                    <div class="conversion-value">${formatTime12Hour(hours, minutes)}</div>
+                    <div class="conversion-label">12-Hour Format</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${formattedTime}</div>
+                    <div class="conversion-label">24-Hour Format</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${result}</div>
+                    <div class="conversion-label">Total Seconds</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${Math.floor(result / 60)}</div>
+                    <div class="conversion-label">Total Minutes</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function convertTimezone() {
+            const hours = parseInt(document.getElementById('tzHours').value) || 0;
+            const minutes = parseInt(document.getElementById('tzMinutes').value) || 0;
+            const fromTz = parseInt(document.getElementById('fromTimezone').value);
+            const toTz = parseInt(document.getElementById('toTimezone').value);
+
+            // Convert to UTC first
+            const utcHours = hours - fromTz;
+            const utcMinutes = minutes;
+            
+            // Convert to target timezone
+            let targetHours = utcHours + toTz;
+            let targetMinutes = utcMinutes;
+            
+            // Handle day overflow
+            if (targetHours < 0) {
+                targetHours += 24;
+            } else if (targetHours >= 24) {
+                targetHours -= 24;
+            }
+
+            const formattedTime = `${targetHours.toString().padStart(2, '0')}:${targetMinutes.toString().padStart(2, '0')}`;
+
+            document.getElementById('resultTime').textContent = formattedTime;
+            document.getElementById('resultLabel').textContent = 'Converted Time';
+
+            // Show timezone info
+            document.getElementById('resultConversions').innerHTML = `
+                <div class="conversion-item">
+                    <div class="conversion-value">${formatTime12Hour(targetHours, targetMinutes)}</div>
+                    <div class="conversion-label">12-Hour Format</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${formattedTime}</div>
+                    <div class="conversion-label">24-Hour Format</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${Math.abs(toTz - fromTz)}</div>
+                    <div class="conversion-label">Hour Difference</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value">${toTz > fromTz ? 'Ahead' : 'Behind'}</div>
+                    <div class="conversion-label">Relative Position</div>
+                </div>
+            `;
+
+            document.getElementById('resultsDisplay').style.display = 'block';
+        }
+
+        function formatTime12Hour(hours, minutes) {
+            const period = hours >= 12 ? 'PM' : 'AM';
+            const displayHours = hours % 12 || 12;
+            return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+        }
+
+        function startStopwatch() {
+            if (!stopwatchRunning) {
+                stopwatchRunning = true;
+                stopwatchInterval = setInterval(() => {
+                    stopwatchTime++;
+                    updateStopwatchDisplay();
+                }, 1000);
+            }
+        }
+
+        function stopStopwatch() {
+            if (stopwatchRunning) {
+                stopwatchRunning = false;
+                clearInterval(stopwatchInterval);
+            }
+        }
+
+        function resetStopwatch() {
+            stopwatchRunning = false;
+            clearInterval(stopwatchInterval);
+            stopwatchTime = 0;
+            updateStopwatchDisplay();
+        }
+
+        function updateStopwatchDisplay() {
+            const hours = Math.floor(stopwatchTime / 3600);
+            const minutes = Math.floor((stopwatchTime % 3600) / 60);
+            const seconds = stopwatchTime % 60;
+            
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('stopwatchDisplay').textContent = formattedTime;
+        }
+
+        function updateWorldClocks() {
+            const now = new Date();
+            const clockData = [
+                { city: 'New York', timezone: -5, country: 'USA' },
+                { city: 'London', timezone: 0, country: 'UK' },
+                { city: 'Tokyo', timezone: 9, country: 'Japan' },
+                { city: 'Sydney', timezone: 10, country: 'Australia' },
+                { city: 'Dubai', timezone: 4, country: 'UAE' },
+                { city: 'Los Angeles', timezone: -8, country: 'USA' }
+            ];
+
+            const clockGrid = document.getElementById('clockGrid');
+            clockGrid.innerHTML = clockData.map(clock => {
+                const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+                const cityTime = new Date(utc + (clock.timezone * 3600000));
+                
+                return `
+                    <div class="clock-item">
+                        <div class="clock-city">${clock.city}</div>
+                        <div class="clock-time">${cityTime.toLocaleTimeString('en-US', { hour12: false }).slice(0, 5)}</div>
+                        <div class="clock-timezone">GMT${clock.timezone >= 0 ? '+' : ''}${clock.timezone}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function quickTime(type) {
+            switch (type) {
+                case 'workday':
+                    document.getElementById('startHours').value = 9;
+                    document.getElementById('startMinutes').value = 0;
+                    document.getElementById('endHours').value = 17;
+                    document.getElementById('endMinutes').value = 0;
+                    switchTab('duration');
+                    calculateDuration();
+                    break;
+                case 'lunch':
+                    document.getElementById('baseHours').value = 12;
+                    document.getElementById('baseMinutes').value = 0;
+                    document.getElementById('addHours').value = 1;
+                    document.getElementById('addMinutes').value = 0;
+                    document.getElementById('timeOperation').value = 'add';
+                    switchTab('addsubtract');
+                    calculateAddSubtract();
+                    break;
+                case 'movie':
+                    document.getElementById('startHours').value = 19;
+                    document.getElementById('startMinutes').value = 0;
+                    document.getElementById('endHours').value = 21;
+                    document.getElementById('endMinutes').value = 0;
+                    switchTab('duration');
+                    calculateDuration();
+                    break;
+                case 'flight':
+                    document.getElementById('startHours').value = 10;
+                    document.getElementById('startMinutes').value = 0;
+                    document.getElementById('endHours').value = 13;
+                    document.getElementById('endMinutes').value = 0;
+                    switchTab('duration');
+                    calculateDuration();
+                    break;
+            }
+        }
+
+        // Initialize world clocks
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWorldClocks();
+            setInterval(updateWorldClocks, 60000); // Update every minute
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

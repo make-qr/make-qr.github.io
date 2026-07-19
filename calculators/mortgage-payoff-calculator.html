@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/mortgage-payoff-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Mortgage Payoff Calculator - Early Payment &amp; Extra Principal | Make QR Calculators
+  </title>
+  <meta content="Calculate mortgage payoff scenarios with extra payments. See how additional principal payments can save thousands in interest and reduce loan term." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .payoff-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #fd7e14 0%, #e83e8c 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #fd7e14;
+            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .payment-options {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-card.active {
+            border-color: #28a745;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+        }
+
+        .option-title {
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-section {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .comparison-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .savings-value { color: #28a745; }
+        .time-value { color: #17a2b8; }
+        .interest-value { color: #dc3545; }
+
+        .payment-schedule {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            max-height: 400px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .strategies-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .strategy-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .strategy-title {
+            font-weight: 700;
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-pros {
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-cons {
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Mortgage Payoff Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online mortgage payoff calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Mortgage Payoff Calculator", "item": "https://make-qr.github.io/calculators/mortgage-payoff-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Mortgage Payoff Calculator</span>
+            </nav>
+            <h1>Mortgage Payoff Calculator</h1>
+            <p>Calculate savings from extra mortgage payments and early payoff strategies</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="payoff-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-edit">
+         </i>
+         Mortgage Details
+        </h3>
+        <div class="input-group">
+         <label for="loan-amount">
+          Original Loan Amount
+         </label>
+         <input class="input-field" id="loan-amount" placeholder="300000" step="1000" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="current-balance">
+          Current Balance
+         </label>
+         <input class="input-field" id="current-balance" placeholder="250000" step="1000" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="interest-rate">
+          Annual Interest Rate (%)
+         </label>
+         <input class="input-field" id="interest-rate" placeholder="4.5" step="0.01" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="remaining-years">
+          Remaining Years
+         </label>
+         <input class="input-field" id="remaining-years" placeholder="25" step="0.5" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="current-payment">
+          Current Monthly Payment
+         </label>
+         <input class="input-field" id="current-payment" placeholder="1500" step="10" type="number"/>
+        </div>
+        <h4 style="margin: 2rem 0 1rem 0; color: #fd7e14;">
+         <i class="fas fa-plus">
+         </i>
+         Extra Payment Options
+        </h4>
+        <div class="input-group">
+         <label for="extra-monthly">
+          Extra Monthly Payment
+         </label>
+         <input class="input-field" id="extra-monthly" placeholder="200" step="10" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="extra-yearly">
+          Extra Yearly Payment
+         </label>
+         <input class="input-field" id="extra-yearly" placeholder="0" step="100" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="one-time-payment">
+          One-time Extra Payment
+         </label>
+         <input class="input-field" id="one-time-payment" placeholder="0" step="1000" type="number"/>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-chart-line">
+         </i>
+         Payoff Results
+        </h3>
+        <div class="input-group">
+         <label for="normal-payoff">
+          Normal Payoff Date
+         </label>
+         <input class="input-field result-field" id="normal-payoff" placeholder="--" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="early-payoff">
+          Early Payoff Date
+         </label>
+         <input class="input-field result-field" id="early-payoff" placeholder="--" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="time-saved">
+          Time Saved
+         </label>
+         <input class="input-field result-field" id="time-saved" placeholder="--" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="normal-interest">
+          Normal Total Interest
+         </label>
+         <input class="input-field result-field" id="normal-interest" placeholder="--" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="early-interest">
+          Early Total Interest
+         </label>
+         <input class="input-field result-field" id="early-interest" placeholder="--" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="interest-saved">
+          Interest Saved
+         </label>
+         <input class="input-field result-field" id="interest-saved" placeholder="--" readonly="" type="text"/>
+        </div>
+       </div>
+      </div>
+      <div class="payment-options">
+       <h3>
+        <i class="fas fa-credit-card">
+        </i>
+        Payment Strategy Options
+       </h3>
+       <div class="options-grid">
+        <div class="option-card active" onclick="selectStrategy('extra-monthly')">
+         <div class="option-title">
+          Extra Monthly Payment
+         </div>
+         <p>
+          Add a fixed amount to your monthly payment
+         </p>
+         <p>
+          <strong>
+           Best for:
+          </strong>
+          Steady income, consistent savings
+         </p>
+        </div>
+        <div class="option-card" onclick="selectStrategy('biweekly')">
+         <div class="option-title">
+          Bi-weekly Payments
+         </div>
+         <p>
+          Pay half your monthly payment every two weeks
+         </p>
+         <p>
+          <strong>
+           Best for:
+          </strong>
+          Bi-weekly paycheck schedule
+         </p>
+        </div>
+        <div class="option-card" onclick="selectStrategy('yearly-bonus')">
+         <div class="option-title">
+          Annual Extra Payment
+         </div>
+         <p>
+          Apply annual bonus or tax refund to principal
+         </p>
+         <p>
+          <strong>
+           Best for:
+          </strong>
+          Irregular extra income
+         </p>
+        </div>
+        <div class="option-card" onclick="selectStrategy('aggressive')">
+         <div class="option-title">
+          Aggressive Paydown
+         </div>
+         <p>
+          Combine multiple strategies for maximum savings
+         </p>
+         <p>
+          <strong>
+           Best for:
+          </strong>
+          High income, debt-free goals
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="comparison-section" id="comparison-section" style="display: none;">
+       <h3>
+        <i class="fas fa-balance-scale">
+        </i>
+        Payoff Comparison
+       </h3>
+       <div class="comparison-grid">
+        <div class="comparison-card">
+         <div class="comparison-value savings-value" id="total-savings">
+          --
+         </div>
+         <div>
+          Total Interest Saved
+         </div>
+        </div>
+        <div class="comparison-card">
+         <div class="comparison-value time-value" id="months-saved">
+          --
+         </div>
+         <div>
+          Months Saved
+         </div>
+        </div>
+        <div class="comparison-card">
+         <div class="comparison-value interest-value" id="monthly-savings">
+          --
+         </div>
+         <div>
+          Avg Monthly Interest Savings
+         </div>
+        </div>
+        <div class="comparison-card">
+         <div class="comparison-value" id="break-even" style="color: #6f42c1;">
+          --
+         </div>
+         <div>
+          Break-even Point
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="payment-schedule" id="schedule-section" style="display: none;">
+       <h3>
+        <i class="fas fa-calendar-alt">
+        </i>
+        Payment Schedule Preview
+       </h3>
+       <div class="table-container">
+        <table>
+         <thead>
+          <tr>
+           <th>
+            Payment #
+           </th>
+           <th>
+            Date
+           </th>
+           <th>
+            Payment
+           </th>
+           <th>
+            Principal
+           </th>
+           <th>
+            Interest
+           </th>
+           <th>
+            Extra Payment
+           </th>
+           <th>
+            Balance
+           </th>
+          </tr>
+         </thead>
+         <tbody id="schedule-table-body">
+          <!-- Schedule rows will be generated here -->
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <div class="strategies-section">
+       <h3>
+        <i class="fas fa-lightbulb">
+        </i>
+        Mortgage Payoff Strategies
+       </h3>
+       <div class="strategies-grid">
+        <div class="strategy-card">
+         <div class="strategy-title">
+          Bi-weekly Payments
+         </div>
+         <div class="strategy-pros">
+          ✓ Painless 26 payments vs 12
+         </div>
+         <div class="strategy-pros">
+          ✓ Saves 4-6 years typically
+         </div>
+         <div class="strategy-cons">
+          ✗ May have setup fees
+         </div>
+         <div class="strategy-cons">
+          ✗ Less flexibility
+         </div>
+        </div>
+        <div class="strategy-card">
+         <div class="strategy-title">
+          Extra Principal
+         </div>
+         <div class="strategy-pros">
+          ✓ Immediate interest savings
+         </div>
+         <div class="strategy-pros">
+          ✓ Flexible amounts
+         </div>
+         <div class="strategy-cons">
+          ✗ Requires discipline
+         </div>
+         <div class="strategy-cons">
+          ✗ Opportunity cost
+         </div>
+        </div>
+        <div class="strategy-card">
+         <div class="strategy-title">
+          Refinancing
+         </div>
+         <div class="strategy-pros">
+          ✓ Lower interest rate
+         </div>
+         <div class="strategy-pros">
+          ✓ Reset to shorter term
+         </div>
+         <div class="strategy-cons">
+          ✗ Closing costs
+         </div>
+         <div class="strategy-cons">
+          ✗ Credit requirements
+         </div>
+        </div>
+        <div class="strategy-card">
+         <div class="strategy-title">
+          Recast/Re-amortization
+         </div>
+         <div class="strategy-pros">
+          ✓ Lower monthly payments
+         </div>
+         <div class="strategy-pros">
+          ✓ Keep current rate
+         </div>
+         <div class="strategy-cons">
+          ✗ Requires large payment
+         </div>
+         <div class="strategy-cons">
+          ✗ Not all lenders offer
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentStrategy = 'extra-monthly';
+
+        function selectStrategy(strategy) {
+            currentStrategy = strategy;
+            
+            // Update UI
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.target.closest('.option-card').classList.add('active');
+
+            // Apply strategy and recalculate
+            applyStrategy(strategy);
+            calculatePayoff();
+        }
+
+        function applyStrategy(strategy) {
+            const currentPayment = parseFloat(document.getElementById('current-payment').value) || 0;
+            
+            switch (strategy) {
+                case 'biweekly':
+                    // Bi-weekly is 26 payments vs 12, so 2.17 extra payments per year
+                    const biweeklyExtra = (currentPayment / 2) * 2.17 / 12;
+                    document.getElementById('extra-monthly').value = biweeklyExtra.toFixed(0);
+                    break;
+                    
+                case 'yearly-bonus':
+                    // Suggest 1 month's payment as annual extra
+                    document.getElementById('extra-yearly').value = currentPayment.toFixed(0);
+                    document.getElementById('extra-monthly').value = 0;
+                    break;
+                    
+                case 'aggressive':
+                    // Combine 10% extra monthly + annual bonus
+                    document.getElementById('extra-monthly').value = (currentPayment * 0.1).toFixed(0);
+                    document.getElementById('extra-yearly').value = currentPayment.toFixed(0);
+                    break;
+                    
+                default:
+                    // Keep current values for extra-monthly
+                    break;
+            }
+        }
+
+        function calculatePayoff() {
+            const currentBalance = parseFloat(document.getElementById('current-balance').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || 0;
+            const remainingYears = parseFloat(document.getElementById('remaining-years').value) || 0;
+            const currentPayment = parseFloat(document.getElementById('current-payment').value) || 0;
+            const extraMonthly = parseFloat(document.getElementById('extra-monthly').value) || 0;
+            const extraYearly = parseFloat(document.getElementById('extra-yearly').value) || 0;
+            const oneTimePayment = parseFloat(document.getElementById('one-time-payment').value) || 0;
+
+            if (currentBalance === 0 || interestRate === 0 || remainingYears === 0 || currentPayment === 0) {
+                clearResults();
+                return;
+            }
+
+            const monthlyRate = interestRate / 12;
+            const totalMonths = remainingYears * 12;
+
+            // Calculate normal payoff scenario
+            const normalResult = calculateMortgagePayoff(
+                currentBalance, 
+                monthlyRate, 
+                totalMonths, 
+                currentPayment, 
+                0, 
+                0, 
+                0
+            );
+
+            // Calculate early payoff scenario
+            let adjustedBalance = currentBalance - oneTimePayment;
+            const earlyResult = calculateMortgagePayoff(
+                adjustedBalance, 
+                monthlyRate, 
+                totalMonths, 
+                currentPayment, 
+                extraMonthly, 
+                extraYearly, 
+                oneTimePayment
+            );
+
+            // Update results
+            updateResults(normalResult, earlyResult);
+            
+            // Generate comparison
+            generateComparison(normalResult, earlyResult);
+            
+            // Generate payment schedule
+            generatePaymentSchedule(adjustedBalance, monthlyRate, currentPayment, extraMonthly, extraYearly);
+
+            // Show sections
+            document.getElementById('comparison-section').style.display = 'block';
+            document.getElementById('schedule-section').style.display = 'block';
+        }
+
+        function calculateMortgagePayoff(balance, monthlyRate, maxMonths, payment, extraMonthly, extraYearly, oneTime) {
+            let currentBalance = balance;
+            let month = 0;
+            let totalInterest = 0;
+            let payments = [];
+
+            while (currentBalance > 0.01 && month < maxMonths) {
+                month++;
+                
+                const interestPayment = currentBalance * monthlyRate;
+                let principalPayment = payment - interestPayment;
+                let extraPayment = extraMonthly;
+                
+                // Add yearly extra payment in December
+                if (month % 12 === 0) {
+                    extraPayment += extraYearly;
+                }
+
+                // Total principal payment
+                const totalPrincipal = Math.min(principalPayment + extraPayment, currentBalance);
+                
+                currentBalance -= totalPrincipal;
+                totalInterest += interestPayment;
+
+                payments.push({
+                    month: month,
+                    payment: payment + extraPayment,
+                    principal: totalPrincipal,
+                    interest: interestPayment,
+                    extra: extraPayment,
+                    balance: currentBalance
+                });
+
+                if (currentBalance <= 0) break;
+            }
+
+            return {
+                months: month,
+                totalInterest: totalInterest,
+                totalPaid: balance + totalInterest,
+                payments: payments
+            };
+        }
+
+        function updateResults(normalResult, earlyResult) {
+            const today = new Date();
+            
+            // Calculate payoff dates
+            const normalPayoffDate = new Date(today);
+            normalPayoffDate.setMonth(normalPayoffDate.getMonth() + normalResult.months);
+            
+            const earlyPayoffDate = new Date(today);
+            earlyPayoffDate.setMonth(earlyPayoffDate.getMonth() + earlyResult.months);
+
+            // Time saved
+            const monthsSaved = normalResult.months - earlyResult.months;
+            const yearsSaved = Math.floor(monthsSaved / 12);
+            const remainingMonths = monthsSaved % 12;
+
+            // Interest saved
+            const interestSaved = normalResult.totalInterest - earlyResult.totalInterest;
+
+            // Update UI
+            document.getElementById('normal-payoff').value = formatDate(normalPayoffDate);
+            document.getElementById('early-payoff').value = formatDate(earlyPayoffDate);
+            document.getElementById('time-saved').value = formatTimeSaved(yearsSaved, remainingMonths);
+            document.getElementById('normal-interest').value = `$${normalResult.totalInterest.toLocaleString()}`;
+            document.getElementById('early-interest').value = `$${earlyResult.totalInterest.toLocaleString()}`;
+            document.getElementById('interest-saved').value = `$${interestSaved.toLocaleString()}`;
+        }
+
+        function generateComparison(normalResult, earlyResult) {
+            const interestSaved = normalResult.totalInterest - earlyResult.totalInterest;
+            const monthsSaved = normalResult.months - earlyResult.months;
+            const avgMonthlySavings = monthsSaved > 0 ? interestSaved / monthsSaved : 0;
+
+            document.getElementById('total-savings').textContent = `$${interestSaved.toLocaleString()}`;
+            document.getElementById('months-saved').textContent = monthsSaved;
+            document.getElementById('monthly-savings').textContent = `$${avgMonthlySavings.toLocaleString()}`;
+            
+            // Break-even calculation (simplified)
+            const extraPayment = parseFloat(document.getElementById('extra-monthly').value) || 0;
+            const breakEvenMonths = extraPayment > 0 ? Math.round(interestSaved / (extraPayment * 12)) : 0;
+            document.getElementById('break-even').textContent = `${breakEvenMonths} years`;
+        }
+
+        function generatePaymentSchedule(balance, monthlyRate, payment, extraMonthly, extraYearly) {
+            const tbody = document.getElementById('schedule-table-body');
+            tbody.innerHTML = '';
+
+            let currentBalance = balance;
+            let month = 0;
+            const today = new Date();
+
+            // Show first 12 months
+            while (currentBalance > 0.01 && month < 12) {
+                month++;
+                
+                const paymentDate = new Date(today);
+                paymentDate.setMonth(paymentDate.getMonth() + month);
+                
+                const interestPayment = currentBalance * monthlyRate;
+                let principalPayment = payment - interestPayment;
+                let extraPayment = extraMonthly;
+                
+                if (month % 12 === 0) {
+                    extraPayment += extraYearly;
+                }
+
+                const totalPrincipal = Math.min(principalPayment + extraPayment, currentBalance);
+                currentBalance -= totalPrincipal;
+
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${month}</td>
+                    <td>${formatDateShort(paymentDate)}</td>
+                    <td>$${(payment + extraPayment).toLocaleString()}</td>
+                    <td>$${principalPayment.toLocaleString()}</td>
+                    <td>$${interestPayment.toLocaleString()}</td>
+                    <td>$${extraPayment.toLocaleString()}</td>
+                    <td>$${currentBalance.toLocaleString()}</td>
+                `;
+            }
+        }
+
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        function formatDateShort(date) {
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                year: 'numeric' 
+            });
+        }
+
+        function formatTimeSaved(years, months) {
+            if (years === 0) {
+                return `${months} months`;
+            } else if (months === 0) {
+                return `${years} years`;
+            } else {
+                return `${years} years, ${months} months`;
+            }
+        }
+
+        function clearResults() {
+            ['normal-payoff', 'early-payoff', 'time-saved', 'normal-interest', 'early-interest', 'interest-saved'].forEach(id => {
+                document.getElementById(id).value = '--';
+            });
+            
+            document.getElementById('comparison-section').style.display = 'none';
+            document.getElementById('schedule-section').style.display = 'none';
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            ['loan-amount', 'current-balance', 'interest-rate', 'remaining-years', 'current-payment', 
+             'extra-monthly', 'extra-yearly', 'one-time-payment'].forEach(id => {
+                const element = document.getElementById(id);
+                element.addEventListener('input', calculatePayoff);
+                element.addEventListener('change', calculatePayoff);
+            });
+
+            // Set default values
+            document.getElementById('loan-amount').value = 300000;
+            document.getElementById('current-balance').value = 250000;
+            document.getElementById('interest-rate').value = 4.5;
+            document.getElementById('remaining-years').value = 25;
+            document.getElementById('current-payment').value = 1500;
+            document.getElementById('extra-monthly').value = 200;
+
+            calculatePayoff();
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

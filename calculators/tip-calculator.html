@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/tip-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Tip Calculator - Calculate Tips &amp; Split Bills | Make QR Calculators
+  </title>
+  <meta content="Free tip calculator to calculate tips and split bills among multiple people. Easy to use with preset tip percentages." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .tip-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .currency-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .currency-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .tip-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-btn {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tip-btn:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+
+        .tip-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .custom-tip {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .custom-tip input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .people-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .counter-btn {
+            width: 3rem;
+            height: 3rem;
+            border: none;
+            border-radius: 50%;
+            background: #007bff;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .counter-btn:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .counter-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .people-count {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .results-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .bill-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        .summary-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background: #c82333;
+        }
+
+        .share-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .share-btn:hover {
+            background: #218838;
+        }
+
+        @media (max-width: 768px) {
+            .tip-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Tip Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online tip calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Tip Calculator", "item": "https://make-qr.github.io/calculators/tip-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--utilities">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link active" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#utilities">Utilities</a>
+                <span class="sep">/</span>
+                <span class="current">Tip Calculator</span>
+            </nav>
+            <h1>Tip Calculator</h1>
+            <p>Calculate tips and split bills easily with friends</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="tip-calculator">
+      <div class="input-group">
+       <label for="billAmount">
+        Bill Amount
+       </label>
+       <div class="input-wrapper">
+        <span class="currency-symbol">
+         $
+        </span>
+        <input class="currency-input" id="billAmount" min="0" placeholder="0.00" step="0.01" type="number"/>
+       </div>
+      </div>
+      <div class="input-group">
+       <label>
+        Select Tip Percentage
+       </label>
+       <div class="tip-buttons">
+        <button class="tip-btn" data-tip="10">
+         10%
+        </button>
+        <button class="tip-btn" data-tip="15">
+         15%
+        </button>
+        <button class="tip-btn" data-tip="18">
+         18%
+        </button>
+        <button class="tip-btn active" data-tip="20">
+         20%
+        </button>
+        <button class="tip-btn" data-tip="22">
+         22%
+        </button>
+        <button class="tip-btn" data-tip="25">
+         25%
+        </button>
+        <button class="tip-btn" data-tip="30">
+         30%
+        </button>
+        <button class="tip-btn" data-tip="0">
+         No Tip
+        </button>
+       </div>
+       <div class="custom-tip">
+        <label for="customTip">
+         Custom:
+        </label>
+        <input id="customTip" max="100" min="0" placeholder="Enter custom %" step="0.1" type="number"/>
+        <span>
+         %
+        </span>
+       </div>
+      </div>
+      <div class="input-group">
+       <label>
+        Number of People
+       </label>
+       <div class="people-counter">
+        <button class="counter-btn" id="decreaseBtn" onclick="changePeople(-1)">
+         −
+        </button>
+        <span class="people-count" id="peopleCount">
+         1
+        </span>
+        <button class="counter-btn" id="increaseBtn" onclick="changePeople(1)">
+         +
+        </button>
+       </div>
+      </div>
+      <div class="results-section">
+       <div class="results-title">
+        Results
+       </div>
+       <div class="result-grid">
+        <div class="result-item">
+         <div class="result-label">
+          Tip Amount
+         </div>
+         <div class="result-value" id="tipAmount">
+          $0.00
+         </div>
+        </div>
+        <div class="result-item">
+         <div class="result-label">
+          Total Bill
+         </div>
+         <div class="result-value" id="totalAmount">
+          $0.00
+         </div>
+        </div>
+        <div class="result-item">
+         <div class="result-label">
+          Per Person
+         </div>
+         <div class="result-value" id="perPerson">
+          $0.00
+         </div>
+        </div>
+        <div class="result-item">
+         <div class="result-label">
+          Tip Per Person
+         </div>
+         <div class="result-value" id="tipPerPerson">
+          $0.00
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bill-summary">
+       <h3>
+        Bill Summary
+       </h3>
+       <div class="summary-item">
+        <span class="summary-label">
+         Original Bill:
+        </span>
+        <span class="summary-value" id="summaryBill">
+         $0.00
+        </span>
+       </div>
+       <div class="summary-item">
+        <span class="summary-label">
+         Tip (
+         <span id="summaryTipPercent">
+          20
+         </span>
+         %):
+        </span>
+        <span class="summary-value" id="summaryTip">
+         $0.00
+        </span>
+       </div>
+       <div class="summary-item">
+        <span class="summary-label">
+         Number of People:
+        </span>
+        <span class="summary-value" id="summaryPeople">
+         1
+        </span>
+       </div>
+       <div class="summary-item">
+        <span class="summary-label">
+         Total Amount:
+        </span>
+        <span class="summary-value" id="summaryTotal">
+         $0.00
+        </span>
+       </div>
+      </div>
+      <div class="quick-actions">
+       <button class="action-btn clear-btn" onclick="clearAll()">
+        <i class="fas fa-trash">
+        </i>
+        Clear All
+       </button>
+       <button class="action-btn share-btn" onclick="shareResults()">
+        <i class="fas fa-share">
+        </i>
+        Share Results
+       </button>
+      </div>
+     </div>
+     <div class="calculator-section">
+      <div class="section-content">
+       <h3>
+        How to Use the Tip Calculator
+       </h3>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem;">
+        <div>
+         <h4>
+          <i class="fas fa-dollar-sign">
+          </i>
+          Enter Bill Amount
+         </h4>
+         <p>
+          Input the total bill amount before tip. The calculator accepts decimal values for precise calculations.
+         </p>
+        </div>
+        <div>
+         <h4>
+          <i class="fas fa-percentage">
+          </i>
+          Select Tip Percentage
+         </h4>
+         <p>
+          Choose from common tip percentages (10-30%) or enter a custom percentage for your specific needs.
+         </p>
+        </div>
+        <div>
+         <h4>
+          <i class="fas fa-users">
+          </i>
+          Set Number of People
+         </h4>
+         <p>
+          Use the + and - buttons to specify how many people are splitting the bill.
+         </p>
+        </div>
+        <div>
+         <h4>
+          <i class="fas fa-calculator">
+          </i>
+          View Results
+         </h4>
+         <p>
+          See tip amount, total bill, and per-person amounts calculated automatically as you make changes.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="calculator-section">
+      <div class="section-content">
+       <h3>
+        Tip Guidelines by Service Type
+       </h3>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+        <div class="tip-guide">
+         <h4>
+          🍽️ Restaurants
+         </h4>
+         <ul>
+          <li>
+           <strong>
+            Excellent service:
+           </strong>
+           20-25%
+          </li>
+          <li>
+           <strong>
+            Good service:
+           </strong>
+           18-20%
+          </li>
+          <li>
+           <strong>
+            Average service:
+           </strong>
+           15-18%
+          </li>
+          <li>
+           <strong>
+            Poor service:
+           </strong>
+           10-15%
+          </li>
+         </ul>
+        </div>
+        <div class="tip-guide">
+         <h4>
+          🚗 Delivery &amp; Transport
+         </h4>
+         <ul>
+          <li>
+           <strong>
+            Food delivery:
+           </strong>
+           15-20%
+          </li>
+          <li>
+           <strong>
+            Taxi/Rideshare:
+           </strong>
+           15-20%
+          </li>
+          <li>
+           <strong>
+            Airport shuttle:
+           </strong>
+           $2-5 per bag
+          </li>
+         </ul>
+        </div>
+        <div class="tip-guide">
+         <h4>
+          💇 Personal Services
+         </h4>
+         <ul>
+          <li>
+           <strong>
+            Hair salon:
+           </strong>
+           15-20%
+          </li>
+          <li>
+           <strong>
+            Spa services:
+           </strong>
+           15-20%
+          </li>
+          <li>
+           <strong>
+            Massage:
+           </strong>
+           15-20%
+          </li>
+         </ul>
+        </div>
+        <div class="tip-guide">
+         <h4>
+          🏨 Hotel Services
+         </h4>
+         <ul>
+          <li>
+           <strong>
+            Housekeeping:
+           </strong>
+           $2-5 per night
+          </li>
+          <li>
+           <strong>
+            Bellhop:
+           </strong>
+           $1-2 per bag
+          </li>
+          <li>
+           <strong>
+            Concierge:
+           </strong>
+           $5-20 per service
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="conversion-calculator.html"><i class="fas fa-arrow-right"></i> Unit Conversion</a>
+                <a class="related-link" href="password-generator.html"><i class="fas fa-arrow-right"></i> Password Generator</a>
+                <a class="related-link" href="ip-subnet-calculator.html"><i class="fas fa-arrow-right"></i> IP Subnet</a>
+                <a class="related-link" href="random-number-generator.html"><i class="fas fa-arrow-right"></i> Random Number</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTipPercent = 20;
+        let peopleCount = 1;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCalculations();
+            
+            // Add event listeners
+            document.getElementById('billAmount').addEventListener('input', updateCalculations);
+            document.getElementById('customTip').addEventListener('input', handleCustomTip);
+            
+            // Tip button event listeners
+            document.querySelectorAll('.tip-btn').forEach(btn => {
+                btn.addEventListener('click', () => selectTipPercent(btn));
+            });
+        });
+
+        function selectTipPercent(button) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.tip-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Update tip percent
+            currentTipPercent = parseFloat(button.dataset.tip);
+            
+            // Clear custom tip input
+            document.getElementById('customTip').value = '';
+            
+            updateCalculations();
+        }
+
+        function handleCustomTip() {
+            const customValue = parseFloat(document.getElementById('customTip').value);
+            
+            if (!isNaN(customValue) && customValue >= 0) {
+                currentTipPercent = customValue;
+                
+                // Remove active class from all preset buttons
+                document.querySelectorAll('.tip-btn').forEach(btn => btn.classList.remove('active'));
+                
+                updateCalculations();
+            }
+        }
+
+        function changePeople(change) {
+            peopleCount = Math.max(1, peopleCount + change);
+            document.getElementById('peopleCount').textContent = peopleCount;
+            
+            // Update button states
+            document.getElementById('decreaseBtn').disabled = peopleCount <= 1;
+            
+            updateCalculations();
+        }
+
+        function updateCalculations() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value) || 0;
+            
+            // Calculate values
+            const tipAmount = billAmount * (currentTipPercent / 100);
+            const totalAmount = billAmount + tipAmount;
+            const perPerson = totalAmount / peopleCount;
+            const tipPerPerson = tipAmount / peopleCount;
+            
+            // Update results display
+            document.getElementById('tipAmount').textContent = formatCurrency(tipAmount);
+            document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
+            document.getElementById('perPerson').textContent = formatCurrency(perPerson);
+            document.getElementById('tipPerPerson').textContent = formatCurrency(tipPerPerson);
+            
+            // Update summary
+            document.getElementById('summaryBill').textContent = formatCurrency(billAmount);
+            document.getElementById('summaryTip').textContent = formatCurrency(tipAmount);
+            document.getElementById('summaryTipPercent').textContent = currentTipPercent.toFixed(1);
+            document.getElementById('summaryPeople').textContent = peopleCount;
+            document.getElementById('summaryTotal').textContent = formatCurrency(totalAmount);
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount);
+        }
+
+        function clearAll() {
+            // Reset form
+            document.getElementById('billAmount').value = '';
+            document.getElementById('customTip').value = '';
+            
+            // Reset tip percent to 20%
+            currentTipPercent = 20;
+            document.querySelectorAll('.tip-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-tip="20"]').classList.add('active');
+            
+            // Reset people count
+            peopleCount = 1;
+            document.getElementById('peopleCount').textContent = peopleCount;
+            document.getElementById('decreaseBtn').disabled = true;
+            
+            updateCalculations();
+        }
+
+        function shareResults() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value) || 0;
+            const tipAmount = billAmount * (currentTipPercent / 100);
+            const totalAmount = billAmount + tipAmount;
+            const perPerson = totalAmount / peopleCount;
+            
+            const shareText = `💰 Bill Split Results:
+📋 Original Bill: ${formatCurrency(billAmount)}
+💡 Tip (${currentTipPercent}%): ${formatCurrency(tipAmount)}
+💳 Total: ${formatCurrency(totalAmount)}
+👥 Split ${peopleCount} ways: ${formatCurrency(perPerson)} per person
+
+Calculated with Make QR Calculators`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Tip Calculator Results',
+                    text: shareText
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Results copied to clipboard!');
+                }).catch(() => {
+                    // Show results in alert if clipboard fails
+                    alert(shareText);
+                });
+            }
+        }
+
+        // Initialize button states
+        document.getElementById('decreaseBtn').disabled = true;
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

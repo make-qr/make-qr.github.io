@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/carpet-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Carpet Calculator - Calculate Carpet &amp; Installation Costs | Make QR Calculators
+  </title>
+  <meta content="Calculate carpet needed for rooms, including padding, installation costs, and material estimates for your flooring project." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .carpet-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #e91e63;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .carpet-types {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .type-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #e91e63;
+        }
+
+        .type-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .type-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-details {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .cost-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .room-layout {
+            background: white;
+            border: 2px dashed #e9ecef;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .room-visual {
+            width: 100%;
+            max-width: 200px;
+            height: 120px;
+            background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #e91e63;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Carpet Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online carpet calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Carpet Calculator", "item": "https://make-qr.github.io/calculators/carpet-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Carpet Calculator</span>
+            </nav>
+            <h1>Carpet Calculator</h1>
+            <p>Calculate carpet needed for rooms including padding, installation costs, and materials</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="carpet-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         Room Dimensions
+        </h3>
+        <div class="input-group">
+         <label>
+          Room Dimensions
+         </label>
+         <div class="dimension-grid">
+          <input class="input-field" id="room-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+          <input class="input-field" id="room-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="room-layout">
+         <div>
+          <div class="room-visual" id="room-visual">
+           <span id="room-dimensions">
+            0' × 0'
+           </span>
+          </div>
+          <p style="margin-top: 1rem; color: #6c757d;">
+           Room Layout Preview
+          </p>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="carpet-width">
+          Carpet Roll Width
+         </label>
+         <select class="input-field" id="carpet-width">
+          <option selected="" value="12">
+           12 feet (standard)
+          </option>
+          <option value="13.5">
+           13.5 feet (broadloom)
+          </option>
+          <option value="15">
+           15 feet (wide width)
+          </option>
+          <option value="6">
+           6 feet (narrow width)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="carpet-type">
+          Carpet Type
+         </label>
+         <select class="input-field" id="carpet-type">
+          <option selected="" value="cut-pile">
+           Cut Pile
+          </option>
+          <option value="loop-pile">
+           Loop Pile (Berber)
+          </option>
+          <option value="cut-loop">
+           Cut &amp; Loop
+          </option>
+          <option value="frieze">
+           Frieze (Shag)
+          </option>
+          <option value="luxury">
+           Luxury/Premium
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="padding-type">
+          Carpet Padding
+         </label>
+         <select class="input-field" id="padding-type">
+          <option value="basic">
+           Basic Foam ($0.50/sq ft)
+          </option>
+          <option selected="" value="rebond">
+           Rebond ($0.75/sq ft)
+          </option>
+          <option value="memory">
+           Memory Foam ($1.25/sq ft)
+          </option>
+          <option value="rubber">
+           Rubber ($1.50/sq ft)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="waste-factor">
+          Waste Factor
+         </label>
+         <select class="input-field" id="waste-factor">
+          <option value="0.05">
+           5% - Simple rectangular room
+          </option>
+          <option selected="" value="0.10">
+           10% - Standard allowance
+          </option>
+          <option value="0.15">
+           15% - Complex layout
+          </option>
+          <option value="0.20">
+           20% - Multiple rooms/angles
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="carpet-price">
+          Carpet Price per Sq Ft
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="carpet-price" min="0" placeholder="4.50" step="0.01" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="installation-cost">
+          Installation Cost per Sq Ft
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="installation-cost" min="0" placeholder="2.50" step="0.01" type="number"/>
+         </div>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-clipboard-list">
+         </i>
+         Carpet Requirements
+        </h3>
+        <div class="input-group">
+         <label for="room-area">
+          Room Area
+         </label>
+         <input class="input-field result-field" id="room-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="carpet-needed">
+          Carpet Needed
+         </label>
+         <input class="input-field result-field" id="carpet-needed" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="carpet-yards">
+          Carpet (Square Yards)
+         </label>
+         <input class="input-field result-field" id="carpet-yards" placeholder="0 sq yd" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="linear-yards">
+          Linear Yards
+         </label>
+         <input class="input-field result-field" id="linear-yards" placeholder="0 lin yd" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="padding-needed">
+          Padding Needed
+         </label>
+         <input class="input-field result-field" id="padding-needed" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="total-cost">
+          Total Project Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="total-cost" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="carpet-types">
+       <h3>
+        <i class="fas fa-cut">
+        </i>
+        Carpet Types &amp; Price Ranges
+       </h3>
+       <div class="types-grid">
+        <div class="type-card">
+         <div class="type-name">
+          ✂️ Cut Pile
+         </div>
+         <div class="type-price">
+          $2-8/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Durability:
+          </strong>
+          Good
+          <br/>
+          <strong>
+           Comfort:
+          </strong>
+          High
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Bedrooms, living rooms
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🔗 Loop Pile (Berber)
+         </div>
+         <div class="type-price">
+          $1.50-6/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Durability:
+          </strong>
+          Excellent
+          <br/>
+          <strong>
+           Comfort:
+          </strong>
+          Medium
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          High traffic areas
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🎭 Cut &amp; Loop
+         </div>
+         <div class="type-price">
+          $3-10/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Durability:
+          </strong>
+          Very Good
+          <br/>
+          <strong>
+           Comfort:
+          </strong>
+          High
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Formal areas
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🌊 Frieze (Shag)
+         </div>
+         <div class="type-price">
+          $3-12/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Durability:
+          </strong>
+          Good
+          <br/>
+          <strong>
+           Comfort:
+          </strong>
+          Very High
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Casual areas
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          💎 Luxury Carpet
+         </div>
+         <div class="type-price">
+          $8-25/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Durability:
+          </strong>
+          Excellent
+          <br/>
+          <strong>
+           Comfort:
+          </strong>
+          Premium
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          High-end homes
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🏢 Commercial Grade
+         </div>
+         <div class="type-price">
+          $1-4/sq ft
+         </div>
+         <div class="type-details">
+          <strong>
+           Durability:
+          </strong>
+          Excellent
+          <br/>
+          <strong>
+           Comfort:
+          </strong>
+          Medium
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Offices, retail
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="cost-breakdown" id="cost-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-pie">
+        </i>
+        Cost Breakdown
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Cost breakdown will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Carpet Selection &amp; Installation Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          📏 Accurate Measuring
+         </h4>
+         <p>
+          Measure the longest and widest points of the room. Include closets and alcoves in your measurements.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎯 Traffic Considerations
+         </h4>
+         <p>
+          Choose higher density carpets for high-traffic areas. Loop pile or commercial grades work best.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🛏️ Padding Importance
+         </h4>
+         <p>
+          Quality padding extends carpet life by 50%. Don't skimp on padding - it affects comfort and durability.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📐 Seam Placement
+         </h4>
+         <p>
+          Plan seams away from high-traffic areas and doorways. Seams should run in the same direction as foot traffic.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎨 Color &amp; Pattern
+         </h4>
+         <p>
+          Lighter colors show dirt more but make rooms look larger. Patterns hide dirt but can overwhelm small spaces.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🏠 Professional Installation
+         </h4>
+         <p>
+          Professional installation includes stretching, proper seaming, and warranty. DIY can void manufacturer warranties.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateCarpet() {
+            const roomLength = parseFloat(document.getElementById('room-length').value) || 0;
+            const roomWidth = parseFloat(document.getElementById('room-width').value) || 0;
+            const carpetWidth = parseFloat(document.getElementById('carpet-width').value) || 12;
+            const wasteFactor = parseFloat(document.getElementById('waste-factor').value) || 0.10;
+            const carpetPrice = parseFloat(document.getElementById('carpet-price').value) || 4.50;
+            const installationCost = parseFloat(document.getElementById('installation-cost').value) || 2.50;
+            const paddingType = document.getElementById('padding-type').value;
+
+            if (roomLength === 0 || roomWidth === 0) {
+                updateRoomVisual(0, 0);
+                return;
+            }
+
+            updateRoomVisual(roomLength, roomWidth);
+
+            // Calculate room area
+            const roomArea = roomLength * roomWidth;
+
+            // Determine carpet layout and calculate needed area
+            let carpetNeeded;
+            let linearYards;
+
+            if (roomWidth <= carpetWidth) {
+                // Room fits within carpet width
+                carpetNeeded = roomArea;
+                linearYards = roomLength / 3; // Convert feet to yards
+            } else {
+                // Need multiple strips
+                const strips = Math.ceil(roomWidth / carpetWidth);
+                carpetNeeded = strips * roomLength * carpetWidth;
+                linearYards = (strips * roomLength) / 3;
+            }
+
+            // Apply waste factor
+            carpetNeeded *= (1 + wasteFactor);
+            linearYards *= (1 + wasteFactor);
+
+            // Calculate padding costs
+            const paddingCosts = {
+                'basic': 0.50,
+                'rebond': 0.75,
+                'memory': 1.25,
+                'rubber': 1.50
+            };
+            const paddingCost = paddingCosts[paddingType] || 0.75;
+
+            // Calculate costs
+            const carpetCostTotal = carpetNeeded * carpetPrice;
+            const paddingCostTotal = roomArea * paddingCost;
+            const installationCostTotal = roomArea * installationCost;
+            const totalCost = carpetCostTotal + paddingCostTotal + installationCostTotal;
+
+            // Update results
+            document.getElementById('room-area').value = roomArea.toFixed(0) + ' sq ft';
+            document.getElementById('carpet-needed').value = carpetNeeded.toFixed(0) + ' sq ft';
+            document.getElementById('carpet-yards').value = (carpetNeeded / 9).toFixed(1) + ' sq yd';
+            document.getElementById('linear-yards').value = linearYards.toFixed(1) + ' lin yd';
+            document.getElementById('padding-needed').value = roomArea.toFixed(0) + ' sq ft';
+            document.getElementById('total-cost').value = totalCost.toFixed(0);
+
+            // Generate cost breakdown
+            generateCostBreakdown(roomArea, carpetCostTotal, paddingCostTotal, installationCostTotal, totalCost);
+        }
+
+        function updateRoomVisual(length, width) {
+            const roomDimensions = document.getElementById('room-dimensions');
+            roomDimensions.textContent = `${length}' × ${width}'`;
+            
+            // Update visual proportions
+            const visual = document.getElementById('room-visual');
+            if (length > 0 && width > 0) {
+                const aspectRatio = Math.min(width / length, length / width);
+                const scaledHeight = Math.max(60, 120 * aspectRatio);
+                visual.style.height = `${scaledHeight}px`;
+            }
+        }
+
+        function generateCostBreakdown(area, carpetCost, paddingCost, installCost, total) {
+            const costPerSqFt = total / area;
+            
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${area.toFixed(0)}</div>
+                    <div class="breakdown-label">Room Area (sq ft)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${carpetCost.toFixed(0)}</div>
+                    <div class="breakdown-label">Carpet Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${paddingCost.toFixed(0)}</div>
+                    <div class="breakdown-label">Padding Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${installCost.toFixed(0)}</div>
+                    <div class="breakdown-label">Installation Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${total.toFixed(0)}</div>
+                    <div class="breakdown-label">Total Project Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${costPerSqFt.toFixed(2)}</div>
+                    <div class="breakdown-label">Cost per Sq Ft</div>
+                </div>
+            `;
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['room-length', 'room-width', 'carpet-width', 'carpet-type', 'padding-type', 
+             'waste-factor', 'carpet-price', 'installation-cost'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateCarpet);
+                    element.addEventListener('change', calculateCarpet);
+                }
+            });
+
+            // Set example values
+            document.getElementById('room-length').value = 12;
+            document.getElementById('room-width').value = 10;
+            document.getElementById('carpet-price').value = 4.50;
+            document.getElementById('installation-cost').value = 2.50;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

@@ -23,12 +23,28 @@ function initNavDropdowns() {
     document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
         const btn = dropdown.querySelector('.nav-dropdown-btn');
         if (!btn) return;
+        let closeTimer;
+
+        function setOpen(open) {
+            dropdown.classList.toggle('is-open', open);
+            btn.setAttribute('aria-expanded', String(open));
+        }
+
+        dropdown.addEventListener('mouseenter', function () {
+            clearTimeout(closeTimer);
+            setOpen(true);
+        });
+
+        dropdown.addEventListener('mouseleave', function () {
+            clearTimeout(closeTimer);
+            closeTimer = setTimeout(() => setOpen(false), 180);
+        });
 
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
             const wasOpen = dropdown.classList.contains('is-open');
             closeAllDropdowns();
-            if (!wasOpen) dropdown.classList.add('is-open');
+            if (!wasOpen) setOpen(true);
         });
     });
 
@@ -39,7 +55,11 @@ function initNavDropdowns() {
 }
 
 function closeAllDropdowns() {
-    document.querySelectorAll('.nav-dropdown.is-open').forEach(d => d.classList.remove('is-open'));
+    document.querySelectorAll('.nav-dropdown.is-open').forEach(dropdown => {
+        dropdown.classList.remove('is-open');
+        const btn = dropdown.querySelector('.nav-dropdown-btn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
 }
 
 function initTabNavigation() {

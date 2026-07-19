@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/gravel-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Gravel Calculator - Calculate Gravel &amp; Stone Needed | Make QR Calculators
+  </title>
+  <meta content="Calculate how much gravel, stone, or aggregate you need for driveways, walkways, and landscaping projects. Include costs and delivery estimates." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .gravel-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #795548 0%, #5d4037 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #795548;
+            box-shadow: 0 0 0 3px rgba(121, 85, 72, 0.1);
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .gravel-types {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .type-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #795548;
+        }
+
+        .type-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .type-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #795548;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-details {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .cost-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Gravel Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online gravel calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Gravel Calculator", "item": "https://make-qr.github.io/calculators/gravel-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Gravel Calculator</span>
+            </nav>
+            <h1>Gravel Calculator</h1>
+            <p>Calculate gravel, stone, and aggregate needed for driveways, walkways, and landscaping</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="gravel-calculator">
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         Project Dimensions
+        </h3>
+        <div class="input-group">
+         <label>
+          Area Dimensions
+         </label>
+         <div class="dimension-grid">
+          <input class="input-field" id="area-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+          <input class="input-field" id="area-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="depth">
+          Depth/Thickness
+         </label>
+         <select class="input-field" id="depth">
+          <option value="1">
+           1 inch (decorative)
+          </option>
+          <option selected="" value="2">
+           2 inches (walkways)
+          </option>
+          <option value="3">
+           3 inches (patios)
+          </option>
+          <option value="4">
+           4 inches (driveways)
+          </option>
+          <option value="6">
+           6 inches (heavy traffic)
+          </option>
+          <option value="custom">
+           Custom depth
+          </option>
+         </select>
+        </div>
+        <div class="input-group" id="custom-depth-group" style="display: none;">
+         <label for="custom-depth">
+          Custom Depth (inches)
+         </label>
+         <input class="input-field" id="custom-depth" max="12" min="0.5" placeholder="3" step="0.5" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="gravel-type">
+          Gravel Type
+         </label>
+         <select class="input-field" id="gravel-type">
+          <option value="pea-gravel">
+           Pea Gravel (3/8")
+          </option>
+          <option selected="" value="crushed-stone">
+           Crushed Stone (3/4")
+          </option>
+          <option value="river-rock">
+           River Rock (1-2")
+          </option>
+          <option value="decomposed-granite">
+           Decomposed Granite
+          </option>
+          <option value="crushed-granite">
+           Crushed Granite
+          </option>
+          <option value="limestone">
+           Limestone Chips
+          </option>
+          <option value="slate-chips">
+           Slate Chips
+          </option>
+          <option value="lava-rock">
+           Lava Rock
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="compaction-factor">
+          Compaction Factor
+         </label>
+         <select class="input-field" id="compaction-factor">
+          <option value="1.0">
+           No Compaction (decorative)
+          </option>
+          <option selected="" value="1.15">
+           Light Compaction (15%)
+          </option>
+          <option value="1.25">
+           Medium Compaction (25%)
+          </option>
+          <option value="1.35">
+           Heavy Compaction (35%)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="waste-factor">
+          Waste Factor
+         </label>
+         <select class="input-field" id="waste-factor">
+          <option value="0.05">
+           5% - Simple rectangular area
+          </option>
+          <option selected="" value="0.10">
+           10% - Standard allowance
+          </option>
+          <option value="0.15">
+           15% - Complex shapes
+          </option>
+          <option value="0.20">
+           20% - Very irregular areas
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="price-per-ton">
+          Price per Ton
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="price-per-ton" min="0" placeholder="35" step="1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="delivery-cost">
+          Delivery Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field" id="delivery-cost" min="0" placeholder="50" step="1" type="number"/>
+         </div>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-mountain">
+         </i>
+         <span id="gravel-type-title">
+          Crushed Stone
+         </span>
+         Needed
+        </h3>
+        <div class="input-group">
+         <label for="total-area">
+          Total Area
+         </label>
+         <input class="input-field result-field" id="total-area" placeholder="0 sq ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="volume-cubic-ft">
+          Volume Needed
+         </label>
+         <input class="input-field result-field" id="volume-cubic-ft" placeholder="0 cu ft" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="volume-cubic-yards">
+          Cubic Yards
+         </label>
+         <input class="input-field result-field" id="volume-cubic-yards" placeholder="0 cu yd" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="weight-tons">
+          Weight (Tons)
+         </label>
+         <input class="input-field result-field" id="weight-tons" placeholder="0 tons" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="material-cost">
+          Material Cost
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="material-cost" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="total-cost">
+          Total Cost (with delivery)
+         </label>
+         <div class="currency-input">
+          <span class="currency-symbol">
+           $
+          </span>
+          <input class="input-field result-field" id="total-cost" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="gravel-types">
+       <h3>
+        <i class="fas fa-mountain">
+        </i>
+        Gravel &amp; Stone Types
+       </h3>
+       <div class="types-grid">
+        <div class="type-card">
+         <div class="type-name">
+          🌿 Pea Gravel
+         </div>
+         <div class="type-price">
+          $25-40/ton
+         </div>
+         <div class="type-details">
+          <strong>
+           Size:
+          </strong>
+          3/8 inch smooth
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Walkways, drainage
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          ~1.3 tons/cu yd
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🪨 Crushed Stone
+         </div>
+         <div class="type-price">
+          $20-35/ton
+         </div>
+         <div class="type-details">
+          <strong>
+           Size:
+          </strong>
+          3/4 inch angular
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Driveways, base
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          ~1.5 tons/cu yd
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🪨 River Rock
+         </div>
+         <div class="type-price">
+          $35-60/ton
+         </div>
+         <div class="type-details">
+          <strong>
+           Size:
+          </strong>
+          1-2 inch smooth
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Decorative landscapes
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          ~1.4 tons/cu yd
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🏔️ Decomposed Granite
+         </div>
+         <div class="type-price">
+          $30-50/ton
+         </div>
+         <div class="type-details">
+          <strong>
+           Size:
+          </strong>
+          Fine particles
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Pathways, patios
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          ~1.4 tons/cu yd
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          ⚫ Lava Rock
+         </div>
+         <div class="type-price">
+          $40-80/ton
+         </div>
+         <div class="type-details">
+          <strong>
+           Size:
+          </strong>
+          Various sizes
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Drainage, mulch
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          ~0.8 tons/cu yd
+         </div>
+        </div>
+        <div class="type-card">
+         <div class="type-name">
+          🏛️ Limestone Chips
+         </div>
+         <div class="type-price">
+          $25-45/ton
+         </div>
+         <div class="type-details">
+          <strong>
+           Size:
+          </strong>
+          3/8-3/4 inch
+          <br/>
+          <strong>
+           Best for:
+          </strong>
+          Driveways, paths
+          <br/>
+          <strong>
+           Weight:
+          </strong>
+          ~1.5 tons/cu yd
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="cost-breakdown" id="cost-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Project Cost Breakdown
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Cost breakdown items will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Gravel Installation Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          📏 Accurate Measurements
+         </h4>
+         <p>
+          Measure carefully and account for irregular shapes. Use string to outline the area for complex layouts.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🏗️ Site Preparation
+         </h4>
+         <p>
+          Clear vegetation and level the area. Install landscape fabric to prevent weeds and mixing with soil.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📐 Proper Depth
+         </h4>
+         <p>
+          Use 2" for light foot traffic, 3-4" for vehicle traffic. Deeper is better for high-use areas.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🛤️ Edging Installation
+         </h4>
+         <p>
+          Install edging material to contain gravel and maintain clean borders. Metal or plastic edging works well.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💧 Drainage Considerations
+         </h4>
+         <p>
+          Ensure proper slope for drainage (2% grade). Consider drainage needs for your climate and soil type.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🚛 Delivery Planning
+         </h4>
+         <p>
+          Ensure delivery truck access. Order 10% extra for settling and future maintenance needs.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="concrete-calculator.html"><i class="fas fa-arrow-right"></i> Concrete Calculator</a>
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateGravel() {
+            const length = parseFloat(document.getElementById('area-length').value) || 0;
+            const width = parseFloat(document.getElementById('area-width').value) || 0;
+            const depth = document.getElementById('depth').value === 'custom' ? 
+                         parseFloat(document.getElementById('custom-depth').value) || 3 : 
+                         parseFloat(document.getElementById('depth').value) || 2;
+            const gravelType = document.getElementById('gravel-type').value;
+            const compactionFactor = parseFloat(document.getElementById('compaction-factor').value) || 1.15;
+            const wasteFactor = parseFloat(document.getElementById('waste-factor').value) || 0.10;
+            const pricePerTon = parseFloat(document.getElementById('price-per-ton').value) || 35;
+            const deliveryCost = parseFloat(document.getElementById('delivery-cost').value) || 50;
+
+            if (length === 0 || width === 0) return;
+
+            // Calculate area and volume
+            const area = length * width;
+            const volumeCubicFt = area * (depth / 12); // Convert inches to feet
+            
+            // Apply compaction and waste factors
+            const adjustedVolume = volumeCubicFt * compactionFactor * (1 + wasteFactor);
+            const volumeCubicYards = adjustedVolume / 27;
+
+            // Weight calculations based on gravel type
+            const densities = {
+                'pea-gravel': 1.3,
+                'crushed-stone': 1.5,
+                'river-rock': 1.4,
+                'decomposed-granite': 1.4,
+                'crushed-granite': 1.6,
+                'limestone': 1.5,
+                'slate-chips': 1.4,
+                'lava-rock': 0.8
+            };
+
+            const density = densities[gravelType] || 1.4;
+            const weightTons = volumeCubicYards * density;
+
+            // Cost calculations
+            const materialCost = weightTons * pricePerTon;
+            const totalCost = materialCost + deliveryCost;
+
+            // Update gravel type title
+            const typeNames = {
+                'pea-gravel': 'Pea Gravel',
+                'crushed-stone': 'Crushed Stone',
+                'river-rock': 'River Rock',
+                'decomposed-granite': 'Decomposed Granite',
+                'crushed-granite': 'Crushed Granite',
+                'limestone': 'Limestone Chips',
+                'slate-chips': 'Slate Chips',
+                'lava-rock': 'Lava Rock'
+            };
+            document.getElementById('gravel-type-title').textContent = typeNames[gravelType] + ' Needed';
+
+            // Update results
+            document.getElementById('total-area').value = area.toFixed(1) + ' sq ft';
+            document.getElementById('volume-cubic-ft').value = adjustedVolume.toFixed(1) + ' cu ft';
+            document.getElementById('volume-cubic-yards').value = volumeCubicYards.toFixed(2) + ' cu yd';
+            document.getElementById('weight-tons').value = weightTons.toFixed(2) + ' tons';
+            document.getElementById('material-cost').value = materialCost.toFixed(0);
+            document.getElementById('total-cost').value = totalCost.toFixed(0);
+
+            // Generate cost breakdown
+            generateCostBreakdown(area, adjustedVolume, volumeCubicYards, weightTons, materialCost, deliveryCost, totalCost);
+        }
+
+        function generateCostBreakdown(area, volume, cubicYards, tons, materialCost, delivery, total) {
+            const costPerSqFt = total / area;
+            const costPerCubicYard = total / cubicYards;
+            
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${area.toFixed(0)}</div>
+                    <div class="breakdown-label">Area (sq ft)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${volume.toFixed(1)}</div>
+                    <div class="breakdown-label">Volume (cu ft)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${cubicYards.toFixed(2)}</div>
+                    <div class="breakdown-label">Cubic Yards</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${tons.toFixed(2)}</div>
+                    <div class="breakdown-label">Weight (tons)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${materialCost.toFixed(0)}</div>
+                    <div class="breakdown-label">Material Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${delivery.toFixed(0)}</div>
+                    <div class="breakdown-label">Delivery Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${costPerSqFt.toFixed(2)}</div>
+                    <div class="breakdown-label">Cost per Sq Ft</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${costPerCubicYard.toFixed(0)}</div>
+                    <div class="breakdown-label">Cost per Cu Yd</div>
+                </div>
+            `;
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['area-length', 'area-width', 'depth', 'custom-depth', 'gravel-type', 
+             'compaction-factor', 'waste-factor', 'price-per-ton', 'delivery-cost'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateGravel);
+                    element.addEventListener('change', calculateGravel);
+                }
+            });
+
+            // Handle custom depth visibility
+            document.getElementById('depth').addEventListener('change', function() {
+                const customDepthGroup = document.getElementById('custom-depth-group');
+                if (this.value === 'custom') {
+                    customDepthGroup.style.display = 'block';
+                } else {
+                    customDepthGroup.style.display = 'none';
+                }
+                calculateGravel();
+            });
+
+            // Set example values
+            document.getElementById('area-length').value = 20;
+            document.getElementById('area-width').value = 10;
+            document.getElementById('price-per-ton').value = 35;
+            document.getElementById('delivery-cost').value = 50;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

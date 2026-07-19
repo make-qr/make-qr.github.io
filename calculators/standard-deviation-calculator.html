@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Primary SEO Meta Tags -->
+  <title>
+   Standard Deviation Calculator - Statistics, Variance &amp; Mean Calculator | Make QR Calculators
+  </title>
+  <meta content="Standard Deviation Calculator - Statistics, Variance &amp; Mean Calculator | Make QR Calculators" name="title"/>
+  <meta content="Calculate standard deviation, variance, mean, median, mode, and quartiles. Complete statistical analysis tool with population and sample calculations. Free with step-by-step explanations." name="description"/>
+  <meta content="standard deviation calculator, statistics calculator, variance calculator, mean calculator, statistical analysis, population standard deviation, sample standard deviation" name="keywords"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Make QR Calculators" name="author"/>
+  <!-- Open Graph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/standard-deviation-calculator.html" property="og:url"/>
+  <meta content="Standard Deviation Calculator - Statistics &amp; Variance Calculator" property="og:title"/>
+  <meta content="Calculate standard deviation, variance, mean, median, mode, and quartiles. Complete statistical analysis tool with population and sample calculations." property="og:description"/>
+  <meta content="https://make-qr.github.io/calculators/standard-deviation-calculator-preview.jpg" property="og:image"/>
+  <meta content="Make QR Calculators" property="og:site_name"/>
+  <!-- Twitter -->
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://make-qr.github.io/calculators/standard-deviation-calculator.html" property="twitter:url"/>
+  <meta content="Standard Deviation Calculator - Statistics &amp; Variance Calculator" property="twitter:title"/>
+  <meta content="Calculate standard deviation, variance, mean, median, mode, and quartiles. Complete statistical analysis tool." property="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/standard-deviation-calculator-preview.jpg" property="twitter:image"/>
+  <!-- Canonical URL -->
+  <link href="https://make-qr.github.io/calculators/standard-deviation-calculator.html" rel="canonical"/>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Standard Deviation Calculator",
+      "applicationCategory": "EducationalApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "Calculate standard deviation, variance, mean, median, mode, and quartiles with detailed statistical analysis",
+      "featureList": ["Standard Deviation", "Variance", "Mean", "Median", "Mode", "Quartiles"],
+      "url": "https://make-qr.github.io/calculators/standard-deviation-calculator.html"
+    }
+  </script>
+  <style>
+   .stats-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .data-input-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-method {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .input-method.active {
+            border-color: #007bff;
+        }
+
+        .method-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .data-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .data-textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .quick-add-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .quick-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #007bff;
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .calculation-type {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-type-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calc-type-option.selected {
+            border-color: #007bff;
+            background: rgba(0, 123, 255, 0.1);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .data-display {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .data-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .formula-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .formula-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #007bff;
+        }
+
+        .formula-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+        }
+
+        .data-visualization {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .data-input-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .calculation-type {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Standard Deviation Calculator - Statistics, Variance &amp; Mean Calculator</span>
+            </nav>
+            <h1>Standard Deviation Calculator - Statistics, Variance &amp; Mean Calculator</h1>
+            <p>Free online standard deviation calculator - statistics, variance &amp; mean calculator with instant, accurate results.</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="calculator-header">
+      <h2>
+       Standard Deviation Calculator - Complete Statistical Analysis
+      </h2>
+      <p>
+       Calculate standard deviation, variance, mean, median, mode, quartiles, and other statistical measures. Support for both population and sample data with detailed explanations.
+      </p>
+     </div>
+     <div class="stats-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-btn active" onclick="switchTab('basic')">
+        Basic Calculator
+       </button>
+       <button class="tab-btn" onclick="switchTab('advanced')">
+        Advanced Analysis
+       </button>
+       <button class="tab-btn" onclick="switchTab('formulas')">
+        Formulas &amp; Theory
+       </button>
+      </div>
+      <!-- Basic Calculator Tab -->
+      <div class="tab-content active" id="basic">
+       <div class="input-section">
+        <h2>
+         Data Input
+        </h2>
+        <div class="data-input-methods">
+         <div class="input-method active">
+          <div class="method-title">
+           <i class="fas fa-edit">
+           </i>
+           Manual Input
+          </div>
+          <textarea aria-label="Data input field" class="data-textarea" id="dataInput" placeholder="Enter your data separated by commas, spaces, or new lines.
+Example: 1, 2, 3, 4, 5
+or
+1
+2
+3
+4
+5"></textarea>
+          <div class="quick-add-buttons">
+           <button class="quick-btn" onclick="addSampleData('grades')">
+            Sample: Test Scores
+           </button>
+           <button class="quick-btn" onclick="addSampleData('heights')">
+            Sample: Heights
+           </button>
+           <button class="quick-btn" onclick="addSampleData('random')">
+            Random Data
+           </button>
+           <button class="quick-btn" onclick="clearData()">
+            Clear All
+           </button>
+          </div>
+         </div>
+        </div>
+        <div class="calculation-type">
+         <div class="calc-type-option selected" id="populationType" onclick="selectCalculationType('population')">
+          <h3>
+           <i class="fas fa-users">
+           </i>
+           Population
+          </h3>
+          <p>
+           Use when you have data for the entire population
+          </p>
+         </div>
+         <div class="calc-type-option" id="sampleType" onclick="selectCalculationType('sample')">
+          <h3>
+           <i class="fas fa-user-friends">
+           </i>
+           Sample
+          </h3>
+          <p>
+           Use when you have sample data from a larger population
+          </p>
+         </div>
+        </div>
+        <button class="calculate-btn" onclick="calculateStatistics()">
+         <i class="fas fa-calculator">
+         </i>
+         Calculate Statistics
+        </button>
+        <div class="error-message" id="errorMessage" style="display: none;">
+        </div>
+       </div>
+       <div class="results-section" id="resultsSection" style="display: none;">
+        <h2>
+         <i class="fas fa-chart-bar">
+         </i>
+         Statistical Results
+        </h2>
+        <div class="results-grid">
+         <div class="result-card">
+          <div class="result-value" id="meanResult">
+           0
+          </div>
+          <div class="result-label">
+           Mean (μ)
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="stdDevResult">
+           0
+          </div>
+          <div class="result-label">
+           Standard Deviation (σ)
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="varianceResult">
+           0
+          </div>
+          <div class="result-label">
+           Variance (σ²)
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="medianResult">
+           0
+          </div>
+          <div class="result-label">
+           Median
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="modeResult">
+           0
+          </div>
+          <div class="result-label">
+           Mode
+          </div>
+         </div>
+         <div class="result-card">
+          <div class="result-value" id="rangeResult">
+           0
+          </div>
+          <div class="result-label">
+           Range
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="data-display" id="dataDisplay" style="display: none;">
+        <h2>
+         <i class="fas fa-table">
+         </i>
+         Data Summary
+        </h2>
+        <div class="data-summary">
+         <div class="summary-item">
+          <div class="summary-value" id="countValue">
+           0
+          </div>
+          <div class="summary-label">
+           Count (n)
+          </div>
+         </div>
+         <div class="summary-item">
+          <div class="summary-value" id="minValue">
+           0
+          </div>
+          <div class="summary-label">
+           Minimum
+          </div>
+         </div>
+         <div class="summary-item">
+          <div class="summary-value" id="maxValue">
+           0
+          </div>
+          <div class="summary-label">
+           Maximum
+          </div>
+         </div>
+         <div class="summary-item">
+          <div class="summary-value" id="q1Value">
+           0
+          </div>
+          <div class="summary-label">
+           Q1 (25%)
+          </div>
+         </div>
+         <div class="summary-item">
+          <div class="summary-value" id="q3Value">
+           0
+          </div>
+          <div class="summary-label">
+           Q3 (75%)
+          </div>
+         </div>
+         <div class="summary-item">
+          <div class="summary-value" id="iqrValue">
+           0
+          </div>
+          <div class="summary-label">
+           IQR
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Advanced Analysis Tab -->
+      <div class="tab-content" id="advanced">
+       <div class="data-visualization">
+        <h2>
+         <i class="fas fa-chart-line">
+         </i>
+         Data Visualization
+        </h2>
+        <div class="chart-placeholder">
+         <div>
+          <i class="fas fa-chart-bar fa-3x">
+          </i>
+          <br/>
+          Histogram and Box Plot will be displayed here
+          <br/>
+          <small>
+           Enter data and calculate to see visualization
+          </small>
+         </div>
+        </div>
+       </div>
+       <div class="formula-section">
+        <h2>
+         <i class="fas fa-flask">
+         </i>
+         Statistical Analysis
+        </h2>
+        <div class="formula-card">
+         <div class="formula-title">
+          Outlier Detection
+         </div>
+         <p>
+          Values outside 1.5 × IQR from Q1 and Q3 are considered outliers:
+         </p>
+         <div class="formula">
+          Lower Bound = Q1 - 1.5 × IQR
+                                Upper Bound = Q3 + 1.5 × IQR
+         </div>
+         <div id="outlierResults">
+         </div>
+        </div>
+        <div class="formula-card">
+         <div class="formula-title">
+          Coefficient of Variation
+         </div>
+         <p>
+          Measures relative variability:
+         </p>
+         <div class="formula">
+          CV = (σ / μ) × 100%
+         </div>
+         <div id="cvResult">
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Formulas Tab -->
+      <div class="tab-content" id="formulas">
+       <div class="formula-section">
+        <h2>
+         <i class="fas fa-graduation-cap">
+         </i>
+         Statistical Formulas
+        </h2>
+        <div class="formula-card">
+         <div class="formula-title">
+          Population Standard Deviation
+         </div>
+         <p>
+          Used when you have data for the entire population:
+         </p>
+         <div class="formula">
+          σ = √(Σ(x - μ)² / N)
+         </div>
+         <p>
+          <strong>
+           Where:
+          </strong>
+          σ = standard deviation, μ = mean, N = population size
+         </p>
+        </div>
+        <div class="formula-card">
+         <div class="formula-title">
+          Sample Standard Deviation
+         </div>
+         <p>
+          Used when working with a sample from a larger population:
+         </p>
+         <div class="formula">
+          s = √(Σ(x - x̄)² / (n - 1))
+         </div>
+         <p>
+          <strong>
+           Where:
+          </strong>
+          s = sample standard deviation, x̄ = sample mean, n = sample size
+         </p>
+        </div>
+        <div class="formula-card">
+         <div class="formula-title">
+          Variance
+         </div>
+         <p>
+          The square of standard deviation:
+         </p>
+         <div class="formula">
+          Population Variance: σ² = Σ(x - μ)² / N
+                                Sample Variance: s² = Σ(x - x̄)² / (n - 1)
+         </div>
+        </div>
+        <div class="formula-card">
+         <div class="formula-title">
+          Other Statistical Measures
+         </div>
+         <div class="formula">
+          Mean: μ = Σx / n
+                                Median: Middle value when data is sorted
+                                Mode: Most frequently occurring value
+                                Range: Maximum - Minimum
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- How to Use Section -->
+     <section class="how-to-section">
+      <div class="container">
+       <h2>
+        How to Use the Standard Deviation Calculator
+       </h2>
+       <div class="how-to-grid">
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-edit">
+          </i>
+          Step 1: Enter Your Data
+         </h3>
+         <p>
+          Input your numbers separated by commas, spaces, or line breaks. You can also use our sample data sets to get started.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-users">
+          </i>
+          Step 2: Choose Population or Sample
+         </h3>
+         <p>
+          Select "Population" if you have data for the entire group, or "Sample" if your data represents a subset of a larger population.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calculator">
+          </i>
+          Step 3: Calculate Results
+         </h3>
+         <p>
+          Click the calculate button to get standard deviation, variance, mean, median, mode, and other statistical measures.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-chart-bar">
+          </i>
+          Step 4: Analyze Results
+         </h3>
+         <p>
+          Review the comprehensive statistical analysis including outlier detection and coefficient of variation.
+         </p>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Related Calculators -->
+     <section class="related-calculators">
+      <div class="container">
+       <h2>
+        Related Mathematical Calculators
+       </h2>
+       <div class="related-grid">
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calculator">
+          </i>
+         </div>
+         <h3>
+          Scientific Calculator
+         </h3>
+         <p>
+          Advanced mathematical functions and operations
+         </p>
+         <a class="btn-link" href="scientific-calculator.html" title="Scientific Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-percentage">
+          </i>
+         </div>
+         <h3>
+          Percentage Calculator
+         </h3>
+         <p>
+          Calculate percentages, percentage change, and ratios
+         </p>
+         <a class="btn-link" href="percentage-calculator.html" title="Percentage Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-chart-line">
+          </i>
+         </div>
+         <h3>
+          Average Calculator
+         </h3>
+         <p>
+          Calculate mean, median, and mode of data sets
+         </p>
+         <a class="btn-link" href="average-calculator.html" title="Average Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-square-root-alt">
+          </i>
+         </div>
+         <h3>
+          Quadratic Formula Calculator
+         </h3>
+         <p>
+          Solve quadratic equations with step-by-step solutions
+         </p>
+         <a class="btn-link" href="quadratic-formula-calculator.html" title="Quadratic Formula Calculator">
+          Use Calculator
+         </a>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="average-calculator.html"><i class="fas fa-arrow-right"></i> Average Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let calculationType = 'population';
+        let currentData = [];
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function selectCalculationType(type) {
+            calculationType = type;
+            document.getElementById('populationType').classList.remove('selected');
+            document.getElementById('sampleType').classList.remove('selected');
+            
+            if (type === 'population') {
+                document.getElementById('populationType').classList.add('selected');
+            } else {
+                document.getElementById('sampleType').classList.add('selected');
+            }
+        }
+
+        function addSampleData(type) {
+            let sampleData = '';
+            switch(type) {
+                case 'grades':
+                    sampleData = '85, 92, 78, 96, 88, 91, 73, 89, 95, 82, 87, 90';
+                    break;
+                case 'heights':
+                    sampleData = '165, 170, 175, 168, 172, 180, 163, 177, 169, 174';
+                    break;
+                case 'random':
+                    const randomNumbers = Array.from({length: 12}, () => Math.floor(Math.random() * 100) + 1);
+                    sampleData = randomNumbers.join(', ');
+                    break;
+            }
+            document.getElementById('dataInput').value = sampleData;
+        }
+
+        function clearData() {
+            document.getElementById('dataInput').value = '';
+            hideResults();
+        }
+
+        function hideResults() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('dataDisplay').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            hideResults();
+        }
+
+        function parseData(input) {
+            if (!input.trim()) {
+                throw new Error('Please enter some data to calculate.');
+            }
+            
+            // Split by comma, space, or newline and filter empty values
+            const numbers = input.split(/[,\s\n]+/)
+                .filter(val => val.trim() !== '')
+                .map(val => {
+                    const num = parseFloat(val.trim());
+                    if (isNaN(num)) {
+                        throw new Error(`"${val}" is not a valid number.`);
+                    }
+                    return num;
+                });
+            
+            if (numbers.length < 2) {
+                throw new Error('Please enter at least 2 numbers for statistical analysis.');
+            }
+            
+            return numbers;
+        }
+
+        function calculateMean(data) {
+            return data.reduce((sum, val) => sum + val, 0) / data.length;
+        }
+
+        function calculateMedian(data) {
+            const sorted = [...data].sort((a, b) => a - b);
+            const mid = Math.floor(sorted.length / 2);
+            return sorted.length % 2 === 0 
+                ? (sorted[mid - 1] + sorted[mid]) / 2 
+                : sorted[mid];
+        }
+
+        function calculateMode(data) {
+            const frequency = {};
+            data.forEach(val => frequency[val] = (frequency[val] || 0) + 1);
+            
+            const maxFreq = Math.max(...Object.values(frequency));
+            const modes = Object.keys(frequency).filter(key => frequency[key] === maxFreq);
+            
+            if (modes.length === data.length) return 'No mode';
+            return modes.length === 1 ? parseFloat(modes[0]) : modes.map(m => parseFloat(m)).join(', ');
+        }
+
+        function calculateQuartiles(data) {
+            const sorted = [...data].sort((a, b) => a - b);
+            const n = sorted.length;
+            
+            const q1Index = Math.floor(n * 0.25);
+            const q3Index = Math.floor(n * 0.75);
+            
+            return {
+                q1: sorted[q1Index],
+                q3: sorted[q3Index]
+            };
+        }
+
+        function calculateStandardDeviation(data, mean, isPopulation) {
+            const squaredDiffs = data.map(val => Math.pow(val - mean, 2));
+            const variance = squaredDiffs.reduce((sum, val) => sum + val, 0) / (isPopulation ? data.length : data.length - 1);
+            return {
+                variance: variance,
+                stdDev: Math.sqrt(variance)
+            };
+        }
+
+        function calculateStatistics() {
+            try {
+                const input = document.getElementById('dataInput').value;
+                currentData = parseData(input);
+                
+                // Basic calculations
+                const mean = calculateMean(currentData);
+                const median = calculateMedian(currentData);
+                const mode = calculateMode(currentData);
+                const min = Math.min(...currentData);
+                const max = Math.max(...currentData);
+                const range = max - min;
+                
+                // Standard deviation and variance
+                const isPopulation = calculationType === 'population';
+                const {variance, stdDev} = calculateStandardDeviation(currentData, mean, isPopulation);
+                
+                // Quartiles
+                const {q1, q3} = calculateQuartiles(currentData);
+                const iqr = q3 - q1;
+                
+                // Display results
+                document.getElementById('meanResult').textContent = mean.toFixed(4);
+                document.getElementById('stdDevResult').textContent = stdDev.toFixed(4);
+                document.getElementById('varianceResult').textContent = variance.toFixed(4);
+                document.getElementById('medianResult').textContent = median.toFixed(4);
+                document.getElementById('modeResult').textContent = mode;
+                document.getElementById('rangeResult').textContent = range.toFixed(4);
+                
+                // Data summary
+                document.getElementById('countValue').textContent = currentData.length;
+                document.getElementById('minValue').textContent = min.toFixed(4);
+                document.getElementById('maxValue').textContent = max.toFixed(4);
+                document.getElementById('q1Value').textContent = q1.toFixed(4);
+                document.getElementById('q3Value').textContent = q3.toFixed(4);
+                document.getElementById('iqrValue').textContent = iqr.toFixed(4);
+                
+                // Advanced analysis
+                const cv = (stdDev / mean) * 100;
+                document.getElementById('cvResult').innerHTML = `<strong>CV = ${cv.toFixed(2)}%</strong>`;
+                
+                // Outlier detection
+                const lowerBound = q1 - 1.5 * iqr;
+                const upperBound = q3 + 1.5 * iqr;
+                const outliers = currentData.filter(val => val < lowerBound || val > upperBound);
+                
+                document.getElementById('outlierResults').innerHTML = outliers.length > 0 
+                    ? `<strong>Outliers detected:</strong> ${outliers.join(', ')}`
+                    : '<strong>No outliers detected</strong>';
+                
+                // Show results
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('dataDisplay').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+                
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        // Initialize with sample data
+        document.addEventListener('DOMContentLoaded', function() {
+            addSampleData('grades');
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

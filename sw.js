@@ -1,4 +1,4 @@
-const CACHE_NAME = 'make-qr-v2';
+const CACHE_NAME = 'make-qr-v5';
 const CORE_ASSETS = [
     '/',
     '/index.html',
@@ -14,7 +14,15 @@ const CORE_ASSETS = [
     '/assets/shared/footer.html',
     '/assets/images/app-icon.svg',
     '/assets/images/app-icon-192.png',
-    '/assets/images/app-icon-512.png'
+    '/assets/images/app-icon-512.png',
+    '/calculators/',
+    '/calculators/assets/css/styles.css',
+    '/calculators/assets/css/home.css',
+    '/calculators/assets/css/make-qr-integration.css',
+    '/calculators/assets/js/script.js',
+    '/calculators/assets/js/search-index.js',
+    '/calculators/assets/js/search.js',
+    '/calculators/assets/js/make-qr-integration.js'
 ];
 
 self.addEventListener('install', event => {

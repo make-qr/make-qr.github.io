@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/pace-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Pace Calculator - Running Pace &amp; Marathon Time Calculator | Make QR Calculators
+  </title>
+  <meta content="Calculate running pace, finish time, and distance for marathons, 5K, 10K, and other races. Plan your training with precise pace calculations." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .pace-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-modes {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mode-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .mode-button.active {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .mode-content {
+            display: none;
+        }
+
+        .mode-content.active {
+            display: block;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .time-input {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .time-field {
+            text-align: center;
+            padding: 0.8rem;
+        }
+
+        .time-separator {
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .result-field::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .race-distances {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .distance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .distance-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .distance-card:hover {
+            border-color: #28a745;
+            background: #e8f5e8;
+        }
+
+        .distance-card.selected {
+            border-color: #28a745;
+            background: #e8f5e8;
+        }
+
+        .distance-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .distance-length {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .pace-zones {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .zones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .zone-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            border-left: 4px solid;
+        }
+
+        .zone1 { border-left-color: #28a745; }
+        .zone2 { border-left-color: #ffc107; }
+        .zone3 { border-left-color: #fd7e14; }
+        .zone4 { border-left-color: #dc3545; }
+        .zone5 { border-left-color: #6f42c1; }
+
+        .zone-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .zone-pace {
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .zone-description {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .splits-table {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .splits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .split-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .split-distance {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .split-time {
+            font-size: 1.1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .training-plans {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .plan-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-modes {
+                flex-direction: column;
+            }
+            
+            .time-input {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Pace Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online pace calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Pace Calculator", "item": "https://make-qr.github.io/calculators/pace-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--health">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link active" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#health">Health & Fitness</a>
+                <span class="sep">/</span>
+                <span class="current">Pace Calculator</span>
+            </nav>
+            <h1>Pace Calculator</h1>
+            <p>Calculate running pace, finish time, and distance for all your races</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="pace-calculator">
+      <div class="calculator-modes">
+       <button class="mode-button active" onclick="setMode('pace')">
+        <i class="fas fa-tachometer-alt">
+        </i>
+        Calculate Pace
+       </button>
+       <button class="mode-button" onclick="setMode('time')">
+        <i class="fas fa-clock">
+        </i>
+        Calculate Time
+       </button>
+       <button class="mode-button" onclick="setMode('distance')">
+        <i class="fas fa-route">
+        </i>
+        Calculate Distance
+       </button>
+      </div>
+      <!-- Calculate Pace Mode -->
+      <div class="mode-content active" id="pace">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-play">
+          </i>
+          Race Information
+         </h3>
+         <div class="input-group">
+          <label for="race-distance">
+           Distance
+          </label>
+          <select class="input-field" id="race-distance">
+           <option value="5">
+            5K (3.1 miles)
+           </option>
+           <option value="10">
+            10K (6.2 miles)
+           </option>
+           <option value="21.0975">
+            Half Marathon (13.1 miles)
+           </option>
+           <option selected="" value="42.195">
+            Marathon (26.2 miles)
+           </option>
+           <option value="custom">
+            Custom Distance
+           </option>
+          </select>
+         </div>
+         <div class="input-group" id="custom-distance-group" style="display: none;">
+          <label for="custom-distance">
+           Custom Distance (km)
+          </label>
+          <input class="input-field" id="custom-distance" min="0.1" placeholder="10.5" step="0.1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="finish-time">
+           Finish Time
+          </label>
+          <div class="time-input">
+           <input class="input-field time-field" id="hours" max="23" min="0" placeholder="3" type="number"/>
+           <span class="time-separator">
+            :
+           </span>
+           <input class="input-field time-field" id="minutes" max="59" min="0" placeholder="30" type="number"/>
+           <span class="time-separator">
+            :
+           </span>
+           <input class="input-field time-field" id="seconds" max="59" min="0" placeholder="15" type="number"/>
+          </div>
+          <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+           Hours : Minutes : Seconds
+          </p>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-tachometer-alt">
+          </i>
+          Your Pace
+         </h3>
+         <div class="input-group">
+          <label for="pace-per-km">
+           Pace per Kilometer
+          </label>
+          <input class="input-field result-field" id="pace-per-km" placeholder="0:00" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="pace-per-mile">
+           Pace per Mile
+          </label>
+          <input class="input-field result-field" id="pace-per-mile" placeholder="0:00" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="speed-kmh">
+           Speed (km/h)
+          </label>
+          <input class="input-field result-field" id="speed-kmh" placeholder="0.0" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="speed-mph">
+           Speed (mph)
+          </label>
+          <input class="input-field result-field" id="speed-mph" placeholder="0.0" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Calculate Time Mode -->
+      <div class="mode-content" id="time">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-route">
+          </i>
+          Pace &amp; Distance
+         </h3>
+         <div class="input-group">
+          <label for="target-distance">
+           Distance
+          </label>
+          <select class="input-field" id="target-distance">
+           <option value="5">
+            5K (3.1 miles)
+           </option>
+           <option value="10">
+            10K (6.2 miles)
+           </option>
+           <option value="21.0975">
+            Half Marathon (13.1 miles)
+           </option>
+           <option selected="" value="42.195">
+            Marathon (26.2 miles)
+           </option>
+           <option value="custom">
+            Custom Distance
+           </option>
+          </select>
+         </div>
+         <div class="input-group" id="custom-target-distance-group" style="display: none;">
+          <label for="custom-target-distance">
+           Custom Distance (km)
+          </label>
+          <input class="input-field" id="custom-target-distance" min="0.1" placeholder="10.5" step="0.1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="target-pace">
+           Target Pace (per km)
+          </label>
+          <div class="time-input">
+           <input class="input-field time-field" id="pace-minutes" max="30" min="0" placeholder="5" type="number"/>
+           <span class="time-separator">
+            :
+           </span>
+           <input class="input-field time-field" id="pace-seconds" max="59" min="0" placeholder="30" type="number"/>
+          </div>
+          <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+           Minutes : Seconds per kilometer
+          </p>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-clock">
+          </i>
+          Finish Time
+         </h3>
+         <div class="input-group">
+          <label for="estimated-time">
+           Estimated Finish Time
+          </label>
+          <input class="input-field result-field" id="estimated-time" placeholder="0:00:00" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="pace-mile-result">
+           Pace per Mile
+          </label>
+          <input class="input-field result-field" id="pace-mile-result" placeholder="0:00" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="avg-speed-kmh">
+           Average Speed (km/h)
+          </label>
+          <input class="input-field result-field" id="avg-speed-kmh" placeholder="0.0" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="avg-speed-mph">
+           Average Speed (mph)
+          </label>
+          <input class="input-field result-field" id="avg-speed-mph" placeholder="0.0" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Calculate Distance Mode -->
+      <div class="mode-content" id="distance">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-stopwatch">
+          </i>
+          Time &amp; Pace
+         </h3>
+         <div class="input-group">
+          <label for="run-time">
+           Running Time
+          </label>
+          <div class="time-input">
+           <input class="input-field time-field" id="run-hours" max="23" min="0" placeholder="1" type="number"/>
+           <span class="time-separator">
+            :
+           </span>
+           <input class="input-field time-field" id="run-minutes" max="59" min="0" placeholder="30" type="number"/>
+           <span class="time-separator">
+            :
+           </span>
+           <input class="input-field time-field" id="run-seconds" max="59" min="0" placeholder="0" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="run-pace">
+           Pace (per km)
+          </label>
+          <div class="time-input">
+           <input class="input-field time-field" id="run-pace-minutes" max="30" min="0" placeholder="5" type="number"/>
+           <span class="time-separator">
+            :
+           </span>
+           <input class="input-field time-field" id="run-pace-seconds" max="59" min="0" placeholder="30" type="number"/>
+          </div>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-route">
+          </i>
+          Distance Covered
+         </h3>
+         <div class="input-group">
+          <label for="distance-km">
+           Distance (Kilometers)
+          </label>
+          <input class="input-field result-field" id="distance-km" placeholder="0.0" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="distance-miles">
+           Distance (Miles)
+          </label>
+          <input class="input-field result-field" id="distance-miles" placeholder="0.0" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="calories-burned">
+           Estimated Calories Burned
+          </label>
+          <input class="input-field result-field" id="calories-burned" placeholder="0" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="race-distances">
+       <h3>
+        <i class="fas fa-medal">
+        </i>
+        Popular Race Distances
+       </h3>
+       <div class="distance-grid">
+        <div class="distance-card" onclick="selectDistance(1, '1K')">
+         <div class="distance-name">
+          1K
+         </div>
+         <div class="distance-length">
+          0.6 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(5, '5K')">
+         <div class="distance-name">
+          5K
+         </div>
+         <div class="distance-length">
+          3.1 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(10, '10K')">
+         <div class="distance-name">
+          10K
+         </div>
+         <div class="distance-length">
+          6.2 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(15, '15K')">
+         <div class="distance-name">
+          15K
+         </div>
+         <div class="distance-length">
+          9.3 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(21.0975, 'Half Marathon')">
+         <div class="distance-name">
+          Half Marathon
+         </div>
+         <div class="distance-length">
+          13.1 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(42.195, 'Marathon')">
+         <div class="distance-name">
+          Marathon
+         </div>
+         <div class="distance-length">
+          26.2 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(50, '50K Ultra')">
+         <div class="distance-name">
+          50K Ultra
+         </div>
+         <div class="distance-length">
+          31.1 miles
+         </div>
+        </div>
+        <div class="distance-card" onclick="selectDistance(100, '100K Ultra')">
+         <div class="distance-name">
+          100K Ultra
+         </div>
+         <div class="distance-length">
+          62.1 miles
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="pace-zones" id="pace-zones" style="display: none;">
+       <h3>
+        <i class="fas fa-heart">
+        </i>
+        Training Pace Zones
+       </h3>
+       <p>
+        Based on your current pace, here are your recommended training zones:
+       </p>
+       <div class="zones-grid" id="zones-grid">
+        <!-- Pace zones will be generated here -->
+       </div>
+      </div>
+      <div class="splits-table" id="splits-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-line">
+        </i>
+        Race Splits
+       </h3>
+       <div class="splits-grid" id="splits-grid">
+        <!-- Split times will be generated here -->
+       </div>
+      </div>
+      <div class="training-plans">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Training Tips
+       </h3>
+       <div class="plans-grid">
+        <div class="plan-item">
+         <h4>
+          🏃‍♂️ Easy Runs (Zone 1)
+         </h4>
+         <p>
+          70-80% of training should be easy pace. You should be able to hold a conversation while running.
+         </p>
+        </div>
+        <div class="plan-item">
+         <h4>
+          ⚡ Tempo Runs (Zone 3)
+         </h4>
+         <p>
+          Comfortably hard pace for 20-40 minutes. Improves lactate threshold and race fitness.
+         </p>
+        </div>
+        <div class="plan-item">
+         <h4>
+          🔥 Interval Training (Zone 4-5)
+         </h4>
+         <p>
+          Short, intense efforts with recovery. Improves VO2 max and running economy.
+         </p>
+        </div>
+        <div class="plan-item">
+         <h4>
+          📊 Progressive Runs
+         </h4>
+         <p>
+          Start easy and gradually increase pace. Great for building fitness and race simulation.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="bmi-calculator.html"><i class="fas fa-arrow-right"></i> BMI Calculator</a>
+                <a class="related-link" href="calorie-calculator.html"><i class="fas fa-arrow-right"></i> Calorie Calculator</a>
+                <a class="related-link" href="body-fat-calculator.html"><i class="fas fa-arrow-right"></i> Body Fat Calculator</a>
+                <a class="related-link" href="bmr-calculator.html"><i class="fas fa-arrow-right"></i> BMR Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentMode = 'pace';
+
+        function setMode(mode) {
+            // Hide all mode contents
+            document.querySelectorAll('.mode-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.mode-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected mode
+            document.getElementById(mode).style.display = 'block';
+            event.target.classList.add('active');
+            
+            currentMode = mode;
+            
+            // Calculate based on current mode
+            if (mode === 'pace') {
+                calculatePace();
+            } else if (mode === 'time') {
+                calculateTime();
+            } else if (mode === 'distance') {
+                calculateDistance();
+            }
+        }
+
+        function selectDistance(distance, name) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.distance-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Set distance in appropriate dropdown
+            if (currentMode === 'pace') {
+                if ([5, 10, 21.0975, 42.195].includes(distance)) {
+                    document.getElementById('race-distance').value = distance;
+                } else {
+                    document.getElementById('race-distance').value = 'custom';
+                    document.getElementById('custom-distance').value = distance;
+                    document.getElementById('custom-distance-group').style.display = 'block';
+                }
+                calculatePace();
+            } else if (currentMode === 'time') {
+                if ([5, 10, 21.0975, 42.195].includes(distance)) {
+                    document.getElementById('target-distance').value = distance;
+                } else {
+                    document.getElementById('target-distance').value = 'custom';
+                    document.getElementById('custom-target-distance').value = distance;
+                    document.getElementById('custom-target-distance-group').style.display = 'block';
+                }
+                calculateTime();
+            }
+        }
+
+        function getDistance(selectId, customId) {
+            const selectValue = document.getElementById(selectId).value;
+            if (selectValue === 'custom') {
+                return parseFloat(document.getElementById(customId).value) || 0;
+            }
+            return parseFloat(selectValue);
+        }
+
+        function formatTime(totalSeconds) {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = Math.floor(totalSeconds % 60);
+            
+            if (hours > 0) {
+                return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        function calculatePace() {
+            const distance = getDistance('race-distance', 'custom-distance');
+            const hours = parseInt(document.getElementById('hours').value) || 0;
+            const minutes = parseInt(document.getElementById('minutes').value) || 0;
+            const seconds = parseInt(document.getElementById('seconds').value) || 0;
+
+            if (distance === 0 || (hours === 0 && minutes === 0 && seconds === 0)) return;
+
+            const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            const pacePerKmSeconds = totalSeconds / distance;
+            const pacePerMileSeconds = totalSeconds / (distance * 0.621371);
+
+            // Update pace displays
+            document.getElementById('pace-per-km').value = formatTime(pacePerKmSeconds);
+            document.getElementById('pace-per-mile').value = formatTime(pacePerMileSeconds);
+
+            // Calculate speeds
+            const speedKmh = (distance / (totalSeconds / 3600)).toFixed(2);
+            const speedMph = (distance * 0.621371 / (totalSeconds / 3600)).toFixed(2);
+
+            document.getElementById('speed-kmh').value = speedKmh + ' km/h';
+            document.getElementById('speed-mph').value = speedMph + ' mph';
+
+            // Generate pace zones and splits
+            generatePaceZones(pacePerKmSeconds);
+            generateSplits(distance, pacePerKmSeconds);
+        }
+
+        function calculateTime() {
+            const distance = getDistance('target-distance', 'custom-target-distance');
+            const paceMinutes = parseInt(document.getElementById('pace-minutes').value) || 0;
+            const paceSeconds = parseInt(document.getElementById('pace-seconds').value) || 0;
+
+            if (distance === 0 || (paceMinutes === 0 && paceSeconds === 0)) return;
+
+            const pacePerKmSeconds = paceMinutes * 60 + paceSeconds;
+            const totalSeconds = distance * pacePerKmSeconds;
+
+            // Update time display
+            document.getElementById('estimated-time').value = formatTime(totalSeconds);
+
+            // Calculate pace per mile
+            const pacePerMileSeconds = pacePerKmSeconds / 0.621371;
+            document.getElementById('pace-mile-result').value = formatTime(pacePerMileSeconds);
+
+            // Calculate speeds
+            const speedKmh = (3600 / pacePerKmSeconds).toFixed(2);
+            const speedMph = (speedKmh * 0.621371).toFixed(2);
+
+            document.getElementById('avg-speed-kmh').value = speedKmh + ' km/h';
+            document.getElementById('avg-speed-mph').value = speedMph + ' mph';
+
+            // Generate splits
+            generateSplits(distance, pacePerKmSeconds);
+        }
+
+        function calculateDistance() {
+            const hours = parseInt(document.getElementById('run-hours').value) || 0;
+            const minutes = parseInt(document.getElementById('run-minutes').value) || 0;
+            const seconds = parseInt(document.getElementById('run-seconds').value) || 0;
+            const paceMinutes = parseInt(document.getElementById('run-pace-minutes').value) || 0;
+            const paceSeconds = parseInt(document.getElementById('run-pace-seconds').value) || 0;
+
+            if ((hours === 0 && minutes === 0 && seconds === 0) || (paceMinutes === 0 && paceSeconds === 0)) return;
+
+            const totalRunSeconds = hours * 3600 + minutes * 60 + seconds;
+            const pacePerKmSeconds = paceMinutes * 60 + paceSeconds;
+            const distance = totalRunSeconds / pacePerKmSeconds;
+
+            // Update distance displays
+            document.getElementById('distance-km').value = distance.toFixed(2) + ' km';
+            document.getElementById('distance-miles').value = (distance * 0.621371).toFixed(2) + ' miles';
+
+            // Estimate calories burned (rough calculation: 60 calories per km for average person)
+            const caloriesBurned = Math.round(distance * 60);
+            document.getElementById('calories-burned').value = caloriesBurned + ' cal';
+        }
+
+        function generatePaceZones(basePaceSeconds) {
+            const zones = [
+                { name: 'Easy/Recovery', multiplier: 1.3, class: 'zone1', description: 'Conversational pace' },
+                { name: 'Aerobic Base', multiplier: 1.15, class: 'zone2', description: 'Comfortable effort' },
+                { name: 'Tempo', multiplier: 0.95, class: 'zone3', description: 'Comfortably hard' },
+                { name: 'Lactate Threshold', multiplier: 0.85, class: 'zone4', description: 'Hard effort' },
+                { name: 'VO2 Max', multiplier: 0.75, class: 'zone5', description: 'Very hard effort' }
+            ];
+
+            const zonesGrid = document.getElementById('zones-grid');
+            zonesGrid.innerHTML = '';
+
+            zones.forEach(zone => {
+                const zoneSeconds = basePaceSeconds * zone.multiplier;
+                const zoneDiv = document.createElement('div');
+                zoneDiv.className = `zone-item ${zone.class}`;
+                zoneDiv.innerHTML = `
+                    <div class="zone-title">${zone.name}</div>
+                    <div class="zone-pace">${formatTime(zoneSeconds)}</div>
+                    <div class="zone-description">${zone.description}</div>
+                `;
+                zonesGrid.appendChild(zoneDiv);
+            });
+
+            document.getElementById('pace-zones').style.display = 'block';
+        }
+
+        function generateSplits(totalDistance, pacePerKmSeconds) {
+            const splitsGrid = document.getElementById('splits-grid');
+            splitsGrid.innerHTML = '';
+
+            // Generate splits based on distance
+            let splitDistances = [];
+            if (totalDistance <= 5) {
+                splitDistances = [1, 2, 3, 4, 5].filter(d => d <= totalDistance);
+            } else if (totalDistance <= 10) {
+                splitDistances = [1, 2.5, 5, 7.5, 10].filter(d => d <= totalDistance);
+            } else if (totalDistance <= 21.1) {
+                splitDistances = [5, 10, 15, 21.0975].filter(d => d <= totalDistance);
+            } else {
+                splitDistances = [5, 10, 15, 20, 25, 30, 35, 42.195].filter(d => d <= totalDistance);
+            }
+
+            // Add final distance if not already included
+            if (!splitDistances.includes(totalDistance)) {
+                splitDistances.push(totalDistance);
+            }
+
+            splitDistances.forEach(distance => {
+                const splitTime = distance * pacePerKmSeconds;
+                const splitDiv = document.createElement('div');
+                splitDiv.className = 'split-item';
+                
+                let distanceLabel = distance + 'K';
+                if (distance === 21.0975) distanceLabel = 'Half';
+                if (distance === 42.195) distanceLabel = 'Full';
+                
+                splitDiv.innerHTML = `
+                    <div class="split-distance">${distanceLabel}</div>
+                    <div class="split-time">${formatTime(splitTime)}</div>
+                `;
+                splitsGrid.appendChild(splitDiv);
+            });
+
+            document.getElementById('splits-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Custom distance visibility
+            document.getElementById('race-distance').addEventListener('change', function() {
+                document.getElementById('custom-distance-group').style.display = 
+                    this.value === 'custom' ? 'block' : 'none';
+                calculatePace();
+            });
+
+            document.getElementById('target-distance').addEventListener('change', function() {
+                document.getElementById('custom-target-distance-group').style.display = 
+                    this.value === 'custom' ? 'block' : 'none';
+                calculateTime();
+            });
+
+            // Calculate Pace mode inputs
+            ['race-distance', 'custom-distance', 'hours', 'minutes', 'seconds'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        if (currentMode === 'pace') calculatePace();
+                    });
+                }
+            });
+
+            // Calculate Time mode inputs
+            ['target-distance', 'custom-target-distance', 'pace-minutes', 'pace-seconds'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        if (currentMode === 'time') calculateTime();
+                    });
+                }
+            });
+
+            // Calculate Distance mode inputs
+            ['run-hours', 'run-minutes', 'run-seconds', 'run-pace-minutes', 'run-pace-seconds'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        if (currentMode === 'distance') calculateDistance();
+                    });
+                }
+            });
+
+            // Set example values
+            document.getElementById('hours').value = 3;
+            document.getElementById('minutes').value = 30;
+            document.getElementById('seconds').value = 0;
+            document.getElementById('pace-minutes').value = 5;
+            document.getElementById('pace-seconds').value = 0;
+            document.getElementById('run-hours').value = 1;
+            document.getElementById('run-minutes').value = 0;
+            document.getElementById('run-seconds').value = 0;
+            document.getElementById('run-pace-minutes').value = 5;
+            document.getElementById('run-pace-seconds').value = 30;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

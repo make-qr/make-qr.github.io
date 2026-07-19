@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/concrete-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Concrete Calculator - Calculate Concrete Volume &amp; Cost | Make QR Calculators
+  </title>
+  <meta content="Calculate concrete volume, bags needed, and project costs for slabs, driveways, footings, and stairs. Plan your concrete projects accurately." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .concrete-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .project-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+
+        .tab-button.active {
+            background: #6c757d;
+            color: white;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #6c757d;
+            box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.1);
+        }
+
+        .dimension-input {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .dimension-field {
+            text-align: center;
+            padding: 0.8rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .project-visual {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .visual-diagram {
+            width: 300px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            background: #f8f9fa;
+            border: 2px dashed #6c757d;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .cost-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-tabs {
+                flex-direction: column;
+            }
+            
+            .dimension-input {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Concrete Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online concrete calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Concrete Calculator", "item": "https://make-qr.github.io/calculators/concrete-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--construction">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link active" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#construction">Construction</a>
+                <span class="sep">/</span>
+                <span class="current">Concrete Calculator</span>
+            </nav>
+            <h1>Concrete Calculator</h1>
+            <p>Calculate concrete volume, bags needed, and project costs for your construction projects</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="concrete-calculator">
+      <div class="project-tabs">
+       <button class="tab-button active" onclick="switchProject('slab')">
+        <i class="fas fa-square">
+        </i>
+        Slab/Patio
+       </button>
+       <button class="tab-button" onclick="switchProject('driveway')">
+        <i class="fas fa-road">
+        </i>
+        Driveway
+       </button>
+       <button class="tab-button" onclick="switchProject('footing')">
+        <i class="fas fa-cube">
+        </i>
+        Footing
+       </button>
+       <button class="tab-button" onclick="switchProject('stairs')">
+        <i class="fas fa-layer-group">
+        </i>
+        Stairs
+       </button>
+       <button class="tab-button" onclick="switchProject('wall')">
+        <i class="fas fa-border-style">
+        </i>
+        Wall
+       </button>
+      </div>
+      <div class="calculator-grid">
+       <div class="input-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-ruler">
+         </i>
+         <span id="project-title">
+          Slab Dimensions
+         </span>
+        </h3>
+        <div class="project-inputs" id="slab-inputs">
+         <div class="input-group">
+          <label>
+           Dimensions (Length × Width × Thickness)
+          </label>
+          <div class="dimension-input">
+           <input class="input-field dimension-field" id="slab-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+           <input class="input-field dimension-field" id="slab-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+           <input class="input-field dimension-field" id="slab-thickness" min="0" placeholder="Thickness (in)" step="0.25" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="slab-units">
+           Unit System
+          </label>
+          <select class="input-field" id="slab-units">
+           <option value="imperial">
+            Imperial (ft/in)
+           </option>
+           <option value="metric">
+            Metric (m/cm)
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="project-inputs" id="driveway-inputs" style="display: none;">
+         <div class="input-group">
+          <label>
+           Dimensions (Length × Width × Thickness)
+          </label>
+          <div class="dimension-input">
+           <input class="input-field dimension-field" id="drive-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+           <input class="input-field dimension-field" id="drive-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+           <input class="input-field dimension-field" id="drive-thickness" min="0" placeholder="Thickness (in)" step="0.25" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="driveway-type">
+           Driveway Type
+          </label>
+          <select class="input-field" id="driveway-type">
+           <option value="standard">
+            Standard Residential
+           </option>
+           <option value="heavy-duty">
+            Heavy Duty (Trucks)
+           </option>
+           <option value="decorative">
+            Decorative
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="project-inputs" id="footing-inputs" style="display: none;">
+         <div class="input-group">
+          <label>
+           Footing Dimensions
+          </label>
+          <div class="dimension-input">
+           <input class="input-field dimension-field" id="footing-length" min="0" placeholder="Length (ft)" step="0.1" type="number"/>
+           <input class="input-field dimension-field" id="footing-width" min="0" placeholder="Width (ft)" step="0.1" type="number"/>
+           <input class="input-field dimension-field" id="footing-depth" min="0" placeholder="Depth (ft)" step="0.1" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="footing-quantity">
+           Number of Footings
+          </label>
+          <input class="input-field" id="footing-quantity" min="1" placeholder="1" step="1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="concrete-price">
+          Concrete Price per Cubic Yard
+         </label>
+         <div style="position: relative;">
+          <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: #6c757d;">
+           $
+          </span>
+          <input class="input-field" id="concrete-price" min="0" placeholder="150" step="1" style="padding-left: 2.5rem;" type="number"/>
+         </div>
+        </div>
+       </div>
+       <div class="result-panel">
+        <h3 class="panel-title">
+         <i class="fas fa-calculator">
+         </i>
+         Results
+        </h3>
+        <div class="input-group">
+         <label for="cubic-yards">
+          Cubic Yards Needed
+         </label>
+         <input class="input-field result-field" id="cubic-yards" placeholder="0.0 yd³" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="cubic-feet">
+          Cubic Feet
+         </label>
+         <input class="input-field result-field" id="cubic-feet" placeholder="0.0 ft³" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="bags-60lb">
+          60lb Bags Needed
+         </label>
+         <input class="input-field result-field" id="bags-60lb" placeholder="0 bags" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="bags-80lb">
+          80lb Bags Needed
+         </label>
+         <input class="input-field result-field" id="bags-80lb" placeholder="0 bags" readonly="" type="text"/>
+        </div>
+        <div class="input-group">
+         <label for="total-cost">
+          Estimated Cost
+         </label>
+         <div style="position: relative;">
+          <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: rgba(255,255,255,0.8);">
+           $
+          </span>
+          <input class="input-field result-field" id="total-cost" placeholder="0.00" readonly="" style="padding-left: 2.5rem;" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="project-visual">
+       <h3>
+        <i class="fas fa-eye">
+        </i>
+        Project Visualization
+       </h3>
+       <div class="visual-diagram" id="project-diagram">
+        <span id="diagram-text">
+         📏 Enter dimensions to see visualization
+        </span>
+       </div>
+       <p id="project-description">
+        Typical concrete slab for patios, garage floors, or basement floors
+       </p>
+      </div>
+      <div class="cost-breakdown" id="cost-breakdown-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-bar">
+        </i>
+        Cost Breakdown
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Cost breakdown items will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Concrete Project Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          📏 Accurate Measurements
+         </h4>
+         <p>
+          Always measure twice and order 5-10% extra concrete to account for waste and slight variations in depth.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🌡️ Weather Considerations
+         </h4>
+         <p>
+          Don't pour concrete in freezing temperatures or during rain. Ideal temperature is 50-70°F.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          💧 Proper Curing
+         </h4>
+         <p>
+          Keep concrete moist for at least 7 days after pouring for maximum strength development.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🏗️ Base Preparation
+         </h4>
+         <p>
+          Proper base preparation with gravel and compaction is crucial for long-lasting concrete.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          ⚡ Quick Setting
+         </h4>
+         <p>
+          Concrete starts setting in 30-60 minutes, so have your tools ready and work efficiently.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🔨 Reinforcement
+         </h4>
+         <p>
+          Consider rebar or wire mesh for slabs over 4 inches thick or in areas with heavy loads.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="paint-calculator.html"><i class="fas fa-arrow-right"></i> Paint Calculator</a>
+                <a class="related-link" href="roof-calculator.html"><i class="fas fa-arrow-right"></i> Roof Calculator</a>
+                <a class="related-link" href="square-footage-calculator.html"><i class="fas fa-arrow-right"></i> Square Footage</a>
+                <a class="related-link" href="flooring-calculator.html"><i class="fas fa-arrow-right"></i> Flooring Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentProject = 'slab';
+
+        function switchProject(projectType) {
+            // Hide all project inputs
+            document.querySelectorAll('.project-inputs').forEach(inputs => {
+                inputs.style.display = 'none';
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected project inputs
+            document.getElementById(projectType + '-inputs').style.display = 'block';
+            event.target.classList.add('active');
+            
+            currentProject = projectType;
+            
+            // Update project title and description
+            updateProjectInfo(projectType);
+            
+            // Calculate for new project
+            calculateConcrete();
+        }
+
+        function updateProjectInfo(projectType) {
+            const projectInfo = {
+                slab: {
+                    title: 'Slab Dimensions',
+                    description: 'Typical concrete slab for patios, garage floors, or basement floors',
+                    diagram: '🏠 Rectangular Slab'
+                },
+                driveway: {
+                    title: 'Driveway Dimensions',
+                    description: 'Concrete driveway with proper thickness for vehicle loads',
+                    diagram: '🚗 Driveway Slab'
+                },
+                footing: {
+                    title: 'Footing Dimensions',
+                    description: 'Foundation footings for structural support',
+                    diagram: '🏗️ Foundation Footing'
+                },
+                stairs: {
+                    title: 'Stairs Dimensions',
+                    description: 'Concrete steps and landings',
+                    diagram: '📐 Concrete Steps'
+                },
+                wall: {
+                    title: 'Wall Dimensions',
+                    description: 'Concrete retaining or structural walls',
+                    diagram: '🧱 Concrete Wall'
+                }
+            };
+
+            const info = projectInfo[projectType];
+            document.getElementById('project-title').textContent = info.title;
+            document.getElementById('project-description').textContent = info.description;
+            document.getElementById('diagram-text').textContent = info.diagram;
+        }
+
+        function calculateConcrete() {
+            let volume = 0; // in cubic feet
+            
+            if (currentProject === 'slab') {
+                const length = parseFloat(document.getElementById('slab-length').value) || 0;
+                const width = parseFloat(document.getElementById('slab-width').value) || 0;
+                const thickness = parseFloat(document.getElementById('slab-thickness').value) || 0;
+                
+                if (length && width && thickness) {
+                    volume = length * width * (thickness / 12); // Convert inches to feet
+                }
+            } else if (currentProject === 'driveway') {
+                const length = parseFloat(document.getElementById('drive-length').value) || 0;
+                const width = parseFloat(document.getElementById('drive-width').value) || 0;
+                const thickness = parseFloat(document.getElementById('drive-thickness').value) || 0;
+                
+                if (length && width && thickness) {
+                    volume = length * width * (thickness / 12);
+                }
+            } else if (currentProject === 'footing') {
+                const length = parseFloat(document.getElementById('footing-length').value) || 0;
+                const width = parseFloat(document.getElementById('footing-width').value) || 0;
+                const depth = parseFloat(document.getElementById('footing-depth').value) || 0;
+                const quantity = parseFloat(document.getElementById('footing-quantity').value) || 1;
+                
+                if (length && width && depth) {
+                    volume = length * width * depth * quantity;
+                }
+            }
+
+            if (volume === 0) return;
+
+            // Convert to cubic yards (27 cubic feet = 1 cubic yard)
+            const cubicYards = volume / 27;
+            
+            // Calculate bags needed
+            // 60lb bag covers approximately 0.45 cubic feet
+            // 80lb bag covers approximately 0.6 cubic feet
+            const bags60lb = Math.ceil(volume / 0.45);
+            const bags80lb = Math.ceil(volume / 0.6);
+            
+            // Calculate cost
+            const pricePerYard = parseFloat(document.getElementById('concrete-price').value) || 150;
+            const totalCost = cubicYards * pricePerYard;
+
+            // Update results
+            document.getElementById('cubic-yards').value = cubicYards.toFixed(2) + ' yd³';
+            document.getElementById('cubic-feet').value = volume.toFixed(2) + ' ft³';
+            document.getElementById('bags-60lb').value = bags60lb + ' bags';
+            document.getElementById('bags-80lb').value = bags80lb + ' bags';
+            document.getElementById('total-cost').value = totalCost.toFixed(2);
+
+            // Generate cost breakdown
+            generateCostBreakdown(cubicYards, totalCost, bags60lb, bags80lb, pricePerYard);
+            
+            // Update diagram
+            updateDiagram(volume);
+        }
+
+        function generateCostBreakdown(yards, totalCost, bags60, bags80, pricePerYard) {
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${yards.toFixed(2)} yd³</div>
+                    <div class="breakdown-label">Concrete Volume</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${totalCost.toFixed(2)}</div>
+                    <div class="breakdown-label">Ready-Mix Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${bags60} bags</div>
+                    <div class="breakdown-label">60lb Bags (≈$${(bags60 * 4.5).toFixed(0)})</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${bags80} bags</div>
+                    <div class="breakdown-label">80lb Bags (≈$${(bags80 * 5.5).toFixed(0)})</div>
+                </div>
+            `;
+            document.getElementById('cost-breakdown-section').style.display = 'block';
+        }
+
+        function updateDiagram(volume) {
+            const diagram = document.getElementById('diagram-text');
+            if (volume > 0) {
+                diagram.textContent = `📊 ${volume.toFixed(1)} ft³ concrete needed`;
+            } else {
+                diagram.textContent = '📏 Enter dimensions to see visualization';
+            }
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slab inputs
+            ['slab-length', 'slab-width', 'slab-thickness'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateConcrete);
+            });
+
+            // Driveway inputs
+            ['drive-length', 'drive-width', 'drive-thickness'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateConcrete);
+            });
+
+            // Footing inputs
+            ['footing-length', 'footing-width', 'footing-depth', 'footing-quantity'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateConcrete);
+            });
+
+            // Price input
+            document.getElementById('concrete-price').addEventListener('input', calculateConcrete);
+
+            // Set example values
+            document.getElementById('slab-length').value = 12;
+            document.getElementById('slab-width').value = 12;
+            document.getElementById('slab-thickness').value = 4;
+            document.getElementById('concrete-price').value = 150;
+            
+            document.getElementById('drive-length').value = 20;
+            document.getElementById('drive-width').value = 12;
+            document.getElementById('drive-thickness').value = 4;
+            
+            document.getElementById('footing-length').value = 2;
+            document.getElementById('footing-width').value = 1;
+            document.getElementById('footing-depth').value = 3;
+            document.getElementById('footing-quantity').value = 4;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

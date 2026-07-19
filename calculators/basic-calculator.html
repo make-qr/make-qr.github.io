@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/basic-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Basic Calculator - Simple Online Calculator | Make QR Calculators
+  </title>
+  <meta content="Free basic calculator for simple arithmetic operations - addition, subtraction, multiplication, and division." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .basic-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+
+        .calculator-body {
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: right;
+            border: 2px solid #444;
+        }
+
+        .display-screen {
+            color: #00ff88;
+            font-size: 2.5rem;
+            font-weight: 300;
+            font-family: 'Courier New', monospace;
+            min-height: 3rem;
+            overflow: hidden;
+            word-break: break-all;
+        }
+
+        .display-history {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            min-height: 1.2rem;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .calc-button {
+            border: none;
+            border-radius: 10px;
+            padding: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+            color: #2c3e50;
+        }
+
+        .calc-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .calc-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .operator {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .function {
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .equals {
+            background: linear-gradient(145deg, #27ae60, #229954);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+
+        .memory-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .memory-display {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .memory-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .memory-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .memory-btn:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        .calculator-info {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-section {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tips-section h4 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+        }
+
+        .tips-section ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .tips-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .basic-calculator {
+                max-width: 350px;
+                padding: 1rem;
+            }
+            
+            .calc-button {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+            
+            .display-screen {
+                font-size: 2rem;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Basic Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online basic calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Basic Calculator", "item": "https://make-qr.github.io/calculators/basic-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Basic Calculator</span>
+            </nav>
+            <h1>Basic Calculator</h1>
+            <p>Simple and fast calculator for everyday calculations</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="basic-calculator">
+      <div class="calculator-body">
+       <div class="display">
+        <div class="display-history" id="history">
+        </div>
+        <div class="display-screen" id="display">
+         0
+        </div>
+       </div>
+       <div class="button-grid">
+        <!-- Row 1 -->
+        <button class="calc-button function" onclick="clearAll()">
+         AC
+        </button>
+        <button class="calc-button function" onclick="clearEntry()">
+         CE
+        </button>
+        <button class="calc-button function" onclick="deleteLast()">
+         ⌫
+        </button>
+        <button class="calc-button operator" onclick="inputOperator('/')" title="Divide">
+         ÷
+        </button>
+        <!-- Row 2 -->
+        <button class="calc-button" onclick="inputNumber('7')">
+         7
+        </button>
+        <button class="calc-button" onclick="inputNumber('8')">
+         8
+        </button>
+        <button class="calc-button" onclick="inputNumber('9')">
+         9
+        </button>
+        <button class="calc-button operator" onclick="inputOperator('*')" title="Multiply">
+         ×
+        </button>
+        <!-- Row 3 -->
+        <button class="calc-button" onclick="inputNumber('4')">
+         4
+        </button>
+        <button class="calc-button" onclick="inputNumber('5')">
+         5
+        </button>
+        <button class="calc-button" onclick="inputNumber('6')">
+         6
+        </button>
+        <button class="calc-button operator" onclick="inputOperator('-')" title="Subtract">
+         −
+        </button>
+        <!-- Row 4 -->
+        <button class="calc-button" onclick="inputNumber('1')">
+         1
+        </button>
+        <button class="calc-button" onclick="inputNumber('2')">
+         2
+        </button>
+        <button class="calc-button" onclick="inputNumber('3')">
+         3
+        </button>
+        <button class="calc-button operator" onclick="inputOperator('+')" title="Add">
+         +
+        </button>
+        <!-- Row 5 -->
+        <button class="calc-button zero" onclick="inputNumber('0')">
+         0
+        </button>
+        <button class="calc-button" onclick="inputDecimal()">
+         .
+        </button>
+        <button class="calc-button equals" onclick="calculate()" title="Equals">
+         =
+        </button>
+       </div>
+       <div class="memory-section">
+        <div class="memory-display" id="memoryDisplay">
+         Memory:
+         <span id="memoryValue">
+          0
+         </span>
+        </div>
+        <div class="memory-buttons">
+         <button class="memory-btn" onclick="memoryClear()" title="Memory Clear">
+          MC
+         </button>
+         <button class="memory-btn" onclick="memoryRecall()" title="Memory Recall">
+          MR
+         </button>
+         <button class="memory-btn" onclick="memoryStore()" title="Memory Store">
+          MS
+         </button>
+         <button class="memory-btn" onclick="memoryAdd()" title="Memory Add">
+          M+
+         </button>
+         <button class="memory-btn" onclick="memorySubtract()" title="Memory Subtract">
+          M−
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="calculator-info">
+      <h3>
+       How to Use the Basic Calculator
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem;">
+       <div>
+        <h4>
+         Basic Operations
+        </h4>
+        <ul>
+         <li>
+          <strong>
+           Numbers:
+          </strong>
+          Click number buttons (0-9) to input values
+         </li>
+         <li>
+          <strong>
+           Operations:
+          </strong>
+          Use +, −, ×, ÷ for arithmetic
+         </li>
+         <li>
+          <strong>
+           Decimal:
+          </strong>
+          Click "." for decimal numbers
+         </li>
+         <li>
+          <strong>
+           Equals:
+          </strong>
+          Press "=" to calculate result
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h4>
+         Control Functions
+        </h4>
+        <ul>
+         <li>
+          <strong>
+           AC:
+          </strong>
+          All Clear - resets calculator
+         </li>
+         <li>
+          <strong>
+           CE:
+          </strong>
+          Clear Entry - clears current number
+         </li>
+         <li>
+          <strong>
+           ⌫:
+          </strong>
+          Backspace - deletes last digit
+         </li>
+         <li>
+          <strong>
+           Memory:
+          </strong>
+          MC, MR, MS, M+, M− functions
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="tips-section">
+      <h4>
+       <i class="fas fa-lightbulb">
+       </i>
+       Calculator Tips
+      </h4>
+      <ul>
+       <li>
+        Use keyboard shortcuts: numbers (0-9), operators (+, -, *, /), Enter for equals
+       </li>
+       <li>
+        Memory functions help store intermediate results for complex calculations
+       </li>
+       <li>
+        AC clears everything, CE clears only the current entry
+       </li>
+       <li>
+        The calculator follows standard order of operations
+       </li>
+       <li>
+        Use parentheses for complex expressions (coming in scientific calculator)
+       </li>
+       <li>
+        For more advanced functions, try our Scientific Calculator
+       </li>
+      </ul>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let display = document.getElementById('display');
+        let history = document.getElementById('history');
+        let currentInput = '0';
+        let operator = '';
+        let previousInput = '';
+        let waitingForOperand = false;
+        let memory = 0;
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+            document.getElementById('memoryValue').textContent = memory.toString();
+        }
+
+        function inputNumber(num) {
+            if (waitingForOperand) {
+                currentInput = num;
+                waitingForOperand = false;
+            } else {
+                currentInput = currentInput === '0' ? num : currentInput + num;
+            }
+            updateDisplay();
+        }
+
+        function inputDecimal() {
+            if (waitingForOperand) {
+                currentInput = '0.';
+                waitingForOperand = false;
+            } else if (currentInput.indexOf('.') === -1) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+
+        function inputOperator(nextOperator) {
+            const inputValue = parseFloat(currentInput);
+
+            if (previousInput === '') {
+                previousInput = inputValue;
+            } else if (operator) {
+                const result = performCalculation();
+                
+                if (result === null) return;
+                
+                currentInput = String(result);
+                previousInput = result;
+            }
+
+            waitingForOperand = true;
+            operator = nextOperator;
+            
+            history.textContent = `${previousInput} ${getOperatorSymbol(operator)}`;
+            updateDisplay();
+        }
+
+        function calculate() {
+            const inputValue = parseFloat(currentInput);
+
+            if (previousInput !== '' && operator) {
+                const result = performCalculation();
+                
+                if (result === null) return;
+                
+                history.textContent = `${previousInput} ${getOperatorSymbol(operator)} ${inputValue} =`;
+                currentInput = String(result);
+                previousInput = '';
+                operator = '';
+                waitingForOperand = true;
+                updateDisplay();
+            }
+        }
+
+        function performCalculation() {
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            let result;
+
+            switch (operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        alert('Cannot divide by zero!');
+                        return null;
+                    }
+                    result = prev / current;
+                    break;
+                default:
+                    return current;
+            }
+
+            return Math.round((result + Number.EPSILON) * 100000000) / 100000000;
+        }
+
+        function getOperatorSymbol(op) {
+            const symbols = {
+                '+': '+',
+                '-': '−',
+                '*': '×',
+                '/': '÷'
+            };
+            return symbols[op] || op;
+        }
+
+        function clearAll() {
+            currentInput = '0';
+            previousInput = '';
+            operator = '';
+            waitingForOperand = false;
+            history.textContent = '';
+            updateDisplay();
+        }
+
+        function clearEntry() {
+            currentInput = '0';
+            waitingForOperand = false;
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        // Memory functions
+        function memoryClear() {
+            memory = 0;
+            updateDisplay();
+        }
+
+        function memoryRecall() {
+            currentInput = memory.toString();
+            waitingForOperand = false;
+            updateDisplay();
+        }
+
+        function memoryStore() {
+            memory = parseFloat(currentInput);
+            updateDisplay();
+        }
+
+        function memoryAdd() {
+            memory += parseFloat(currentInput);
+            updateDisplay();
+        }
+
+        function memorySubtract() {
+            memory -= parseFloat(currentInput);
+            updateDisplay();
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                inputNumber(key);
+            } else if (key === '.') {
+                inputDecimal();
+            } else if (key === '+') {
+                inputOperator('+');
+            } else if (key === '-') {
+                inputOperator('-');
+            } else if (key === '*') {
+                inputOperator('*');
+            } else if (key === '/') {
+                event.preventDefault();
+                inputOperator('/');
+            } else if (key === 'Enter' || key === '=') {
+                event.preventDefault();
+                calculate();
+            } else if (key === 'Escape') {
+                clearAll();
+            } else if (key === 'Backspace') {
+                event.preventDefault();
+                deleteLast();
+            }
+        });
+
+        // Initialize display
+        updateDisplay();
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

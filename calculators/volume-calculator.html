@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/volume-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Volume Calculator - Calculate Volume of 3D Shapes | Make QR Calculators
+  </title>
+  <meta content="Calculate volume of various 3D shapes including cube, sphere, cylinder, cone, pyramid and more geometric solids with formulas and examples." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .volume-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .shapes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .shape-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shape-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .shape-card:hover::before {
+            left: 100%;
+        }
+
+        .shape-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .shape-card.active {
+            border-color: #007bff;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .shape-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .shape-card.active .shape-icon {
+            color: white;
+        }
+
+        .shape-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .shape-formula {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            z-index: 1;
+        }
+
+        .calculator-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .calculator-section.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .formula-display {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2196f3;
+            position: relative;
+        }
+
+        .formula-display::before {
+            content: '📐';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .input-group::before {
+            content: attr(data-icon);
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .unit-selector {
+            margin-top: 0.5rem;
+        }
+
+        .unit-selector select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .calculate-btn:hover::before {
+            left: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .result-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-unit {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .conversion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .conversion-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .conversion-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .conversion-unit {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .visualization-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .shape-diagram {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #1976d2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dimension-labels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .dimension-label {
+            background: white;
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .examples-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .example-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #28a745;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-calculation {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .shapes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .conversion-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .result-value {
+                font-size: 2rem;
+            }
+            
+            .shape-diagram {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Volume Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online volume calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Volume Calculator", "item": "https://make-qr.github.io/calculators/volume-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Volume Calculator</span>
+            </nav>
+            <h1>Volume Calculator</h1>
+            <p>Calculate the volume of various 3D geometric shapes and solids</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="volume-calculator">
+      <h2>
+       Select a 3D Shape
+      </h2>
+      <div class="shapes-grid">
+       <div class="shape-card active" data-shape="cube">
+        <div class="shape-icon">
+         🧊
+        </div>
+        <div class="shape-name">
+         Cube
+        </div>
+        <div class="shape-formula">
+         V = s³
+        </div>
+       </div>
+       <div class="shape-card" data-shape="rectangular">
+        <div class="shape-icon">
+         📦
+        </div>
+        <div class="shape-name">
+         Rectangular Prism
+        </div>
+        <div class="shape-formula">
+         V = l × w × h
+        </div>
+       </div>
+       <div class="shape-card" data-shape="sphere">
+        <div class="shape-icon">
+         ⚽
+        </div>
+        <div class="shape-name">
+         Sphere
+        </div>
+        <div class="shape-formula">
+         V = (4/3)πr³
+        </div>
+       </div>
+       <div class="shape-card" data-shape="cylinder">
+        <div class="shape-icon">
+         🥫
+        </div>
+        <div class="shape-name">
+         Cylinder
+        </div>
+        <div class="shape-formula">
+         V = πr²h
+        </div>
+       </div>
+       <div class="shape-card" data-shape="cone">
+        <div class="shape-icon">
+         🍦
+        </div>
+        <div class="shape-name">
+         Cone
+        </div>
+        <div class="shape-formula">
+         V = (1/3)πr²h
+        </div>
+       </div>
+       <div class="shape-card" data-shape="pyramid">
+        <div class="shape-icon">
+         🔺
+        </div>
+        <div class="shape-name">
+         Pyramid
+        </div>
+        <div class="shape-formula">
+         V = (1/3) × base × h
+        </div>
+       </div>
+      </div>
+      <!-- Cube Calculator -->
+      <div class="calculator-section active" id="cube">
+       <div class="calculator-header">
+        <h3>
+         <i class="fas fa-cube">
+         </i>
+         Cube Volume Calculator
+        </h3>
+        <div class="formula-display">
+         Volume = side³ = s × s × s
+        </div>
+       </div>
+       <div class="visualization-section">
+        <div class="shape-diagram">
+         🧊
+        </div>
+        <p>
+         A cube has 6 equal square faces. All edges are the same length.
+        </p>
+        <div class="dimension-labels">
+         <div class="dimension-label">
+          Side = s
+         </div>
+         <div class="dimension-label">
+          All edges equal
+         </div>
+         <div class="dimension-label">
+          6 square faces
+         </div>
+        </div>
+       </div>
+       <div class="input-grid">
+        <div class="input-group" data-icon="📏">
+         <label for="cube-side">
+          Side Length
+         </label>
+         <input class="input-field" id="cube-side" min="0" placeholder="Enter side length" step="0.01" type="number"/>
+         <div class="unit-selector">
+          <select id="cube-unit">
+           <option value="m">
+            Meters (m)
+           </option>
+           <option value="cm">
+            Centimeters (cm)
+           </option>
+           <option value="mm">
+            Millimeters (mm)
+           </option>
+           <option value="in">
+            Inches (in)
+           </option>
+           <option value="ft">
+            Feet (ft)
+           </option>
+          </select>
+         </div>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateCube()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Cube Volume
+       </button>
+       <div class="result-section" id="cube-result" style="display: none;">
+        <div class="result-content">
+         <h3>
+          Cube Volume Result
+         </h3>
+         <div class="result-value" id="cube-volume">
+          0
+         </div>
+         <div class="result-unit">
+          cubic units
+         </div>
+         <div class="conversion-grid" id="cube-conversions">
+          <!-- Conversions will be populated here -->
+         </div>
+        </div>
+       </div>
+       <div class="examples-section">
+        <h3>
+         <i class="fas fa-lightbulb">
+         </i>
+         Cube Examples
+        </h3>
+        <div class="example-grid">
+         <div class="example-item">
+          <div class="example-title">
+           <span>
+            🎲
+           </span>
+           Dice
+          </div>
+          <p>
+           Side: 1.5 cm
+          </p>
+          <div class="example-calculation">
+           Volume = 1.5³ = 3.375 cm³
+          </div>
+         </div>
+         <div class="example-item">
+          <div class="example-title">
+           <span>
+            📦
+           </span>
+           Storage Box
+          </div>
+          <p>
+           Side: 50 cm
+          </p>
+          <div class="example-calculation">
+           Volume = 50³ = 125,000 cm³ = 125 L
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Sphere Calculator -->
+      <div class="calculator-section" id="sphere">
+       <div class="calculator-header">
+        <h3>
+         <i class="fas fa-circle">
+         </i>
+         Sphere Volume Calculator
+        </h3>
+        <div class="formula-display">
+         Volume = (4/3) × π × radius³ ≈ 4.189 × r³
+        </div>
+       </div>
+       <div class="visualization-section">
+        <div class="shape-diagram">
+         ⚽
+        </div>
+        <p>
+         A sphere is a perfectly round 3D shape. Every point on the surface is equidistant from the center.
+        </p>
+        <div class="dimension-labels">
+         <div class="dimension-label">
+          Radius = r
+         </div>
+         <div class="dimension-label">
+          Diameter = 2r
+         </div>
+         <div class="dimension-label">
+          Curved surface
+         </div>
+        </div>
+       </div>
+       <div class="input-grid">
+        <div class="input-group" data-icon="📐">
+         <label for="sphere-radius">
+          Radius
+         </label>
+         <input class="input-field" id="sphere-radius" min="0" placeholder="Enter radius" step="0.01" type="number"/>
+         <div class="unit-selector">
+          <select id="sphere-unit">
+           <option value="m">
+            Meters (m)
+           </option>
+           <option value="cm">
+            Centimeters (cm)
+           </option>
+           <option value="mm">
+            Millimeters (mm)
+           </option>
+           <option value="in">
+            Inches (in)
+           </option>
+           <option value="ft">
+            Feet (ft)
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="input-group" data-icon="⚖️">
+         <label for="sphere-diameter">
+          Or Enter Diameter
+         </label>
+         <input class="input-field" id="sphere-diameter" min="0" placeholder="Enter diameter" step="0.01" type="number"/>
+         <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+          Radius = Diameter ÷ 2
+         </p>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateSphere()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Sphere Volume
+       </button>
+       <div class="result-section" id="sphere-result" style="display: none;">
+        <div class="result-content">
+         <h3>
+          Sphere Volume Result
+         </h3>
+         <div class="result-value" id="sphere-volume">
+          0
+         </div>
+         <div class="result-unit">
+          cubic units
+         </div>
+         <div class="conversion-grid" id="sphere-conversions">
+          <!-- Conversions will be populated here -->
+         </div>
+        </div>
+       </div>
+       <div class="examples-section">
+        <h3>
+         <i class="fas fa-lightbulb">
+         </i>
+         Sphere Examples
+        </h3>
+        <div class="example-grid">
+         <div class="example-item">
+          <div class="example-title">
+           <span>
+            🏀
+           </span>
+           Basketball
+          </div>
+          <p>
+           Radius: 12 cm
+          </p>
+          <div class="example-calculation">
+           Volume = (4/3)π × 12³ = 7,238 cm³
+          </div>
+         </div>
+         <div class="example-item">
+          <div class="example-title">
+           <span>
+            🌍
+           </span>
+           Earth (scaled)
+          </div>
+          <p>
+           Radius: 6.371 million km
+          </p>
+          <div class="example-calculation">
+           Volume ≈ 1.083 × 10²¹ m³
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Cylinder Calculator -->
+      <div class="calculator-section" id="cylinder">
+       <div class="calculator-header">
+        <h3>
+         <i class="fas fa-database">
+         </i>
+         Cylinder Volume Calculator
+        </h3>
+        <div class="formula-display">
+         Volume = π × radius² × height ≈ 3.14159 × r² × h
+        </div>
+       </div>
+       <div class="visualization-section">
+        <div class="shape-diagram">
+         🥫
+        </div>
+        <p>
+         A cylinder has two parallel circular bases connected by a curved surface.
+        </p>
+        <div class="dimension-labels">
+         <div class="dimension-label">
+          Radius = r
+         </div>
+         <div class="dimension-label">
+          Height = h
+         </div>
+         <div class="dimension-label">
+          2 circular bases
+         </div>
+        </div>
+       </div>
+       <div class="input-grid">
+        <div class="input-group" data-icon="⭕">
+         <label for="cylinder-radius">
+          Radius
+         </label>
+         <input class="input-field" id="cylinder-radius" min="0" placeholder="Enter radius" step="0.01" type="number"/>
+         <div class="unit-selector">
+          <select id="cylinder-radius-unit">
+           <option value="m">
+            Meters (m)
+           </option>
+           <option value="cm">
+            Centimeters (cm)
+           </option>
+           <option value="mm">
+            Millimeters (mm)
+           </option>
+           <option value="in">
+            Inches (in)
+           </option>
+           <option value="ft">
+            Feet (ft)
+           </option>
+          </select>
+         </div>
+        </div>
+        <div class="input-group" data-icon="📏">
+         <label for="cylinder-height">
+          Height
+         </label>
+         <input class="input-field" id="cylinder-height" min="0" placeholder="Enter height" step="0.01" type="number"/>
+         <div class="unit-selector">
+          <select id="cylinder-height-unit">
+           <option value="m">
+            Meters (m)
+           </option>
+           <option value="cm">
+            Centimeters (cm)
+           </option>
+           <option value="mm">
+            Millimeters (mm)
+           </option>
+           <option value="in">
+            Inches (in)
+           </option>
+           <option value="ft">
+            Feet (ft)
+           </option>
+          </select>
+         </div>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateCylinder()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Cylinder Volume
+       </button>
+       <div class="result-section" id="cylinder-result" style="display: none;">
+        <div class="result-content">
+         <h3>
+          Cylinder Volume Result
+         </h3>
+         <div class="result-value" id="cylinder-volume">
+          0
+         </div>
+         <div class="result-unit">
+          cubic units
+         </div>
+         <div class="conversion-grid" id="cylinder-conversions">
+          <!-- Conversions will be populated here -->
+         </div>
+        </div>
+       </div>
+       <div class="examples-section">
+        <h3>
+         <i class="fas fa-lightbulb">
+         </i>
+         Cylinder Examples
+        </h3>
+        <div class="example-grid">
+         <div class="example-item">
+          <div class="example-title">
+           <span>
+            🥤
+           </span>
+           Soda Can
+          </div>
+          <p>
+           Radius: 3.3 cm, Height: 12 cm
+          </p>
+          <div class="example-calculation">
+           Volume = π × 3.3² × 12 = 410 cm³
+          </div>
+         </div>
+         <div class="example-item">
+          <div class="example-title">
+           <span>
+            🛢️
+           </span>
+           Oil Drum
+          </div>
+          <p>
+           Radius: 30 cm, Height: 90 cm
+          </p>
+          <div class="example-calculation">
+           Volume = π × 30² × 90 = 254,469 cm³ = 254 L
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-graduation-cap">
+        </i>
+        Volume Calculation Tips
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <div class="tip-title">
+          📏 Unit Consistency
+         </div>
+         <p>
+          Always use the same units for all measurements. The result will be in cubic units (e.g., m³ for meters).
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-title">
+          🔢 Pi Precision
+         </div>
+         <p>
+          For precise calculations involving π, use more decimal places (π ≈ 3.14159265359). Calculators typically use high precision.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-title">
+          📊 Real Applications
+         </div>
+         <p>
+          Volume calculations are useful for liquid capacity, material estimation, shipping, and storage planning.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-title">
+          🔄 Unit Conversions
+         </div>
+         <p>
+          Remember: 1 m³ = 1,000 L, 1 ft³ ≈ 28.3 L, 1 in³ ≈ 16.4 mL. Use conversion tables for accuracy.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-title">
+          🧮 Complex Shapes
+         </div>
+         <p>
+          For irregular shapes, break them into simpler forms or use water displacement method for physical objects.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-title">
+          ⚖️ Density Relations
+         </div>
+         <p>
+          Volume × Density = Mass. Use this relationship to calculate weight when you know volume and material density.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="percentage-calculator.html"><i class="fas fa-arrow-right"></i> Percentage Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   const conversionFactors = {
+            'm': 1,
+            'cm': 0.01,
+            'mm': 0.001,
+            'in': 0.0254,
+            'ft': 0.3048
+        };
+
+        // Shape selection
+        document.querySelectorAll('.shape-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const shape = this.dataset.shape;
+                
+                // Update active shape
+                document.querySelectorAll('.shape-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding calculator
+                document.querySelectorAll('.calculator-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                const targetSection = document.getElementById(shape);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            });
+        });
+
+        function calculateCube() {
+            const side = parseFloat(document.getElementById('cube-side').value);
+            const unit = document.getElementById('cube-unit').value;
+
+            if (!side || side <= 0) {
+                alert('Please enter a valid positive value for side length.');
+                return;
+            }
+
+            // Convert to meters for calculation
+            const sideInMeters = side * conversionFactors[unit];
+            const volumeInCubicMeters = Math.pow(sideInMeters, 3);
+
+            // Display result
+            document.getElementById('cube-volume').textContent = volumeInCubicMeters.toFixed(6);
+            document.getElementById('cube-result').style.display = 'block';
+
+            // Generate conversions
+            generateVolumeConversions('cube-conversions', volumeInCubicMeters);
+        }
+
+        function calculateSphere() {
+            let radius = parseFloat(document.getElementById('sphere-radius').value);
+            const diameter = parseFloat(document.getElementById('sphere-diameter').value);
+            const unit = document.getElementById('sphere-unit').value;
+
+            // Use diameter if radius is not provided
+            if (!radius && diameter) {
+                radius = diameter / 2;
+                document.getElementById('sphere-radius').value = radius;
+            }
+
+            if (!radius || radius <= 0) {
+                alert('Please enter a valid positive value for radius or diameter.');
+                return;
+            }
+
+            // Convert to meters for calculation
+            const radiusInMeters = radius * conversionFactors[unit];
+            const volumeInCubicMeters = (4/3) * Math.PI * Math.pow(radiusInMeters, 3);
+
+            // Display result
+            document.getElementById('sphere-volume').textContent = volumeInCubicMeters.toFixed(6);
+            document.getElementById('sphere-result').style.display = 'block';
+
+            // Generate conversions
+            generateVolumeConversions('sphere-conversions', volumeInCubicMeters);
+        }
+
+        function calculateCylinder() {
+            const radius = parseFloat(document.getElementById('cylinder-radius').value);
+            const height = parseFloat(document.getElementById('cylinder-height').value);
+            const radiusUnit = document.getElementById('cylinder-radius-unit').value;
+            const heightUnit = document.getElementById('cylinder-height-unit').value;
+
+            if (!radius || !height || radius <= 0 || height <= 0) {
+                alert('Please enter valid positive values for radius and height.');
+                return;
+            }
+
+            // Convert to meters for calculation
+            const radiusInMeters = radius * conversionFactors[radiusUnit];
+            const heightInMeters = height * conversionFactors[heightUnit];
+            const volumeInCubicMeters = Math.PI * Math.pow(radiusInMeters, 2) * heightInMeters;
+
+            // Display result
+            document.getElementById('cylinder-volume').textContent = volumeInCubicMeters.toFixed(6);
+            document.getElementById('cylinder-result').style.display = 'block';
+
+            // Generate conversions
+            generateVolumeConversions('cylinder-conversions', volumeInCubicMeters);
+        }
+
+        function generateVolumeConversions(containerId, volumeInCubicMeters) {
+            const container = document.getElementById(containerId);
+            const conversions = [
+                { unit: 'Cubic Meters', value: volumeInCubicMeters, symbol: 'm³' },
+                { unit: 'Cubic Centimeters', value: volumeInCubicMeters * 1000000, symbol: 'cm³' },
+                { unit: 'Liters', value: volumeInCubicMeters * 1000, symbol: 'L' },
+                { unit: 'Milliliters', value: volumeInCubicMeters * 1000000, symbol: 'mL' },
+                { unit: 'Cubic Inches', value: volumeInCubicMeters * 61023.74, symbol: 'in³' },
+                { unit: 'Cubic Feet', value: volumeInCubicMeters * 35.31467, symbol: 'ft³' },
+                { unit: 'US Gallons', value: volumeInCubicMeters * 264.172, symbol: 'gal' },
+                { unit: 'UK Gallons', value: volumeInCubicMeters * 219.969, symbol: 'gal (UK)' }
+            ];
+
+            container.innerHTML = conversions.map(conv => `
+                <div class="conversion-item">
+                    <div class="conversion-value">${formatNumber(conv.value)}</div>
+                    <div class="conversion-unit">${conv.symbol}</div>
+                </div>
+            `).join('');
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(2) + 'K';
+            } else if (num < 0.001) {
+                return num.toExponential(2);
+            } else {
+                return num.toFixed(num < 1 ? 4 : 2);
+            }
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cube inputs
+            document.getElementById('cube-side').addEventListener('input', function() {
+                if (this.value) {
+                    calculateCube();
+                }
+            });
+
+            // Sphere inputs
+            document.getElementById('sphere-radius').addEventListener('input', function() {
+                if (this.value) {
+                    document.getElementById('sphere-diameter').value = (this.value * 2).toFixed(2);
+                    calculateSphere();
+                }
+            });
+
+            document.getElementById('sphere-diameter').addEventListener('input', function() {
+                if (this.value) {
+                    document.getElementById('sphere-radius').value = (this.value / 2).toFixed(2);
+                    calculateSphere();
+                }
+            });
+
+            // Cylinder inputs
+            ['cylinder-radius', 'cylinder-height'].forEach(id => {
+                document.getElementById(id).addEventListener('input', function() {
+                    const radius = document.getElementById('cylinder-radius').value;
+                    const height = document.getElementById('cylinder-height').value;
+                    if (radius && height) {
+                        calculateCylinder();
+                    }
+                });
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

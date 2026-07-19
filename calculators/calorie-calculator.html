@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/calorie-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Calorie Calculator - Daily Calorie Needs | Make QR Calculators
+  </title>
+  <meta content="Free calorie calculator to determine your daily calorie needs for weight loss, maintenance, or weight gain based on your activity level." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .calorie-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input, .input-group select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #28a745;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .input-group .input-with-icon {
+            position: relative;
+        }
+
+        .input-group .input-with-icon input {
+            padding-left: 2.5rem;
+        }
+
+        .input-group .input-with-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .gender-selection {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .gender-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gender-option.selected {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .gender-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #28a745;
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .bmr-display {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .bmr-display .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .bmr-display .label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .calorie-goals {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+
+        .goal-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .goal-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .macros-breakdown {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .macro-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .macro-item:last-child {
+            border-bottom: none;
+        }
+
+        .macro-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .macro-value {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .nutrition-tips {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .nutrition-tips h4 {
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .nutrition-tips ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .nutrition-tips li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Calorie Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online calorie calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Calorie Calculator", "item": "https://make-qr.github.io/calculators/calorie-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--health">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link active" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#health">Health & Fitness</a>
+                <span class="sep">/</span>
+                <span class="current">Calorie Calculator</span>
+            </nav>
+            <h1>Calorie Calculator</h1>
+            <p>Calculate your daily calorie needs for optimal health and fitness</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="calorie-calculator">
+      <div class="calculator-grid">
+       <div class="input-section">
+        <div class="input-group">
+         <label>
+          Gender
+         </label>
+         <div class="gender-selection">
+          <div class="gender-option" onclick="selectGender('male')">
+           <i class="fas fa-mars">
+           </i>
+           <div>
+            Male
+           </div>
+          </div>
+          <div class="gender-option" onclick="selectGender('female')">
+           <i class="fas fa-venus">
+           </i>
+           <div>
+            Female
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="age">
+          Age
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-birthday-cake">
+          </i>
+          <input id="age" max="120" min="10" placeholder="Enter your age" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="height">
+          Height (cm)
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-ruler-vertical">
+          </i>
+          <input id="height" max="250" min="100" placeholder="Enter your height" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="weight">
+          Weight (kg)
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-weight">
+          </i>
+          <input id="weight" max="300" min="30" placeholder="Enter your weight" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="activityLevel">
+          Activity Level
+         </label>
+         <select id="activityLevel">
+          <option value="1.2">
+           Sedentary (little or no exercise)
+          </option>
+          <option value="1.375">
+           Lightly active (light exercise 1-3 days/week)
+          </option>
+          <option selected="" value="1.55">
+           Moderately active (moderate exercise 3-5 days/week)
+          </option>
+          <option value="1.725">
+           Very active (hard exercise 6-7 days/week)
+          </option>
+          <option value="1.9">
+           Extremely active (very hard exercise, physical job)
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="goal">
+          Goal
+         </label>
+         <select id="goal">
+          <option value="maintain">
+           Maintain weight
+          </option>
+          <option value="lose">
+           Lose weight (0.5 kg/week)
+          </option>
+          <option value="lose-fast">
+           Lose weight fast (1 kg/week)
+          </option>
+          <option value="gain">
+           Gain weight (0.5 kg/week)
+          </option>
+          <option value="gain-fast">
+           Gain weight fast (1 kg/week)
+          </option>
+         </select>
+        </div>
+        <button class="btn-calculate" onclick="calculateCalories()">
+         Calculate Calories
+        </button>
+       </div>
+       <div class="results-section">
+        <div class="bmr-display">
+         <div class="amount" id="bmrValue">
+          0
+         </div>
+         <div class="label">
+          BMR (Basal Metabolic Rate)
+         </div>
+        </div>
+        <div class="calorie-goals">
+         <div class="goal-item">
+          <span class="goal-label">
+           Maintenance Calories
+          </span>
+          <span class="goal-value" id="maintenanceCalories">
+           0 cal
+          </span>
+         </div>
+         <div class="goal-item">
+          <span class="goal-label">
+           Target Calories
+          </span>
+          <span class="goal-value" id="targetCalories">
+           0 cal
+          </span>
+         </div>
+         <div class="goal-item">
+          <span class="goal-label">
+           Weekly Weight Change
+          </span>
+          <span class="goal-value" id="weightChange">
+           0 kg
+          </span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="macros-breakdown">
+       <h3>
+        Recommended Macronutrient Breakdown
+       </h3>
+       <div class="macro-item">
+        <span class="macro-label">
+         Protein (25%)
+        </span>
+        <span class="macro-value" id="proteinGrams">
+         0g (0 cal)
+        </span>
+       </div>
+       <div class="macro-item">
+        <span class="macro-label">
+         Carbohydrates (45%)
+        </span>
+        <span class="macro-value" id="carbsGrams">
+         0g (0 cal)
+        </span>
+       </div>
+       <div class="macro-item">
+        <span class="macro-label">
+         Fats (30%)
+        </span>
+        <span class="macro-value" id="fatsGrams">
+         0g (0 cal)
+        </span>
+       </div>
+      </div>
+      <div class="nutrition-tips">
+       <h4>
+        <i class="fas fa-apple-alt">
+        </i>
+        Nutrition Tips
+       </h4>
+       <ul>
+        <li>
+         Eat a balanced diet with plenty of fruits and vegetables
+        </li>
+        <li>
+         Stay hydrated by drinking at least 8 glasses of water daily
+        </li>
+        <li>
+         Include lean proteins in every meal to maintain muscle mass
+        </li>
+        <li>
+         Choose complex carbohydrates over simple sugars
+        </li>
+        <li>
+         Don't skip meals - eat regularly throughout the day
+        </li>
+        <li>
+         Listen to your body's hunger and fullness cues
+        </li>
+        <li>
+         Consider consulting a nutritionist for personalized advice
+        </li>
+        <li>
+         Track your food intake to stay within your calorie goals
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="bmi-calculator.html"><i class="fas fa-arrow-right"></i> BMI Calculator</a>
+                <a class="related-link" href="body-fat-calculator.html"><i class="fas fa-arrow-right"></i> Body Fat Calculator</a>
+                <a class="related-link" href="bmr-calculator.html"><i class="fas fa-arrow-right"></i> BMR Calculator</a>
+                <a class="related-link" href="pregnancy-calculator.html"><i class="fas fa-arrow-right"></i> Pregnancy Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let selectedGender = '';
+
+        function selectGender(gender) {
+            selectedGender = gender;
+            document.querySelectorAll('.gender-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.closest('.gender-option').classList.add('selected');
+            calculateCalories();
+        }
+
+        function calculateCalories() {
+            const age = parseInt(document.getElementById('age').value) || 0;
+            const height = parseFloat(document.getElementById('height').value) || 0;
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const activityLevel = parseFloat(document.getElementById('activityLevel').value) || 1.55;
+            const goal = document.getElementById('goal').value;
+
+            if (!selectedGender || age <= 0 || height <= 0 || weight <= 0) {
+                return;
+            }
+
+            // Calculate BMR using Mifflin-St Jeor Equation
+            let bmr;
+            if (selectedGender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            // Calculate maintenance calories (TDEE)
+            const maintenanceCalories = bmr * activityLevel;
+
+            // Calculate target calories based on goal
+            let targetCalories = maintenanceCalories;
+            let weightChange = 0;
+
+            switch (goal) {
+                case 'lose':
+                    targetCalories = maintenanceCalories - 500; // 0.5 kg/week
+                    weightChange = -0.5;
+                    break;
+                case 'lose-fast':
+                    targetCalories = maintenanceCalories - 1000; // 1 kg/week
+                    weightChange = -1;
+                    break;
+                case 'gain':
+                    targetCalories = maintenanceCalories + 500; // 0.5 kg/week
+                    weightChange = 0.5;
+                    break;
+                case 'gain-fast':
+                    targetCalories = maintenanceCalories + 1000; // 1 kg/week
+                    weightChange = 1;
+                    break;
+                default:
+                    weightChange = 0;
+            }
+
+            // Calculate macronutrients
+            const proteinCalories = targetCalories * 0.25;
+            const carbsCalories = targetCalories * 0.45;
+            const fatsCalories = targetCalories * 0.30;
+
+            const proteinGrams = proteinCalories / 4; // 4 cal per gram
+            const carbsGrams = carbsCalories / 4; // 4 cal per gram
+            const fatsGrams = fatsCalories / 9; // 9 cal per gram
+
+            // Update results
+            document.getElementById('bmrValue').textContent = Math.round(bmr);
+            document.getElementById('maintenanceCalories').textContent = Math.round(maintenanceCalories) + ' cal';
+            document.getElementById('targetCalories').textContent = Math.round(targetCalories) + ' cal';
+            document.getElementById('weightChange').textContent = (weightChange >= 0 ? '+' : '') + weightChange + ' kg/week';
+
+            // Update macros
+            document.getElementById('proteinGrams').textContent = 
+                Math.round(proteinGrams) + 'g (' + Math.round(proteinCalories) + ' cal)';
+            document.getElementById('carbsGrams').textContent = 
+                Math.round(carbsGrams) + 'g (' + Math.round(carbsCalories) + ' cal)';
+            document.getElementById('fatsGrams').textContent = 
+                Math.round(fatsGrams) + 'g (' + Math.round(fatsCalories) + ' cal)';
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['age', 'height', 'weight', 'activityLevel', 'goal'];
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateCalories);
+                document.getElementById(id).addEventListener('change', calculateCalories);
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

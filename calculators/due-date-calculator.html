@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/due-date-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Due Date Calculator - Pregnancy Due Date &amp; Timeline | Make QR Calculators
+  </title>
+  <meta content="Calculate your pregnancy due date, track milestones, and get week-by-week pregnancy information. Multiple calculation methods available." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .due-date-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .tab-container {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 150px;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #e91e63;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .pregnancy-timeline {
+            background: #fce4ec;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-progress {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e91e63, #ad1457);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .milestones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .milestone-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .milestone-week {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .trimester-info {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .trimesters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .trimester-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .trimester-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2196f3;
+            margin-bottom: 0.5rem;
+        }
+
+        .trimester-weeks {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .trimester-details {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: left;
+        }
+
+        .baby-development {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .development-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .development-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .development-icon {
+            font-size: 2rem;
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .tips-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minMax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            color: #e91e63;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Due Date Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online due date calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Due Date Calculator", "item": "https://make-qr.github.io/calculators/due-date-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Due Date Calculator</span>
+            </nav>
+            <h1>Due Date Calculator</h1>
+            <p>Calculate your pregnancy due date and track important milestones</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="due-date-calculator">
+      <div class="tab-container">
+       <button class="tab-button active" onclick="switchTab('lmp')">
+        📅 Last Period
+       </button>
+       <button class="tab-button" onclick="switchTab('conception')">
+        💕 Conception Date
+       </button>
+       <button class="tab-button" onclick="switchTab('ultrasound')">
+        🔍 Ultrasound Date
+       </button>
+      </div>
+      <!-- Last Menstrual Period Tab -->
+      <div class="tab-content active" id="lmp">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-calendar-alt">
+          </i>
+          Last Menstrual Period
+         </h3>
+         <div class="input-group">
+          <label for="lmp-date">
+           First Day of Last Period
+          </label>
+          <input class="input-field" id="lmp-date" type="date"/>
+         </div>
+         <div class="input-group">
+          <label for="cycle-length">
+           Average Cycle Length (days)
+          </label>
+          <input class="input-field" id="cycle-length" max="35" min="21" placeholder="28" step="1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="luteal-phase">
+           Luteal Phase Length (days)
+          </label>
+          <input class="input-field" id="luteal-phase" max="16" min="10" placeholder="14" step="1" type="number"/>
+          <small style="color: #6c757d;">
+           Usually 12-16 days
+          </small>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-baby-carriage">
+          </i>
+          Pregnancy Information
+         </h3>
+         <div class="input-group">
+          <label for="due-date">
+           Estimated Due Date
+          </label>
+          <input class="input-field result-field" id="due-date" placeholder="--" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="conception-date">
+           Conception Date
+          </label>
+          <input class="input-field result-field" id="conception-date" placeholder="--" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="current-week">
+           Current Week
+          </label>
+          <input class="input-field result-field" id="current-week" placeholder="--" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="current-trimester">
+           Current Trimester
+          </label>
+          <input class="input-field result-field" id="current-trimester" placeholder="--" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="days-remaining">
+           Days Remaining
+          </label>
+          <input class="input-field result-field" id="days-remaining" placeholder="--" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="baby-size">
+           Baby Size (approx)
+          </label>
+          <input class="input-field result-field" id="baby-size" placeholder="--" readonly="" type="text"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="pregnancy-timeline" id="timeline-section" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-line">
+        </i>
+        Pregnancy Timeline
+       </h3>
+       <div class="timeline-progress">
+        <h4 id="progress-title">
+         Week 0 of 40
+        </h4>
+        <div class="progress-bar">
+         <div class="progress-fill" id="progress-fill" style="width: 0%;">
+         </div>
+        </div>
+        <p id="progress-text">
+         Your pregnancy journey is about to begin!
+        </p>
+       </div>
+       <div class="milestones-grid" id="milestones-grid">
+        <!-- Milestone cards will be generated here -->
+       </div>
+      </div>
+      <div class="trimester-info">
+       <h3>
+        <i class="fas fa-layer-group">
+        </i>
+        Pregnancy Trimesters
+       </h3>
+       <div class="trimesters-grid">
+        <div class="trimester-card">
+         <div class="trimester-number">
+          1st
+         </div>
+         <div class="trimester-weeks">
+          Weeks 1-12
+         </div>
+         <div class="trimester-details">
+          <strong>
+           Key developments:
+          </strong>
+          <br/>
+          • Major organs form
+          <br/>
+          • Heart starts beating
+          <br/>
+          • Neural tube develops
+          <br/>
+          • Morning sickness common
+         </div>
+        </div>
+        <div class="trimester-card">
+         <div class="trimester-number">
+          2nd
+         </div>
+         <div class="trimester-weeks">
+          Weeks 13-26
+         </div>
+         <div class="trimester-details">
+          <strong>
+           Key developments:
+          </strong>
+          <br/>
+          • Sex can be determined
+          <br/>
+          • Baby starts moving
+          <br/>
+          • Anatomy scan performed
+          <br/>
+          • Energy levels improve
+         </div>
+        </div>
+        <div class="trimester-card">
+         <div class="trimester-number">
+          3rd
+         </div>
+         <div class="trimester-weeks">
+          Weeks 27-40
+         </div>
+         <div class="trimester-details">
+          <strong>
+           Key developments:
+          </strong>
+          <br/>
+          • Rapid weight gain
+          <br/>
+          • Lungs mature
+          <br/>
+          • Baby drops into position
+          <br/>
+          • Braxton Hicks contractions
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="baby-development" id="development-section" style="display: none;">
+       <h3>
+        <i class="fas fa-seedling">
+        </i>
+        Baby Development This Week
+       </h3>
+       <div class="development-grid" id="development-grid">
+        <!-- Development cards will be generated here -->
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-lightbulb">
+        </i>
+        Pregnancy Tips &amp; Care
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-pills">
+          </i>
+         </div>
+         <h4>
+          Prenatal Vitamins
+         </h4>
+         <p>
+          Take prenatal vitamins with folic acid daily. Start before conception if possible to prevent neural tube defects.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-apple-alt">
+          </i>
+         </div>
+         <h4>
+          Healthy Nutrition
+         </h4>
+         <p>
+          Eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins. Avoid raw fish, deli meats, and unpasteurized foods.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-dumbbell">
+          </i>
+         </div>
+         <h4>
+          Safe Exercise
+         </h4>
+         <p>
+          Stay active with pregnancy-safe exercises like walking, swimming, and prenatal yoga. Consult your doctor before starting new routines.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-bed">
+          </i>
+         </div>
+         <h4>
+          Adequate Rest
+         </h4>
+         <p>
+          Get 7-9 hours of sleep nightly. Use pregnancy pillows for comfort and sleep on your side, preferably left side.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-user-md">
+          </i>
+         </div>
+         <h4>
+          Regular Checkups
+         </h4>
+         <p>
+          Attend all prenatal appointments. Regular monitoring ensures both mother and baby's health throughout pregnancy.
+         </p>
+        </div>
+        <div class="tip-item">
+         <div class="tip-icon">
+          <i class="fas fa-smoking-ban">
+          </i>
+         </div>
+         <h4>
+          Avoid Harmful Substances
+         </h4>
+         <p>
+          No smoking, alcohol, or drugs. Limit caffeine to 200mg daily. Check with doctor before taking any medications.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Calculate for the active tab
+            calculateDueDate();
+        }
+
+        function calculateDueDate() {
+            const lmpDate = document.getElementById('lmp-date').value;
+            const cycleLength = parseInt(document.getElementById('cycle-length').value) || 28;
+            const lutealPhase = parseInt(document.getElementById('luteal-phase').value) || 14;
+
+            if (!lmpDate) return;
+
+            const lmp = new Date(lmpDate);
+            const today = new Date();
+            
+            // Calculate due date (280 days from LMP)
+            const dueDate = new Date(lmp);
+            dueDate.setDate(dueDate.getDate() + 280);
+            
+            // Calculate conception date (ovulation typically occurs 14 days before next period)
+            const conceptionDate = new Date(lmp);
+            conceptionDate.setDate(conceptionDate.getDate() + (cycleLength - lutealPhase));
+            
+            // Calculate current pregnancy week
+            const daysSinceLMP = Math.floor((today - lmp) / (1000 * 60 * 60 * 24));
+            const currentWeek = Math.floor(daysSinceLMP / 7);
+            const currentDay = daysSinceLMP % 7;
+            
+            // Calculate trimester
+            let trimester = '';
+            if (currentWeek <= 12) trimester = '1st Trimester';
+            else if (currentWeek <= 26) trimester = '2nd Trimester';
+            else trimester = '3rd Trimester';
+            
+            // Calculate days remaining
+            const daysRemaining = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+            
+            // Get baby size
+            const babySize = getBabySize(currentWeek);
+
+            // Update results
+            document.getElementById('due-date').value = dueDate.toLocaleDateString();
+            document.getElementById('conception-date').value = conceptionDate.toLocaleDateString();
+            document.getElementById('current-week').value = `${currentWeek} weeks, ${currentDay} days`;
+            document.getElementById('current-trimester').value = trimester;
+            document.getElementById('days-remaining').value = daysRemaining > 0 ? `${daysRemaining} days` : 'Baby is due!';
+            document.getElementById('baby-size').value = babySize;
+
+            // Update timeline
+            updateTimeline(currentWeek, daysRemaining);
+            
+            // Generate milestones
+            generateMilestones(lmp, dueDate);
+            
+            // Update development info
+            updateDevelopment(currentWeek);
+
+            // Show sections
+            document.getElementById('timeline-section').style.display = 'block';
+            document.getElementById('development-section').style.display = 'block';
+        }
+
+        function getBabySize(week) {
+            const sizes = {
+                4: 'Poppy seed (2mm)',
+                5: 'Sesame seed (3mm)',
+                6: 'Lentil (5mm)',
+                7: 'Blueberry (1cm)',
+                8: 'Kidney bean (1.6cm)',
+                9: 'Grape (2.3cm)',
+                10: 'Kumquat (3.1cm)',
+                11: 'Fig (4.1cm)',
+                12: 'Lime (5.4cm)',
+                13: 'Peach (7.4cm)',
+                14: 'Lemon (8.7cm)',
+                15: 'Apple (10.1cm)',
+                16: 'Avocado (11.6cm)',
+                17: 'Turnip (13cm)',
+                18: 'Bell pepper (14.2cm)',
+                19: 'Tomato (15.3cm)',
+                20: 'Banana (16.4cm)',
+                21: 'Carrot (26.7cm)',
+                22: 'Spaghetti squash (27.8cm)',
+                23: 'Large mango (28.9cm)',
+                24: 'Ear of corn (30cm)',
+                25: 'Rutabaga (34.6cm)',
+                26: 'Scallion (35.6cm)',
+                27: 'Cauliflower (36.6cm)',
+                28: 'Eggplant (37.6cm)',
+                29: 'Butternut squash (38.6cm)',
+                30: 'Cabbage (39.9cm)',
+                31: 'Coconut (41.1cm)',
+                32: 'Jicama (42.4cm)',
+                33: 'Pineapple (43.7cm)',
+                34: 'Cantaloupe (45cm)',
+                35: 'Honeydew melon (46.2cm)',
+                36: 'Papaya (47.4cm)',
+                37: 'Swiss chard (48.6cm)',
+                38: 'Leek (49.8cm)',
+                39: 'Mini watermelon (50.7cm)',
+                40: 'Small pumpkin (51.2cm)'
+            };
+            return sizes[week] || 'Varies by week';
+        }
+
+        function updateTimeline(currentWeek, daysRemaining) {
+            const progressPercent = Math.min((currentWeek / 40) * 100, 100);
+            
+            document.getElementById('progress-title').textContent = `Week ${currentWeek} of 40`;
+            document.getElementById('progress-fill').style.width = `${progressPercent}%`;
+            
+            let progressText = '';
+            if (currentWeek < 13) {
+                progressText = 'First trimester - Early development phase';
+            } else if (currentWeek < 27) {
+                progressText = 'Second trimester - The golden period';
+            } else {
+                progressText = 'Third trimester - Final preparation';
+            }
+            document.getElementById('progress-text').textContent = progressText;
+        }
+
+        function generateMilestones(lmp, dueDate) {
+            const milestones = [
+                { week: 8, title: 'First Prenatal Visit', description: 'Confirm pregnancy, basic tests' },
+                { week: 12, title: 'End of First Trimester', description: 'Reduced miscarriage risk' },
+                { week: 16, title: 'Anatomy Scan Window', description: 'Gender reveal possible' },
+                { week: 20, title: 'Halfway Point', description: 'Detailed anatomy scan' },
+                { week: 24, title: 'Viability Milestone', description: 'Baby can survive outside womb' },
+                { week: 28, title: 'Third Trimester Begins', description: 'Rapid growth phase' },
+                { week: 32, title: 'Baby Shower Time', description: 'Celebrate upcoming arrival' },
+                { week: 36, title: 'Full Term Approaching', description: 'Baby is nearly ready' },
+                { week: 40, title: 'Due Date', description: 'Expected delivery date' }
+            ];
+
+            const milestonesGrid = document.getElementById('milestones-grid');
+            milestonesGrid.innerHTML = milestones.map(milestone => {
+                const milestoneDate = new Date(lmp);
+                milestoneDate.setDate(milestoneDate.getDate() + (milestone.week * 7));
+                
+                return `
+                    <div class="milestone-card">
+                        <div class="milestone-week">Week ${milestone.week}</div>
+                        <div class="milestone-title">${milestone.title}</div>
+                        <div class="milestone-date">${milestoneDate.toLocaleDateString()}</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #6c757d;">${milestone.description}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateDevelopment(week) {
+            const developments = {
+                4: [
+                    { icon: 'fas fa-heart', title: 'Heart Formation', desc: 'Heart tube begins to form' },
+                    { icon: 'fas fa-brain', title: 'Neural Development', desc: 'Neural tube starts forming' }
+                ],
+                8: [
+                    { icon: 'fas fa-hand-paper', title: 'Limb Buds', desc: 'Arms and legs are forming' },
+                    { icon: 'fas fa-eye', title: 'Facial Features', desc: 'Eyes and ears developing' }
+                ],
+                12: [
+                    { icon: 'fas fa-heartbeat', title: 'Heartbeat', desc: 'Heart beats 160 times per minute' },
+                    { icon: 'fas fa-child', title: 'Basic Form', desc: 'All major organs present' }
+                ],
+                16: [
+                    { icon: 'fas fa-venus-mars', title: 'Gender', desc: 'Sex organs fully developed' },
+                    { icon: 'fas fa-running', title: 'Movement', desc: 'Baby starts moving around' }
+                ],
+                20: [
+                    { icon: 'fas fa-volume-up', title: 'Hearing', desc: 'Can hear sounds from outside' },
+                    { icon: 'fas fa-fingerprint', title: 'Fingerprints', desc: 'Unique fingerprints form' }
+                ],
+                24: [
+                    { icon: 'fas fa-lungs', title: 'Lung Development', desc: 'Lungs developing rapidly' },
+                    { icon: 'fas fa-bed', title: 'Sleep Cycles', desc: 'Regular sleep/wake patterns' }
+                ],
+                28: [
+                    { icon: 'fas fa-eye', title: 'Eyes Opening', desc: 'Can open and close eyes' },
+                    { icon: 'fas fa-weight', title: 'Weight Gain', desc: 'Rapid weight gain begins' }
+                ],
+                32: [
+                    { icon: 'fas fa-bone', title: 'Bone Hardening', desc: 'Bones are hardening' },
+                    { icon: 'fas fa-brain', title: 'Brain Growth', desc: 'Brain developing rapidly' }
+                ],
+                36: [
+                    { icon: 'fas fa-lungs', title: 'Lung Maturity', desc: 'Lungs nearly mature' },
+                    { icon: 'fas fa-arrow-down', title: 'Head Down', desc: 'Usually in head-down position' }
+                ],
+                40: [
+                    { icon: 'fas fa-baby', title: 'Full Term', desc: 'Ready to be born' },
+                    { icon: 'fas fa-weight', title: 'Average Weight', desc: '6-8 pounds' }
+                ]
+            };
+
+            const weekKey = Math.floor(week / 4) * 4;
+            const currentDevelopments = developments[weekKey] || developments[40];
+
+            const developmentGrid = document.getElementById('development-grid');
+            developmentGrid.innerHTML = currentDevelopments.map(dev => `
+                <div class="development-card">
+                    <div class="development-icon"><i class="${dev.icon}"></i></div>
+                    <h4>${dev.title}</h4>
+                    <p>${dev.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            ['lmp-date', 'cycle-length', 'luteal-phase'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateDueDate);
+                    element.addEventListener('change', calculateDueDate);
+                }
+            });
+
+            // Set default values
+            document.getElementById('cycle-length').value = 28;
+            document.getElementById('luteal-phase').value = 14;
+            
+            // Set default date to 8 weeks ago for demo
+            const eightWeeksAgo = new Date();
+            eightWeeksAgo.setDate(eightWeeksAgo.getDate() - 56);
+            document.getElementById('lmp-date').value = eightWeeksAgo.toISOString().split('T')[0];
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

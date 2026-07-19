@@ -5,7 +5,6 @@
     'use strict';
 
     const rootPath = typeof ROOT_PATH === 'string' ? ROOT_PATH : '';
-    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
     let installPrompt = null;
 
     function currentTheme() {
@@ -108,12 +107,6 @@
     window.addEventListener('appinstalled', () => {
         installPrompt = null;
         updateInstallButtons();
-    });
-
-    darkQuery.addEventListener('change', event => {
-        if (!localStorage.getItem('make-qr-theme')) {
-            setTheme(event.matches ? 'dark' : 'light', false);
-        }
     });
 
     addPwaMetadata();

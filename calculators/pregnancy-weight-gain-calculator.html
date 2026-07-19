@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Pregnancy Weight Gain Calculator - Healthy Weight Tracking | Free Online Tool
+  </title>
+  <meta content="Calculate recommended weight gain during pregnancy based on pre-pregnancy BMI. Track healthy weight gain by trimester with personalized recommendations for you and your baby." name="description"/>
+  <meta content="pregnancy weight gain calculator, pregnancy weight tracker, healthy pregnancy weight, BMI pregnancy, pregnancy nutrition, weight gain by trimester" name="keywords"/>
+  <meta content="Calculator Tools" name="author"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/pregnancy-weight-gain-calculator.html" rel="canonical"/>
+  <!-- Open Graph Tags -->
+  <meta content="Pregnancy Weight Gain Calculator - Healthy Weight Tracking" property="og:title"/>
+  <meta content="Calculate recommended weight gain during pregnancy based on pre-pregnancy BMI. Track healthy weight gain by trimester." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/pregnancy-weight-gain-calculator.html" property="og:url"/>
+  <meta content="https://make-qr.github.io/calculators/images/pregnancy-weight-gain-calculator.jpg" property="og:image"/>
+  <meta content="Calculator Tools" property="og:site_name"/>
+  <!-- Twitter Card Tags -->
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Pregnancy Weight Gain Calculator - Healthy Weight Tracking" name="twitter:title"/>
+  <meta content="Calculate recommended weight gain during pregnancy based on pre-pregnancy BMI. Track healthy weight gain by trimester." name="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/images/pregnancy-weight-gain-calculator.jpg" name="twitter:image"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Pregnancy Weight Gain Calculator",
+        "description": "Calculate recommended weight gain during pregnancy based on pre-pregnancy BMI",
+        "url": "https://make-qr.github.io/calculators/pregnancy-weight-gain-calculator.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Calculator Tools"
+        }
+    }
+  </script>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+  <style>
+   .calculator-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .input-group input, .input-group select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .unit-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .unit-btn {
+            padding: 8px 16px;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .unit-btn.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .calculate-btn {
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .calculate-btn:hover {
+            background: #0056b3;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .bmi-indicator {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .underweight { background: #cce5ff; color: #004085; }
+        .normal { background: #d4edda; color: #155724; }
+        .overweight { background: #fff3cd; color: #856404; }
+        .obese { background: #f8d7da; color: #721c24; }
+        
+        .weight-chart {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .chart-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .chart-row:last-child {
+            border-bottom: none;
+        }
+        
+        .chart-header {
+            font-weight: bold;
+            background: #f8f9fa;
+            margin: -15px -15px 15px -15px;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .tips-section {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        @media (max-width: 768px) {
+            .calculator-container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .input-section {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+  </style>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--health">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link active" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><span class="sep">/</span>
+                <a href="index.html#health">Health & Fitness</a><span class="sep">/</span>
+                <span class="current">Pregnancy Weight Gain Calculator</span>
+            </nav>
+            <h1>Pregnancy Weight Gain Calculator</h1>
+            <p>Calculate recommended weight gain during pregnancy based on your pre-pregnancy BMI and current stage of pregnancy.</p>
+        </div>
+    </section>
+<div class="container">
+   <header>
+    <h2>
+     Pregnancy Weight Gain Calculator
+    </h2>
+    <p>
+     Calculate recommended weight gain during pregnancy based on your pre-pregnancy BMI and current stage of pregnancy.
+    </p>
+   </header>
+   <div class="calculator-container">
+    <div class="unit-toggle">
+     <button class="unit-btn active" onclick="toggleUnits('metric')">
+      Metric (kg/cm)
+     </button>
+     <button class="unit-btn" onclick="toggleUnits('imperial')">
+      Imperial (lbs/ft)
+     </button>
+    </div>
+    <div class="input-section">
+     <div class="input-group">
+      <label for="height">
+       Height:
+      </label>
+      <input id="height" placeholder="Enter height" step="0.1" type="number"/>
+      <small id="height-unit">
+       cm
+      </small>
+     </div>
+     <div class="input-group">
+      <label for="preWeight">
+       Pre-pregnancy Weight:
+      </label>
+      <input id="preWeight" placeholder="Enter pre-pregnancy weight" step="0.1" type="number"/>
+      <small id="weight-unit">
+       kg
+      </small>
+     </div>
+     <div class="input-group">
+      <label for="currentWeight">
+       Current Weight (optional):
+      </label>
+      <input id="currentWeight" placeholder="Enter current weight" step="0.1" type="number"/>
+      <small id="current-weight-unit">
+       kg
+      </small>
+     </div>
+     <div class="input-group">
+      <label for="weeks">
+       Weeks Pregnant:
+      </label>
+      <input id="weeks" max="42" min="1" placeholder="Enter weeks" type="number"/>
+     </div>
+     <div class="input-group">
+      <label for="pregnancyType">
+       Pregnancy Type:
+      </label>
+      <select id="pregnancyType">
+       <option value="single">
+        Single Baby
+       </option>
+       <option value="twins">
+        Twins
+       </option>
+       <option value="triplets">
+        Triplets or More
+       </option>
+      </select>
+     </div>
+    </div>
+    <button class="calculate-btn" onclick="calculateWeightGain()">
+     Calculate Recommended Weight Gain
+    </button>
+    <div class="results" id="results" style="display: none;">
+     <h3>
+      Your Pregnancy Weight Gain Recommendations
+     </h3>
+     <div id="bmi-status">
+     </div>
+     <div id="weight-recommendations">
+     </div>
+     <div id="current-progress">
+     </div>
+    </div>
+   </div>
+   <div class="tips-section">
+    <h3>
+     Healthy Weight Gain Guidelines
+    </h3>
+    <h4>
+     Weight Gain by BMI Category (Single Baby):
+    </h4>
+    <div class="weight-chart">
+     <div class="chart-header">
+      Pre-pregnancy BMI Categories
+     </div>
+     <div class="chart-row">
+      <span>
+       Underweight (BMI &lt; 18.5)
+      </span>
+      <span>
+       <strong>
+        28-40 lbs (12.7-18 kg)
+       </strong>
+      </span>
+     </div>
+     <div class="chart-row">
+      <span>
+       Normal Weight (BMI 18.5-24.9)
+      </span>
+      <span>
+       <strong>
+        25-35 lbs (11.3-15.9 kg)
+       </strong>
+      </span>
+     </div>
+     <div class="chart-row">
+      <span>
+       Overweight (BMI 25-29.9)
+      </span>
+      <span>
+       <strong>
+        15-25 lbs (6.8-11.3 kg)
+       </strong>
+      </span>
+     </div>
+     <div class="chart-row">
+      <span>
+       Obese (BMI ≥ 30)
+      </span>
+      <span>
+       <strong>
+        11-20 lbs (5-9 kg)
+       </strong>
+      </span>
+     </div>
+    </div>
+    <h4>
+     Weight Gain Pattern:
+    </h4>
+    <ul>
+     <li>
+      <strong>
+       First Trimester (0-12 weeks):
+      </strong>
+      1-4 lbs total
+     </li>
+     <li>
+      <strong>
+       Second Trimester (13-26 weeks):
+      </strong>
+      1-2 lbs per week
+     </li>
+     <li>
+      <strong>
+       Third Trimester (27-40 weeks):
+      </strong>
+      1-2 lbs per week
+     </li>
+    </ul>
+    <h4>
+     Multiple Pregnancies:
+    </h4>
+    <ul>
+     <li>
+      <strong>
+       Twins:
+      </strong>
+      37-54 lbs (normal BMI), 31-50 lbs (overweight), 25-42 lbs (obese)
+     </li>
+     <li>
+      <strong>
+       Triplets:
+      </strong>
+      Consult with healthcare provider for individualized recommendations
+     </li>
+    </ul>
+   </div>
+   <div class="warning-box">
+    <h4>
+     ⚠️ Important Medical Disclaimer
+    </h4>
+    <p>
+     This calculator provides general guidelines based on Institute of Medicine recommendations. Every pregnancy is unique, and individual needs may vary. Always consult with your healthcare provider for personalized advice about appropriate weight gain during pregnancy, especially if you have medical conditions or concerns.
+    </p>
+   </div>
+   <div class="tips-section">
+    <h3>
+     Tips for Healthy Weight Gain
+    </h3>
+    <ul>
+     <li>
+      <strong>
+       Eat Nutrient-Dense Foods:
+      </strong>
+      Focus on fruits, vegetables, whole grains, lean proteins, and dairy
+     </li>
+     <li>
+      <strong>
+       Stay Hydrated:
+      </strong>
+      Drink plenty of water throughout the day
+     </li>
+     <li>
+      <strong>
+       Regular Exercise:
+      </strong>
+      With doctor's approval, maintain appropriate physical activity
+     </li>
+     <li>
+      <strong>
+       Monitor Regularly:
+      </strong>
+      Weigh yourself weekly at the same time of day
+     </li>
+     <li>
+      <strong>
+       Avoid Empty Calories:
+      </strong>
+      Limit sugary drinks, processed foods, and excessive sweets
+     </li>
+     <li>
+      <strong>
+       Listen to Your Body:
+      </strong>
+      Eat when hungry, stop when satisfied
+     </li>
+     <li>
+      <strong>
+       Take Prenatal Vitamins:
+      </strong>
+      Ensure adequate nutrition for you and baby
+     </li>
+    </ul>
+    <h4>
+     Warning Signs to Discuss with Your Doctor:
+    </h4>
+    <ul>
+     <li>
+      Sudden weight gain (more than 2 lbs in a week)
+     </li>
+     <li>
+      No weight gain or weight loss in second/third trimester
+     </li>
+     <li>
+      Excessive weight gain beyond recommendations
+     </li>
+     <li>
+      Swelling in face, hands, or feet
+     </li>
+     <li>
+      Severe nausea preventing adequate nutrition
+     </li>
+    </ul>
+   </div>
+  </div>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="bmi-calculator.html"><i class="fas fa-arrow-right"></i> BMI Calculator</a>
+                <a class="related-link" href="calorie-calculator.html"><i class="fas fa-arrow-right"></i> Calorie Calculator</a>
+                <a class="related-link" href="body-fat-calculator.html"><i class="fas fa-arrow-right"></i> Body Fat Calculator</a>
+                <a class="related-link" href="bmr-calculator.html"><i class="fas fa-arrow-right"></i> BMR Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let isMetric = true;
+
+        function toggleUnits(unit) {
+            isMetric = unit === 'metric';
+            
+            // Update button appearance
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update unit labels
+            document.getElementById('height-unit').textContent = isMetric ? 'cm' : 'ft & in';
+            document.getElementById('weight-unit').textContent = isMetric ? 'kg' : 'lbs';
+            document.getElementById('current-weight-unit').textContent = isMetric ? 'kg' : 'lbs';
+            
+            // Update placeholders
+            document.getElementById('height').placeholder = isMetric ? 'Enter height in cm' : 'Enter height (e.g., 5.5 for 5\'6")';
+            document.getElementById('preWeight').placeholder = isMetric ? 'Enter weight in kg' : 'Enter weight in lbs';
+            document.getElementById('currentWeight').placeholder = isMetric ? 'Enter weight in kg' : 'Enter weight in lbs';
+        }
+
+        function calculateWeightGain() {
+            const height = parseFloat(document.getElementById('height').value);
+            const preWeight = parseFloat(document.getElementById('preWeight').value);
+            const currentWeight = parseFloat(document.getElementById('currentWeight').value) || null;
+            const weeks = parseInt(document.getElementById('weeks').value);
+            const pregnancyType = document.getElementById('pregnancyType').value;
+            
+            if (!height || !preWeight || !weeks) {
+                alert('Please fill in height, pre-pregnancy weight, and weeks pregnant.');
+                return;
+            }
+            
+            if (weeks < 1 || weeks > 42) {
+                alert('Please enter a valid number of weeks (1-42).');
+                return;
+            }
+            
+            // Convert to metric if needed
+            let heightCm = height;
+            let preWeightKg = preWeight;
+            let currentWeightKg = currentWeight;
+            
+            if (!isMetric) {
+                heightCm = height * 30.48; // feet to cm
+                preWeightKg = preWeight * 0.453592;
+                if (currentWeight) currentWeightKg = currentWeight * 0.453592;
+            }
+            
+            // Calculate BMI
+            const bmi = preWeightKg / Math.pow(heightCm / 100, 2);
+            
+            // Determine BMI category
+            let bmiCategory, bmiClass, minGain, maxGain;
+            if (bmi < 18.5) {
+                bmiCategory = 'Underweight';
+                bmiClass = 'underweight';
+                minGain = pregnancyType === 'single' ? 12.7 : 
+                         pregnancyType === 'twins' ? 22.7 : 23;
+                maxGain = pregnancyType === 'single' ? 18 : 
+                         pregnancyType === 'twins' ? 28 : 30;
+            } else if (bmi < 25) {
+                bmiCategory = 'Normal Weight';
+                bmiClass = 'normal';
+                minGain = pregnancyType === 'single' ? 11.3 : 
+                         pregnancyType === 'twins' ? 16.8 : 17;
+                maxGain = pregnancyType === 'single' ? 15.9 : 
+                         pregnancyType === 'twins' ? 24.5 : 25;
+            } else if (bmi < 30) {
+                bmiCategory = 'Overweight';
+                bmiClass = 'overweight';
+                minGain = pregnancyType === 'single' ? 6.8 : 
+                         pregnancyType === 'twins' ? 14.1 : 14;
+                maxGain = pregnancyType === 'single' ? 11.3 : 
+                         pregnancyType === 'twins' ? 22.7 : 23;
+            } else {
+                bmiCategory = 'Obese';
+                bmiClass = 'obese';
+                minGain = pregnancyType === 'single' ? 5 : 
+                         pregnancyType === 'twins' ? 11.3 : 11;
+                maxGain = pregnancyType === 'single' ? 9 : 
+                         pregnancyType === 'twins' ? 19.1 : 19;
+            }
+            
+            // Convert back to display units if needed
+            const displayUnit = isMetric ? 'kg' : 'lbs';
+            const minGainDisplay = isMetric ? minGain : minGain * 2.20462;
+            const maxGainDisplay = isMetric ? maxGain : maxGain * 2.20462;
+            
+            // Calculate expected weight gain by week
+            let expectedGainSoFar = 0;
+            if (weeks <= 12) {
+                // First trimester: 1-4 lbs total
+                expectedGainSoFar = (weeks / 12) * (isMetric ? 1.8 : 4);
+            } else if (weeks <= 26) {
+                // Second trimester: 1-2 lbs per week after first trimester
+                const firstTrimesterGain = isMetric ? 1.8 : 4;
+                const secondTrimesterWeeks = weeks - 12;
+                expectedGainSoFar = firstTrimesterGain + (secondTrimesterWeeks * (isMetric ? 0.45 : 1));
+            } else {
+                // Third trimester: continue 1-2 lbs per week
+                const firstTrimesterGain = isMetric ? 1.8 : 4;
+                const secondTrimesterGain = 14 * (isMetric ? 0.45 : 1);
+                const thirdTrimesterWeeks = weeks - 26;
+                expectedGainSoFar = firstTrimesterGain + secondTrimesterGain + (thirdTrimesterWeeks * (isMetric ? 0.45 : 1));
+            }
+            
+            // Display results
+            let resultsHTML = `
+                <div class="bmi-indicator ${bmiClass}">
+                    Pre-pregnancy BMI: ${bmi.toFixed(1)} (${bmiCategory})
+                </div>
+                
+                <div class="weight-chart">
+                    <div class="chart-header">Your Recommended Total Weight Gain</div>
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #007bff;">
+                            ${minGainDisplay.toFixed(1)} - ${maxGainDisplay.toFixed(1)} ${displayUnit}
+                        </div>
+                        <div style="color: #666; margin-top: 5px;">
+                            For ${pregnancyType === 'single' ? 'single baby' : pregnancyType} pregnancy
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="weight-chart">
+                    <div class="chart-header">Expected Weight Gain by Week ${weeks}</div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 18px; font-weight: bold;">
+                            Expected gain so far: ${expectedGainSoFar.toFixed(1)} ${displayUnit}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (currentWeight) {
+                const actualGain = currentWeightKg - preWeightKg;
+                const actualGainDisplay = isMetric ? actualGain : actualGain * 2.20462;
+                const status = actualGainDisplay < expectedGainSoFar * 0.8 ? 'below' : 
+                              actualGainDisplay > expectedGainSoFar * 1.2 ? 'above' : 'on track';
+                
+                resultsHTML += `
+                    <div class="weight-chart">
+                        <div class="chart-header">Your Current Progress</div>
+                        <div style="padding: 15px;">
+                            <div><strong>Actual weight gain:</strong> ${actualGainDisplay.toFixed(1)} ${displayUnit}</div>
+                            <div><strong>Status:</strong> <span style="color: ${status === 'on track' ? '#28a745' : '#dc3545'};">${status}</span></div>
+                            ${status !== 'on track' ? '<div style="margin-top: 10px; color: #856404;"><small>Consider discussing with your healthcare provider</small></div>' : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('weight-recommendations').innerHTML = resultsHTML;
+            document.getElementById('results').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+        
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateWeightGain();
+            }
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

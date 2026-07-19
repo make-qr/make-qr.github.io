@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/retirement-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Retirement Calculator - Plan Your Retirement Savings | Make QR Calculators
+  </title>
+  <meta content="Free retirement calculator to estimate how much you need to save for retirement and plan your financial future." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .retirement-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input, .input-group select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group .input-with-icon {
+            position: relative;
+        }
+
+        .input-group .input-with-icon input {
+            padding-left: 2.5rem;
+        }
+
+        .input-group .input-with-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .retirement-goal {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .retirement-goal .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .retirement-goal .label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .savings-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .breakdown-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breakdown-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-card .label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .progress-chart {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .retirement-tips {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .retirement-tips h4 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .retirement-tips ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .retirement-tips li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Retirement Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online retirement calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Retirement Calculator", "item": "https://make-qr.github.io/calculators/retirement-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Retirement Calculator</span>
+            </nav>
+            <h1>Retirement Calculator</h1>
+            <p>Plan your retirement savings and secure your financial future</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="retirement-calculator">
+      <div class="calculator-grid">
+       <div class="input-section">
+        <div class="input-group">
+         <label for="currentAge">
+          Current Age
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-user">
+          </i>
+          <input id="currentAge" max="100" min="18" placeholder="Enter your current age" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="retirementAge">
+          Retirement Age
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-calendar-check">
+          </i>
+          <input id="retirementAge" max="80" min="50" placeholder="Enter retirement age" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="currentIncome">
+          Current Annual Income
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-dollar-sign">
+          </i>
+          <input id="currentIncome" min="0" placeholder="Enter current income" step="1000" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="currentSavings">
+          Current Retirement Savings
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-piggy-bank">
+          </i>
+          <input id="currentSavings" min="0" placeholder="Enter current savings" step="1000" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="monthlyContribution">
+          Monthly Contribution
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-dollar-sign">
+          </i>
+          <input id="monthlyContribution" min="0" placeholder="Enter monthly savings" step="50" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="expectedReturn">
+          Expected Annual Return (%)
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-chart-line">
+          </i>
+          <input id="expectedReturn" max="20" min="0" placeholder="Enter expected return" step="0.1" type="number" value="7"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="inflationRate">
+          Inflation Rate (%)
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-percent">
+          </i>
+          <input id="inflationRate" max="10" min="0" placeholder="Enter inflation rate" step="0.1" type="number" value="3"/>
+         </div>
+        </div>
+        <button class="btn-calculate" onclick="calculateRetirement()">
+         Calculate Retirement Plan
+        </button>
+       </div>
+       <div class="results-section">
+        <div class="retirement-goal">
+         <div class="amount" id="retirementGoal">
+          $0
+         </div>
+         <div class="label">
+          Retirement Goal
+         </div>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Years to Retirement
+         </span>
+         <span class="result-value" id="yearsToRetirement">
+          0
+         </span>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Total Savings at Retirement
+         </span>
+         <span class="result-value" id="totalSavings">
+          $0
+         </span>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Monthly Income Needed
+         </span>
+         <span class="result-value" id="monthlyIncomeNeeded">
+          $0
+         </span>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Savings Gap
+         </span>
+         <span class="result-value" id="savingsGap">
+          $0
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="savings-breakdown">
+       <div class="breakdown-card">
+        <div class="value" id="currentSavingsDisplay">
+         $0
+        </div>
+        <div class="label">
+         Current Savings
+        </div>
+       </div>
+       <div class="breakdown-card">
+        <div class="value" id="futureContributions">
+         $0
+        </div>
+        <div class="label">
+         Future Contributions
+        </div>
+       </div>
+       <div class="breakdown-card">
+        <div class="value" id="investmentGrowth">
+         $0
+        </div>
+        <div class="label">
+         Investment Growth
+        </div>
+       </div>
+       <div class="breakdown-card">
+        <div class="value" id="totalAtRetirement">
+         $0
+        </div>
+        <div class="label">
+         Total at Retirement
+        </div>
+       </div>
+      </div>
+      <div class="progress-chart">
+       <h3>
+        Retirement Readiness
+       </h3>
+       <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%">
+        </div>
+       </div>
+       <p id="progressText">
+        Enter your information to see your retirement progress
+       </p>
+      </div>
+      <div class="retirement-tips">
+       <h4>
+        <i class="fas fa-lightbulb">
+        </i>
+        Retirement Planning Tips
+       </h4>
+       <ul>
+        <li>
+         Start saving early - compound interest is your best friend
+        </li>
+        <li>
+         Aim to save at least 10-15% of your income for retirement
+        </li>
+        <li>
+         Take advantage of employer 401(k) matching programs
+        </li>
+        <li>
+         Consider increasing contributions when you get a raise
+        </li>
+        <li>
+         Diversify your retirement portfolio across different asset classes
+        </li>
+        <li>
+         Review and adjust your retirement plan annually
+        </li>
+        <li>
+         Consider the impact of inflation on your purchasing power
+        </li>
+        <li>
+         Plan for healthcare costs in retirement
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function calculateRetirement() {
+            const currentAge = parseInt(document.getElementById('currentAge').value) || 0;
+            const retirementAge = parseInt(document.getElementById('retirementAge').value) || 0;
+            const currentIncome = parseFloat(document.getElementById('currentIncome').value) || 0;
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const expectedReturn = parseFloat(document.getElementById('expectedReturn').value) / 100 || 0.07;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100 || 0.03;
+
+            if (currentAge >= retirementAge) {
+                alert('Retirement age must be greater than current age');
+                return;
+            }
+
+            const yearsToRetirement = retirementAge - currentAge;
+            const monthsToRetirement = yearsToRetirement * 12;
+            const monthlyReturn = expectedReturn / 12;
+
+            // Calculate future value of current savings
+            const futureCurrentSavings = currentSavings * Math.pow(1 + expectedReturn, yearsToRetirement);
+
+            // Calculate future value of monthly contributions (annuity)
+            const futureContributionsValue = monthlyContribution * 
+                ((Math.pow(1 + monthlyReturn, monthsToRetirement) - 1) / monthlyReturn);
+
+            const totalSavingsAtRetirement = futureCurrentSavings + futureContributionsValue;
+
+            // Calculate retirement goal (80% of current income adjusted for inflation)
+            const inflationAdjustedIncome = currentIncome * Math.pow(1 + inflationRate, yearsToRetirement);
+            const retirementGoalAmount = inflationAdjustedIncome * 0.8 * 25; // 25x annual expenses rule
+
+            // Calculate monthly income needed in retirement
+            const monthlyIncomeNeeded = (inflationAdjustedIncome * 0.8) / 12;
+
+            // Calculate savings gap
+            const savingsGap = Math.max(0, retirementGoalAmount - totalSavingsAtRetirement);
+
+            // Calculate investment growth
+            const totalContributions = currentSavings + (monthlyContribution * monthsToRetirement);
+            const investmentGrowth = totalSavingsAtRetirement - totalContributions;
+
+            // Update results
+            document.getElementById('retirementGoal').textContent = formatCurrency(retirementGoalAmount);
+            document.getElementById('yearsToRetirement').textContent = yearsToRetirement + ' years';
+            document.getElementById('totalSavings').textContent = formatCurrency(totalSavingsAtRetirement);
+            document.getElementById('monthlyIncomeNeeded').textContent = formatCurrency(monthlyIncomeNeeded);
+            document.getElementById('savingsGap').textContent = formatCurrency(savingsGap);
+
+            // Update breakdown
+            document.getElementById('currentSavingsDisplay').textContent = formatCurrency(currentSavings);
+            document.getElementById('futureContributions').textContent = formatCurrency(monthlyContribution * monthsToRetirement);
+            document.getElementById('investmentGrowth').textContent = formatCurrency(investmentGrowth);
+            document.getElementById('totalAtRetirement').textContent = formatCurrency(totalSavingsAtRetirement);
+
+            // Update progress
+            const progressPercentage = Math.min(100, (totalSavingsAtRetirement / retirementGoalAmount) * 100);
+            document.getElementById('progressFill').style.width = progressPercentage + '%';
+            
+            let progressMessage;
+            if (progressPercentage >= 100) {
+                progressMessage = 'Congratulations! You\'re on track for retirement!';
+            } else if (progressPercentage >= 75) {
+                progressMessage = 'You\'re doing well! Consider increasing contributions slightly.';
+            } else if (progressPercentage >= 50) {
+                progressMessage = 'Good start! Consider increasing your monthly contributions.';
+            } else {
+                progressMessage = 'You need to significantly increase your retirement savings.';
+            }
+            
+            document.getElementById('progressText').textContent = 
+                `${progressPercentage.toFixed(1)}% of retirement goal - ${progressMessage}`;
+        }
+
+        function formatCurrency(amount) {
+            return '$' + Math.round(amount).toLocaleString();
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['currentAge', 'retirementAge', 'currentIncome', 'currentSavings', 
+                          'monthlyContribution', 'expectedReturn', 'inflationRate'];
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateRetirement);
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

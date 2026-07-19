@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Unit Converter - Multi-Category Unit Conversion Calculator | Free Online Tool
+  </title>
+  <meta content="Free online unit converter for length, weight, temperature, volume, area, speed, energy, power, and more. Convert between metric, imperial, and other measurement systems instantly." name="description"/>
+  <meta content="unit converter, measurement converter, metric converter, imperial converter, length converter, weight converter, temperature converter, volume converter" name="keywords"/>
+  <meta content="Calculator Tools" name="author"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/unit-converter.html" rel="canonical"/>
+  <!-- Open Graph Tags -->
+  <meta content="Unit Converter - Multi-Category Unit Conversion Calculator" property="og:title"/>
+  <meta content="Free online unit converter for length, weight, temperature, volume, area, speed, energy, power, and more. Convert between metric and imperial systems." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/unit-converter.html" property="og:url"/>
+  <meta content="https://make-qr.github.io/calculators/images/unit-converter.jpg" property="og:image"/>
+  <meta content="Calculator Tools" property="og:site_name"/>
+  <!-- Twitter Card Tags -->
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Unit Converter - Multi-Category Unit Conversion Calculator" name="twitter:title"/>
+  <meta content="Free online unit converter for length, weight, temperature, volume, area, speed, energy, power, and more." name="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/images/unit-converter.jpg" name="twitter:image"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Unit Converter",
+        "description": "Multi-category unit conversion calculator for various measurement systems",
+        "url": "https://make-qr.github.io/calculators/unit-converter.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Calculator Tools"
+        }
+    }
+  </script>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+  <style>
+   .converter-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .tab-btn {
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .tab-btn:hover {
+            background: #e9ecef;
+        }
+        
+        .tab-btn.active:hover {
+            background: #0056b3;
+        }
+        
+        .converter-section {
+            display: none;
+        }
+        
+        .converter-section.active {
+            display: block;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .input-group input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .input-group select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background: white;
+        }
+        
+        .swap-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .swap-btn:hover {
+            background: #1e7e34;
+            transform: rotate(180deg);
+        }
+        
+        .result-display {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            margin-top: 20px;
+        }
+        
+        .result-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .conversion-formula {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .quick-conversions {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .quick-conversion-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .quick-conversion-item:last-child {
+            border-bottom: none;
+        }
+        
+        @media (max-width: 768px) {
+            .converter-container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .category-tabs {
+                justify-content: center;
+            }
+            
+            .tab-btn {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+        }
+  </style>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--utilities">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link active" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><span class="sep">/</span>
+                <a href="index.html#utilities">Utilities</a><span class="sep">/</span>
+                <span class="current">Unit Converter</span>
+            </nav>
+            <h1>Unit Converter</h1>
+            <p>Convert between different units of measurement including length, weight, temperature, volume, area, speed, energy, and more.</p>
+        </div>
+    </section>
+<div class="container">
+   <header>
+    <h2>
+     Unit Converter
+    </h2>
+    <p>
+     Convert between different units of measurement including length, weight, temperature, volume, area, speed, energy, and more.
+    </p>
+   </header>
+   <div class="converter-container">
+    <div class="category-tabs">
+     <button class="tab-btn active" onclick="showCategory('length')">
+      Length
+     </button>
+     <button class="tab-btn" onclick="showCategory('weight')">
+      Weight
+     </button>
+     <button class="tab-btn" onclick="showCategory('temperature')">
+      Temperature
+     </button>
+     <button class="tab-btn" onclick="showCategory('volume')">
+      Volume
+     </button>
+     <button class="tab-btn" onclick="showCategory('area')">
+      Area
+     </button>
+     <button class="tab-btn" onclick="showCategory('speed')">
+      Speed
+     </button>
+     <button class="tab-btn" onclick="showCategory('energy')">
+      Energy
+     </button>
+     <button class="tab-btn" onclick="showCategory('power')">
+      Power
+     </button>
+    </div>
+    <!-- Length Converter -->
+    <div class="converter-section active" id="length">
+     <h3>
+      Length Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="length-from-value">
+        From:
+       </label>
+       <input id="length-from-value" oninput="convertLength('from')" placeholder="Enter value" type="number"/>
+       <select id="length-from-unit" onchange="convertLength('from')">
+        <option value="mm">
+         Millimeter (mm)
+        </option>
+        <option value="cm">
+         Centimeter (cm)
+        </option>
+        <option selected="" value="m">
+         Meter (m)
+        </option>
+        <option value="km">
+         Kilometer (km)
+        </option>
+        <option value="in">
+         Inch (in)
+        </option>
+        <option value="ft">
+         Foot (ft)
+        </option>
+        <option value="yd">
+         Yard (yd)
+        </option>
+        <option value="mi">
+         Mile (mi)
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('length')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="length-to-value">
+        To:
+       </label>
+       <input id="length-to-value" oninput="convertLength('to')" placeholder="Result" type="number"/>
+       <select id="length-to-unit" onchange="convertLength('from')">
+        <option value="mm">
+         Millimeter (mm)
+        </option>
+        <option value="cm">
+         Centimeter (cm)
+        </option>
+        <option value="m">
+         Meter (m)
+        </option>
+        <option selected="" value="km">
+         Kilometer (km)
+        </option>
+        <option value="in">
+         Inch (in)
+        </option>
+        <option value="ft">
+         Foot (ft)
+        </option>
+        <option value="yd">
+         Yard (yd)
+        </option>
+        <option value="mi">
+         Mile (mi)
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Weight Converter -->
+    <div class="converter-section" id="weight">
+     <h3>
+      Weight Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="weight-from-value">
+        From:
+       </label>
+       <input id="weight-from-value" oninput="convertWeight('from')" placeholder="Enter value" type="number"/>
+       <select id="weight-from-unit" onchange="convertWeight('from')">
+        <option value="mg">
+         Milligram (mg)
+        </option>
+        <option value="g">
+         Gram (g)
+        </option>
+        <option selected="" value="kg">
+         Kilogram (kg)
+        </option>
+        <option value="t">
+         Metric Ton (t)
+        </option>
+        <option value="oz">
+         Ounce (oz)
+        </option>
+        <option value="lb">
+         Pound (lb)
+        </option>
+        <option value="st">
+         Stone (st)
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('weight')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="weight-to-value">
+        To:
+       </label>
+       <input id="weight-to-value" oninput="convertWeight('to')" placeholder="Result" type="number"/>
+       <select id="weight-to-unit" onchange="convertWeight('from')">
+        <option value="mg">
+         Milligram (mg)
+        </option>
+        <option value="g">
+         Gram (g)
+        </option>
+        <option value="kg">
+         Kilogram (kg)
+        </option>
+        <option value="t">
+         Metric Ton (t)
+        </option>
+        <option value="oz">
+         Ounce (oz)
+        </option>
+        <option selected="" value="lb">
+         Pound (lb)
+        </option>
+        <option value="st">
+         Stone (st)
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Temperature Converter -->
+    <div class="converter-section" id="temperature">
+     <h3>
+      Temperature Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="temp-from-value">
+        From:
+       </label>
+       <input id="temp-from-value" oninput="convertTemperature('from')" placeholder="Enter value" type="number"/>
+       <select id="temp-from-unit" onchange="convertTemperature('from')">
+        <option selected="" value="c">
+         Celsius (°C)
+        </option>
+        <option value="f">
+         Fahrenheit (°F)
+        </option>
+        <option value="k">
+         Kelvin (K)
+        </option>
+        <option value="r">
+         Rankine (°R)
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('temperature')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="temp-to-value">
+        To:
+       </label>
+       <input id="temp-to-value" oninput="convertTemperature('to')" placeholder="Result" type="number"/>
+       <select id="temp-to-unit" onchange="convertTemperature('from')">
+        <option value="c">
+         Celsius (°C)
+        </option>
+        <option selected="" value="f">
+         Fahrenheit (°F)
+        </option>
+        <option value="k">
+         Kelvin (K)
+        </option>
+        <option value="r">
+         Rankine (°R)
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Volume Converter -->
+    <div class="converter-section" id="volume">
+     <h3>
+      Volume Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="volume-from-value">
+        From:
+       </label>
+       <input id="volume-from-value" oninput="convertVolume('from')" placeholder="Enter value" type="number"/>
+       <select id="volume-from-unit" onchange="convertVolume('from')">
+        <option value="ml">
+         Milliliter (ml)
+        </option>
+        <option selected="" value="l">
+         Liter (l)
+        </option>
+        <option value="m3">
+         Cubic Meter (m³)
+        </option>
+        <option value="tsp">
+         Teaspoon (tsp)
+        </option>
+        <option value="tbsp">
+         Tablespoon (tbsp)
+        </option>
+        <option value="floz">
+         Fluid Ounce (fl oz)
+        </option>
+        <option value="cup">
+         Cup
+        </option>
+        <option value="pt">
+         Pint (pt)
+        </option>
+        <option value="qt">
+         Quart (qt)
+        </option>
+        <option value="gal">
+         Gallon (gal)
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('volume')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="volume-to-value">
+        To:
+       </label>
+       <input id="volume-to-value" oninput="convertVolume('to')" placeholder="Result" type="number"/>
+       <select id="volume-to-unit" onchange="convertVolume('from')">
+        <option value="ml">
+         Milliliter (ml)
+        </option>
+        <option value="l">
+         Liter (l)
+        </option>
+        <option value="m3">
+         Cubic Meter (m³)
+        </option>
+        <option value="tsp">
+         Teaspoon (tsp)
+        </option>
+        <option value="tbsp">
+         Tablespoon (tbsp)
+        </option>
+        <option value="floz">
+         Fluid Ounce (fl oz)
+        </option>
+        <option value="cup">
+         Cup
+        </option>
+        <option value="pt">
+         Pint (pt)
+        </option>
+        <option value="qt">
+         Quart (qt)
+        </option>
+        <option selected="" value="gal">
+         Gallon (gal)
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Area Converter -->
+    <div class="converter-section" id="area">
+     <h3>
+      Area Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="area-from-value">
+        From:
+       </label>
+       <input id="area-from-value" oninput="convertArea('from')" placeholder="Enter value" type="number"/>
+       <select id="area-from-unit" onchange="convertArea('from')">
+        <option value="mm2">
+         Square Millimeter (mm²)
+        </option>
+        <option value="cm2">
+         Square Centimeter (cm²)
+        </option>
+        <option selected="" value="m2">
+         Square Meter (m²)
+        </option>
+        <option value="ha">
+         Hectare (ha)
+        </option>
+        <option value="km2">
+         Square Kilometer (km²)
+        </option>
+        <option value="in2">
+         Square Inch (in²)
+        </option>
+        <option value="ft2">
+         Square Foot (ft²)
+        </option>
+        <option value="yd2">
+         Square Yard (yd²)
+        </option>
+        <option value="ac">
+         Acre (ac)
+        </option>
+        <option value="mi2">
+         Square Mile (mi²)
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('area')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="area-to-value">
+        To:
+       </label>
+       <input id="area-to-value" oninput="convertArea('to')" placeholder="Result" type="number"/>
+       <select id="area-to-unit" onchange="convertArea('from')">
+        <option value="mm2">
+         Square Millimeter (mm²)
+        </option>
+        <option value="cm2">
+         Square Centimeter (cm²)
+        </option>
+        <option value="m2">
+         Square Meter (m²)
+        </option>
+        <option value="ha">
+         Hectare (ha)
+        </option>
+        <option value="km2">
+         Square Kilometer (km²)
+        </option>
+        <option value="in2">
+         Square Inch (in²)
+        </option>
+        <option selected="" value="ft2">
+         Square Foot (ft²)
+        </option>
+        <option value="yd2">
+         Square Yard (yd²)
+        </option>
+        <option value="ac">
+         Acre (ac)
+        </option>
+        <option value="mi2">
+         Square Mile (mi²)
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Speed Converter -->
+    <div class="converter-section" id="speed">
+     <h3>
+      Speed Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="speed-from-value">
+        From:
+       </label>
+       <input id="speed-from-value" oninput="convertSpeed('from')" placeholder="Enter value" type="number"/>
+       <select id="speed-from-unit" onchange="convertSpeed('from')">
+        <option value="ms">
+         Meter/Second (m/s)
+        </option>
+        <option selected="" value="kmh">
+         Kilometer/Hour (km/h)
+        </option>
+        <option value="mph">
+         Mile/Hour (mph)
+        </option>
+        <option value="kn">
+         Knot (kn)
+        </option>
+        <option value="fps">
+         Foot/Second (ft/s)
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('speed')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="speed-to-value">
+        To:
+       </label>
+       <input id="speed-to-value" oninput="convertSpeed('to')" placeholder="Result" type="number"/>
+       <select id="speed-to-unit" onchange="convertSpeed('from')">
+        <option value="ms">
+         Meter/Second (m/s)
+        </option>
+        <option value="kmh">
+         Kilometer/Hour (km/h)
+        </option>
+        <option selected="" value="mph">
+         Mile/Hour (mph)
+        </option>
+        <option value="kn">
+         Knot (kn)
+        </option>
+        <option value="fps">
+         Foot/Second (ft/s)
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Energy Converter -->
+    <div class="converter-section" id="energy">
+     <h3>
+      Energy Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="energy-from-value">
+        From:
+       </label>
+       <input id="energy-from-value" oninput="convertEnergy('from')" placeholder="Enter value" type="number"/>
+       <select id="energy-from-unit" onchange="convertEnergy('from')">
+        <option selected="" value="j">
+         Joule (J)
+        </option>
+        <option value="kj">
+         Kilojoule (kJ)
+        </option>
+        <option value="cal">
+         Calorie (cal)
+        </option>
+        <option value="kcal">
+         Kilocalorie (kcal)
+        </option>
+        <option value="wh">
+         Watt-hour (Wh)
+        </option>
+        <option value="kwh">
+         Kilowatt-hour (kWh)
+        </option>
+        <option value="btu">
+         BTU
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('energy')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="energy-to-value">
+        To:
+       </label>
+       <input id="energy-to-value" oninput="convertEnergy('to')" placeholder="Result" type="number"/>
+       <select id="energy-to-unit" onchange="convertEnergy('from')">
+        <option value="j">
+         Joule (J)
+        </option>
+        <option value="kj">
+         Kilojoule (kJ)
+        </option>
+        <option value="cal">
+         Calorie (cal)
+        </option>
+        <option selected="" value="kcal">
+         Kilocalorie (kcal)
+        </option>
+        <option value="wh">
+         Watt-hour (Wh)
+        </option>
+        <option value="kwh">
+         Kilowatt-hour (kWh)
+        </option>
+        <option value="btu">
+         BTU
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <!-- Power Converter -->
+    <div class="converter-section" id="power">
+     <h3>
+      Power Converter
+     </h3>
+     <div class="input-row">
+      <div class="input-group">
+       <label for="power-from-value">
+        From:
+       </label>
+       <input id="power-from-value" oninput="convertPower('from')" placeholder="Enter value" type="number"/>
+       <select id="power-from-unit" onchange="convertPower('from')">
+        <option selected="" value="w">
+         Watt (W)
+        </option>
+        <option value="kw">
+         Kilowatt (kW)
+        </option>
+        <option value="hp">
+         Horsepower (hp)
+        </option>
+        <option value="ps">
+         Metric Horsepower (PS)
+        </option>
+        <option value="btu/h">
+         BTU/hour
+        </option>
+       </select>
+      </div>
+      <button class="swap-btn" onclick="swapUnits('power')" title="Swap units">
+       ⇄
+      </button>
+      <div class="input-group">
+       <label for="power-to-value">
+        To:
+       </label>
+       <input id="power-to-value" oninput="convertPower('to')" placeholder="Result" type="number"/>
+       <select id="power-to-unit" onchange="convertPower('from')">
+        <option value="w">
+         Watt (W)
+        </option>
+        <option value="kw">
+         Kilowatt (kW)
+        </option>
+        <option selected="" value="hp">
+         Horsepower (hp)
+        </option>
+        <option value="ps">
+         Metric Horsepower (PS)
+        </option>
+        <option value="btu/h">
+         BTU/hour
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="info-section" style="max-width: 900px; margin: 30px auto; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+    <h3>
+     About Unit Conversion
+    </h3>
+    <p>
+     Unit conversion is the process of converting the value of a physical quantity from one unit to another. This tool supports conversion between various measurement systems including:
+    </p>
+    <ul>
+     <li>
+      <strong>
+       Metric System:
+      </strong>
+      Based on powers of 10 (meters, grams, liters, etc.)
+     </li>
+     <li>
+      <strong>
+       Imperial System:
+      </strong>
+      Traditional British units (feet, pounds, gallons, etc.)
+     </li>
+     <li>
+      <strong>
+       US Customary:
+      </strong>
+      American variations of imperial units
+     </li>
+     <li>
+      <strong>
+       Scientific Units:
+      </strong>
+      SI base units and derived units
+     </li>
+    </ul>
+    <h4>
+     Common Conversion Factors:
+    </h4>
+    <ul>
+     <li>
+      1 meter = 3.28084 feet
+     </li>
+     <li>
+      1 kilogram = 2.20462 pounds
+     </li>
+     <li>
+      1 liter = 0.264172 gallons (US)
+     </li>
+     <li>
+      °F = (°C × 9/5) + 32
+     </li>
+     <li>
+      1 square meter = 10.7639 square feet
+     </li>
+    </ul>
+   </div>
+  </div>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="conversion-calculator.html"><i class="fas fa-arrow-right"></i> Unit Conversion</a>
+                <a class="related-link" href="tip-calculator.html"><i class="fas fa-arrow-right"></i> Tip Calculator</a>
+                <a class="related-link" href="password-generator.html"><i class="fas fa-arrow-right"></i> Password Generator</a>
+                <a class="related-link" href="ip-subnet-calculator.html"><i class="fas fa-arrow-right"></i> IP Subnet</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   // Unit conversion factors (to base units)
+        const conversions = {
+            length: {
+                mm: 0.001, cm: 0.01, m: 1, km: 1000,
+                in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.344
+            },
+            weight: {
+                mg: 0.000001, g: 0.001, kg: 1, t: 1000,
+                oz: 0.0283495, lb: 0.453592, st: 6.35029
+            },
+            volume: {
+                ml: 0.001, l: 1, m3: 1000,
+                tsp: 0.00492892, tbsp: 0.0147868, floz: 0.0295735,
+                cup: 0.236588, pt: 0.473176, qt: 0.946353, gal: 3.78541
+            },
+            area: {
+                mm2: 0.000001, cm2: 0.0001, m2: 1, ha: 10000, km2: 1000000,
+                in2: 0.00064516, ft2: 0.092903, yd2: 0.836127, ac: 4046.86, mi2: 2589988
+            },
+            speed: {
+                ms: 1, kmh: 0.277778, mph: 0.44704, kn: 0.514444, fps: 0.3048
+            },
+            energy: {
+                j: 1, kj: 1000, cal: 4.184, kcal: 4184, wh: 3600, kwh: 3600000, btu: 1055.06
+            },
+            power: {
+                w: 1, kw: 1000, hp: 745.7, ps: 735.5, 'btu/h': 0.293071
+            }
+        };
+
+        function showCategory(category) {
+            // Hide all sections
+            document.querySelectorAll('.converter-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(category).classList.add('active');
+            
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function convertLength(direction) {
+            convertUnit('length', direction);
+        }
+
+        function convertWeight(direction) {
+            convertUnit('weight', direction);
+        }
+
+        function convertTemperature(direction) {
+            const fromValue = parseFloat(document.getElementById('temp-from-value').value);
+            const toValue = parseFloat(document.getElementById('temp-to-value').value);
+            const fromUnit = document.getElementById('temp-from-unit').value;
+            const toUnit = document.getElementById('temp-to-unit').value;
+
+            if (direction === 'from' && !isNaN(fromValue)) {
+                let celsius;
+                
+                // Convert to Celsius first
+                switch (fromUnit) {
+                    case 'c': celsius = fromValue; break;
+                    case 'f': celsius = (fromValue - 32) * 5/9; break;
+                    case 'k': celsius = fromValue - 273.15; break;
+                    case 'r': celsius = (fromValue - 491.67) * 5/9; break;
+                }
+                
+                // Convert from Celsius to target unit
+                let result;
+                switch (toUnit) {
+                    case 'c': result = celsius; break;
+                    case 'f': result = celsius * 9/5 + 32; break;
+                    case 'k': result = celsius + 273.15; break;
+                    case 'r': result = celsius * 9/5 + 491.67; break;
+                }
+                
+                document.getElementById('temp-to-value').value = result.toFixed(4);
+            } else if (direction === 'to' && !isNaN(toValue)) {
+                let celsius;
+                
+                // Convert to Celsius first
+                switch (toUnit) {
+                    case 'c': celsius = toValue; break;
+                    case 'f': celsius = (toValue - 32) * 5/9; break;
+                    case 'k': celsius = toValue - 273.15; break;
+                    case 'r': celsius = (toValue - 491.67) * 5/9; break;
+                }
+                
+                // Convert from Celsius to source unit
+                let result;
+                switch (fromUnit) {
+                    case 'c': result = celsius; break;
+                    case 'f': result = celsius * 9/5 + 32; break;
+                    case 'k': result = celsius + 273.15; break;
+                    case 'r': result = celsius * 9/5 + 491.67; break;
+                }
+                
+                document.getElementById('temp-from-value').value = result.toFixed(4);
+            }
+        }
+
+        function convertVolume(direction) {
+            convertUnit('volume', direction);
+        }
+
+        function convertArea(direction) {
+            convertUnit('area', direction);
+        }
+
+        function convertSpeed(direction) {
+            convertUnit('speed', direction);
+        }
+
+        function convertEnergy(direction) {
+            convertUnit('energy', direction);
+        }
+
+        function convertPower(direction) {
+            convertUnit('power', direction);
+        }
+
+        function convertUnit(category, direction) {
+            const fromValue = parseFloat(document.getElementById(`${category}-from-value`).value);
+            const toValue = parseFloat(document.getElementById(`${category}-to-value`).value);
+            const fromUnit = document.getElementById(`${category}-from-unit`).value;
+            const toUnit = document.getElementById(`${category}-to-unit`).value;
+
+            if (direction === 'from' && !isNaN(fromValue)) {
+                const baseValue = fromValue * conversions[category][fromUnit];
+                const result = baseValue / conversions[category][toUnit];
+                document.getElementById(`${category}-to-value`).value = result.toFixed(8).replace(/\.?0+$/, '');
+            } else if (direction === 'to' && !isNaN(toValue)) {
+                const baseValue = toValue * conversions[category][toUnit];
+                const result = baseValue / conversions[category][fromUnit];
+                document.getElementById(`${category}-from-value`).value = result.toFixed(8).replace(/\.?0+$/, '');
+            }
+        }
+
+        function swapUnits(category) {
+            const fromUnit = document.getElementById(`${category}-from-unit`);
+            const toUnit = document.getElementById(`${category}-to-unit`);
+            const fromValue = document.getElementById(`${category}-from-value`);
+            const toValue = document.getElementById(`${category}-to-value`);
+
+            // Swap units
+            const tempUnit = fromUnit.value;
+            fromUnit.value = toUnit.value;
+            toUnit.value = tempUnit;
+
+            // Swap values
+            const tempValue = fromValue.value;
+            fromValue.value = toValue.value;
+            toValue.value = tempValue;
+        }
+
+        // Initialize with default conversion
+        window.onload = function() {
+            convertLength('from');
+        };
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

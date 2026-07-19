@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Primary SEO Meta Tags -->
+  <title>
+   Week Number Calculator - ISO Week Numbers &amp; Week-Based Calculations | Make QR Calculators
+  </title>
+  <meta content="Week Number Calculator - ISO Week Numbers &amp; Week-Based Calculations | Make QR Calculators" name="title"/>
+  <meta content="Free week number calculator with ISO 8601 standard. Find week numbers, calculate weeks between dates, and convert between week numbers and dates." name="description"/>
+  <meta content="week number calculator, ISO week, week number finder, weeks between dates, ISO 8601, calendar week" name="keywords"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Make QR Calculators" name="author"/>
+  <!-- Open Graph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/week-number-calculator.html" property="og:url"/>
+  <meta content="Week Number Calculator - ISO Week Numbers &amp; Calculations" property="og:title"/>
+  <meta content="Free week number calculator with ISO 8601 standard for finding week numbers and week-based calculations." property="og:description"/>
+  <meta content="https://make-qr.github.io/calculators/week-number-calculator-preview.jpg" property="og:image"/>
+  <meta content="Make QR Calculators" property="og:site_name"/>
+  <!-- Twitter -->
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://make-qr.github.io/calculators/week-number-calculator.html" property="twitter:url"/>
+  <meta content="Week Number Calculator - ISO Week Numbers" property="twitter:title"/>
+  <meta content="Free week number calculator with ISO 8601 standard and week-based calculations." property="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/week-number-calculator-preview.jpg" property="twitter:image"/>
+  <!-- Canonical URL -->
+  <link href="https://make-qr.github.io/calculators/week-number-calculator.html" rel="canonical"/>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Week Number Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "Week number calculator with ISO 8601 standard for finding week numbers and week-based calculations",
+      "featureList": ["Week Number Finder", "ISO 8601 Standard", "Weeks Between Dates", "Week to Date Converter", "Calendar Weeks"],
+      "url": "https://make-qr.github.io/calculators/week-number-calculator.html"
+    }
+  </script>
+  <style>
+   .week-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .current-week-display {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .week-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .week-info {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        .detail-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .week-calendar {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #e9ecef;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .year-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .week-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .week-item:hover {
+            background: #e7f3ff;
+            border-color: #007bff;
+        }
+
+        .week-item.current {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .week-item.selected {
+            background: #28a745;
+            color: white;
+            border-color: #1e7e34;
+        }
+
+        .week-item-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .week-item-dates {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .info-section {
+            background: #e7f3ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid #bee5eb;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-text {
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .week-number {
+                font-size: 3rem;
+            }
+            
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                text-align: center;
+            }
+            
+            .weeks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Week Number Calculator - ISO Week Numbers &amp; Week-Based Calculations</span>
+            </nav>
+            <h1>Week Number Calculator - ISO Week Numbers &amp; Week-Based Calculations</h1>
+            <p>Free online week number calculator - iso week numbers &amp; week-based calculations with instant, accurate results.</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="calculator-header">
+      <h2>
+       Week Number Calculator - ISO Week Numbers &amp; Calculations
+      </h2>
+      <p>
+       Calculate week numbers according to ISO 8601 standard, find weeks between dates, and convert between week numbers and dates. Perfect for business planning and scheduling.
+      </p>
+     </div>
+     <div class="week-calculator">
+      <!-- Current Week Display -->
+      <div class="current-week-display">
+       <div class="week-number" id="currentWeekNumber">
+        52
+       </div>
+       <div class="week-info" id="currentWeekInfo">
+        Week 52 of 2024 (December 23 - December 29)
+       </div>
+      </div>
+      <div class="calculator-tabs">
+       <button class="tab-btn active" onclick="switchTab('weekFinder')">
+        Week Finder
+       </button>
+       <button class="tab-btn" onclick="switchTab('weeksBetween')">
+        Weeks Between
+       </button>
+       <button class="tab-btn" onclick="switchTab('weekToDate')">
+        Week to Date
+       </button>
+       <button class="tab-btn" onclick="switchTab('weekCalendar')">
+        Week Calendar
+       </button>
+      </div>
+      <!-- Week Finder Tab -->
+      <div class="tab-content active" id="weekFinder">
+       <div class="input-section">
+        <h3>
+         <i class="fas fa-search">
+         </i>
+         Find Week Number for Date
+        </h3>
+        <div class="input-group">
+         <div>
+          <label class="input-label" for="findDate">
+           Select Date
+          </label>
+          <input class="form-input" id="findDate" type="date"/>
+         </div>
+         <div>
+          <button class="calculate-btn" onclick="findWeekNumber()">
+           <i class="fas fa-search">
+           </i>
+           Find Week Number
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="result-section" id="weekFinderResult" style="display: none;">
+        <div class="result-title">
+         Week Number Information
+        </div>
+        <div class="result-value" id="foundWeekNumber">
+         Week 52
+        </div>
+        <div class="result-details">
+         <div class="detail-card">
+          <div class="detail-value" id="resultWeekYear">
+           2024
+          </div>
+          <div class="detail-label">
+           ISO Week Year
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="weekStart">
+           Dec 23
+          </div>
+          <div class="detail-label">
+           Week Start
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="weekEnd">
+           Dec 29
+          </div>
+          <div class="detail-label">
+           Week End
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="dayOfWeek">
+           Monday
+          </div>
+          <div class="detail-label">
+           Day of Week
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Weeks Between Tab -->
+      <div class="tab-content" id="weeksBetween">
+       <div class="input-section">
+        <h3>
+         <i class="fas fa-calculator">
+         </i>
+         Calculate Weeks Between Dates
+        </h3>
+        <div class="input-group">
+         <div>
+          <label class="input-label" for="startDate">
+           Start Date
+          </label>
+          <input class="form-input" id="startDate" type="date"/>
+         </div>
+         <div>
+          <label class="input-label" for="endDate">
+           End Date
+          </label>
+          <input class="form-input" id="endDate" type="date"/>
+         </div>
+        </div>
+        <button class="calculate-btn" onclick="calculateWeeksBetween()">
+         <i class="fas fa-calculator">
+         </i>
+         Calculate Weeks Between
+        </button>
+       </div>
+       <div class="result-section" id="weeksBetweenResult" style="display: none;">
+        <div class="result-title">
+         Weeks Between Dates
+        </div>
+        <div class="result-value" id="totalWeeks">
+         0 weeks
+        </div>
+        <div class="result-details">
+         <div class="detail-card">
+          <div class="detail-value" id="exactDays">
+           0
+          </div>
+          <div class="detail-label">
+           Total Days
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="fullWeeks">
+           0
+          </div>
+          <div class="detail-label">
+           Full Weeks
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="remainingDays">
+           0
+          </div>
+          <div class="detail-label">
+           Remaining Days
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="workingWeeks">
+           0
+          </div>
+          <div class="detail-label">
+           Working Weeks
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Week to Date Tab -->
+      <div class="tab-content" id="weekToDate">
+       <div class="input-section">
+        <h3>
+         <i class="fas fa-calendar-alt">
+         </i>
+         Convert Week Number to Date
+        </h3>
+        <div class="input-group">
+         <div>
+          <label class="input-label" for="weekYear">
+           Year
+          </label>
+          <input class="form-input" id="weekYear" max="2100" min="1900" type="number" value="2024"/>
+         </div>
+         <div>
+          <label class="input-label" for="weekNumber">
+           Week Number
+          </label>
+          <input class="form-input" id="weekNumber" max="53" min="1" type="number" value="1"/>
+         </div>
+        </div>
+        <button class="calculate-btn" onclick="convertWeekToDate()">
+         <i class="fas fa-calendar-alt">
+         </i>
+         Convert to Date
+        </button>
+       </div>
+       <div class="result-section" id="weekToDateResult" style="display: none;">
+        <div class="result-title">
+         Week Date Range
+        </div>
+        <div class="result-value" id="weekDateRange">
+         January 1 - January 7, 2024
+        </div>
+        <div class="result-details">
+         <div class="detail-card">
+          <div class="detail-value" id="mondayDate">
+           Jan 1
+          </div>
+          <div class="detail-label">
+           Monday
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="fridayDate">
+           Jan 5
+          </div>
+          <div class="detail-label">
+           Friday
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="sundayDate">
+           Jan 7
+          </div>
+          <div class="detail-label">
+           Sunday
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="daysInWeek">
+           7
+          </div>
+          <div class="detail-label">
+           Days in Week
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Week Calendar Tab -->
+      <div class="tab-content" id="weekCalendar">
+       <div class="week-calendar">
+        <div class="calendar-header">
+         <button class="nav-btn" onclick="changeYear(-1)">
+          <i class="fas fa-chevron-left">
+          </i>
+         </button>
+         <div class="year-display" id="calendarYear">
+          2024
+         </div>
+         <button class="nav-btn" onclick="changeYear(1)">
+          <i class="fas fa-chevron-right">
+          </i>
+         </button>
+        </div>
+        <div class="weeks-grid" id="weeksGrid">
+         <!-- Week items will be populated by JavaScript -->
+        </div>
+       </div>
+      </div>
+      <!-- ISO 8601 Information -->
+      <div class="info-section">
+       <h3>
+        <i class="fas fa-info-circle">
+        </i>
+        About ISO 8601 Week Numbers
+       </h3>
+       <div class="info-grid">
+        <div class="info-card">
+         <div class="info-icon">
+          <i class="fas fa-calendar-week">
+          </i>
+         </div>
+         <div class="info-title">
+          ISO 8601 Standard
+         </div>
+         <div class="info-text">
+          Week numbers follow the ISO 8601 international standard where weeks start on Monday and the first week contains January 4th.
+         </div>
+        </div>
+        <div class="info-card">
+         <div class="info-icon">
+          <i class="fas fa-clock">
+          </i>
+         </div>
+         <div class="info-title">
+          Week Numbering
+         </div>
+         <div class="info-text">
+          Most years have 52 weeks, but some years have 53 weeks. Week 1 is the first week with at least 4 days in the new year.
+         </div>
+        </div>
+        <div class="info-card">
+         <div class="info-icon">
+          <i class="fas fa-business-time">
+          </i>
+         </div>
+         <div class="info-title">
+          Business Use
+         </div>
+         <div class="info-text">
+          Week numbers are commonly used in business for planning, scheduling, and reporting across different countries and industries.
+         </div>
+        </div>
+        <div class="info-card">
+         <div class="info-icon">
+          <i class="fas fa-globe">
+          </i>
+         </div>
+         <div class="info-title">
+          International Standard
+         </div>
+         <div class="info-text">
+          ISO 8601 is recognized worldwide and ensures consistent week numbering across different systems and countries.
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- How to Use Section -->
+     <section class="how-to-section">
+      <div class="container">
+       <h2>
+        How to Use the Week Number Calculator
+       </h2>
+       <div class="how-to-grid">
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-search">
+          </i>
+          Find Week Number
+         </h3>
+         <p>
+          Enter any date to find its corresponding ISO week number, including week year, start/end dates, and day of week information.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calculator">
+          </i>
+          Calculate Weeks Between
+         </h3>
+         <p>
+          Calculate the exact number of weeks between two dates, including full weeks, remaining days, and working weeks.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calendar-alt">
+          </i>
+          Week to Date Conversion
+         </h3>
+         <p>
+          Convert week numbers back to date ranges. Enter a year and week number to see the corresponding Monday-Sunday date range.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calendar-week">
+          </i>
+          Week Calendar View
+         </h3>
+         <p>
+          Browse through years to see all week numbers in a visual calendar format. Click on weeks to see detailed information.
+         </p>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Related Tools -->
+     <section class="related-calculators">
+      <div class="container">
+       <h2>
+        Related Time &amp; Date Tools
+       </h2>
+       <div class="related-grid">
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calendar">
+          </i>
+         </div>
+         <h3>
+          Calendar Calculator
+         </h3>
+         <p>
+          Calculate dates and find day of the week
+         </p>
+         <a class="btn-link" href="calendar-calculator.html" title="Calendar Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-clock">
+          </i>
+         </div>
+         <h3>
+          Time Calculator
+         </h3>
+         <p>
+          Add, subtract, and calculate time durations
+         </p>
+         <a class="btn-link" href="time-calculator.html" title="Time Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-globe">
+          </i>
+         </div>
+         <h3>
+          World Clock
+         </h3>
+         <p>
+          Current time in different time zones worldwide
+         </p>
+         <a class="btn-link" href="world-clock.html" title="World Clock">
+          View Clock
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-stopwatch">
+          </i>
+         </div>
+         <h3>
+          Timer Calculator
+         </h3>
+         <p>
+          Countdown timer, stopwatch, and multiple timers
+         </p>
+         <a class="btn-link" href="timer-calculator.html" title="Timer Calculator">
+          Use Timer
+         </a>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentCalendarYear = new Date().getFullYear();
+
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabName === 'weekCalendar') {
+                generateWeekCalendar(currentCalendarYear);
+            }
+        }
+
+        function getISOWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            const weekNumber = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+            return {
+                week: weekNumber,
+                year: d.getUTCFullYear()
+            };
+        }
+
+        function getWeekStartEnd(year, week) {
+            const jan4 = new Date(Date.UTC(year, 0, 4));
+            const jan4Day = jan4.getUTCDay() || 7;
+            const weekStart = new Date(jan4);
+            weekStart.setUTCDate(jan4.getUTCDate() - jan4Day + 1 + (week - 1) * 7);
+            
+            const weekEnd = new Date(weekStart);
+            weekEnd.setUTCDate(weekStart.getUTCDate() + 6);
+            
+            return { start: weekStart, end: weekEnd };
+        }
+
+        function updateCurrentWeek() {
+            const today = new Date();
+            const weekInfo = getISOWeekNumber(today);
+            const weekDates = getWeekStartEnd(weekInfo.year, weekInfo.week);
+            
+            document.getElementById('currentWeekNumber').textContent = weekInfo.week;
+            
+            const startStr = weekDates.start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            const endStr = weekDates.end.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            
+            document.getElementById('currentWeekInfo').textContent = 
+                `Week ${weekInfo.week} of ${weekInfo.year} (${startStr} - ${endStr})`;
+        }
+
+        function findWeekNumber() {
+            const date = new Date(document.getElementById('findDate').value);
+            
+            if (!date || isNaN(date)) {
+                alert('Please select a valid date');
+                return;
+            }
+            
+            const weekInfo = getISOWeekNumber(date);
+            const weekDates = getWeekStartEnd(weekInfo.year, weekInfo.week);
+            
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayOfWeek = dayNames[date.getDay()];
+            
+            document.getElementById('foundWeekNumber').textContent = `Week ${weekInfo.week}`;
+            document.getElementById('resultWeekYear').textContent = weekInfo.year;
+            document.getElementById('weekStart').textContent = weekDates.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            document.getElementById('weekEnd').textContent = weekDates.end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            document.getElementById('dayOfWeek').textContent = dayOfWeek;
+            
+            document.getElementById('weekFinderResult').style.display = 'block';
+        }
+
+        function calculateWeeksBetween() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            
+            if (!startDate || !endDate || isNaN(startDate) || isNaN(endDate)) {
+                alert('Please select valid start and end dates');
+                return;
+            }
+            
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            const weeksDiff = daysDiff / 7;
+            const fullWeeks = Math.floor(weeksDiff);
+            const remainingDays = daysDiff % 7;
+            
+            // Calculate working weeks (assuming 5-day work week)
+            const workingDays = Math.floor(daysDiff * (5/7));
+            const workingWeeks = Math.floor(workingDays / 5);
+            
+            document.getElementById('totalWeeks').textContent = `${weeksDiff.toFixed(1)} weeks`;
+            document.getElementById('exactDays').textContent = daysDiff;
+            document.getElementById('fullWeeks').textContent = fullWeeks;
+            document.getElementById('remainingDays').textContent = remainingDays;
+            document.getElementById('workingWeeks').textContent = workingWeeks;
+            
+            document.getElementById('weeksBetweenResult').style.display = 'block';
+        }
+
+        function convertWeekToDate() {
+            const year = parseInt(document.getElementById('weekYear').value);
+            const week = parseInt(document.getElementById('weekNumber').value);
+            
+            if (!year || !week || week < 1 || week > 53) {
+                alert('Please enter a valid year and week number (1-53)');
+                return;
+            }
+            
+            const weekDates = getWeekStartEnd(year, week);
+            
+            const startStr = weekDates.start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            const endStr = weekDates.end.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            
+            // Get specific days
+            const monday = new Date(weekDates.start);
+            const friday = new Date(weekDates.start);
+            friday.setUTCDate(monday.getUTCDate() + 4);
+            const sunday = new Date(weekDates.end);
+            
+            document.getElementById('weekDateRange').textContent = `${startStr} - ${endStr}`;
+            document.getElementById('mondayDate').textContent = monday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            document.getElementById('fridayDate').textContent = friday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            document.getElementById('sundayDate').textContent = sunday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            document.getElementById('daysInWeek').textContent = '7';
+            
+            document.getElementById('weekToDateResult').style.display = 'block';
+        }
+
+        function generateWeekCalendar(year) {
+            const weeksGrid = document.getElementById('weeksGrid');
+            weeksGrid.innerHTML = '';
+            
+            document.getElementById('calendarYear').textContent = year;
+            
+            // Calculate number of weeks in the year
+            const lastDayOfYear = new Date(year, 11, 31);
+            const lastWeekInfo = getISOWeekNumber(lastDayOfYear);
+            const weeksInYear = lastWeekInfo.year === year ? lastWeekInfo.week : 52;
+            
+            const today = new Date();
+            const currentWeekInfo = getISOWeekNumber(today);
+            
+            for (let week = 1; week <= weeksInYear; week++) {
+                const weekDates = getWeekStartEnd(year, week);
+                const weekItem = document.createElement('div');
+                weekItem.className = 'week-item';
+                
+                if (year === currentWeekInfo.year && week === currentWeekInfo.week) {
+                    weekItem.classList.add('current');
+                }
+                
+                const startStr = weekDates.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                const endStr = weekDates.end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                
+                weekItem.innerHTML = `
+                    <div class="week-item-number">W${week}</div>
+                    <div class="week-item-dates">${startStr} - ${endStr}</div>
+                `;
+                
+                weekItem.onclick = () => selectWeek(year, week, weekItem);
+                weeksGrid.appendChild(weekItem);
+            }
+        }
+
+        function selectWeek(year, week, element) {
+            // Remove previous selection
+            document.querySelectorAll('.week-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selection to clicked item
+            element.classList.add('selected');
+            
+            // Show week information
+            const weekDates = getWeekStartEnd(year, week);
+            const startStr = weekDates.start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            const endStr = weekDates.end.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            
+            alert(`Week ${week} of ${year}\n${startStr} - ${endStr}`);
+        }
+
+        function changeYear(direction) {
+            currentCalendarYear += direction;
+            generateWeekCalendar(currentCalendarYear);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentWeek();
+            
+            // Set today's date as default for inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('findDate').value = today;
+            document.getElementById('startDate').value = today;
+            document.getElementById('endDate').value = today;
+            
+            // Update current week every minute
+            setInterval(updateCurrentWeek, 60000);
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/interest-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Interest Calculator - Simple &amp; Compound Interest | Make QR Calculators
+  </title>
+  <meta content="Free interest calculator to calculate simple and compound interest earnings on your investments and savings." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .interest-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input, .input-group select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group .input-with-icon {
+            position: relative;
+        }
+
+        .input-group .input-with-icon input {
+            padding-left: 2.5rem;
+        }
+
+        .input-group .input-with-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .result-highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .result-highlight .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-highlight .label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .comparison-chart {
+            margin-top: 2rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            gap: 1rem;
+            height: 200px;
+            margin: 1rem 0;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, #667eea, #764ba2);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            min-height: 20px;
+        }
+
+        .chart-bar .value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .chart-bar .label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .investment-tips {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .investment-tips h4 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .investment-tips ul {
+            color: #333;
+            padding-left: 1.5rem;
+        }
+
+        .investment-tips li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Interest Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online interest calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Interest Calculator", "item": "https://make-qr.github.io/calculators/interest-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Interest Calculator</span>
+            </nav>
+            <h1>Interest Calculator</h1>
+            <p>Calculate simple and compound interest on your investments</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="interest-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-button active" onclick="switchTab('simple')">
+        Simple Interest
+       </button>
+       <button class="tab-button" onclick="switchTab('compound')">
+        Compound Interest
+       </button>
+      </div>
+      <div class="calculator-grid">
+       <div class="input-section">
+        <div class="input-group">
+         <label for="principal">
+          Principal Amount
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-dollar-sign">
+          </i>
+          <input id="principal" min="0" placeholder="Enter principal amount" step="100" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="interestRate">
+          Annual Interest Rate (%)
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-percent">
+          </i>
+          <input id="interestRate" min="0" placeholder="Enter interest rate" step="0.1" type="number"/>
+         </div>
+        </div>
+        <div class="input-group">
+         <label for="timePeriod">
+          Time Period (Years)
+         </label>
+         <div class="input-with-icon">
+          <i class="fas fa-calendar-alt">
+          </i>
+          <input id="timePeriod" min="0" placeholder="Enter time period" step="0.5" type="number"/>
+         </div>
+        </div>
+        <div class="input-group" id="compoundingGroup" style="display: none;">
+         <label for="compoundingFrequency">
+          Compounding Frequency
+         </label>
+         <select id="compoundingFrequency">
+          <option value="1">
+           Annually
+          </option>
+          <option value="2">
+           Semi-annually
+          </option>
+          <option value="4">
+           Quarterly
+          </option>
+          <option selected="" value="12">
+           Monthly
+          </option>
+          <option value="52">
+           Weekly
+          </option>
+          <option value="365">
+           Daily
+          </option>
+         </select>
+        </div>
+        <button class="btn-calculate" onclick="calculateInterest()">
+         Calculate Interest
+        </button>
+       </div>
+       <div class="results-section">
+        <div class="result-highlight">
+         <div class="amount" id="totalAmount">
+          $0.00
+         </div>
+         <div class="label">
+          Total Amount
+         </div>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Principal
+         </span>
+         <span class="result-value" id="principalDisplay">
+          $0.00
+         </span>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Interest Earned
+         </span>
+         <span class="result-value" id="interestEarned">
+          $0.00
+         </span>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Interest Rate
+         </span>
+         <span class="result-value" id="rateDisplay">
+          0%
+         </span>
+        </div>
+        <div class="result-item">
+         <span class="result-label">
+          Time Period
+         </span>
+         <span class="result-value" id="timeDisplay">
+          0 years
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="comparison-chart">
+       <h3>
+        Interest Comparison
+       </h3>
+       <div class="chart-bars">
+        <div class="chart-bar" id="principalBar">
+         <div class="value" id="principalValue">
+          $0
+         </div>
+         <div class="label">
+          Principal
+         </div>
+        </div>
+        <div class="chart-bar" id="interestBar">
+         <div class="value" id="interestValue">
+          $0
+         </div>
+         <div class="label">
+          Interest
+         </div>
+        </div>
+        <div class="chart-bar" id="totalBar">
+         <div class="value" id="totalValue">
+          $0
+         </div>
+         <div class="label">
+          Total
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="investment-tips">
+       <h4>
+        <i class="fas fa-chart-line">
+        </i>
+        Investment Tips
+       </h4>
+       <ul>
+        <li>
+         Compound interest is more powerful than simple interest for long-term investments
+        </li>
+        <li>
+         The earlier you start investing, the more time your money has to grow
+        </li>
+        <li>
+         Higher compounding frequency generally results in higher returns
+        </li>
+        <li>
+         Consider the effect of inflation on your real returns
+        </li>
+        <li>
+         Diversify your investments to manage risk
+        </li>
+        <li>
+         Regular contributions can significantly boost your total returns
+        </li>
+        <li>
+         Compare different investment options before making decisions
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentTab = 'simple';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide compounding frequency
+            const compoundingGroup = document.getElementById('compoundingGroup');
+            if (tab === 'compound') {
+                compoundingGroup.style.display = 'flex';
+            } else {
+                compoundingGroup.style.display = 'none';
+            }
+            
+            // Recalculate if values exist
+            calculateInterest();
+        }
+
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const rate = parseFloat(document.getElementById('interestRate').value) / 100 || 0;
+            const time = parseFloat(document.getElementById('timePeriod').value) || 0;
+            const frequency = parseInt(document.getElementById('compoundingFrequency').value) || 12;
+
+            if (principal <= 0 || rate <= 0 || time <= 0) {
+                return;
+            }
+
+            let totalAmount, interest;
+
+            if (currentTab === 'simple') {
+                // Simple Interest: A = P(1 + rt)
+                interest = principal * rate * time;
+                totalAmount = principal + interest;
+            } else {
+                // Compound Interest: A = P(1 + r/n)^(nt)
+                totalAmount = principal * Math.pow(1 + rate / frequency, frequency * time);
+                interest = totalAmount - principal;
+            }
+
+            // Update results
+            document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
+            document.getElementById('principalDisplay').textContent = formatCurrency(principal);
+            document.getElementById('interestEarned').textContent = formatCurrency(interest);
+            document.getElementById('rateDisplay').textContent = (rate * 100).toFixed(2) + '%';
+            document.getElementById('timeDisplay').textContent = time + ' years';
+
+            // Update chart
+            updateChart(principal, interest, totalAmount);
+        }
+
+        function updateChart(principal, interest, total) {
+            const maxValue = total;
+            
+            // Calculate heights as percentages
+            const principalHeight = (principal / maxValue) * 100;
+            const interestHeight = (interest / maxValue) * 100;
+            const totalHeight = 100;
+
+            // Update bars
+            document.getElementById('principalBar').style.height = principalHeight + '%';
+            document.getElementById('interestBar').style.height = interestHeight + '%';
+            document.getElementById('totalBar').style.height = totalHeight + '%';
+
+            // Update values
+            document.getElementById('principalValue').textContent = formatCurrency(principal);
+            document.getElementById('interestValue').textContent = formatCurrency(interest);
+            document.getElementById('totalValue').textContent = formatCurrency(total);
+        }
+
+        function formatCurrency(amount) {
+            return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['principal', 'interestRate', 'timePeriod', 'compoundingFrequency'];
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateInterest);
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

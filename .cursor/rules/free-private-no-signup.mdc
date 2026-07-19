@@ -1,5 +1,5 @@
 ---
-description: Product promise applied consistently across the Make QR website
+description: Free, private tools and QR codes without embedded ads or redirects
 alwaysApply: true
 ---
 
@@ -15,3 +15,13 @@ Apply this product promise across the entire Make QR website:
 - Downloads must be free and must not add a Make QR watermark.
 - Show the promise concisely and consistently; avoid repeating long marketing explanations.
 - Do not claim privacy or quality beyond what the implementation actually guarantees.
+
+## Meaning of “No ads” for QR codes
+
+- “No ads” applies to the generated QR code and its scan flow, not to the website interface.
+- Generated static QR codes must encode the user's content directly.
+- Never insert a Make QR ad page, interstitial, tracking redirect, short-link redirect, paywall, expiration, or subscription requirement between scanning and the encoded destination.
+- Never inject advertising or tracking data into the QR payload or downloaded QR image.
+- The destination website may contain its own ads; Make QR cannot control or make claims about that destination.
+- The Make QR website may display normal advertising such as Google AdSense to fund the free tools, but ads must not receive user-entered content or file contents.
+- Use precise copy such as **“No embedded ads”** or **“No ad redirects”**. Do not describe the website itself as **“ad-free”** while it displays ads.

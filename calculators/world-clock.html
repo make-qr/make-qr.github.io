@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Primary SEO Meta Tags -->
+  <title>
+   World Clock - Current Time in All Time Zones | Make QR Calculators
+  </title>
+  <meta content="World Clock - Current Time in All Time Zones | Make QR Calculators" name="title"/>
+  <meta content="Free world clock showing current time in all major cities and time zones. Real-time updates, UTC time, timezone converter, and daylight saving time information." name="description"/>
+  <meta content="world clock, time zones, current time, UTC time, timezone converter, international time, global clock" name="keywords"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Make QR Calculators" name="author"/>
+  <!-- Open Graph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/world-clock.html" property="og:url"/>
+  <meta content="World Clock - Current Time in All Time Zones" property="og:title"/>
+  <meta content="Free world clock showing current time in all major cities and time zones with real-time updates and timezone information." property="og:description"/>
+  <meta content="https://make-qr.github.io/calculators/world-clock-preview.jpg" property="og:image"/>
+  <meta content="Make QR Calculators" property="og:site_name"/>
+  <!-- Twitter -->
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://make-qr.github.io/calculators/world-clock.html" property="twitter:url"/>
+  <meta content="World Clock - Current Time in All Time Zones" property="twitter:title"/>
+  <meta content="Free world clock with real-time updates for all major cities and time zones worldwide." property="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/world-clock-preview.jpg" property="twitter:image"/>
+  <!-- Canonical URL -->
+  <link href="https://make-qr.github.io/calculators/world-clock.html" rel="canonical"/>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "World Clock",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "World clock showing current time in all major cities and time zones with real-time updates",
+      "featureList": ["World Clock", "Time Zones", "UTC Time", "Timezone Converter", "Daylight Saving Time"],
+      "url": "https://make-qr.github.io/calculators/world-clock.html"
+    }
+  </script>
+  <style>
+   .world-clock {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .current-time {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .local-time {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .local-date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .local-timezone {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .search-section {
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .timezone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .timezone-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .timezone-card:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+        }
+
+        .timezone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .city-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .country-flag {
+            font-size: 1.5rem;
+        }
+
+        .timezone-time {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+
+        .timezone-date {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .timezone-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .dst-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffc107;
+            color: #212529;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .utc-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .utc-time {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .converter-section {
+            background: #e7f3ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .converter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .converter-input {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .converter-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .quick-cities {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .city-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .city-btn:hover, .city-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .time-difference {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .local-time {
+                font-size: 2rem;
+            }
+            
+            .timezone-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .converter-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-cities {
+                justify-content: center;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">World Clock - Current Time in All Time Zones</span>
+            </nav>
+            <h1>World Clock - Current Time in All Time Zones</h1>
+            <p>Free online world clock - current time in all time zones with instant, accurate results.</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="calculator-header">
+      <h2>
+       World Clock - Current Time in All Time Zones
+      </h2>
+      <p>
+       Check current time in major cities worldwide. Real-time updates with timezone information, UTC time, and daylight saving time indicators.
+      </p>
+     </div>
+     <div class="world-clock">
+      <!-- Current Local Time -->
+      <div class="current-time">
+       <div class="local-time" id="localTime">
+        12:00:00
+       </div>
+       <div class="local-date" id="localDate">
+        Monday, December 1, 2024
+       </div>
+       <div class="local-timezone" id="localTimezone">
+        Your Local Time
+       </div>
+      </div>
+      <!-- UTC Time -->
+      <div class="utc-section">
+       <h2>
+        <i class="fas fa-globe">
+        </i>
+        Coordinated Universal Time (UTC)
+       </h2>
+       <div class="utc-time" id="utcTime">
+        12:00:00
+       </div>
+       <div class="timezone-date" id="utcDate">
+        Monday, December 1, 2024
+       </div>
+      </div>
+      <!-- Search Section -->
+      <div class="search-section">
+       <input class="search-input" id="citySearch" oninput="filterCities()" placeholder="Search for a city or timezone..." type="text"/>
+      </div>
+      <!-- Quick City Buttons -->
+      <div class="quick-cities">
+       <button class="city-btn active" onclick="showAllCities()">
+        All Cities
+       </button>
+       <button class="city-btn" onclick="filterByRegion('Americas')">
+        Americas
+       </button>
+       <button class="city-btn" onclick="filterByRegion('Europe')">
+        Europe
+       </button>
+       <button class="city-btn" onclick="filterByRegion('Asia')">
+        Asia
+       </button>
+       <button class="city-btn" onclick="filterByRegion('Africa')">
+        Africa
+       </button>
+       <button class="city-btn" onclick="filterByRegion('Oceania')">
+        Oceania
+       </button>
+      </div>
+      <!-- World Clocks Grid -->
+      <div class="timezone-grid" id="timezoneGrid">
+       <!-- Cities will be populated by JavaScript -->
+      </div>
+      <!-- Timezone Converter -->
+      <div class="converter-section">
+       <h2>
+        <i class="fas fa-exchange-alt">
+        </i>
+        Timezone Converter
+       </h2>
+       <div class="converter-grid">
+        <select class="converter-input" id="fromTimezone">
+         <option value="">
+          Select source timezone
+         </option>
+        </select>
+        <input class="converter-input" id="sourceTime" type="datetime-local"/>
+        <select class="converter-input" id="toTimezone">
+         <option value="">
+          Select target timezone
+         </option>
+        </select>
+        <input class="converter-input" id="targetTime" readonly="" type="datetime-local"/>
+       </div>
+       <div class="time-difference" id="timeDifference" style="display: none;">
+       </div>
+      </div>
+     </div>
+     <!-- How to Use Section -->
+     <section class="how-to-section">
+      <div class="container">
+       <h2>
+        How to Use the World Clock
+       </h2>
+       <div class="how-to-grid">
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-globe-americas">
+          </i>
+          View World Times
+         </h3>
+         <p>
+          See current time in major cities worldwide with real-time updates. Times are automatically adjusted for daylight saving time.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-search">
+          </i>
+          Search Cities
+         </h3>
+         <p>
+          Use the search box to quickly find specific cities or filter by regions like Americas, Europe, Asia, Africa, and Oceania.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-exchange-alt">
+          </i>
+          Convert Timezones
+         </h3>
+         <p>
+          Use the timezone converter to convert time between any two timezones. Perfect for scheduling international meetings.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-clock">
+          </i>
+          UTC Reference
+         </h3>
+         <p>
+          View Coordinated Universal Time (UTC) as a reference point for all international time calculations.
+         </p>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Related Tools -->
+     <section class="related-calculators">
+      <div class="container">
+       <h2>
+        Related Time &amp; Date Tools
+       </h2>
+       <div class="related-grid">
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-stopwatch">
+          </i>
+         </div>
+         <h3>
+          Timer Calculator
+         </h3>
+         <p>
+          Countdown timer, stopwatch, and multiple timers
+         </p>
+         <a class="btn-link" href="timer-calculator.html" title="Timer Calculator">
+          Use Timer
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calendar">
+          </i>
+         </div>
+         <h3>
+          Calendar Calculator
+         </h3>
+         <p>
+          Calculate dates and find day of the week
+         </p>
+         <a class="btn-link" href="calendar-calculator.html" title="Calendar Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calculator">
+          </i>
+         </div>
+         <h3>
+          Time Calculator
+         </h3>
+         <p>
+          Add, subtract, and calculate time durations
+         </p>
+         <a class="btn-link" href="time-calculator.html" title="Time Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calendar-week">
+          </i>
+         </div>
+         <h3>
+          Week Number Calculator
+         </h3>
+         <p>
+          Find week numbers and calculate weeks
+         </p>
+         <a class="btn-link" href="week-number-calculator.html" title="Week Number Calculator">
+          Use Calculator
+         </a>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   const worldCities = [
+            { name: 'New York', country: 'USA', timezone: 'America/New_York', flag: '🇺🇸', region: 'Americas' },
+            { name: 'Los Angeles', country: 'USA', timezone: 'America/Los_Angeles', flag: '🇺🇸', region: 'Americas' },
+            { name: 'Chicago', country: 'USA', timezone: 'America/Chicago', flag: '🇺🇸', region: 'Americas' },
+            { name: 'London', country: 'UK', timezone: 'Europe/London', flag: '🇬🇧', region: 'Europe' },
+            { name: 'Paris', country: 'France', timezone: 'Europe/Paris', flag: '🇫🇷', region: 'Europe' },
+            { name: 'Berlin', country: 'Germany', timezone: 'Europe/Berlin', flag: '🇩🇪', region: 'Europe' },
+            { name: 'Rome', country: 'Italy', timezone: 'Europe/Rome', flag: '🇮🇹', region: 'Europe' },
+            { name: 'Madrid', country: 'Spain', timezone: 'Europe/Madrid', flag: '🇪🇸', region: 'Europe' },
+            { name: 'Moscow', country: 'Russia', timezone: 'Europe/Moscow', flag: '🇷🇺', region: 'Europe' },
+            { name: 'Tokyo', country: 'Japan', timezone: 'Asia/Tokyo', flag: '🇯🇵', region: 'Asia' },
+            { name: 'Beijing', country: 'China', timezone: 'Asia/Shanghai', flag: '🇨🇳', region: 'Asia' },
+            { name: 'Hong Kong', country: 'Hong Kong', timezone: 'Asia/Hong_Kong', flag: '🇭🇰', region: 'Asia' },
+            { name: 'Singapore', country: 'Singapore', timezone: 'Asia/Singapore', flag: '🇸🇬', region: 'Asia' },
+            { name: 'Mumbai', country: 'India', timezone: 'Asia/Kolkata', flag: '🇮🇳', region: 'Asia' },
+            { name: 'Dubai', country: 'UAE', timezone: 'Asia/Dubai', flag: '🇦🇪', region: 'Asia' },
+            { name: 'Seoul', country: 'South Korea', timezone: 'Asia/Seoul', flag: '🇰🇷', region: 'Asia' },
+            { name: 'Sydney', country: 'Australia', timezone: 'Australia/Sydney', flag: '🇦🇺', region: 'Oceania' },
+            { name: 'Melbourne', country: 'Australia', timezone: 'Australia/Melbourne', flag: '🇦🇺', region: 'Oceania' },
+            { name: 'Auckland', country: 'New Zealand', timezone: 'Pacific/Auckland', flag: '🇳🇿', region: 'Oceania' },
+            { name: 'Cairo', country: 'Egypt', timezone: 'Africa/Cairo', flag: '🇪🇬', region: 'Africa' },
+            { name: 'Lagos', country: 'Nigeria', timezone: 'Africa/Lagos', flag: '🇳🇬', region: 'Africa' },
+            { name: 'Johannesburg', country: 'South Africa', timezone: 'Africa/Johannesburg', flag: '🇿🇦', region: 'Africa' },
+            { name: 'Toronto', country: 'Canada', timezone: 'America/Toronto', flag: '🇨🇦', region: 'Americas' },
+            { name: 'Vancouver', country: 'Canada', timezone: 'America/Vancouver', flag: '🇨🇦', region: 'Americas' },
+            { name: 'Mexico City', country: 'Mexico', timezone: 'America/Mexico_City', flag: '🇲🇽', region: 'Americas' },
+            { name: 'São Paulo', country: 'Brazil', timezone: 'America/Sao_Paulo', flag: '🇧🇷', region: 'Americas' },
+            { name: 'Buenos Aires', country: 'Argentina', timezone: 'America/Argentina/Buenos_Aires', flag: '🇦🇷', region: 'Americas' },
+            { name: 'Lima', country: 'Peru', timezone: 'America/Lima', flag: '🇵🇪', region: 'Americas' }
+        ];
+
+        let filteredCities = [...worldCities];
+        let updateInterval;
+
+        function updateAllTimes() {
+            const now = new Date();
+            
+            // Update local time
+            updateLocalTime(now);
+            
+            // Update UTC time
+            updateUTCTime(now);
+            
+            // Update world cities
+            updateWorldCities(now);
+            
+            // Update converter if values are set
+            updateConverter();
+        }
+
+        function updateLocalTime(now) {
+            const timeOptions = { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            };
+            const dateOptions = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            
+            document.getElementById('localTime').textContent = now.toLocaleTimeString('en-US', timeOptions);
+            document.getElementById('localDate').textContent = now.toLocaleDateString('en-US', dateOptions);
+            
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('localTimezone').textContent = `${timezone} (Local Time)`;
+        }
+
+        function updateUTCTime(now) {
+            const utcTime = now.toISOString().substr(11, 8);
+            const utcDate = now.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                timeZone: 'UTC'
+            });
+            
+            document.getElementById('utcTime').textContent = utcTime;
+            document.getElementById('utcDate').textContent = utcDate;
+        }
+
+        function updateWorldCities(now) {
+            const grid = document.getElementById('timezoneGrid');
+            
+            grid.innerHTML = filteredCities.map(city => {
+                const cityTime = new Date(now.toLocaleString('en-US', { timeZone: city.timezone }));
+                const timeString = cityTime.toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+                const dateString = cityTime.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                // Check if DST is in effect (simplified check)
+                const jan = new Date(now.getFullYear(), 0, 1);
+                const jul = new Date(now.getFullYear(), 6, 1);
+                const janOffset = new Date(jan.toLocaleString('en-US', { timeZone: city.timezone })).getTimezoneOffset();
+                const julOffset = new Date(jul.toLocaleString('en-US', { timeZone: city.timezone })).getTimezoneOffset();
+                const currentOffset = cityTime.getTimezoneOffset();
+                const isDST = currentOffset !== Math.max(janOffset, julOffset);
+                
+                // Get UTC offset
+                const utcOffset = -cityTime.getTimezoneOffset() / 60;
+                const offsetString = `UTC${utcOffset >= 0 ? '+' : ''}${utcOffset}`;
+                
+                return `
+                    <div class="timezone-card">
+                        ${isDST ? '<div class="dst-indicator">DST</div>' : ''}
+                        <div class="timezone-header">
+                            <div class="city-name">${city.name}</div>
+                            <div class="country-flag">${city.flag}</div>
+                        </div>
+                        <div class="timezone-time">${timeString}</div>
+                        <div class="timezone-date">${dateString}</div>
+                        <div class="timezone-info">${city.country} • ${offsetString}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterCities() {
+            const searchTerm = document.getElementById('citySearch').value.toLowerCase();
+            filteredCities = worldCities.filter(city => 
+                city.name.toLowerCase().includes(searchTerm) ||
+                city.country.toLowerCase().includes(searchTerm) ||
+                city.timezone.toLowerCase().includes(searchTerm)
+            );
+            updateWorldCities(new Date());
+        }
+
+        function filterByRegion(region) {
+            // Update button states
+            document.querySelectorAll('.city-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (region === 'all') {
+                filteredCities = [...worldCities];
+            } else {
+                filteredCities = worldCities.filter(city => city.region === region);
+            }
+            updateWorldCities(new Date());
+        }
+
+        function showAllCities() {
+            document.querySelectorAll('.city-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.city-btn').classList.add('active');
+            filteredCities = [...worldCities];
+            updateWorldCities(new Date());
+        }
+
+        function populateTimezoneSelects() {
+            const fromSelect = document.getElementById('fromTimezone');
+            const toSelect = document.getElementById('toTimezone');
+            
+            worldCities.forEach(city => {
+                const option1 = new Option(`${city.name}, ${city.country}`, city.timezone);
+                const option2 = new Option(`${city.name}, ${city.country}`, city.timezone);
+                fromSelect.add(option1);
+                toSelect.add(option2);
+            });
+            
+            // Add event listeners
+            fromSelect.addEventListener('change', updateConverter);
+            toSelect.addEventListener('change', updateConverter);
+            document.getElementById('sourceTime').addEventListener('change', updateConverter);
+        }
+
+        function updateConverter() {
+            const fromTz = document.getElementById('fromTimezone').value;
+            const toTz = document.getElementById('toTimezone').value;
+            const sourceTime = document.getElementById('sourceTime').value;
+            
+            if (fromTz && toTz && sourceTime) {
+                try {
+                    const sourceDate = new Date(sourceTime);
+                    
+                    // Convert to target timezone
+                    const targetDate = new Date(sourceDate.toLocaleString('en-US', { timeZone: toTz }));
+                    
+                    // Format for datetime-local input
+                    const targetTimeString = new Date(targetDate.getTime() - targetDate.getTimezoneOffset() * 60000)
+                        .toISOString().slice(0, 16);
+                    
+                    document.getElementById('targetTime').value = targetTimeString;
+                    
+                    // Calculate time difference
+                    const diffHours = (targetDate.getTime() - sourceDate.getTime()) / (1000 * 60 * 60);
+                    const diffText = diffHours >= 0 ? 
+                        `Target time is ${Math.abs(diffHours)} hours ahead` :
+                        `Target time is ${Math.abs(diffHours)} hours behind`;
+                    
+                    const diffDiv = document.getElementById('timeDifference');
+                    diffDiv.textContent = diffText;
+                    diffDiv.style.display = 'block';
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            populateTimezoneSelects();
+            updateAllTimes();
+            
+            // Set current time in converter
+            const now = new Date();
+            const currentTimeString = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+                .toISOString().slice(0, 16);
+            document.getElementById('sourceTime').value = currentTimeString;
+            
+            // Update every second
+            updateInterval = setInterval(updateAllTimes, 1000);
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

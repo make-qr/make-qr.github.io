@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Primary SEO Meta Tags -->
+  <title>
+   Calendar Calculator - Date Calculator &amp; Day Finder | Make QR Calculators
+  </title>
+  <meta content="Calendar Calculator - Date Calculator &amp; Day Finder | Make QR Calculators" name="title"/>
+  <meta content="Free calendar calculator to find dates, calculate days between dates, determine day of week, and view interactive calendar. Perfect for planning and scheduling." name="description"/>
+  <meta content="calendar calculator, date calculator, day finder, days between dates, calendar tool, date planning" name="keywords"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Make QR Calculators" name="author"/>
+  <!-- Open Graph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="https://make-qr.github.io/calculators/calendar-calculator.html" property="og:url"/>
+  <meta content="Calendar Calculator - Date Calculator &amp; Day Finder" property="og:title"/>
+  <meta content="Free calendar calculator to find dates, calculate days between dates, and view interactive calendar for planning." property="og:description"/>
+  <meta content="https://make-qr.github.io/calculators/calendar-calculator-preview.jpg" property="og:image"/>
+  <meta content="Make QR Calculators" property="og:site_name"/>
+  <!-- Twitter -->
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://make-qr.github.io/calculators/calendar-calculator.html" property="twitter:url"/>
+  <meta content="Calendar Calculator - Date Calculator &amp; Day Finder" property="twitter:title"/>
+  <meta content="Free calendar calculator for date calculations and planning." property="twitter:description"/>
+  <meta content="https://make-qr.github.io/calculators/calendar-calculator-preview.jpg" property="twitter:image"/>
+  <!-- Canonical URL -->
+  <link href="https://make-qr.github.io/calculators/calendar-calculator.html" rel="canonical"/>
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Calendar Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "All",
+      "description": "Calendar calculator for date calculations, day finding, and calendar viewing",
+      "featureList": ["Date Calculator", "Day Finder", "Calendar View", "Days Between Dates", "Date Planning"],
+      "url": "https://make-qr.github.io/calculators/calendar-calculator.html"
+    }
+  </script>
+  <style>
+   .calendar-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .month-nav {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .month-nav:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .month-year {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendar-table th,
+        .calendar-table td {
+            width: 14.28%;
+            height: 40px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #e9ecef;
+        }
+
+        .calendar-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .calendar-table td {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-table td:hover {
+            background: #e7f3ff;
+        }
+
+        .calendar-table td.today {
+            background: #007bff;
+            color: white;
+            font-weight: 700;
+        }
+
+        .calendar-table td.selected {
+            background: #28a745;
+            color: white;
+            font-weight: 700;
+        }
+
+        .calendar-table td.other-month {
+            color: #6c757d;
+            opacity: 0.5;
+        }
+
+        .date-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .date-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        .detail-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .day-finder-section {
+            background: #e7f3ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-dates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-date-btn {
+            padding: 1rem;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .quick-date-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .add-days-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .add-days-input {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .date-input-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                text-align: center;
+            }
+            
+            .add-days-input {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+<section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Calendar Calculator - Date Calculator &amp; Day Finder</span>
+            </nav>
+            <h1>Calendar Calculator - Date Calculator &amp; Day Finder</h1>
+            <p>Free online calendar calculator - date calculator &amp; day finder with instant, accurate results.</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="calculator-header">
+      <h2>
+       Calendar Calculator - Date Calculator &amp; Day Finder
+      </h2>
+      <p>
+       Calculate days between dates, find day of the week, add/subtract days, and view interactive calendar. Perfect for planning and scheduling.
+      </p>
+     </div>
+     <div class="calendar-calculator">
+      <div class="calculator-tabs">
+       <button class="tab-btn active" onclick="switchTab('calendar')">
+        Calendar View
+       </button>
+       <button class="tab-btn" onclick="switchTab('daysBetween')">
+        Days Between
+       </button>
+       <button class="tab-btn" onclick="switchTab('dayFinder')">
+        Day Finder
+       </button>
+       <button class="tab-btn" onclick="switchTab('addDays')">
+        Add/Subtract Days
+       </button>
+      </div>
+      <!-- Calendar View Tab -->
+      <div class="tab-content active" id="calendar">
+       <div class="calendar-grid">
+        <div class="calendar-section">
+         <div class="calendar-header">
+          <button class="month-nav" onclick="changeMonth(-1)">
+           <i class="fas fa-chevron-left">
+           </i>
+          </button>
+          <div class="month-year" id="currentMonth">
+           December 2024
+          </div>
+          <button class="month-nav" onclick="changeMonth(1)">
+           <i class="fas fa-chevron-right">
+           </i>
+          </button>
+         </div>
+         <table class="calendar-table" id="calendarTable">
+          <thead>
+           <tr>
+            <th>
+             Sun
+            </th>
+            <th>
+             Mon
+            </th>
+            <th>
+             Tue
+            </th>
+            <th>
+             Wed
+            </th>
+            <th>
+             Thu
+            </th>
+            <th>
+             Fri
+            </th>
+            <th>
+             Sat
+            </th>
+           </tr>
+          </thead>
+          <tbody id="calendarBody">
+           <!-- Calendar days will be populated by JavaScript -->
+          </tbody>
+         </table>
+        </div>
+        <div class="calendar-section">
+         <h3>
+          <i class="fas fa-info-circle">
+          </i>
+          Date Information
+         </h3>
+         <div id="dateInfo">
+          <p>
+           Click on a date to see detailed information
+          </p>
+         </div>
+         <div class="quick-dates">
+          <button class="quick-date-btn" onclick="goToToday()">
+           <i class="fas fa-calendar-day">
+           </i>
+           Today
+          </button>
+          <button class="quick-date-btn" onclick="goToDate('2025-01-01')">
+           <i class="fas fa-calendar-alt">
+           </i>
+           New Year 2025
+          </button>
+          <button class="quick-date-btn" onclick="goToDate('2024-12-25')">
+           <i class="fas fa-gifts">
+           </i>
+           Christmas 2024
+          </button>
+          <button class="quick-date-btn" onclick="goToDate('2025-02-14')">
+           <i class="fas fa-heart">
+           </i>
+           Valentine's Day
+          </button>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Days Between Tab -->
+      <div class="tab-content" id="daysBetween">
+       <div class="date-input-group">
+        <div class="input-section">
+         <label class="input-label" for="startDate">
+          Start Date
+         </label>
+         <input class="date-input" id="startDate" type="date"/>
+        </div>
+        <div class="input-section">
+         <label class="input-label" for="endDate">
+          End Date
+         </label>
+         <input class="date-input" id="endDate" type="date"/>
+        </div>
+       </div>
+       <button class="calculate-btn" onclick="calculateDaysBetween()">
+        <i class="fas fa-calculator">
+        </i>
+        Calculate Days Between
+       </button>
+       <div class="result-section" id="daysBetweenResult" style="display: none;">
+        <div class="result-title">
+         Days Between Dates
+        </div>
+        <div class="result-value" id="totalDays">
+         0 days
+        </div>
+        <div class="result-details">
+         <div class="detail-card">
+          <div class="detail-value" id="totalWeeks">
+           0
+          </div>
+          <div class="detail-label">
+           Weeks
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="totalMonths">
+           0
+          </div>
+          <div class="detail-label">
+           Months
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="totalYears">
+           0
+          </div>
+          <div class="detail-label">
+           Years
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="workingDays">
+           0
+          </div>
+          <div class="detail-label">
+           Working Days
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Day Finder Tab -->
+      <div class="tab-content" id="dayFinder">
+       <div class="day-finder-section">
+        <h3>
+         <i class="fas fa-search">
+         </i>
+         Find Day of the Week
+        </h3>
+        <div class="date-input-group">
+         <div class="input-section">
+          <label class="input-label" for="findDate">
+           Select Date
+          </label>
+          <input class="date-input" id="findDate" type="date"/>
+         </div>
+         <div class="input-section">
+          <button class="calculate-btn" onclick="findDayOfWeek()">
+           <i class="fas fa-search">
+           </i>
+           Find Day
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="result-section" id="dayFinderResult" style="display: none;">
+        <div class="result-title">
+         Day of the Week
+        </div>
+        <div class="result-value" id="dayOfWeek">
+         Monday
+        </div>
+        <div class="result-details">
+         <div class="detail-card">
+          <div class="detail-value" id="dayNumber">
+           1
+          </div>
+          <div class="detail-label">
+           Day of Year
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="weekNumber">
+           1
+          </div>
+          <div class="detail-label">
+           Week Number
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="quarter">
+           Q1
+          </div>
+          <div class="detail-label">
+           Quarter
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="isLeapYear">
+           No
+          </div>
+          <div class="detail-label">
+           Leap Year
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Add/Subtract Days Tab -->
+      <div class="tab-content" id="addDays">
+       <div class="add-days-section">
+        <h3>
+         <i class="fas fa-plus-minus">
+         </i>
+         Add or Subtract Days
+        </h3>
+        <div class="add-days-input">
+         <div>
+          <label class="input-label" for="baseDate">
+           Base Date
+          </label>
+          <input class="date-input" id="baseDate" type="date"/>
+         </div>
+         <div>
+          <label class="input-label" for="daysToAdd">
+           Days to Add/Subtract
+          </label>
+          <input class="date-input" id="daysToAdd" placeholder="Enter days" type="number"/>
+         </div>
+         <div>
+          <button class="calculate-btn" onclick="addSubtractDays()">
+           <i class="fas fa-calculator">
+           </i>
+           Calculate
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="result-section" id="addDaysResult" style="display: none;">
+        <div class="result-title">
+         Calculated Date
+        </div>
+        <div class="result-value" id="calculatedDate">
+         January 1, 2025
+        </div>
+        <div class="result-details">
+         <div class="detail-card">
+          <div class="detail-value" id="calculatedDay">
+           Monday
+          </div>
+          <div class="detail-label">
+           Day of Week
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="calculatedWeek">
+           1
+          </div>
+          <div class="detail-label">
+           Week Number
+          </div>
+         </div>
+         <div class="detail-card">
+          <div class="detail-value" id="daysFromToday">
+           0
+          </div>
+          <div class="detail-label">
+           Days from Today
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- How to Use Section -->
+     <section class="how-to-section">
+      <div class="container">
+       <h2>
+        How to Use the Calendar Calculator
+       </h2>
+       <div class="how-to-grid">
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calendar">
+          </i>
+          Calendar View
+         </h3>
+         <p>
+          Navigate through months and years, click on dates for detailed information, and use quick date buttons for common dates.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-calculator">
+          </i>
+          Days Between
+         </h3>
+         <p>
+          Calculate the exact number of days, weeks, months, and years between any two dates, including working days.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-search">
+          </i>
+          Day Finder
+         </h3>
+         <p>
+          Find what day of the week any date falls on, plus additional information like week number and quarter.
+         </p>
+        </div>
+        <div class="how-to-card">
+         <h3>
+          <i class="fas fa-plus-minus">
+          </i>
+          Add/Subtract Days
+         </h3>
+         <p>
+          Add or subtract any number of days from a base date to find future or past dates with detailed information.
+         </p>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Related Tools -->
+     <section class="related-calculators">
+      <div class="container">
+       <h2>
+        Related Time &amp; Date Tools
+       </h2>
+       <div class="related-grid">
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-calendar-week">
+          </i>
+         </div>
+         <h3>
+          Week Number Calculator
+         </h3>
+         <p>
+          Find week numbers and calculate weeks between dates
+         </p>
+         <a class="btn-link" href="week-number-calculator.html" title="Week Number Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-clock">
+          </i>
+         </div>
+         <h3>
+          Time Calculator
+         </h3>
+         <p>
+          Add, subtract, and calculate time durations
+         </p>
+         <a class="btn-link" href="time-calculator.html" title="Time Calculator">
+          Use Calculator
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-globe">
+          </i>
+         </div>
+         <h3>
+          World Clock
+         </h3>
+         <p>
+          Current time in different time zones worldwide
+         </p>
+         <a class="btn-link" href="world-clock.html" title="World Clock">
+          View Clock
+         </a>
+        </div>
+        <div class="related-card">
+         <div class="related-icon">
+          <i class="fas fa-stopwatch">
+          </i>
+         </div>
+         <h3>
+          Timer Calculator
+         </h3>
+         <p>
+          Countdown timer, stopwatch, and multiple timers
+         </p>
+         <a class="btn-link" href="timer-calculator.html" title="Timer Calculator">
+          Use Timer
+         </a>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="age-calculator.html"><i class="fas fa-arrow-right"></i> Age Calculator</a>
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentDate = new Date();
+        let selectedDate = null;
+
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function generateCalendar(year, month) {
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
+            
+            const calendarBody = document.getElementById('calendarBody');
+            calendarBody.innerHTML = '';
+            
+            const today = new Date();
+            
+            for (let week = 0; week < 6; week++) {
+                const row = document.createElement('tr');
+                
+                for (let day = 0; day < 7; day++) {
+                    const cellDate = new Date(startDate);
+                    cellDate.setDate(startDate.getDate() + (week * 7) + day);
+                    
+                    const cell = document.createElement('td');
+                    cell.textContent = cellDate.getDate();
+                    cell.onclick = () => selectDate(cellDate);
+                    
+                    if (cellDate.getMonth() !== month) {
+                        cell.classList.add('other-month');
+                    }
+                    
+                    if (cellDate.toDateString() === today.toDateString()) {
+                        cell.classList.add('today');
+                    }
+                    
+                    if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
+                        cell.classList.add('selected');
+                    }
+                    
+                    row.appendChild(cell);
+                }
+                
+                calendarBody.appendChild(row);
+            }
+            
+            document.getElementById('currentMonth').textContent = 
+                firstDay.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        }
+
+        function changeMonth(direction) {
+            currentDate.setMonth(currentDate.getMonth() + direction);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        }
+
+        function selectDate(date) {
+            selectedDate = new Date(date);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            showDateInfo(date);
+        }
+
+        function showDateInfo(date) {
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                              'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const dayOfWeek = dayNames[date.getDay()];
+            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const weekNumber = getWeekNumber(date);
+            const quarter = Math.ceil((date.getMonth() + 1) / 3);
+            const isLeapYear = (date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) || (date.getFullYear() % 400 === 0);
+            
+            const dateInfo = document.getElementById('dateInfo');
+            dateInfo.innerHTML = `
+                <h4>${dayOfWeek}, ${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}</h4>
+                <div class="result-details">
+                    <div class="detail-card">
+                        <div class="detail-value">${dayOfYear}</div>
+                        <div class="detail-label">Day of Year</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-value">${weekNumber}</div>
+                        <div class="detail-label">Week Number</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-value">Q${quarter}</div>
+                        <div class="detail-label">Quarter</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-value">${isLeapYear ? 'Yes' : 'No'}</div>
+                        <div class="detail-label">Leap Year</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function goToToday() {
+            const today = new Date();
+            currentDate = new Date(today);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            selectDate(today);
+        }
+
+        function goToDate(dateString) {
+            const date = new Date(dateString);
+            currentDate = new Date(date);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            selectDate(date);
+        }
+
+        function calculateDaysBetween() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates');
+                return;
+            }
+            
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            
+            const weeks = Math.floor(daysDiff / 7);
+            const months = Math.floor(daysDiff / 30.44); // Average days per month
+            const years = Math.floor(daysDiff / 365.25); // Account for leap years
+            
+            // Calculate working days (excluding weekends)
+            let workingDays = 0;
+            const currentDate = new Date(startDate);
+            while (currentDate <= endDate) {
+                const dayOfWeek = currentDate.getDay();
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Not Sunday or Saturday
+                    workingDays++;
+                }
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            
+            document.getElementById('totalDays').textContent = `${daysDiff} days`;
+            document.getElementById('totalWeeks').textContent = weeks;
+            document.getElementById('totalMonths').textContent = months;
+            document.getElementById('totalYears').textContent = years;
+            document.getElementById('workingDays').textContent = workingDays;
+            
+            document.getElementById('daysBetweenResult').style.display = 'block';
+        }
+
+        function findDayOfWeek() {
+            const date = new Date(document.getElementById('findDate').value);
+            
+            if (!date || isNaN(date)) {
+                alert('Please select a valid date');
+                return;
+            }
+            
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayOfWeek = dayNames[date.getDay()];
+            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const weekNumber = getWeekNumber(date);
+            const quarter = Math.ceil((date.getMonth() + 1) / 3);
+            const isLeapYear = (date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) || (date.getFullYear() % 400 === 0);
+            
+            document.getElementById('dayOfWeek').textContent = dayOfWeek;
+            document.getElementById('dayNumber').textContent = dayOfYear;
+            document.getElementById('weekNumber').textContent = weekNumber;
+            document.getElementById('quarter').textContent = `Q${quarter}`;
+            document.getElementById('isLeapYear').textContent = isLeapYear ? 'Yes' : 'No';
+            
+            document.getElementById('dayFinderResult').style.display = 'block';
+        }
+
+        function addSubtractDays() {
+            const baseDate = new Date(document.getElementById('baseDate').value);
+            const daysToAdd = parseInt(document.getElementById('daysToAdd').value);
+            
+            if (!baseDate || isNaN(baseDate) || isNaN(daysToAdd)) {
+                alert('Please enter a valid date and number of days');
+                return;
+            }
+            
+            const calculatedDate = new Date(baseDate);
+            calculatedDate.setDate(calculatedDate.getDate() + daysToAdd);
+            
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                              'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const formattedDate = `${monthNames[calculatedDate.getMonth()]} ${calculatedDate.getDate()}, ${calculatedDate.getFullYear()}`;
+            const dayOfWeek = dayNames[calculatedDate.getDay()];
+            const weekNumber = getWeekNumber(calculatedDate);
+            
+            const today = new Date();
+            const daysFromToday = Math.floor((calculatedDate - today) / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('calculatedDate').textContent = formattedDate;
+            document.getElementById('calculatedDay').textContent = dayOfWeek;
+            document.getElementById('calculatedWeek').textContent = weekNumber;
+            document.getElementById('daysFromToday').textContent = daysFromToday;
+            
+            document.getElementById('addDaysResult').style.display = 'block';
+        }
+
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        // Initialize calendar
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            
+            // Set today's date as default for inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            document.getElementById('endDate').value = today;
+            document.getElementById('findDate').value = today;
+            document.getElementById('baseDate').value = today;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/age-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Age Calculator - Calculate Your Exact Age | Make QR Calculators
+  </title>
+  <meta content="Calculate your exact age in years, months, days, hours, minutes and seconds. Find out how old you are with our precise age calculator." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .age-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .date-inputs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result-section {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .age-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .main-age {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .age-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .age-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .age-number {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .age-label {
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .next-birthday {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .birthday-info {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .days-until {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #28a745;
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Age Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online age calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Age Calculator", "item": "https://make-qr.github.io/calculators/age-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--time">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link active" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#time">Time & Date</a>
+                <span class="sep">/</span>
+                <span class="current">Age Calculator</span>
+            </nav>
+            <h1>Age Calculator</h1>
+            <p>Calculate your exact age in years, months, days and more</p>
+        </div>
+    </section>
+   <section class="calculator-section">
+    <div class="container">
+     <div class="age-calculator">
+      <form id="ageForm">
+       <h3 style="margin-bottom: 1.5rem; text-align: center;">
+        Enter Your Birth Date
+       </h3>
+       <div class="date-inputs">
+        <div class="input-group">
+         <label for="birthMonth">
+          Month
+         </label>
+         <select id="birthMonth" required="">
+          <option value="">
+           Select Month
+          </option>
+          <option value="1">
+           January
+          </option>
+          <option value="2">
+           February
+          </option>
+          <option value="3">
+           March
+          </option>
+          <option value="4">
+           April
+          </option>
+          <option value="5">
+           May
+          </option>
+          <option value="6">
+           June
+          </option>
+          <option value="7">
+           July
+          </option>
+          <option value="8">
+           August
+          </option>
+          <option value="9">
+           September
+          </option>
+          <option value="10">
+           October
+          </option>
+          <option value="11">
+           November
+          </option>
+          <option value="12">
+           December
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="birthDay">
+          Day
+         </label>
+         <input id="birthDay" max="31" min="1" placeholder="Day" required="" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="birthYear">
+          Year
+         </label>
+         <input id="birthYear" max="2024" min="1900" placeholder="Year" required="" type="number"/>
+        </div>
+       </div>
+       <h3 style="margin-top: 2rem; margin-bottom: 1rem; text-align: center;">
+        Calculate Age At Specific Date (Optional)
+       </h3>
+       <div class="date-inputs">
+        <div class="input-group">
+         <label for="targetMonth">
+          Month
+         </label>
+         <select id="targetMonth">
+          <option value="">
+           Current Date
+          </option>
+          <option value="1">
+           January
+          </option>
+          <option value="2">
+           February
+          </option>
+          <option value="3">
+           March
+          </option>
+          <option value="4">
+           April
+          </option>
+          <option value="5">
+           May
+          </option>
+          <option value="6">
+           June
+          </option>
+          <option value="7">
+           July
+          </option>
+          <option value="8">
+           August
+          </option>
+          <option value="9">
+           September
+          </option>
+          <option value="10">
+           October
+          </option>
+          <option value="11">
+           November
+          </option>
+          <option value="12">
+           December
+          </option>
+         </select>
+        </div>
+        <div class="input-group">
+         <label for="targetDay">
+          Day
+         </label>
+         <input id="targetDay" max="31" min="1" placeholder="Day" type="number"/>
+        </div>
+        <div class="input-group">
+         <label for="targetYear">
+          Year
+         </label>
+         <input id="targetYear" max="2100" min="1900" placeholder="Year" type="number"/>
+        </div>
+       </div>
+       <button class="calculate-btn" type="submit">
+        Calculate Age
+       </button>
+      </form>
+      <div class="result-section" id="resultSection">
+       <div class="age-display">
+        <div class="main-age" id="mainAge">
+         0 Years Old
+        </div>
+        <div>
+         Your Current Age
+        </div>
+       </div>
+       <div class="age-breakdown">
+        <div class="age-item">
+         <div class="age-number" id="totalDays">
+          0
+         </div>
+         <div class="age-label">
+          Days Old
+         </div>
+        </div>
+        <div class="age-item">
+         <div class="age-number" id="totalHours">
+          0
+         </div>
+         <div class="age-label">
+          Hours Old
+         </div>
+        </div>
+        <div class="age-item">
+         <div class="age-number" id="totalMinutes">
+          0
+         </div>
+         <div class="age-label">
+          Minutes Old
+         </div>
+        </div>
+        <div class="age-item">
+         <div class="age-number" id="totalMonths">
+          0
+         </div>
+         <div class="age-label">
+          Months Old
+         </div>
+        </div>
+       </div>
+       <div class="next-birthday">
+        <div class="birthday-info">
+         Next Birthday
+        </div>
+        <div class="days-until" id="daysUntilBirthday">
+         0 days
+        </div>
+        <div id="nextBirthdayDate">
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="date-calculator.html"><i class="fas fa-arrow-right"></i> Date Calculator</a>
+                <a class="related-link" href="time-calculator.html"><i class="fas fa-arrow-right"></i> Time Calculator</a>
+                <a class="related-link" href="timer-calculator.html"><i class="fas fa-arrow-right"></i> Timer</a>
+                <a class="related-link" href="world-clock.html"><i class="fas fa-arrow-right"></i> World Clock</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+<script>
+   document.getElementById('ageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const birthMonth = parseInt(document.getElementById('birthMonth').value);
+            const birthDay = parseInt(document.getElementById('birthDay').value);
+            const birthYear = parseInt(document.getElementById('birthYear').value);
+            
+            if (birthMonth && birthDay && birthYear) {
+                calculateAge(birthMonth, birthDay, birthYear);
+            }
+        });
+
+        function calculateAge(birthMonth, birthDay, birthYear) {
+            const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+            
+            // Check if target date is specified
+            const targetMonth = document.getElementById('targetMonth').value;
+            const targetDay = document.getElementById('targetDay').value;
+            const targetYear = document.getElementById('targetYear').value;
+            
+            let targetDate;
+            if (targetMonth && targetDay && targetYear) {
+                targetDate = new Date(parseInt(targetYear), parseInt(targetMonth) - 1, parseInt(targetDay));
+            } else {
+                targetDate = new Date();
+            }
+            
+            // Calculate age in years, months, days
+            let ageYears = targetDate.getFullYear() - birthDate.getFullYear();
+            let ageMonths = targetDate.getMonth() - birthDate.getMonth();
+            let ageDays = targetDate.getDate() - birthDate.getDate();
+            
+            if (ageDays < 0) {
+                ageMonths--;
+                const lastMonth = new Date(targetDate.getFullYear(), targetDate.getMonth(), 0);
+                ageDays += lastMonth.getDate();
+            }
+            
+            if (ageMonths < 0) {
+                ageYears--;
+                ageMonths += 12;
+            }
+            
+            // Calculate total days, hours, minutes
+            const timeDiff = targetDate.getTime() - birthDate.getTime();
+            const totalDays = Math.floor(Math.abs(timeDiff) / (1000 * 60 * 60 * 24));
+            const totalHours = Math.floor(Math.abs(timeDiff) / (1000 * 60 * 60));
+            const totalMinutes = Math.floor(Math.abs(timeDiff) / (1000 * 60));
+            const totalMonths = Math.abs(ageYears * 12 + ageMonths);
+            
+            // Calculate next birthday from target date
+            let nextBirthday = new Date(targetDate.getFullYear(), birthMonth - 1, birthDay);
+            if (nextBirthday < targetDate) {
+                nextBirthday.setFullYear(targetDate.getFullYear() + 1);
+            }
+            
+            const daysUntilBirthday = Math.ceil((nextBirthday - targetDate) / (1000 * 60 * 60 * 24));
+            
+            // Check if calculating for past, present, or future
+            const timeContext = timeDiff < 0 ? 'future' : 'past';
+            
+            displayAgeResults({
+                ageYears: Math.abs(ageYears),
+                ageMonths,
+                ageDays,
+                totalDays,
+                totalHours,
+                totalMinutes,
+                totalMonths,
+                daysUntilBirthday,
+                nextBirthday,
+                timeContext,
+                targetDate
+            });
+        }
+
+        function displayAgeResults(age) {
+            const ageText = age.ageYears === 1 ? 'Year' : 'Years';
+            const isCurrentDate = !age.targetDate || Math.abs(age.targetDate.getTime() - new Date().getTime()) < 86400000; // within 1 day
+            
+            let ageTitle;
+            if (isCurrentDate) {
+                ageTitle = `${age.ageYears} ${ageText} Old`;
+            } else if (age.timeContext === 'future') {
+                ageTitle = `Will be ${age.ageYears} ${ageText} Old`;
+            } else {
+                const targetFormatted = age.targetDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                ageTitle = `Was ${age.ageYears} ${ageText} Old on ${targetFormatted}`;
+            }
+            
+            document.getElementById('mainAge').textContent = ageTitle;
+            
+            document.getElementById('totalDays').textContent = age.totalDays.toLocaleString();
+            document.getElementById('totalHours').textContent = age.totalHours.toLocaleString();
+            document.getElementById('totalMinutes').textContent = age.totalMinutes.toLocaleString();
+            document.getElementById('totalMonths').textContent = age.totalMonths.toLocaleString();
+            
+            if (isCurrentDate) {
+                document.getElementById('daysUntilBirthday').textContent = `${age.daysUntilBirthday} days`;
+                
+                const nextBirthdayFormatted = age.nextBirthday.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                document.getElementById('nextBirthdayDate').textContent = nextBirthdayFormatted;
+            } else {
+                document.getElementById('daysUntilBirthday').textContent = `${age.daysUntilBirthday} days`;
+                document.getElementById('nextBirthdayDate').textContent = `Next birthday from that date`;
+            }
+            
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

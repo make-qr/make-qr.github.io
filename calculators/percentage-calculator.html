@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/percentage-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Percentage Calculator - Calculate Percentages | Make QR Calculators
+  </title>
+  <meta content="Free percentage calculator for all types of percentage calculations including increase, decrease, and percentage of a number." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .percentage-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .calculator-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-card.active {
+            background: linear-gradient(135deg, #17a2b8, #20c997);
+            color: white;
+            border-color: #17a2b8;
+        }
+
+        .tab-card i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #17a2b8;
+        }
+
+        .tab-card.active i {
+            color: white;
+        }
+
+        .tab-card h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .calculator-content {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #17a2b8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, #17a2b8, #20c997);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .calculation-steps {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .step {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            font-family: 'Courier New', monospace;
+        }
+
+        .step:last-child {
+            border-bottom: none;
+        }
+
+        .examples-section {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .examples-section h4 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .example-question {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-answer {
+            color: #17a2b8;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-tabs {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Percentage Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online percentage calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Percentage Calculator", "item": "https://make-qr.github.io/calculators/percentage-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--math">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link active" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#math">Math</a>
+                <span class="sep">/</span>
+                <span class="current">Percentage Calculator</span>
+            </nav>
+            <h1>Percentage Calculator</h1>
+            <p>Calculate percentages, increases, decreases, and more</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="percentage-calculator">
+      <div class="calculator-tabs">
+       <div class="tab-card active" onclick="switchCalculator('basic')">
+        <i class="fas fa-percentage">
+        </i>
+        <h4>
+         Basic Percentage
+        </h4>
+       </div>
+       <div class="tab-card" onclick="switchCalculator('increase')">
+        <i class="fas fa-arrow-up">
+        </i>
+        <h4>
+         Percentage Increase
+        </h4>
+       </div>
+       <div class="tab-card" onclick="switchCalculator('decrease')">
+        <i class="fas fa-arrow-down">
+        </i>
+        <h4>
+         Percentage Decrease
+        </h4>
+       </div>
+       <div class="tab-card" onclick="switchCalculator('change')">
+        <i class="fas fa-exchange-alt">
+        </i>
+        <h4>
+         Percentage Change
+        </h4>
+       </div>
+      </div>
+      <div class="calculator-content">
+       <!-- Basic Percentage Calculator -->
+       <div class="calculator-type" id="basicCalculator">
+        <h3>
+         What is X% of Y?
+        </h3>
+        <div class="input-grid">
+         <div class="input-group">
+          <label for="basicPercent">
+           Percentage (%)
+          </label>
+          <input id="basicPercent" placeholder="Enter percentage" step="0.01" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="basicNumber">
+           Number
+          </label>
+          <input id="basicNumber" placeholder="Enter number" step="0.01" type="number"/>
+         </div>
+        </div>
+       </div>
+       <!-- Percentage Increase Calculator -->
+       <div class="calculator-type" id="increaseCalculator" style="display: none;">
+        <h3>
+         Calculate Percentage Increase
+        </h3>
+        <div class="input-grid">
+         <div class="input-group">
+          <label for="increaseOriginal">
+           Original Value
+          </label>
+          <input id="increaseOriginal" placeholder="Enter original value" step="0.01" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="increaseNew">
+           New Value
+          </label>
+          <input id="increaseNew" placeholder="Enter new value" step="0.01" type="number"/>
+         </div>
+        </div>
+       </div>
+       <!-- Percentage Decrease Calculator -->
+       <div class="calculator-type" id="decreaseCalculator" style="display: none;">
+        <h3>
+         Calculate Percentage Decrease
+        </h3>
+        <div class="input-grid">
+         <div class="input-group">
+          <label for="decreaseOriginal">
+           Original Value
+          </label>
+          <input id="decreaseOriginal" placeholder="Enter original value" step="0.01" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="decreaseNew">
+           New Value
+          </label>
+          <input id="decreaseNew" placeholder="Enter new value" step="0.01" type="number"/>
+         </div>
+        </div>
+       </div>
+       <!-- Percentage Change Calculator -->
+       <div class="calculator-type" id="changeCalculator" style="display: none;">
+        <h3>
+         Calculate Percentage Change
+        </h3>
+        <div class="input-grid">
+         <div class="input-group">
+          <label for="changeOriginal">
+           Original Value
+          </label>
+          <input id="changeOriginal" placeholder="Enter original value" step="0.01" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="changeNew">
+           New Value
+          </label>
+          <input id="changeNew" placeholder="Enter new value" step="0.01" type="number"/>
+         </div>
+        </div>
+       </div>
+       <div class="result-display">
+        <div class="result-value" id="resultValue">
+         0
+        </div>
+        <div class="result-label" id="resultLabel">
+         Enter values to calculate
+        </div>
+       </div>
+      </div>
+      <div class="calculation-steps" id="calculationSteps" style="display: none;">
+       <h3>
+        Calculation Steps
+       </h3>
+       <div id="stepsContent">
+       </div>
+      </div>
+      <div class="examples-section">
+       <h4>
+        <i class="fas fa-lightbulb">
+        </i>
+        Common Percentage Examples
+       </h4>
+       <div class="example-grid">
+        <div class="example-card">
+         <div class="example-question">
+          What is 15% of 200?
+         </div>
+         <div class="example-answer">
+          Answer: 30
+         </div>
+        </div>
+        <div class="example-card">
+         <div class="example-question">
+          25% increase from 80
+         </div>
+         <div class="example-answer">
+          Answer: 100 (25% increase)
+         </div>
+        </div>
+        <div class="example-card">
+         <div class="example-question">
+          20% discount on $50
+         </div>
+         <div class="example-answer">
+          Answer: $40 (20% decrease)
+         </div>
+        </div>
+        <div class="example-card">
+         <div class="example-question">
+          Change from 120 to 150
+         </div>
+         <div class="example-answer">
+          Answer: 25% increase
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="scientific-calculator.html"><i class="fas fa-arrow-right"></i> Scientific Calculator</a>
+                <a class="related-link" href="fraction-calculator.html"><i class="fas fa-arrow-right"></i> Fraction Calculator</a>
+                <a class="related-link" href="standard-deviation-calculator.html"><i class="fas fa-arrow-right"></i> Standard Deviation</a>
+                <a class="related-link" href="average-calculator.html"><i class="fas fa-arrow-right"></i> Average Calculator</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   let currentCalculator = 'basic';
+
+        function switchCalculator(type) {
+            currentCalculator = type;
+            
+            // Update tab appearance
+            document.querySelectorAll('.tab-card').forEach(card => card.classList.remove('active'));
+            event.target.closest('.tab-card').classList.add('active');
+            
+            // Hide all calculators
+            document.querySelectorAll('.calculator-type').forEach(calc => calc.style.display = 'none');
+            
+            // Show selected calculator
+            document.getElementById(type + 'Calculator').style.display = 'block';
+            
+            // Reset result
+            document.getElementById('resultValue').textContent = '0';
+            document.getElementById('resultLabel').textContent = 'Enter values to calculate';
+            document.getElementById('calculationSteps').style.display = 'none';
+            
+            // Calculate if values exist
+            calculate();
+        }
+
+        function calculate() {
+            let result = 0;
+            let label = '';
+            let steps = [];
+
+            switch (currentCalculator) {
+                case 'basic':
+                    result = calculateBasic();
+                    break;
+                case 'increase':
+                    result = calculateIncrease();
+                    break;
+                case 'decrease':
+                    result = calculateDecrease();
+                    break;
+                case 'change':
+                    result = calculateChange();
+                    break;
+            }
+
+            if (result !== null) {
+                updateResult(result.value, result.label, result.steps);
+            }
+        }
+
+        function calculateBasic() {
+            const percent = parseFloat(document.getElementById('basicPercent').value);
+            const number = parseFloat(document.getElementById('basicNumber').value);
+
+            if (isNaN(percent) || isNaN(number)) return null;
+
+            const result = (percent / 100) * number;
+            const steps = [
+                `Formula: (${percent} ÷ 100) × ${number}`,
+                `Step 1: ${percent} ÷ 100 = ${(percent / 100).toFixed(4)}`,
+                `Step 2: ${(percent / 100).toFixed(4)} × ${number} = ${result.toFixed(2)}`
+            ];
+
+            return {
+                value: result.toFixed(2),
+                label: `${percent}% of ${number}`,
+                steps: steps
+            };
+        }
+
+        function calculateIncrease() {
+            const original = parseFloat(document.getElementById('increaseOriginal').value);
+            const newValue = parseFloat(document.getElementById('increaseNew').value);
+
+            if (isNaN(original) || isNaN(newValue) || original === 0) return null;
+
+            const increase = newValue - original;
+            const percentage = (increase / original) * 100;
+            
+            const steps = [
+                `Formula: ((New Value - Original Value) ÷ Original Value) × 100`,
+                `Step 1: ${newValue} - ${original} = ${increase}`,
+                `Step 2: ${increase} ÷ ${original} = ${(increase / original).toFixed(4)}`,
+                `Step 3: ${(increase / original).toFixed(4)} × 100 = ${percentage.toFixed(2)}%`
+            ];
+
+            return {
+                value: percentage.toFixed(2) + '%',
+                label: `Increase from ${original} to ${newValue}`,
+                steps: steps
+            };
+        }
+
+        function calculateDecrease() {
+            const original = parseFloat(document.getElementById('decreaseOriginal').value);
+            const newValue = parseFloat(document.getElementById('decreaseNew').value);
+
+            if (isNaN(original) || isNaN(newValue) || original === 0) return null;
+
+            const decrease = original - newValue;
+            const percentage = (decrease / original) * 100;
+            
+            const steps = [
+                `Formula: ((Original Value - New Value) ÷ Original Value) × 100`,
+                `Step 1: ${original} - ${newValue} = ${decrease}`,
+                `Step 2: ${decrease} ÷ ${original} = ${(decrease / original).toFixed(4)}`,
+                `Step 3: ${(decrease / original).toFixed(4)} × 100 = ${percentage.toFixed(2)}%`
+            ];
+
+            return {
+                value: percentage.toFixed(2) + '%',
+                label: `Decrease from ${original} to ${newValue}`,
+                steps: steps
+            };
+        }
+
+        function calculateChange() {
+            const original = parseFloat(document.getElementById('changeOriginal').value);
+            const newValue = parseFloat(document.getElementById('changeNew').value);
+
+            if (isNaN(original) || isNaN(newValue) || original === 0) return null;
+
+            const change = newValue - original;
+            const percentage = (change / original) * 100;
+            const isIncrease = change >= 0;
+            
+            const steps = [
+                `Formula: ((New Value - Original Value) ÷ Original Value) × 100`,
+                `Step 1: ${newValue} - ${original} = ${change}`,
+                `Step 2: ${change} ÷ ${original} = ${(change / original).toFixed(4)}`,
+                `Step 3: ${(change / original).toFixed(4)} × 100 = ${percentage.toFixed(2)}%`
+            ];
+
+            return {
+                value: Math.abs(percentage).toFixed(2) + '%',
+                label: `${isIncrease ? 'Increase' : 'Decrease'} from ${original} to ${newValue}`,
+                steps: steps
+            };
+        }
+
+        function updateResult(value, label, steps) {
+            document.getElementById('resultValue').textContent = value;
+            document.getElementById('resultLabel').textContent = label;
+            
+            if (steps && steps.length > 0) {
+                const stepsContent = document.getElementById('stepsContent');
+                stepsContent.innerHTML = steps.map(step => `<div class="step">${step}</div>`).join('');
+                document.getElementById('calculationSteps').style.display = 'block';
+            }
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = [
+                'basicPercent', 'basicNumber',
+                'increaseOriginal', 'increaseNew',
+                'decreaseOriginal', 'decreaseNew',
+                'changeOriginal', 'changeNew'
+            ];
+            
+            inputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculate);
+                }
+            });
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>

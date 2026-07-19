@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8"/>
+  <meta content="index, follow" name="robots"/>
+  <link href="https://make-qr.github.io/calculators/payment-calculator.html" rel="canonical"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Payment Calculator - Calculate Loan &amp; Mortgage Payments | Make QR Calculators
+  </title>
+  <meta content="Calculate monthly payments for loans, mortgages, auto loans, and credit cards. Compare different payment scenarios and terms." name="description"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .payment-calculator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .tab-container {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 120px;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-panel label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .result-panel .currency-symbol {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .currency-input input {
+            padding-left: 2.5rem;
+        }
+
+        .result-field {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .payment-breakdown {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .comparison-section {
+            background: #fff3cd;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .comparison-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .comparison-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .comparison-payment {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-chart {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .tips-section {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+        }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Payment Calculator", "applicationCategory": "CalculatorApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "operatingSystem": "All", "description": "Free online payment calculator with step-by-step calculations and detailed results."}
+  </script>
+  <script type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://make-qr.github.io/calculators/"}, {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://make-qr.github.io/calculators/#calculators"}, {"@type": "ListItem", "position": 3, "name": "Payment Calculator", "item": "https://make-qr.github.io/calculators/payment-calculator.html"}]}
+  </script>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link href="assets/css/page.css" rel="stylesheet"/>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/make-qr-integration.css?v=20260719-1">
+<script src="assets/js/make-qr-integration.js?v=20260719-2" defer></script>
+</head>
+ <body class="page-calculator page-calculator--financial">
+<div class="makeqr-calculator-bar" role="navigation" aria-label="Make QR calculator navigation">
+  <a class="makeqr-calculator-brand" href="/">Make QR</a>
+  <a href="/calculators/">All calculators</a>
+  <span>Free · Local calculation · No signup</span>
+  <button type="button" data-calculator-theme aria-label="Use dark mode">☾</button>
+</div>
+  <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                <span>Make QR <span class="logo-domain">Calculators</span></span>
+            </a>
+            <nav class="nav-menu" id="mainNavigation">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.html#financial">Financial</a>
+                <a class="nav-link" href="index.html#health">Health</a>
+                <a class="nav-link" href="index.html#math">Math</a>
+                <a class="nav-link" href="index.html#time">Time</a>
+                <a class="nav-link" href="index.html#construction">Construction</a>
+                <a class="nav-link" href="index.html#utilities">Utilities</a>
+            </nav>
+            <div class="header-actions">
+                <a href="sitemap.html" class="btn-browse"><i class="fas fa-th-large"></i> <span>Browse all</span></a>
+                <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNavigation"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+  <main class="main">
+   <section class="page-hero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#financial">Financial</a>
+                <span class="sep">/</span>
+                <span class="current">Payment Calculator</span>
+            </nav>
+            <h1>Payment Calculator</h1>
+            <p>Calculate monthly payments for loans, mortgages, auto loans, and credit cards</p>
+        </div>
+    </section>
+   <section>
+    <div class="container">
+     <div class="payment-calculator">
+      <div class="tab-container">
+       <button class="tab-button active" onclick="switchTab('loan')">
+        💰 Loan Payment
+       </button>
+       <button class="tab-button" onclick="switchTab('mortgage')">
+        🏠 Mortgage Payment
+       </button>
+       <button class="tab-button" onclick="switchTab('auto')">
+        🚗 Auto Loan
+       </button>
+       <button class="tab-button" onclick="switchTab('credit')">
+        💳 Credit Card
+       </button>
+      </div>
+      <!-- Loan Payment Tab -->
+      <div class="tab-content active" id="loan">
+       <div class="calculator-grid">
+        <div class="input-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-money-bill-wave">
+          </i>
+          Loan Details
+         </h3>
+         <div class="input-group">
+          <label for="loan-amount">
+           Loan Amount
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field" id="loan-amount" min="0" placeholder="50000" step="100" type="number"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="loan-rate">
+           Annual Interest Rate (%)
+          </label>
+          <input class="input-field" id="loan-rate" max="30" min="0" placeholder="5.5" step="0.1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="loan-term">
+           Loan Term
+          </label>
+          <select class="input-field" id="loan-term-type" style="margin-bottom: 0.5rem;">
+           <option value="years">
+            Years
+           </option>
+           <option value="months">
+            Months
+           </option>
+          </select>
+          <input class="input-field" id="loan-term" min="1" placeholder="10" step="1" type="number"/>
+         </div>
+         <div class="input-group">
+          <label for="loan-start">
+           Start Date
+          </label>
+          <input class="input-field" id="loan-start" type="date"/>
+         </div>
+         <div class="input-group">
+          <label for="extra-payment">
+           Extra Monthly Payment
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field" id="extra-payment" min="0" placeholder="0" step="10" type="number"/>
+          </div>
+         </div>
+        </div>
+        <div class="result-panel">
+         <h3 class="panel-title">
+          <i class="fas fa-calculator">
+          </i>
+          Payment Results
+         </h3>
+         <div class="input-group">
+          <label for="monthly-payment">
+           Monthly Payment
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="monthly-payment" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="total-payments">
+           Total of Payments
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="total-payments" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="total-interest">
+           Total Interest
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="total-interest" placeholder="0" readonly="" type="text"/>
+          </div>
+         </div>
+         <div class="input-group">
+          <label for="payoff-date">
+           Payoff Date
+          </label>
+          <input class="input-field result-field" id="payoff-date" placeholder="--" readonly="" type="text"/>
+         </div>
+         <div class="input-group">
+          <label for="interest-savings">
+           Interest Savings
+          </label>
+          <div class="currency-input">
+           <span class="currency-symbol">
+            $
+           </span>
+           <input class="input-field result-field" id="interest-savings" placeholder="0" readonly="" type="text"/>
+          </div>
+          <small style="color: rgba(255,255,255,0.8);">
+           With extra payments
+          </small>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Similar tabs for mortgage, auto, credit would go here -->
+      <div class="payment-breakdown" id="payment-breakdown" style="display: none;">
+       <h3>
+        <i class="fas fa-chart-pie">
+        </i>
+        Payment Breakdown
+       </h3>
+       <div class="breakdown-grid" id="breakdown-grid">
+        <!-- Breakdown items will be generated here -->
+       </div>
+      </div>
+      <div class="comparison-section" id="comparison-section" style="display: none;">
+       <h3>
+        <i class="fas fa-balance-scale">
+        </i>
+        Payment Comparison
+       </h3>
+       <div class="comparison-grid" id="comparison-grid">
+        <!-- Comparison items will be generated here -->
+       </div>
+      </div>
+      <div class="payment-chart">
+       <h3>
+        <i class="fas fa-chart-line">
+        </i>
+        Payment Schedule Visualization
+       </h3>
+       <div class="chart-container">
+        <div>
+         <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem; color: #28a745;">
+         </i>
+         <p>
+          Payment schedule chart will appear here after calculation
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="tips-section">
+       <h3>
+        <i class="fas fa-lightbulb">
+        </i>
+        Payment Tips &amp; Strategies
+       </h3>
+       <div class="tips-grid">
+        <div class="tip-item">
+         <h4>
+          💡 Extra Payments
+         </h4>
+         <p>
+          Making extra principal payments can significantly reduce total interest and shorten your loan term.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📅 Bi-Weekly Payments
+         </h4>
+         <p>
+          Switching to bi-weekly payments effectively makes 13 monthly payments per year instead of 12.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🎯 Interest Rate Impact
+         </h4>
+         <p>
+          Even a 0.5% reduction in interest rate can save thousands over the life of the loan.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          ⚖️ Payment vs. Investing
+         </h4>
+         <p>
+          Consider investing extra money if potential returns exceed your loan interest rate.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          🏦 Refinancing Options
+         </h4>
+         <p>
+          Monitor rates regularly. Refinancing can lower payments if rates drop significantly.
+         </p>
+        </div>
+        <div class="tip-item">
+         <h4>
+          📊 Budget Planning
+         </h4>
+         <p>
+          Keep total debt payments under 36-40% of gross monthly income for financial stability.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <section class="related-tools">
+        <div class="container">
+            <h2>Related calculators</h2>
+            <div class="related-links">
+                <a class="related-link" href="mortgage-calculator.html"><i class="fas fa-arrow-right"></i> Mortgage Calculator</a>
+                <a class="related-link" href="loan-calculator.html"><i class="fas fa-arrow-right"></i> Loan Calculator</a>
+                <a class="related-link" href="investment-calculator.html"><i class="fas fa-arrow-right"></i> Investment Calculator</a>
+                <a class="related-link" href="compound-interest-calculator.html"><i class="fas fa-arrow-right"></i> Compound Interest</a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-icon"><i class="fas fa-calculator"></i></span>
+                        <span>Make QR <span class="logo-domain">Calculators</span></span>
+                    </a>
+                    <p class="footer-tagline">Free professional calculators — fast, accurate, no signup required.</p>
+                </div>
+                <div class="footer-quick">
+                    <a href="sitemap.html">All Calculators</a>
+                    <a href="index.html">Home</a>
+                    <a href="/">Make QR Home</a>
+                </div>
+            </div>
+            <div class="footer-links-row footer-content">
+                <div class="footer-section">
+                    <h4>Financial</h4>
+                    <ul>
+                        <li><a href="mortgage-calculator.html">Mortgage</a></li>
+                        <li><a href="loan-calculator.html">Loan</a></li>
+                        <li><a href="investment-calculator.html">Investment</a></li>
+                        <li><a href="retirement-calculator.html">Retirement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Health</h4>
+                    <ul>
+                        <li><a href="bmi-calculator.html">BMI</a></li>
+                        <li><a href="calorie-calculator.html">Calorie</a></li>
+                        <li><a href="body-fat-calculator.html">Body Fat</a></li>
+                        <li><a href="pregnancy-calculator.html">Pregnancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Math</h4>
+                    <ul>
+                        <li><a href="scientific-calculator.html">Scientific</a></li>
+                        <li><a href="percentage-calculator.html">Percentage</a></li>
+                        <li><a href="fraction-calculator.html">Fraction</a></li>
+                        <li><a href="standard-deviation-calculator.html">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Construction</h4>
+                    <ul>
+                        <li><a href="concrete-calculator.html">Concrete</a></li>
+                        <li><a href="paint-calculator.html">Paint</a></li>
+                        <li><a href="roof-calculator.html">Roof</a></li>
+                        <li><a href="square-footage-calculator.html">Square Footage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Make QR Calculators · Designed by <strong>Long Thái Bảo</strong></p>
+            </div>
+        </div>
+    </footer>
+  <script>
+   function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Calculate for the active tab
+            calculatePayment();
+        }
+
+        function calculatePayment() {
+            const amount = parseFloat(document.getElementById('loan-amount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('loan-rate').value) || 0;
+            const termValue = parseFloat(document.getElementById('loan-term').value) || 0;
+            const termType = document.getElementById('loan-term-type').value;
+            const extraPayment = parseFloat(document.getElementById('extra-payment').value) || 0;
+            const startDate = document.getElementById('loan-start').value;
+
+            if (amount === 0 || annualRate === 0 || termValue === 0) return;
+
+            // Convert term to months
+            const termInMonths = termType === 'years' ? termValue * 12 : termValue;
+            
+            // Monthly interest rate
+            const monthlyRate = annualRate / 100 / 12;
+            
+            // Calculate monthly payment using PMT formula
+            const monthlyPayment = amount * (monthlyRate * Math.pow(1 + monthlyRate, termInMonths)) / 
+                                  (Math.pow(1 + monthlyRate, termInMonths) - 1);
+            
+            // Calculate total payments and interest
+            const totalPayments = monthlyPayment * termInMonths;
+            const totalInterest = totalPayments - amount;
+            
+            // Calculate with extra payments
+            let balance = amount;
+            let totalPaid = 0;
+            let totalInterestPaid = 0;
+            let months = 0;
+            let interestSavings = 0;
+
+            if (extraPayment > 0) {
+                while (balance > 0.01 && months < termInMonths * 2) {
+                    const interestPayment = balance * monthlyRate;
+                    const principalPayment = Math.min(monthlyPayment - interestPayment + extraPayment, balance);
+                    
+                    balance -= principalPayment;
+                    totalPaid += interestPayment + principalPayment;
+                    totalInterestPaid += interestPayment;
+                    months++;
+                }
+                interestSavings = totalInterest - totalInterestPaid;
+            }
+
+            // Calculate payoff date
+            let payoffDate = '';
+            if (startDate) {
+                const start = new Date(startDate);
+                const payoffMonths = extraPayment > 0 ? months : termInMonths;
+                const payoff = new Date(start.getFullYear(), start.getMonth() + payoffMonths, start.getDate());
+                payoffDate = payoff.toLocaleDateString();
+            }
+
+            // Update results
+            document.getElementById('monthly-payment').value = monthlyPayment.toFixed(2);
+            document.getElementById('total-payments').value = totalPayments.toFixed(2);
+            document.getElementById('total-interest').value = totalInterest.toFixed(2);
+            document.getElementById('payoff-date').value = payoffDate;
+            document.getElementById('interest-savings').value = interestSavings.toFixed(2);
+
+            // Generate breakdown
+            generateBreakdown(monthlyPayment, totalPayments, totalInterest, amount);
+            
+            // Generate comparison
+            generateComparison(monthlyPayment, termInMonths, amount, annualRate);
+        }
+
+        function generateBreakdown(payment, total, interest, principal) {
+            const breakdown = document.getElementById('breakdown-grid');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${payment.toFixed(2)}</div>
+                    <div class="breakdown-label">Monthly Payment</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${principal.toFixed(0)}</div>
+                    <div class="breakdown-label">Principal Amount</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${interest.toFixed(0)}</div>
+                    <div class="breakdown-label">Total Interest</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">$${total.toFixed(0)}</div>
+                    <div class="breakdown-label">Total Payments</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${((interest / total) * 100).toFixed(1)}%</div>
+                    <div class="breakdown-label">Interest Percentage</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value">${((payment * 12 / principal) * 100).toFixed(1)}%</div>
+                    <div class="breakdown-label">Payment to Income Ratio</div>
+                </div>
+            `;
+            document.getElementById('payment-breakdown').style.display = 'block';
+        }
+
+        function generateComparison(basePayment, baseTerm, amount, rate) {
+            const scenarios = [
+                { name: '15 Year Term', term: 15 * 12 },
+                { name: '20 Year Term', term: 20 * 12 },
+                { name: '30 Year Term', term: 30 * 12 }
+            ];
+
+            const monthlyRate = rate / 100 / 12;
+            
+            const comparison = document.getElementById('comparison-grid');
+            comparison.innerHTML = scenarios.map(scenario => {
+                if (scenario.term === baseTerm) return '';
+                
+                const payment = amount * (monthlyRate * Math.pow(1 + monthlyRate, scenario.term)) / 
+                               (Math.pow(1 + monthlyRate, scenario.term) - 1);
+                const totalPayments = payment * scenario.term;
+                const totalInterest = totalPayments - amount;
+                
+                return `
+                    <div class="comparison-item">
+                        <div class="comparison-title">${scenario.name}</div>
+                        <div class="comparison-payment">$${payment.toFixed(2)}/month</div>
+                        <div>Total Interest: $${totalInterest.toFixed(0)}</div>
+                        <div>Total Payments: $${totalPayments.toFixed(0)}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('comparison-section').style.display = 'block';
+        }
+
+        // Event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            ['loan-amount', 'loan-rate', 'loan-term', 'loan-term-type', 'extra-payment', 'loan-start'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculatePayment);
+                    element.addEventListener('change', calculatePayment);
+                }
+            });
+
+            // Set default values
+            document.getElementById('loan-amount').value = 50000;
+            document.getElementById('loan-rate').value = 5.5;
+            document.getElementById('loan-term').value = 10;
+            
+            // Set default start date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('loan-start').value = today;
+        });
+  </script>
+  <script src="assets/js/nav.js"></script>
+ </body>
+</html>
