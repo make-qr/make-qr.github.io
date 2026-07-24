@@ -23,28 +23,56 @@ function computeRootPath() {
 }
 
 const PAGE_TITLES = {
-    'scan-qr': 'QR Code Scanner',
-    'compress-jpg': 'JPG Compressor',
-    'compress-png': 'PNG Compressor',
-    'convert-to-webp': 'Convert to WebP',
-    'webp-to-png': 'WebP to PNG',
-    'merge-pdf': 'PDF Merger',
-    'split-pdf': 'Split PDF',
-    'rotate-pdf': 'Rotate PDF',
-    'delete-pdf-pages': 'Delete PDF Pages',
-    'extract-pdf-pages': 'Extract PDF Pages',
-    'organize-pdf': 'Organize PDF',
-    'microphone-test': 'Microphone Test',
-    'webcam-test': 'Webcam Test',
-    'speaker-test': 'Speaker Test',
-    'mouse-test': 'Mouse Test',
-    'dead-pixel-test': 'Dead Pixel Test',
-    'controller-tester': 'Controller Test',
-    'test-tools': 'Device Test Tools',
-    'test-keyboard': 'Keyboard Tester Pro'
+    'scan-qr': "QR Code Scanner",
+    'compress-jpg': "JPG Compressor",
+    'compress-png': "PNG Compressor",
+    'convert-to-webp': "Convert to WebP",
+    'webp-to-png': "WebP to PNG",
+    'merge-pdf': "PDF Merger",
+    'split-pdf': "Split PDF",
+    'rotate-pdf': "Rotate PDF",
+    'delete-pdf-pages': "Delete PDF Pages",
+    'extract-pdf-pages': "Extract selected PDF pages into a new file",
+    'organize-pdf': "Organize PDF",
+    'microphone-test': "Microphone Test",
+    'webcam-test': "Webcam Test",
+    'speaker-test': "Speaker Test",
+    'mouse-test': "Mouse Test",
+    'dead-pixel-test': "Dead Pixel Test",
+    'controller-tester': "Controller Test",
+    'test-tools': "Device Test Tools",
+    'test-keyboard': "Keyboard Tester Pro",
+    'how-to-create-wifi-qr-code': "How to create a WiFi QR code guests can scan in seconds",
+    'static-vs-dynamic-qr-codes': "Static vs dynamic QR codes",
+    'merge-pdf-without-signup': "Merge PDF files in your browser without signup",
+    'how-to-scan-qr-code-on-pc': "How to scan a QR code on PC (camera, paste, upload)",
+    'how-to-make-qr-code-with-logo': "How to make a QR code with a logo that still scans",
+    'best-qr-code-size-for-print': "Best QR code size for print (business card, A4, poster)",
+    'how-to-create-vcard-qr-code': "How to create a vCard QR code for business cards",
+    'how-to-split-pdf': "Split a PDF into separate files (step-by-step)",
+    'compress-jpg-without-ruining-quality': "Compress JPG without ruining quality",
+    'convert-images-to-webp': "Convert images to WebP for faster websites",
+    'how-to-test-microphone-in-browser': "How to test your microphone in the browser",
+    'how-to-rotate-pdf-pages': "How to rotate PDF pages that scanned sideways",
+    'delete-pdf-pages-without-acrobat': "Delete pages from a PDF without Acrobat",
+    'reorder-pdf-pages': "Reorder PDF pages before you send a contract",
+    'png-vs-jpg-vs-webp': "PNG vs JPG vs WebP: which format should you use?",
+    'how-to-create-email-sms-qr-code': "How to create an email or SMS QR code",
+    'qr-code-color-mistakes': "QR code color mistakes that break scanning",
+    'keyboard-test-checklist': "Keyboard test checklist before buying a used laptop",
+    'percentage-calculator-discounts-tips': "How to use a percentage calculator for discounts and tips",
+    'loan-mortgage-payment-calculator': "Mortgage and loan payments explained with a free calculator",
+    'bmi-calculator-meaning': "BMI calculator",
+    'scientific-calculator-deg-rad-tips': "Scientific calculator online",
+    'device-checks-before-meeting': "Webcam, speaker and dead-pixel checks before a meeting",
 };
 
 function getPageTitle(filename, currentPath) {
+    if (currentPath.includes('/blog')) {
+        if (filename === 'index' || filename === '') return 'Guides';
+        if (PAGE_TITLES[filename]) return PAGE_TITLES[filename];
+        return filename.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
     if (filename === 'index' || filename === '') {
         if (currentPath.includes('test-tools')) return 'Device Test Tools';
         if (currentPath.includes('test-keyboard')) return 'Keyboard Tester Pro';
@@ -55,6 +83,9 @@ function getPageTitle(filename, currentPath) {
 }
 
 function getCanonicalPath(isRootPage, filename, currentPath) {
+    if (currentPath.includes('/blog')) {
+        return (filename === 'index' || filename === '') ? 'blog/' : 'blog/' + filename + '.html';
+    }
     if (isRootPage && (filename === 'index' || filename === '')) return '';
     if (currentPath.includes('test-keyboard')) return 'pages/test-keyboard/';
     if (currentPath.includes('test-tools')) {
@@ -76,11 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const headContent = document.head.innerHTML;
 
     Promise.all([
-        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260719-2').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260724-1').then(r => {
             if (!r.ok) throw new Error('Failed to fetch header');
             return r.text();
         }),
-        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260719-2').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260724-1').then(r => {
             if (!r.ok) throw new Error('Failed to fetch footer');
             return r.text();
         })

@@ -1,0 +1,218 @@
+[
+  {
+    "slug": "how-to-create-wifi-qr-code",
+    "title": "How to create a WiFi QR code guests can scan in seconds",
+    "description": "Create a free WiFi QR code with your SSID and password. Guests scan once to join — no signup, no watermark, static and private.",
+    "category": "QR Code",
+    "publish": "2026-07-24",
+    "cta_href": "/",
+    "read_min": 6
+  },
+  {
+    "slug": "static-vs-dynamic-qr-codes",
+    "title": "Static vs dynamic QR codes: which should you use?",
+    "description": "Compare static and dynamic QR codes. Learn why static codes never expire, avoid ad redirects, and keep working without a paid subscription.",
+    "category": "QR Code",
+    "publish": "2026-07-24",
+    "cta_href": "/",
+    "read_min": 6
+  },
+  {
+    "slug": "merge-pdf-without-signup",
+    "title": "Merge PDF files in your browser without signup",
+    "description": "Merge multiple PDF files in your browser without signup. Free, private, client-side PDF merger from Make QR.",
+    "category": "PDF",
+    "publish": "2026-07-24",
+    "cta_href": "/pages/merge-pdf.html",
+    "read_min": 5
+  },
+  {
+    "slug": "how-to-scan-qr-code-on-pc",
+    "title": "How to scan a QR code on PC (camera, paste, upload)",
+    "description": "Scan QR codes on your computer with camera, Ctrl+V paste, or image upload — free browser scanner from Make QR.",
+    "category": "QR Code",
+    "publish": "2026-07-25",
+    "cta_href": "/pages/scan-qr.html",
+    "read_min": 5
+  },
+  {
+    "slug": "how-to-make-qr-code-with-logo",
+    "title": "How to make a QR code with a logo that still scans",
+    "description": "Add a logo to a static QR code without breaking scans. Error correction, size and contrast tips from Make QR.",
+    "category": "QR Code",
+    "publish": "2026-07-26",
+    "cta_href": "/",
+    "read_min": 6
+  },
+  {
+    "slug": "best-qr-code-size-for-print",
+    "title": "Best QR code size for print (business card, A4, poster)",
+    "description": "Recommended QR print sizes for business cards, flyers, A4 sheets and posters so phones can scan reliably.",
+    "category": "QR Code",
+    "publish": "2026-07-27",
+    "cta_href": "/",
+    "read_min": 5
+  },
+  {
+    "slug": "how-to-create-vcard-qr-code",
+    "title": "How to create a vCard QR code for business cards",
+    "description": "Encode name, phone, email and company into a vCard QR code for networking and printed cards.",
+    "category": "QR Code",
+    "publish": "2026-07-28",
+    "cta_href": "/",
+    "read_min": 5
+  },
+  {
+    "slug": "how-to-split-pdf",
+    "title": "Split a PDF into separate files (step-by-step)",
+    "description": "Split a PDF into page ranges or separate files in your browser — free, private, no signup.",
+    "category": "PDF",
+    "publish": "2026-07-29",
+    "cta_href": "/pages/split-pdf.html",
+    "read_min": 5
+  },
+  {
+    "slug": "compress-jpg-without-ruining-quality",
+    "title": "Compress JPG without ruining quality",
+    "description": "Reduce JPG file size for email and web while keeping photos sharp enough — browser-side compression.",
+    "category": "Image",
+    "publish": "2026-07-30",
+    "cta_href": "/pages/compress-jpg.html",
+    "read_min": 5
+  },
+  {
+    "slug": "convert-images-to-webp",
+    "title": "Convert images to WebP for faster websites",
+    "description": "Convert PNG or JPG images to WebP in the browser to shrink assets for faster page loads.",
+    "category": "Image",
+    "publish": "2026-07-31",
+    "cta_href": "/pages/convert-to-webp.html",
+    "read_min": 5
+  },
+  {
+    "slug": "how-to-test-microphone-in-browser",
+    "title": "How to test your microphone in the browser",
+    "description": "Check mic levels, permissions and left/right input before a call — free browser microphone test.",
+    "category": "Device Test",
+    "publish": "2026-08-01",
+    "cta_href": "/pages/test-tools/microphone-test.html",
+    "read_min": 4
+  },
+  {
+    "slug": "how-to-rotate-pdf-pages",
+    "title": "How to rotate PDF pages that scanned sideways",
+    "description": "Fix sideways or upside-down PDF pages in your browser without installing Acrobat.",
+    "category": "PDF",
+    "publish": "2026-08-02",
+    "cta_href": "/pages/rotate-pdf.html",
+    "read_min": 4
+  },
+  {
+    "slug": "delete-pdf-pages-without-acrobat",
+    "title": "Delete pages from a PDF without Acrobat",
+    "description": "Remove unwanted PDF pages locally in Chrome or Edge — free and private.",
+    "category": "PDF",
+    "publish": "2026-08-03",
+    "cta_href": "/pages/delete-pdf-pages.html",
+    "read_min": 4
+  },
+  {
+    "slug": "extract-pdf-pages",
+    "title": "Extract selected PDF pages into a new file",
+    "description": "Save only the pages you need into a new PDF without uploading documents.",
+    "category": "PDF",
+    "publish": "2026-08-04",
+    "cta_href": "/pages/extract-pdf-pages.html",
+    "read_min": 4
+  },
+  {
+    "slug": "reorder-pdf-pages",
+    "title": "Reorder PDF pages before you send a contract",
+    "description": "Drag pages into the right order, then download a clean PDF for signing or sharing.",
+    "category": "PDF",
+    "publish": "2026-08-05",
+    "cta_href": "/pages/organize-pdf.html",
+    "read_min": 4
+  },
+  {
+    "slug": "png-vs-jpg-vs-webp",
+    "title": "PNG vs JPG vs WebP: which format should you use?",
+    "description": "Choose the right image format for photos, graphics and websites — with free conversion tools.",
+    "category": "Image",
+    "publish": "2026-08-06",
+    "cta_href": "/pages/convert-to-webp.html",
+    "read_min": 6
+  },
+  {
+    "slug": "how-to-create-email-sms-qr-code",
+    "title": "How to create an email or SMS QR code",
+    "description": "Pre-fill an email or text message with a static QR code for support desks and print materials.",
+    "category": "QR Code",
+    "publish": "2026-08-07",
+    "cta_href": "/",
+    "read_min": 4
+  },
+  {
+    "slug": "qr-code-color-mistakes",
+    "title": "QR code color mistakes that break scanning",
+    "description": "Avoid low contrast, inverted colors and busy backgrounds that make QR codes unscannable.",
+    "category": "QR Code",
+    "publish": "2026-08-08",
+    "cta_href": "/",
+    "read_min": 5
+  },
+  {
+    "slug": "keyboard-test-checklist",
+    "title": "Keyboard test checklist before buying a used laptop",
+    "description": "Test every key, ghosting and stuck switches in the browser before you pay for a used laptop.",
+    "category": "Device Test",
+    "publish": "2026-08-09",
+    "cta_href": "/pages/test-keyboard/index.html",
+    "read_min": 4
+  },
+  {
+    "slug": "percentage-calculator-discounts-tips",
+    "title": "How to use a percentage calculator for discounts and tips",
+    "description": "Work out sale discounts, tip amounts and percentage change quickly with a free online calculator.",
+    "category": "Calculators",
+    "publish": "2026-08-10",
+    "cta_href": "/calculators/percentage-calculator.html",
+    "read_min": 5
+  },
+  {
+    "slug": "loan-mortgage-payment-calculator",
+    "title": "Mortgage and loan payments explained with a free calculator",
+    "description": "Estimate monthly loan or mortgage payments and see how rate and term change the total.",
+    "category": "Calculators",
+    "publish": "2026-08-11",
+    "cta_href": "/calculators/loan-calculator.html",
+    "read_min": 6
+  },
+  {
+    "slug": "bmi-calculator-meaning",
+    "title": "BMI calculator: what the number means (and what it doesn’t)",
+    "description": "Use a free BMI calculator responsibly — understand categories and the limits of BMI as a health signal.",
+    "category": "Calculators",
+    "publish": "2026-08-12",
+    "cta_href": "/calculators/bmi-calculator.html",
+    "read_min": 5
+  },
+  {
+    "slug": "scientific-calculator-deg-rad-tips",
+    "title": "Scientific calculator online: DEG/RAD and expression tips",
+    "description": "Use DEG vs RAD correctly, edit expressions with a cursor, and calculate trig and logs in the browser.",
+    "category": "Calculators",
+    "publish": "2026-08-13",
+    "cta_href": "/calculators/scientific-calculator.html",
+    "read_min": 5
+  },
+  {
+    "slug": "device-checks-before-meeting",
+    "title": "Webcam, speaker and dead-pixel checks before a meeting",
+    "description": "Run a quick device checklist in your browser so your next video call starts without surprises.",
+    "category": "Device Test",
+    "publish": "2026-08-14",
+    "cta_href": "/pages/test-tools/index.html",
+    "read_min": 4
+  }
+]

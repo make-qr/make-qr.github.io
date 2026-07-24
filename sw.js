@@ -1,8 +1,9 @@
-const CACHE_NAME = 'make-qr-v5';
+const CACHE_NAME = 'make-qr-v6';
 const CORE_ASSETS = [
     '/',
     '/index.html',
     '/404.html',
+    '/blog/',
     '/manifest.webmanifest',
     '/assets/css/tailwind.min.css',
     '/assets/css/style.css',

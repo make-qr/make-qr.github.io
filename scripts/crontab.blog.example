@@ -1,0 +1,11 @@
+# Make QR blog — publish 1 scheduled guide/day at 08:00 Asia/Ho_Chi_Minh
+# Install on NAS/server:
+#   chmod +x /home/vananh/NAS/projects/personal/make-qr/make-qr.github.io/scripts/nas-publish-blog.sh
+#   crontab -e
+# Paste the line below (adjust path if needed):
+
+0 8 * * * /home/vananh/NAS/projects/personal/make-qr/make-qr.github.io/scripts/nas-publish-blog.sh
+
+# Optional environment overrides:
+#   MAKE_QR_BLOG_PUSH=0   # commit only, do not push
+#   MAKE_QR_REPO=/path/to/make-qr.github.io

@@ -1,1 +1,4 @@
 node_modules/
+
+# Blog publish logs
+scripts/logs/
