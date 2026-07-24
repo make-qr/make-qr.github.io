@@ -2,3 +2,6 @@ node_modules/
 
 # Blog publish logs
 scripts/logs/
+
+__pycache__/
+*.pyc
