@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlipBloom OBS — Starting Soon</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="css/overlay.css">
+</head>
+<body class="obs-page">
+  <main class="obs-stage">
+    <p class="obs-kicker">FlipBloom</p>
+    <h1 class="obs-title" data-obs-title>Starting Soon</h1>
+    <p class="obs-sub" data-obs-sub>Grab a drink — the stream begins when the clock hits zero.</p>
+    <div class="fb-clock" data-obs-clock aria-live="polite"></div>
+    <div class="obs-progress" data-obs-progress><span></span></div>
+    <div class="obs-phase" data-obs-phase>Countdown</div>
+    <p class="obs-brand">FlipBloom Timer</p>
+  </main>
+  <script src="js/overlay.js"></script>
+  <script>
+    FlipBloomOBS.applyChrome();
+    const q = new URLSearchParams(location.search);
+    if (!q.get('seconds') && !q.get('minutes') && !q.get('duration')) {
+      history.replaceState(null, '', '?minutes=5');
+    }
+    FlipBloomOBS.startCountdown({ doneLabel: 'We are live' });
+  </script>
+</body>
+</html>

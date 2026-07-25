@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlipBloom OBS Overlays — Browser Source URLs</title>
+  <meta name="description" content="Free FlipBloom OBS Browser Source overlays: Starting Soon, BRB, Ending Soon, live clock and Pomodoro.">
+  <link rel="stylesheet" href="css/overlay.css">
+</head>
+<body class="hub">
+  <div class="hub-wrap">
+    <h1>FlipBloom OBS overlays</h1>
+    <p>Paste any URL below into OBS → Sources → Browser. Soft pink flip-clock style, no signup, no watermark on the overlay.</p>
+
+    <div class="hub-grid" id="cards"></div>
+
+    <div class="hub-note">
+      <strong>Tips:</strong> Add <code>?transparent=1</code> for a transparent background.
+      Duration examples: <code>?minutes=5</code>, <code>?seconds=90</code>, <code>?duration=1h30m</code>.
+      Clock timezone: <code>?tz=Asia/Ho_Chi_Minh</code>.
+      Pomodoro: <code>?work=25&amp;break=5</code> (minutes).
+      In OBS, uncheck “Shutdown source when not visible” so the timer keeps running.
+    </div>
+  </div>
+  <script>
+    const base = location.href.replace(/index\.html$/, '').replace(/\/?$/, '/');
+    const items = [
+      ['Starting Soon', 'starting-soon.html?minutes=5', 'Pre-stream countdown'],
+      ['Be Right Back', 'brb.html?minutes=3', 'Mid-stream break'],
+      ['Ending Soon', 'ending-soon.html?minutes=2', 'Wrap-up screen'],
+      ['Live Clock', 'clock.html', 'Real-time flip clock'],
+      ['Live Clock (VN)', 'clock.html?tz=Asia/Ho_Chi_Minh', 'Asia/Ho_Chi_Minh'],
+      ['Pomodoro', 'pomodoro.html?work=25&break=5', 'Focus / break cycles'],
+      ['Starting Soon transparent', 'starting-soon.html?minutes=5&transparent=1', 'Overlay over gameplay']
+    ];
+    const root = document.getElementById('cards');
+    items.forEach(([name, path, desc]) => {
+      const url = base + path;
+      const card = document.createElement('article');
+      card.className = 'hub-card';
+      card.innerHTML = '<h2>' + name + '</h2><p>' + desc + '</p><a href="' + url + '" target="_blank" rel="noopener">Open preview</a><code class="url">' + url + '</code>';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'Copy OBS URL';
+      btn.onclick = async () => {
+        await navigator.clipboard.writeText(url);
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy OBS URL'; }, 1200);
+      };
+      card.appendChild(btn);
+      root.appendChild(card);
+    });
+  </script>
+</body>
+</html>

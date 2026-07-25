@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlipBloom OBS — Pomodoro</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="css/overlay.css">
+</head>
+<body class="obs-page">
+  <main class="obs-stage">
+    <p class="obs-kicker">FlipBloom</p>
+    <h1 class="obs-title" data-obs-title>Pomodoro Focus</h1>
+    <p class="obs-sub" data-obs-sub>Study-with-me style focus / break cycles for livestreams.</p>
+    <div class="obs-phase" data-obs-phase>Focus</div>
+    <div class="fb-clock" data-obs-clock aria-live="polite"></div>
+    <div class="obs-progress" data-obs-progress><span></span></div>
+    <p class="obs-brand">FlipBloom Timer</p>
+  </main>
+  <script src="js/overlay.js"></script>
+  <script>
+    FlipBloomOBS.applyChrome();
+    FlipBloomOBS.startPomodoro();
+  </script>
+</body>
+</html>

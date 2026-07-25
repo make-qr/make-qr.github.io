@@ -1,0 +1,205 @@
+/* FlipBloom OBS overlays — soft pink flip clock */
+:root {
+  --fb-bg: #fce7f3;
+  --fb-bg2: #fdf2f8;
+  --fb-card: #ffffff;
+  --fb-shadow: #f9a8d4;
+  --fb-fold: #fbcfe8;
+  --fb-digit: #9d174d;
+  --fb-colon: #db2777;
+  --fb-muted: #be185d;
+  --fb-accent: #ec4899;
+  --fb-label: #831843;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+body.obs-page {
+  background: linear-gradient(160deg, var(--fb-bg), var(--fb-bg2));
+  color: var(--fb-digit);
+  display: grid;
+  place-items: center;
+}
+
+body.obs-page.transparent {
+  background: transparent !important;
+}
+
+.obs-stage {
+  width: min(100vw, 1920px);
+  height: min(100vh, 1080px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.obs-kicker {
+  margin: 0;
+  font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fb-muted);
+}
+
+.obs-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--fb-label);
+  letter-spacing: -0.02em;
+}
+
+.obs-sub {
+  margin: 0;
+  max-width: 36rem;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--fb-muted);
+}
+
+.fb-clock {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  filter: drop-shadow(0 10px 24px rgba(190, 24, 93, 0.18));
+}
+
+.fb-digit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(2.6rem, 7vw, 5.5rem);
+  height: clamp(3.6rem, 10vw, 7.5rem);
+  padding: 0 0.35rem;
+  border-radius: 0.55rem;
+  background: linear-gradient(180deg, #fff 0%, #fff 49%, var(--fb-fold) 50%, #fff 51%, #fff 100%);
+  box-shadow:
+    0 1px 0 var(--fb-shadow),
+    0 8px 18px rgba(249, 168, 212, 0.45);
+  color: var(--fb-digit);
+  font-family: "JetBrains Mono", "Liberation Mono", ui-monospace, monospace;
+  font-weight: 800;
+  font-size: clamp(2rem, 7vw, 4.8rem);
+  line-height: 1;
+}
+
+.fb-digit::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: rgba(251, 207, 232, 0.95);
+}
+
+.fb-colon {
+  color: var(--fb-colon);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 4rem);
+  padding-bottom: 0.35rem;
+}
+
+.obs-progress {
+  width: min(70vw, 640px);
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+  border: 1px solid rgba(249, 168, 212, 0.7);
+}
+
+.obs-progress > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, #f472b6, #db2777);
+  transition: transform 0.2s linear;
+}
+
+.obs-brand {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fb-muted);
+  opacity: 0.85;
+}
+
+.obs-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(249, 168, 212, 0.8);
+  color: var(--fb-label);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+body.hub {
+  background: linear-gradient(160deg, #fdf2f8, #fce7f3);
+  overflow: auto;
+  color: #831843;
+}
+.hub-wrap {
+  width: min(920px, calc(100% - 2rem));
+  margin: 2rem auto 3rem;
+}
+.hub-wrap h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+.hub-wrap p { color: #be185d; line-height: 1.55; }
+.hub-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.hub-card {
+  padding: 1rem 1.15rem;
+  border-radius: 0.85rem;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid #f9a8d4;
+}
+.hub-card h2 { margin: 0 0 0.35rem; font-size: 1.15rem; }
+.hub-card code, .hub-card .url {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.45rem;
+  background: #fdf2f8;
+  font-size: 0.82rem;
+  word-break: break-all;
+  color: #9d174d;
+}
+.hub-card button {
+  border: 0;
+  border-radius: 0.45rem;
+  padding: 0.45rem 0.8rem;
+  background: #db2777;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.hub-card a { color: #be185d; font-weight: 600; }
+.hub-note {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid #ec4899;
+  background: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+}
