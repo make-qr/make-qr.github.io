@@ -609,11 +609,29 @@
         <priority>0.75</priority>
     </url>
 
+<url>
+        <loc>https://make-qr.github.io/flipbloom-obs/</loc>
+        <lastmod>2026-07-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.75</priority>
+    </url>
     <url>
         <loc>https://make-qr.github.io/blog/</loc>
-        <lastmod>2026-07-24</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/how-to-make-qr-code-with-logo.html</loc>
+        <lastmod>2026-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/how-to-scan-qr-code-on-pc.html</loc>
+        <lastmod>2026-07-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://make-qr.github.io/blog/how-to-create-wifi-qr-code.html</loc>
@@ -632,11 +650,5 @@
         <lastmod>2026-07-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://make-qr.github.io/flipbloom-obs/</loc>
-        <lastmod>2026-07-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.75</priority>
     </url>
 </urlset>
