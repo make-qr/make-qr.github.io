@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert PNG images to JPG online. Runs locally in your browser.">
+    <meta name="keywords" content="png to jpg, image converter, png to jpg">
+    <meta name="author" content="Make QR">
+    <title>PNG to JPG | Make QR</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <link href="../assets/css/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css?v=20260729-1" rel="stylesheet">
+    <script src="../assets/js/template-loader.js?v=20260729-1" defer></script>
+    <script src="../assets/js/p1-tools.js?v=20260729-1" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-257SVV94KB');
+    </script>
+</head>
+<body class="page-body" data-tool="png-to-jpg">
+<main class="max-w-4xl mx-auto px-4 py-8">
+
+<div class="text-center mb-8">
+  <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">PNG to JPG</h1>
+  <p class="text-lg text-gray-600">Convert PNG images to JPG online. Runs locally in your browser.</p>
+</div>
+<div class="bg-white rounded-lg shadow-md p-6 space-y-4">
+<div data-format-converter data-from-label="PNG" data-accept="image/png,.png" data-to-mime="image/jpeg" data-to-ext=".jpg" data-quality="0.92">
+  <div id="fc-drop" class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center cursor-pointer hover:border-blue-400 bg-gray-50">
+    <p class="font-medium text-gray-700">Drop PNG files here or click to select</p>
+    <p class="text-sm text-gray-500 mt-1">Multiple files supported · processed locally</p>
+    <input type="file" id="fc-file" class="hidden" multiple>
+  </div>
+  
+<div>
+  <label class="block text-sm font-medium text-gray-700 mb-1">JPG quality: <span id="fc-quality-val">92</span>%</label>
+  <input type="range" id="fc-quality" min="40" max="100" value="92" class="w-full">
+</div>
+  <button type="button" id="fc-convert" disabled class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50">Convert</button>
+  <p id="fc-status" class="text-sm text-gray-500"></p>
+  <div id="fc-results" class="hidden space-y-3">
+    <h2 class="text-lg font-semibold">Results</h2>
+    <div id="fc-list" class="space-y-3"></div>
+  </div>
+</div>
+</div>
+
+<p class="mt-10 text-sm text-gray-500 text-center">Free · Private · No signup — processing stays in your browser when possible.</p>
+</main>
+</body>
+</html>

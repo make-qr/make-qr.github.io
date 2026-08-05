@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4151519079019358" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resize images to exact pixel dimensions in your browser. Free and private.">
+    <meta name="keywords" content="image resizer, resize image online">
+    <meta name="author" content="Make QR">
+    <title>Image Resizer | Make QR</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <link href="../assets/css/tailwind.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css?v=20260729-1" rel="stylesheet">
+    <script src="../assets/js/template-loader.js?v=20260729-1" defer></script>
+    <script src="../assets/js/p1-tools.js?v=20260729-1" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-257SVV94KB');
+    </script>
+</head>
+<body class="page-body" data-tool="image-resizer">
+<main class="max-w-4xl mx-auto px-4 py-8">
+
+<div class="text-center mb-8">
+  <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Image Resizer</h1>
+  <p class="text-lg text-gray-600">Choose an image, set width/height, download the result.</p>
+</div>
+<div class="bg-white rounded-lg shadow-md p-6 space-y-4">
+<input type="file" id="rz-file" accept="image/*" class="w-full border rounded-lg px-3 py-2">
+<div class="grid grid-cols-2 gap-3">
+  <label class="text-sm">Width <input type="number" id="rz-w" class="w-full border rounded-lg px-3 py-2"></label>
+  <label class="text-sm">Height <input type="number" id="rz-h" class="w-full border rounded-lg px-3 py-2"></label>
+</div>
+<label class="flex items-center gap-2 text-sm"><input type="checkbox" id="rz-keep" checked> Keep aspect ratio when editing width</label>
+<button type="button" id="rz-run" class="w-full bg-blue-600 text-white py-3 rounded-lg">Resize</button>
+<img id="rz-preview" class="hidden max-h-64 mx-auto rounded border" alt="Preview">
+<button type="button" id="rz-download" class="hidden w-full bg-gray-800 text-white py-3 rounded-lg">Download</button>
+</div>
+
+<p class="mt-10 text-sm text-gray-500 text-center">Free · Private · No signup — processing stays in your browser when possible.</p>
+</main>
+</body>
+</html>

@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://make-qr.github.io/sitemap.xml 
+Sitemap: https://make-qr.github.io/sitemap.xml
