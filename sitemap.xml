@@ -681,11 +681,42 @@
     <loc>https://make-qr.github.io/flipbloom-obs/</loc>
     <changefreq>weekly</changefreq>
   </url>
+
     <url>
         <loc>https://make-qr.github.io/blog/</loc>
-        <lastmod>2026-08-06</lastmod>
+        <lastmod>2026-08-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/loan-mortgage-payment-calculator.html</loc>
+        <lastmod>2026-08-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/percentage-calculator-discounts-tips.html</loc>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/keyboard-test-checklist.html</loc>
+        <lastmod>2026-08-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/qr-code-color-mistakes.html</loc>
+        <lastmod>2026-08-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://make-qr.github.io/blog/how-to-create-email-sms-qr-code.html</loc>
+        <lastmod>2026-08-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://make-qr.github.io/blog/png-vs-jpg-vs-webp.html</loc>
