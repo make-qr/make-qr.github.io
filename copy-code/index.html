@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chèn Liên Kết &amp; Hiển Thị Dạng Code</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #fff;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #16a34a;
+      --accent-hover: #15803d;
+      --code: #f3f4f6;
+      --preview: #fff;
+      --shadow: 0 1px 2px rgba(0,0,0,.06);
+    }
+    .dark {
+      --bg: #1e293b;
+      --panel: #273549;
+      --text: #e5eef7;
+      --muted: #94a3b8;
+      --line: #334155;
+      --accent: #22c55e;
+      --accent-hover: #16a34a;
+      --code: #1e293b;
+      --preview: #1e293b;
+      --shadow: none;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+    .app {
+      height: 100dvh;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 12px 12px;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 8px;
+    }
+    .sticky-note {
+      position: fixed;
+      z-index: 40;
+      width: 400px;
+      min-width: 280px;
+      left: 16px;
+      top: 56px;
+      background: #fff3a1;
+      color: #3f3a1f;
+      border: 1px solid #ead56a;
+      border-radius: 8px;
+      box-shadow: 3px 6px 16px rgba(0,0,0,.18);
+      padding: 0 8px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sticky-note.collapsed .sticky-body { display: none; }
+    .sticky-handle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin: 0 -8px 2px;
+      padding: 7px 8px;
+      background: #ffe566;
+      border-radius: 8px 8px 0 0;
+      cursor: grab;
+      user-select: none;
+      font-size: 12px;
+      font-weight: 700;
+      color: #6b5b16;
+    }
+    .sticky-note.dragging .sticky-handle { cursor: grabbing; }
+    .sticky-handle button {
+      padding: 3px 7px;
+      font-size: 11px;
+      background: #c9a227;
+    }
+    .sticky-handle button:hover { background: #a88612; }
+    .sticky-note label {
+      margin-bottom: 2px;
+      color: #6b5b16;
+    }
+    .sticky-note input,
+    .sticky-note textarea {
+      background: rgba(255,255,255,.55);
+      border: 1px solid #ead56a;
+      color: #3f3a1f;
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+    .sticky-note textarea {
+      height: 140px;
+      min-height: 100px;
+      flex: none;
+      resize: vertical;
+      line-height: 1.4;
+    }
+    .sticky-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px;
+      align-items: end;
+    }
+    .sticky-row button {
+      padding: 6px 8px;
+      font-size: 11px;
+      background: #c9a227;
+    }
+    .sticky-row button:hover { background: #a88612; }
+    .sticky-actions {
+      display: flex;
+      gap: 4px;
+    }
+    .sticky-actions button {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 11px;
+      background: #16a34a;
+    }
+    .dark .sticky-note {
+      background: #d4c15a;
+      border-color: #b8a43d;
+      color: #2d2912;
+    }
+    .dark .sticky-handle { background: #c9b24a; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 32px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .theme {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 8px;
+      min-height: 0;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .editor {
+      min-height: 0;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--preview);
+      color: var(--text);
+      font: inherit;
+    }
+    textarea {
+      flex: 1;
+      min-height: 0;
+      resize: none;
+      line-height: 1.45;
+    }
+    textarea:focus, input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .password-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto auto;
+      gap: 6px;
+      align-items: end;
+      margin-top: 8px;
+    }
+    .password-row input {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: .02em;
+    }
+    .actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    button {
+      border: none;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+    button:hover { background: var(--accent-hover); }
+    button.secondary {
+      background: #475569;
+    }
+    button.secondary:hover { background: #334155; }
+    .preview-title, .bottom-title {
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .preview-content {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      background: var(--preview);
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .preview-content a { color: #2563eb; }
+    .dark .preview-content a { color: #93c5fd; }
+    .bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+      gap: 8px;
+      min-height: 0;
+    }
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    .tab {
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--code);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .code-wrap {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; }
+    .tab-content.active { display: flex; }
+    pre {
+      flex: 1;
+      min-height: 0;
+      margin: 0 0 6px;
+      padding: 8px 10px;
+      overflow: auto;
+      background: var(--code);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .history-head h3 {
+      margin: 0;
+      font-size: 13px;
+    }
+    .history-head button {
+      padding: 5px 8px;
+      font-size: 12px;
+    }
+    #historyItems {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+    }
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+    }
+    .history-item:last-child { border-bottom: none; }
+    .history-meta {
+      min-width: 0;
+    }
+    .history-meta strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .history-date { color: var(--muted); font-size: 11px; }
+    .history-item button {
+      padding: 4px 8px;
+      font-size: 11px;
+    }
+    .toast {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(0,0,0,.78);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: none;
+      z-index: 50;
+    }
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .app {
+        height: auto;
+        min-height: 100dvh;
+        grid-template-rows: auto auto auto;
+      }
+      .workspace, .bottom, .fields, .password-row {
+        grid-template-columns: 1fr;
+      }
+      textarea { min-height: 160px; }
+      .preview-content, pre, #historyItems { min-height: 140px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Chèn Liên Kết &amp; Hiển Thị Dạng Code</h1>
+      <label class="theme">
+        Chế độ tối
+        <input type="checkbox" id="darkMode">
+      </label>
+    </header>
+
+    <aside class="sticky-note" id="stickyNoteCard">
+      <div class="sticky-handle" id="stickyHandle" tabindex="0">
+        <span>Ghi chú</span>
+        <button type="button" id="stickyToggle" title="Thu gọn / mở">−</button>
+      </div>
+      <div class="sticky-body" id="stickyBody">
+        <div>
+          <label for="stickySite">Tên web</label>
+          <div class="sticky-row">
+            <input type="text" id="stickySite" placeholder="Tên website">
+            <button type="button" data-copy-sticky="stickySite">Copy</button>
+          </div>
+        </div>
+        <div>
+          <label for="stickyUrl">Link web</label>
+          <div class="sticky-row">
+            <input type="text" id="stickyUrl" placeholder="https://">
+            <button type="button" data-copy-sticky="stickyUrl">Copy</button>
+          </div>
+        </div>
+        <div>
+          <label for="stickyPassword">Mật khẩu</label>
+          <div class="sticky-row">
+            <input type="text" id="stickyPassword" spellcheck="false" autocomplete="off" placeholder="Mật khẩu">
+            <button type="button" data-copy-sticky="stickyPassword">Copy</button>
+          </div>
+        </div>
+        <div>
+          <label for="stickyNote">Ghi chú thêm</label>
+          <textarea id="stickyNote" placeholder="Ghi chú, checklist..."></textarea>
+        </div>
+        <div class="sticky-actions">
+          <button type="button" id="stickyFromForm">Lấy từ form</button>
+          <button type="button" id="stickyToForm">Điền vào form</button>
+        </div>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <div class="panel editor">
+        <label for="limitedContent">Nhập nội dung</label>
+        <textarea id="limitedContent" placeholder="Nội dung này sẽ được thay thế từ khóa bằng liên kết"></textarea>
+
+        <div class="fields">
+          <div>
+            <label for="keyword">Từ khóa</label>
+            <input type="text" id="keyword" placeholder="Nhập từ cần thay thế">
+          </div>
+          <div>
+            <label for="link">Link website</label>
+            <input type="text" id="link" placeholder="https://example.com">
+          </div>
+        </div>
+
+        <div class="password-row">
+          <div>
+            <label for="password">Mật khẩu mạnh</label>
+            <input type="text" id="password" spellcheck="false" autocomplete="off">
+          </div>
+          <button type="button" id="regenPassword" title="Tạo mật khẩu mới">Tạo mới</button>
+          <button type="button" class="secondary" id="copyPassword">Copy</button>
+          <button type="button" class="secondary" id="insertPassword">Chèn</button>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="generateBtn">Tạo Nội Dung</button>
+          <button type="button" class="secondary" id="saveBtn">Lưu Thiết Lập</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 class="preview-title">Xem trước kết quả</h3>
+        <div class="preview-content" id="previewContent">Kết quả xem trước sẽ hiển thị ở đây...</div>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <div class="panel">
+        <h2 class="bottom-title">Kết quả (dạng code)</h2>
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="html">HTML</button>
+          <button type="button" class="tab" data-tab="markdown">Markdown</button>
+          <button type="button" class="tab" data-tab="bbcode">BBCode</button>
+          <button type="button" class="tab" data-tab="plain">Plain URL</button>
+        </div>
+        <div class="code-wrap">
+          <div class="tab-content active" id="html-tab">
+            <pre><code id="htmlCodeOutput"></code></pre>
+            <button type="button" class="copy-btn" data-copy="htmlCodeOutput">Copy Code</button>
+          </div>
+          <div class="tab-content" id="markdown-tab">
+            <pre><code id="markdownCodeOutput"></code></pre>
+            <button type="button" class="copy-btn" data-copy="markdownCodeOutput">Copy Code</button>
+          </div>
+          <div class="tab-content" id="bbcode-tab">
+            <pre><code id="bbcodeCodeOutput"></code></pre>
+            <button type="button" class="copy-btn" data-copy="bbcodeCodeOutput">Copy Code</button>
+          </div>
+          <div class="tab-content" id="plain-tab">
+            <pre><code id="plainCodeOutput"></code></pre>
+            <button type="button" class="copy-btn" data-copy="plainCodeOutput">Copy Code</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="history-head">
+          <h3>Lịch sử (tối đa 10)</h3>
+          <button type="button" class="secondary" id="clearHistoryBtn">Xóa tất cả</button>
+        </div>
+        <div id="historyItems"></div>
+      </div>
+    </section>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const LINK_LIMIT = 2;
+    const HISTORY_KEY = "copyCodeHistory";
+    const LEGACY_HISTORY_KEY = "inputHistory";
+    const THEME_KEY = "copyCodeDark";
+    const NOTE_KEY = "copyCodeStickyNote";
+
+    const limitedContent = document.getElementById("limitedContent");
+    const keywordInput = document.getElementById("keyword");
+    const linkInput = document.getElementById("link");
+    const passwordInput = document.getElementById("password");
+    const previewContent = document.getElementById("previewContent");
+    const darkMode = document.getElementById("darkMode");
+    const toast = document.getElementById("toast");
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.style.display = "block";
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => { toast.style.display = "none"; }, 2200);
+    }
+
+    function generateStrongPassword(length = 16) {
+      const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+      const lower = "abcdefghijkmnopqrstuvwxyz";
+      const digits = "23456789";
+      const symbols = "!@#$%^&*-_=+";
+      const sets = [upper, lower, digits, symbols];
+      const all = sets.join("");
+      const bytes = new Uint32Array(length);
+      crypto.getRandomValues(bytes);
+      const chars = Array.from({ length }, (_, i) => {
+        const set = sets[i] || all;
+        return set[bytes[i] % set.length];
+      });
+      for (let i = chars.length - 1; i > 0; i--) {
+        const j = bytes[i] % (i + 1);
+        [chars[i], chars[j]] = [chars[j], chars[i]];
+      }
+      return chars.join("");
+    }
+
+    function refreshPassword() {
+      passwordInput.value = generateStrongPassword();
+    }
+
+    function copyText(text, successMessage) {
+      if (!text) return;
+      const done = () => showToast(successMessage);
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+      } else {
+        fallbackCopy(text, done);
+      }
+    }
+
+    function fallbackCopy(text, done) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand("copy"); done(); } catch (err) { console.error(err); }
+      document.body.removeChild(area);
+    }
+
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function toHtmlLayout(text) {
+      return escapeHtml(text).replace(/\r\n|\r|\n/g, "<br>");
+    }
+
+    function replaceLimited(content, keyword, replacement) {
+      if (!keyword) return content;
+      let count = 0;
+      return content.replace(new RegExp(escapeRegExp(keyword), "gi"), function (match) {
+        if (count < LINK_LIMIT) {
+          count += 1;
+          return replacement;
+        }
+        return match;
+      });
+    }
+
+    function generateContent() {
+      const content = limitedContent.value;
+      const keyword = keywordInput.value.trim();
+      const link = linkInput.value.trim();
+
+      if (!content) {
+        previewContent.textContent = "Kết quả xem trước sẽ hiển thị ở đây...";
+        document.getElementById("htmlCodeOutput").textContent = "";
+        document.getElementById("markdownCodeOutput").textContent = "";
+        document.getElementById("bbcodeCodeOutput").textContent = "";
+        document.getElementById("plainCodeOutput").textContent = "";
+        return;
+      }
+
+      let html = toHtmlLayout(content);
+      let markdown = content;
+      let bbcode = content;
+      let plain = content;
+
+      if (keyword && link) {
+        const safeKeyword = escapeHtml(keyword);
+        const safeHref = escapeHtml(link);
+        html = replaceLimited(html, safeKeyword, `<a href="${safeHref}">${safeKeyword}</a>`);
+        markdown = replaceLimited(content, keyword, `[${keyword}](${link})`);
+        bbcode = replaceLimited(content, keyword, `[url=${link}]${keyword}[/url]`);
+        plain = replaceLimited(content, keyword, link);
+      }
+
+      document.getElementById("htmlCodeOutput").textContent = html;
+      document.getElementById("markdownCodeOutput").textContent = markdown;
+      document.getElementById("bbcodeCodeOutput").textContent = bbcode;
+      document.getElementById("plainCodeOutput").textContent = plain;
+      previewContent.innerHTML = html;
+    }
+
+    function storageGet(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+    function storageSet(key, value) {
+      try { localStorage.setItem(key, value); return true; } catch (e) { return false; }
+    }
+
+    function getHistory() {
+      try {
+        const raw = storageGet(HISTORY_KEY) || storageGet(LEGACY_HISTORY_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveHistory(history) {
+      return storageSet(HISTORY_KEY, JSON.stringify(history));
+    }
+
+    function displayHistory(history) {
+      const box = document.getElementById("historyItems");
+      if (!history.length) {
+        box.innerHTML = '<p style="margin:0;color:var(--muted);font-size:13px;">Chưa có lịch sử nào được lưu.</p>';
+        return;
+      }
+      box.innerHTML = history.map((item, index) => {
+        const date = new Date(item.timestamp);
+        const formatted = Number.isNaN(date.getTime()) ? "" : date.toLocaleString();
+        return `<div class="history-item">
+          <div class="history-meta">
+            <strong>${item.keyword || "(Không có từ khóa)"}</strong>
+            <div class="history-date">${formatted}</div>
+          </div>
+          <div>
+            <button type="button" data-load="${index}">Chọn</button>
+            <button type="button" class="secondary" data-remove="${index}">Xóa</button>
+          </div>
+        </div>`;
+      }).join("");
+    }
+
+    function saveCurrent() {
+      const content = limitedContent.value;
+      if (!content) {
+        showToast("Vui lòng nhập nội dung để lưu");
+        return;
+      }
+      let history = getHistory();
+      history.unshift({
+        content,
+        keyword: keywordInput.value,
+        link: linkInput.value,
+        password: passwordInput.value,
+        timestamp: new Date().toISOString()
+      });
+      history = history.slice(0, 10);
+      if (saveHistory(history)) {
+        displayHistory(history);
+        showToast("Đã lưu thiết lập");
+      } else {
+        showToast("Không lưu được lịch sử trên trình duyệt này");
+      }
+    }
+
+    function loadFromHistory(index) {
+      const item = getHistory()[index];
+      if (!item) return;
+      limitedContent.value = item.content || "";
+      keywordInput.value = item.keyword || "";
+      linkInput.value = item.link || "";
+      passwordInput.value = item.password || generateStrongPassword();
+      generateContent();
+    }
+
+    function applyTheme(isDark) {
+      document.body.classList.toggle("dark", isDark);
+      darkMode.checked = isDark;
+    }
+
+    document.getElementById("regenPassword").addEventListener("click", () => {
+      refreshPassword();
+      showToast("Đã tạo mật khẩu mới");
+    });
+    document.getElementById("copyPassword").addEventListener("click", () => {
+      copyText(passwordInput.value, "Đã copy mật khẩu");
+    });
+    document.getElementById("insertPassword").addEventListener("click", () => {
+      const password = passwordInput.value;
+      if (!password) return;
+      const start = limitedContent.selectionStart;
+      const end = limitedContent.selectionEnd;
+      const value = limitedContent.value;
+      const needsSpace = start > 0 && !/\s/.test(value[start - 1]);
+      const insert = (needsSpace ? " " : "") + password;
+      limitedContent.value = value.slice(0, start) + insert + value.slice(end);
+      limitedContent.focus();
+      limitedContent.selectionStart = limitedContent.selectionEnd = start + insert.length;
+      generateContent();
+    });
+    document.getElementById("generateBtn").addEventListener("click", generateContent);
+    document.getElementById("saveBtn").addEventListener("click", saveCurrent);
+    document.getElementById("clearHistoryBtn").addEventListener("click", () => {
+      if (confirm("Bạn có chắc muốn xóa tất cả lịch sử?")) {
+        saveHistory([]);
+        displayHistory([]);
+      }
+    });
+    darkMode.addEventListener("change", () => {
+      applyTheme(darkMode.checked);
+      storageSet(THEME_KEY, darkMode.checked ? "1" : "0");
+    });
+
+    ["limitedContent", "keyword", "link"].forEach((id) => {
+      document.getElementById(id).addEventListener("input", generateContent);
+    });
+
+    const stickyCard = document.getElementById("stickyNoteCard");
+    const stickyHandle = document.getElementById("stickyHandle");
+    const stickyFields = {
+      site: document.getElementById("stickySite"),
+      url: document.getElementById("stickyUrl"),
+      password: document.getElementById("stickyPassword"),
+      note: document.getElementById("stickyNote")
+    };
+
+    function defaultStickyState() {
+      return { x: 16, y: 56, site: "", url: "", password: "", note: "", collapsed: false };
+    }
+
+    function readStickyState() {
+      try {
+        const raw = storageGet(NOTE_KEY);
+        if (!raw) return defaultStickyState();
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object") return { ...defaultStickyState(), ...parsed };
+        return { ...defaultStickyState(), note: String(raw) };
+      } catch (e) {
+        return { ...defaultStickyState(), note: storageGet(NOTE_KEY) || "" };
+      }
+    }
+
+    function clampStickyPos(x, y) {
+      const maxX = Math.max(8, window.innerWidth - stickyCard.offsetWidth - 8);
+      const maxY = Math.max(8, window.innerHeight - stickyCard.offsetHeight - 8);
+      return {
+        x: Math.min(Math.max(8, x), maxX),
+        y: Math.min(Math.max(8, y), maxY)
+      };
+    }
+
+    function applyStickyPos(x, y) {
+      const pos = clampStickyPos(x, y);
+      stickyCard.style.left = pos.x + "px";
+      stickyCard.style.top = pos.y + "px";
+      return pos;
+    }
+
+    function currentStickyState() {
+      const left = parseFloat(stickyCard.style.left) || stickyCard.getBoundingClientRect().left;
+      const top = parseFloat(stickyCard.style.top) || stickyCard.getBoundingClientRect().top;
+      return {
+        x: left,
+        y: top,
+        site: stickyFields.site.value,
+        url: stickyFields.url.value,
+        password: stickyFields.password.value,
+        note: stickyFields.note.value,
+        collapsed: stickyCard.classList.contains("collapsed")
+      };
+    }
+
+    function saveStickyState() {
+      storageSet(NOTE_KEY, JSON.stringify(currentStickyState()));
+    }
+
+    function loadStickyState() {
+      const state = readStickyState();
+      stickyFields.site.value = state.site;
+      stickyFields.url.value = state.url;
+      stickyFields.password.value = state.password;
+      stickyFields.note.value = state.note;
+      stickyCard.classList.toggle("collapsed", !!state.collapsed);
+      document.getElementById("stickyToggle").textContent = state.collapsed ? "+" : "−";
+      requestAnimationFrame(() => applyStickyPos(state.x, state.y));
+    }
+
+    let drag = null;
+    function startStickyDrag(event) {
+      if (event.target.closest("button")) return;
+      if (event.type === "mousedown" && event.button !== 0) return;
+      const rect = stickyCard.getBoundingClientRect();
+      drag = {
+        dx: event.clientX - rect.left,
+        dy: event.clientY - rect.top
+      };
+      stickyCard.classList.add("dragging");
+      if (event.pointerId != null) {
+        try { stickyHandle.setPointerCapture(event.pointerId); } catch (e) {}
+      }
+      event.preventDefault();
+    }
+    function moveStickyDrag(event) {
+      if (!drag) return;
+      applyStickyPos(event.clientX - drag.dx, event.clientY - drag.dy);
+    }
+    function endStickyDrag() {
+      if (!drag) return;
+      drag = null;
+      stickyCard.classList.remove("dragging");
+      saveStickyState();
+    }
+    stickyHandle.addEventListener("pointerdown", startStickyDrag);
+    window.addEventListener("pointermove", moveStickyDrag);
+    window.addEventListener("pointerup", endStickyDrag);
+    window.addEventListener("pointercancel", endStickyDrag);
+    stickyHandle.addEventListener("mousedown", startStickyDrag);
+    window.addEventListener("mousemove", moveStickyDrag);
+    window.addEventListener("mouseup", endStickyDrag);
+
+    document.getElementById("stickyToggle").addEventListener("click", (event) => {
+      event.stopPropagation();
+      stickyCard.classList.toggle("collapsed");
+      document.getElementById("stickyToggle").textContent =
+        stickyCard.classList.contains("collapsed") ? "+" : "−";
+      saveStickyState();
+    });
+
+    Object.values(stickyFields).forEach((field) => {
+      field.addEventListener("input", saveStickyState);
+    });
+    stickyCard.querySelectorAll("[data-copy-sticky]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const field = document.getElementById(btn.dataset.copySticky);
+        copyText(field.value, "Đã copy");
+      });
+    });
+    document.getElementById("stickyFromForm").addEventListener("click", () => {
+      stickyFields.site.value = keywordInput.value;
+      stickyFields.url.value = linkInput.value;
+      stickyFields.password.value = passwordInput.value;
+      saveStickyState();
+      showToast("Đã lấy từ form");
+    });
+    document.getElementById("stickyToForm").addEventListener("click", () => {
+      if (stickyFields.site.value) keywordInput.value = stickyFields.site.value;
+      if (stickyFields.url.value) linkInput.value = stickyFields.url.value;
+      if (stickyFields.password.value) passwordInput.value = stickyFields.password.value;
+      generateContent();
+      showToast("Đã điền vào form");
+    });
+    window.addEventListener("resize", () => {
+      const state = currentStickyState();
+      applyStickyPos(state.x, state.y);
+    });
+    loadStickyState();
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab + "-tab").classList.add("active");
+      });
+    });
+
+    document.querySelectorAll(".copy-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        copyText(document.getElementById(btn.dataset.copy).textContent, "Đã copy");
+      });
+    });
+
+    document.getElementById("historyItems").addEventListener("click", (event) => {
+      const load = event.target.closest("[data-load]");
+      const remove = event.target.closest("[data-remove]");
+      if (load) loadFromHistory(Number(load.dataset.load));
+      if (remove) {
+        const history = getHistory();
+        history.splice(Number(remove.dataset.remove), 1);
+        saveHistory(history);
+        displayHistory(history);
+      }
+    });
+
+    limitedContent.value = "Đây là một ví dụ về từ khóa.\n\nTừ khóa này sẽ xuất hiện nhiều lần\nnhưng chỉ được thay thế một số lần.";
+    keywordInput.value = "từ khóa";
+    linkInput.value = "https://example.com";
+    refreshPassword();
+    applyTheme(storageGet(THEME_KEY) === "1");
+    displayHistory(getHistory());
+    generateContent();
+  </script>
+</body>
+</html>
