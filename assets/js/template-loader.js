@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const headContent = document.head.innerHTML;
 
     Promise.all([
-        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260724-1').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260915-2').then(r => {
             if (!r.ok) throw new Error('Failed to fetch header');
             return r.text();
         }),
-        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260724-1').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260915-2').then(r => {
             if (!r.ok) throw new Error('Failed to fetch footer');
             return r.text();
         })
