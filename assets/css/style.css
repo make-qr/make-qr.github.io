@@ -635,6 +635,75 @@
 .home-tools {
     margin-top: 2.5rem;
 }
+.home-tools-intro {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: -0.35rem auto 1.25rem;
+    max-width: 40rem;
+}
+.home-tools-category {
+    max-width: 72rem;
+    margin: 0 auto 1.25rem;
+    padding: 1rem 1rem 0.85rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.85rem;
+}
+.home-tools-category-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+.home-tools-category-head h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+.home-tools-category-head span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+}
+.home-tools-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+@media (min-width: 640px) {
+    .home-tools-links {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media (min-width: 960px) {
+    .home-tools-links {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+.home-tool-link {
+    display: block;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.55rem;
+    background: #f8fafc;
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.25;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.home-tool-link:hover {
+    border-color: #93c5fd;
+    background: #eff6ff;
+    color: #1d4ed8;
+}
 @media (min-width: 720px) {
     .qr-how-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1411,10 +1480,29 @@ html[data-theme="dark"] .qr-how-grid li > span {
     background: #1e3a8a;
     color: #bfdbfe;
 }
-html[data-theme="dark"] .home-tool-card:hover,
-html[data-theme="dark"] .qr-faq details[open] {
-    border-color: #3b82f6 !important;
-    background: #121e31 !important;
+html[data-theme="dark"] .home-tools-category {
+    border-color: #26364d !important;
+    background: #101827 !important;
+}
+html[data-theme="dark"] .home-tools-category-head h3 {
+    color: #e2e8f0;
+}
+html[data-theme="dark"] .home-tools-category-head span {
+    background: #1e293b;
+    color: #94a3b8;
+}
+html[data-theme="dark"] .home-tool-link {
+    border-color: #26364d;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+html[data-theme="dark"] .home-tool-link:hover {
+    border-color: #3b82f6;
+    background: #121e31;
+    color: #93c5fd;
+}
+html[data-theme="dark"] .home-tools-intro {
+    color: #94a3b8;
 }
 html[data-theme="dark"] .qr-knowledge {
     border-color: #294568;
