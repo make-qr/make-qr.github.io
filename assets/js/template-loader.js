@@ -66,7 +66,6 @@ const PAGE_TITLES = {
     'scientific-calculator-deg-rad-tips': "Scientific calculator online",
     'device-checks-before-meeting': "Webcam, speaker and dead-pixel checks before a meeting",
 };
-};
 
 function getPageTitle(filename, currentPath) {
     if (currentPath.includes('/blog')) {
