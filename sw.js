@@ -1,4 +1,4 @@
-const CACHE_NAME = 'make-qr-v7';
+const CACHE_NAME = 'make-qr-v8';
 const CORE_ASSETS = [
     '/',
     '/index.html',

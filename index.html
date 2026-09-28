@@ -12,9 +12,13 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://creatorqrcode.com/">
     <meta property="og:site_name" content="Creator QR Code">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://creatorqrcode.com/assets/images/app-icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free QR Code Generator | Creator QR Code">
     <meta name="twitter:description" content="Free QR code generator and QR gen tool — create static QR codes with logo in your browser.">
+    <meta name="twitter:image" content="https://creatorqrcode.com/assets/images/app-icon-512.png">
+    <meta name="theme-color" content="#1e40af">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://creatorqrcode.com/">
     <title>Free QR Code Generator | Creator QR Code</title>
@@ -27,18 +31,19 @@
     <link href="assets/css/style.css?v=20260915-1" rel="stylesheet">
     
     <!-- Scripts -->
-    <script src="assets/js/template-loader.js?v=20260928-1" defer></script>
+    <script src="assets/js/template-loader.js?v=20260929-1" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js" defer></script>
     <script src="assets/js/qr-generator.js?v=20260718-3" defer></script>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-257SVV94KB"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1JL3TDJ4B"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-257SVV94KB');
+    gtag('config', 'G-M1JL3TDJ4B');
     </script>
     
     <!-- Structured data for search engines and answer engines -->
@@ -47,11 +52,20 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "Organization",
+          "@id": "https://creatorqrcode.com/#organization",
+          "name": "Creator QR Code",
+          "url": "https://creatorqrcode.com/",
+          "logo": "https://creatorqrcode.com/assets/images/app-icon-512.png"
+        },
+        {
           "@type": "WebSite",
           "@id": "https://creatorqrcode.com/#website",
           "url": "https://creatorqrcode.com/",
           "name": "Creator QR Code",
-          "alternateName": ["Make QR", "QR Code Generator", "QR gen"]
+          "alternateName": ["Make QR", "QR Code Generator", "QR gen"],
+          "inLanguage": "en",
+          "publisher": {"@id": "https://creatorqrcode.com/#organization"}
         },
         {
           "@type": "WebPage",
@@ -59,8 +73,12 @@
           "url": "https://creatorqrcode.com/",
           "name": "Free QR Code Generator",
           "description": "Free QR code generator and QR gen tool to create static QR codes for URLs, text, WiFi, vCards, email and SMS.",
+          "inLanguage": "en",
+          "dateModified": "2026-09-29",
           "isPartOf": {"@id": "https://creatorqrcode.com/#website"},
-          "mainEntity": {"@id": "https://creatorqrcode.com/#app"}
+          "about": {"@id": "https://creatorqrcode.com/#app"},
+          "mainEntity": {"@id": "https://creatorqrcode.com/#app"},
+          "primaryImageOfPage": "https://creatorqrcode.com/assets/images/app-icon-512.png"
         },
         {
           "@type": "WebApplication",
@@ -72,11 +90,13 @@
           "operatingSystem": "Any",
           "browserRequirements": "Requires JavaScript and a modern web browser",
           "description": "A free browser-based QR code generator (QR gen) with live preview, colors, shapes, frames, logos and PNG download.",
+          "isAccessibleForFree": true,
           "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "USD"
           },
+          "provider": {"@id": "https://creatorqrcode.com/#organization"},
           "featureList": [
             "URL, text, WiFi, vCard, email and SMS QR codes",
             "Live QR code preview",
@@ -122,8 +142,13 @@
             },
             {
               "@type": "Question",
-              "name": "What is QR gen or qr code generátor?",
-              "acceptedAnswer": {"@type": "Answer", "text": "QR gen is short for QR code generator. Terms like qr code generátor are language variants of the same tool: a free QR Code Generator that creates a scannable QR code in your browser."}
+              "name": "What is Creator QR Code?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Creator QR Code is a free QR code generator at creatorqrcode.com. It creates static QR codes in your browser for a URL, plain text, WiFi network, vCard, email, SMS or a small file, then downloads a PNG. The code does not expire and does not send people through a tracking link."}
+            },
+            {
+              "@type": "Question",
+              "name": "What do QR gen and qr code generátor mean?",
+              "acceptedAnswer": {"@type": "Answer", "text": "QR gen is short for QR code generator. Searches such as QR Code Generator, creator qr code, qr kód generator and qr code generátor all point to the same kind of free tool on Creator QR Code: create a scannable QR code in your browser, customize it, and download a PNG."}
             }
           ]
         }
@@ -510,7 +535,8 @@
         <section class="qr-knowledge" aria-labelledby="qr-knowledge-title">
             <div class="qr-knowledge-main">
                 <h2 id="qr-knowledge-title">Create a QR code that scans reliably</h2>
-                <p>A QR code converts text or structured data into a square pattern that phone cameras can read. This free QR code generator creates static codes: the destination is stored directly in the pattern, with no tracking redirect, embedded advertisement or expiration date.</p>
+                <p>Creator QR Code is a free QR code generator at creatorqrcode.com. It creates static QR codes in your browser for a URL, plain text, WiFi network, vCard, email, SMS or a small file, then downloads a PNG. The code does not expire and does not send people through a tracking link.</p>
+                <p>A QR code converts text or structured data into a square pattern that phone cameras can read. The destination is stored directly in the pattern, with no tracking redirect, embedded advertisement or expiration date.</p>
                 <p>For reliable scanning, use a dark QR color on a light background, keep the clear margin around the code and test the final image at its intended print size. When adding a logo, use High (H) error correction and avoid covering the three large corner markers. Whether you call it a QR Code Generator, QR gen, or qr code generátor, the result is the same: a scannable code you can download as PNG.</p>
             </div>
             <div class="qr-use-cases">
@@ -546,6 +572,10 @@
                 <details>
                     <summary>Is my QR code content uploaded?</summary>
                     <p>The QR generator processes the content locally in your browser and does not upload the content for QR creation.</p>
+                </details>
+                <details>
+                    <summary>What is Creator QR Code?</summary>
+                    <p>Creator QR Code is a free QR code generator at creatorqrcode.com. It creates static QR codes in your browser for a URL, plain text, WiFi network, vCard, email, SMS or a small file, then downloads a PNG. The code does not expire and does not send people through a tracking link.</p>
                 </details>
                 <details>
                     <summary>What do “QR gen” and “qr code generátor” mean?</summary>
@@ -793,7 +823,7 @@
             </div>
         </section>
 
-        <section class="home-trust" aria-label="Why Make QR">
+        <section class="home-trust" aria-label="Why Creator QR Code">
             <div class="home-trust-item">
                 <span class="home-trust-icon" aria-hidden="true">🔒</span>
                 <h3>Private by design</h3>

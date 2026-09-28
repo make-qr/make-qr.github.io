@@ -104,14 +104,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const isRootPage = ROOT_PATH === '';
     const pageTitle = getPageTitle(filename, currentPath);
     const canonicalPath = getCanonicalPath(isRootPage, filename, currentPath);
+    const homeHref = ROOT_PATH === '' ? '/' : ROOT_PATH;
     const headContent = document.head.innerHTML;
 
     Promise.all([
-        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260915-2').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/header.html?v=20260929-1').then(r => {
             if (!r.ok) throw new Error('Failed to fetch header');
             return r.text();
         }),
-        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260915-2').then(r => {
+        fetch(ROOT_PATH + 'assets/shared/footer.html?v=20260929-1').then(r => {
             if (!r.ok) throw new Error('Failed to fetch footer');
             return r.text();
         })
@@ -119,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(([headerHtml, footerHtml]) => {
         headerHtml = headerHtml
             .replace(/\{\{ROOT_PATH\}\}/g, ROOT_PATH)
+            .replace(/\{\{HOME_HREF\}\}/g, homeHref)
             .replace(/\{\{PAGE_TITLE\}\}/g, pageTitle)
             .replace(/\{\{CANONICAL_PATH\}\}/g, canonicalPath)
             .replace('{{CUSTOM_HEAD}}', getCustomHeadContent(headContent));
@@ -130,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.insertBefore(navElement, document.body.firstChild);
         }
 
-        footerHtml = footerHtml.replace(/\{\{ROOT_PATH\}\}/g, ROOT_PATH);
+        footerHtml = footerHtml.replace(/\{\{ROOT_PATH\}\}/g, ROOT_PATH).replace(/\{\{HOME_HREF\}\}/g, homeHref);
         footerHtml = footerHtml.replace('{{CUSTOM_SCRIPTS}}', getCustomScripts());
 
         const footerContainer = document.createElement('div');

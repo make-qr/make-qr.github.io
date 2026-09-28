@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Make QR — Free QR Code Generator",
-  "short_name": "Make QR",
+  "name": "Creator QR Code — Free QR Code Generator",
+  "short_name": "Creator QR Code",
   "description": "Create static QR codes and use private browser tools without signup.",
   "start_url": "/?source=pwa",
   "scope": "/",

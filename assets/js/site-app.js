@@ -87,7 +87,7 @@
             return;
         }
         if (isIosMobile()) {
-            alert('To install Make QR, tap the Share button in Safari, then choose “Add to Home Screen”.');
+            alert('To install Creator QR Code, tap the Share button in Safari, then choose “Add to Home Screen”.');
         }
     }
 

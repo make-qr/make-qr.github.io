@@ -1,0 +1,35 @@
+# Creator QR Code
+
+> Creator QR Code is a free QR code generator at https://creatorqrcode.com/. It creates static QR codes in the browser for a URL, plain text, WiFi network, vCard, email, SMS, or a small file, then downloads a PNG. Codes do not expire, do not use a tracking redirect, and do not add a watermark. QR content is processed locally and is not uploaded to create the code.
+
+## Facts
+
+- Site: https://creatorqrcode.com/
+- Primary tool: free static QR code generator
+- Price: free, no account required
+- Output: high-quality PNG
+- Customization: QR color, background, frame, shape, logo, size, and error correction L, M, Q, or H
+- A logo upload switches error correction to High (H)
+- File QR codes are limited to 100 KB so they stay scannable
+- Privacy: files and QR content stay on the device for these browser tools
+- The same site also has a QR scanner, PDF tools, image tools, calculators, device tests, and how-to guides
+
+## Main pages
+
+- [QR code generator](https://creatorqrcode.com/): create, customize, and download a QR code
+- [Scan a QR code](https://creatorqrcode.com/pages/scan-qr.html): scan from a camera or an uploaded image
+- [Calculators](https://creatorqrcode.com/calculators/): free browser calculators
+- [Guides](https://creatorqrcode.com/blog/): how-to articles for QR codes, PDFs, images, and device checks
+
+## Guides
+
+- [How to create a WiFi QR code](https://creatorqrcode.com/blog/how-to-create-wifi-qr-code.html)
+- [How to create a vCard QR code](https://creatorqrcode.com/blog/how-to-create-vcard-qr-code.html)
+- [How to make a QR code with a logo](https://creatorqrcode.com/blog/how-to-make-qr-code-with-logo.html)
+- [Static vs dynamic QR codes](https://creatorqrcode.com/blog/static-vs-dynamic-qr-codes.html)
+- [Best QR code size for print](https://creatorqrcode.com/blog/best-qr-code-size-for-print.html)
+- [How to scan a QR code on PC](https://creatorqrcode.com/blog/how-to-scan-qr-code-on-pc.html)
+
+## Optional
+
+- [Sitemap](https://creatorqrcode.com/sitemap.xml)

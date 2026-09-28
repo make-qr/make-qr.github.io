@@ -10,12 +10,14 @@
     <meta property="og:title" content="{{PAGE_TITLE}} | Creator QR Code">
     <meta property="og:description" content="Create customizable QR codes, compress images, convert formats, merge PDFs and more — free, in your browser.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://creatorqrcode.com/">
+    <meta property="og:url" content="https://creatorqrcode.com/{{CANONICAL_PATH}}">
+    <meta property="og:image" content="https://creatorqrcode.com/assets/images/app-icon-512.png">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{PAGE_TITLE}} | Creator QR Code">
     <meta name="twitter:description" content="Free QR code generator and document tools that run entirely in your browser.">
+    <meta name="twitter:image" content="https://creatorqrcode.com/assets/images/app-icon-512.png">
     <meta name="robots" content="index, follow">
-    <meta name="canonical" href="https://creatorqrcode.com/{{CANONICAL_PATH}}">
+    <link rel="canonical" href="https://creatorqrcode.com/{{CANONICAL_PATH}}">
     <title>{{PAGE_TITLE}} | Creator QR Code</title>
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='4' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='4' y='18' width='10' height='10' rx='2' fill='%231E40AF'/%3E%3Crect x='18' y='18' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='24' y='18' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='18' y='24' width='4' height='4' fill='%231E40AF'/%3E%3Crect x='24' y='24' width='4' height='4' fill='%231E40AF'/%3E%3C/svg%3E">
@@ -49,7 +51,7 @@
 <body class="page-body">
     <nav class="main-nav shadow-md">
         <div class="container mx-auto main-nav-container max-w-6xl">
-            <a href="{{ROOT_PATH}}index.html" class="site-logo nav-logo" aria-label="Creator QR Code Home">
+            <a href="{{HOME_HREF}}" class="site-logo nav-logo" aria-label="Creator QR Code Home">
                 <svg class="site-logo-icon site-logo-icon--nav" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <rect x="4" y="4" width="10" height="10" rx="2" fill="currentColor"/>
                     <rect x="18" y="4" width="10" height="10" rx="2" fill="currentColor"/>
@@ -74,7 +76,7 @@
                         </svg>
                     </button>
                     <div class="nav-dropdown-content rounded-md py-2 w-48">
-                        <a href="{{ROOT_PATH}}index.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Generate QR Code</a>
+                        <a href="{{HOME_HREF}}" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Generate QR Code</a>
                         <a href="{{ROOT_PATH}}pages/scan-qr.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Scan QR Code</a>
                     </div>
                 </div>
