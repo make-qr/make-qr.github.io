@@ -1,0 +1,29 @@
+{
+  "id": "HP-DIEU-001",
+  "slug": "hat-dieu-tuoi-rang-cui",
+  "url": "https://creatorqrcode.com/t/hat-dieu-tuoi-rang-cui/",
+  "product": {
+    "name": "Hạt điều tươi rang củi",
+    "nameEn": "Wood roasted cashew nuts",
+    "brand": "Hoàng Phú",
+    "description": "Hạt vàng nâu tròn đều, giòn rụm, béo ngậy, ngọt thanh và thơm lừng mùi khói củi tự nhiên.",
+    "usage": "Dùng trực tiếp",
+    "packs": [
+      { "size": "250g", "priceVnd": 110000 },
+      { "size": "400g", "priceVnd": 170000 }
+    ],
+    "packNote": "250g, 400g và đóng theo yêu cầu của khách hàng",
+    "distribution": "Nội địa",
+    "mfgDate": "In trên bao bì từng hũ",
+    "expDate": "In trên bao bì từng hũ"
+  },
+  "producer": {
+    "name": "Công ty TNHH Một thành viên Sản xuất Hoàng Phú",
+    "representative": "Hoàng Chuẩn",
+    "title": "Giám đốc",
+    "address": "Ấp 11B, xã Tấn Lộc, thành phố Đồng Nai",
+    "phone": "0919569029",
+    "email": "hatdieuhoangphu@gmail.com",
+    "taxCode": "3801072160"
+  }
+}
