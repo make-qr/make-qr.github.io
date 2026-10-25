@@ -13,7 +13,17 @@
       { "size": "400g", "priceVnd": 170000 }
     ],
     "packNote": "Hũ 250g, hũ 400g, hộp quà 6 hũ, túi giấy, hoặc đóng theo yêu cầu",
+    "material": "Thu mua từ các hộ dân tại địa phương, thành phố Đồng Nai",
     "distribution": "Nội địa",
+    "slogan": "Chắt chiu từ vùng đất điều, giữ trọn vị mộc nguyên bản.",
+    "process": [
+      "Tiếp nhận nguyên liệu",
+      "Phân loại và làm sạch",
+      "Rang củi nhân điều",
+      "Làm nguội",
+      "Cân định lượng",
+      "Đóng gói và dán nhãn"
+    ],
     "mfgDate": "In trên bao bì từng hũ",
     "expDate": "In trên bao bì từng hũ"
   },
@@ -25,6 +35,7 @@
     "phone": "0919569029",
     "phoneRegistered": "0977928932",
     "email": "hatdieuhoangphu@gmail.com",
+    "website": "http://hatdieuhoangphu.com.vn/",
     "taxCode": "3801072160",
     "registeredOn": "2014-03-31",
     "registrationUpdatedOn": "2025-08-25"
