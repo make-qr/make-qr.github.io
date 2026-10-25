@@ -205,26 +205,67 @@
       background: #eee;
     }
     .shots a:first-child img { height: 230px; }
-    .docs { display: grid; gap: 10px; }
-    .doc {
-      display: block;
-      text-decoration: none;
-      background: var(--card);
+    .cert {
+      background: #fff;
       border: 1px solid var(--line);
       border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .cert h3 { margin: 0 0 6px; font-size: 1.02rem; }
+    .cert p { margin: 0 0 8px; color: var(--muted); font-size: 0.88rem; }
+    .cert .pdf {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .cert-page {
+      display: block;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
       overflow: hidden;
     }
-    .doc img {
+    .cert-page img {
       display: block;
       width: 100%;
-      height: 210px;
-      object-fit: cover;
-      object-position: top;
+      height: auto;
       background: #fff;
     }
-    .doc div { padding: 12px 14px 14px; }
-    .doc strong { display: block; }
-    .doc span { display: block; margin-top: 4px; color: var(--muted); font-size: 0.86rem; font-weight: 500; }
+    #zoom {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      background: rgba(16, 24, 20, 0.94);
+      display: flex;
+      flex-direction: column;
+    }
+    #zoom[hidden] { display: none; }
+    #zoom-close {
+      align-self: flex-end;
+      margin: 10px 12px 0;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--deep);
+      font: inherit;
+      font-weight: 700;
+      padding: 10px 16px;
+    }
+    #zoom-scroll {
+      overflow: auto;
+      flex: 1;
+      padding: 10px 0 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+    #zoom-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      background: #fff;
+    }
     .note {
       margin: 4px 18px 0;
       padding: 12px 14px;
@@ -362,22 +403,19 @@
 
     <section>
       <h2 id="giay-to">Giấy tờ</h2>
-      <div class="docs">
-        <a class="doc" href="gpkd.pdf">
-          <img src="gpkd-bia.jpg" alt="Trang bìa giấy chứng nhận đăng ký doanh nghiệp Hoàng Phú" width="1000" height="1378">
-          <div>
-            <strong>Giấy chứng nhận đăng ký doanh nghiệp</strong>
-            <span>Mã số 3801072160. Đăng ký lần đầu 31/03/2014, thay đổi lần 2 ngày 25/08/2025. Bấm để xem bản PDF.</span>
-          </div>
-        </a>
-        <a class="doc" href="haccp.jpg">
-          <img src="haccp.jpg" alt="Giấy chứng nhận HACCP TCVN 5603:2023 của Hoàng Phú" width="904" height="1288">
-          <div>
-            <strong>Chứng nhận HACCP</strong>
-            <span>Số GL 0362/2024-FSMS, tiêu chuẩn TCVN 5603:2023. Hiệu lực 29/01/2024 đến 28/01/2027. Lĩnh vực ghi trên giấy: sản xuất hạt điều rang muối. Đơn vị cấp: GlobalCert.</span>
-          </div>
-        </a>
-      </div>
+      <article class="cert">
+        <h3>Giấy chứng nhận đăng ký doanh nghiệp</h3>
+        <p>Mã số 3801072160. Đăng ký lần đầu 31/03/2014, thay đổi lần 2 ngày 25/08/2025. Chạm trang để xem toàn màn hình.</p>
+        <p><a class="pdf" href="gpkd.pdf">Tải bản PDF</a></p>
+        <a class="cert-page" href="gpkd-1.jpg"><img src="gpkd-1.jpg" alt="Giấy chứng nhận đăng ký doanh nghiệp Hoàng Phú, trang 1" width="2554" height="3515"></a>
+        <a class="cert-page" href="gpkd-2.jpg"><img src="gpkd-2.jpg" alt="Giấy xác nhận thay đổi đăng ký doanh nghiệp Hoàng Phú, trang 2" width="2570" height="3525" loading="lazy"></a>
+        <a class="cert-page" href="gpkd-3.jpg"><img src="gpkd-3.jpg" alt="Danh sách chủ sở hữu Hoàng Phú, trang 3" width="2586" height="3535" loading="lazy"></a>
+      </article>
+      <article class="cert">
+        <h3>Chứng nhận HACCP</h3>
+        <p>Số GL 0362/2024-FSMS, tiêu chuẩn TCVN 5603:2023. Hiệu lực 29/01/2024 đến 28/01/2027. Lĩnh vực ghi trên giấy: sản xuất hạt điều rang muối. Đơn vị cấp: GlobalCert. Chạm ảnh để xem toàn màn hình.</p>
+        <a class="cert-page" href="haccp.jpg"><img src="haccp.jpg" alt="Giấy chứng nhận HACCP TCVN 5603:2023 của Hoàng Phú" width="904" height="1288" loading="lazy"></a>
+      </article>
     </section>
 
     <p class="note">Thông tin trên do nhà sản xuất công bố. Mã lô, ngày sản xuất và hạn sử dụng của từng hũ được in trên bao bì.</p>
@@ -392,5 +430,33 @@
     <a class="call" href="tel:+84919569029">Gọi nhà sản xuất</a>
     <a class="mail" href="mailto:hatdieuhoangphu@gmail.com">Gửi email</a>
   </div>
+
+  <div id="zoom" hidden>
+    <button id="zoom-close" type="button">Đóng</button>
+    <div id="zoom-scroll">
+      <img id="zoom-img" alt="">
+    </div>
+  </div>
+  <script>
+    const zoom = document.getElementById("zoom");
+    const zoomImg = document.getElementById("zoom-img");
+    const zoomScroll = document.getElementById("zoom-scroll");
+    document.querySelectorAll(".cert-page").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        zoomImg.src = link.getAttribute("href");
+        zoomImg.alt = link.querySelector("img").alt;
+        zoom.hidden = false;
+        zoomScroll.scrollTop = 0;
+        zoomScroll.scrollLeft = 0;
+        document.body.style.overflow = "hidden";
+      });
+    });
+    document.getElementById("zoom-close").addEventListener("click", () => {
+      zoom.hidden = true;
+      zoomImg.removeAttribute("src");
+      document.body.style.overflow = "";
+    });
+  </script>
 </body>
 </html>
