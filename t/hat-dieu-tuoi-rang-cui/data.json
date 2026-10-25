@@ -12,7 +12,7 @@
       { "size": "250g", "priceVnd": 110000 },
       { "size": "400g", "priceVnd": 170000 }
     ],
-    "packNote": "250g, 400g và đóng theo yêu cầu của khách hàng",
+    "packNote": "Hũ 250g, hũ 400g, hộp quà 6 hũ, túi giấy, hoặc đóng theo yêu cầu",
     "distribution": "Nội địa",
     "mfgDate": "In trên bao bì từng hũ",
     "expDate": "In trên bao bì từng hũ"
@@ -21,9 +21,27 @@
     "name": "Công ty TNHH Một thành viên Sản xuất Hoàng Phú",
     "representative": "Hoàng Chuẩn",
     "title": "Giám đốc",
-    "address": "Ấp 11B, xã Tấn Lộc, thành phố Đồng Nai",
+    "address": "Ấp 11B, xã Lộc Tấn, tỉnh Đồng Nai",
     "phone": "0919569029",
+    "phoneRegistered": "0977928932",
     "email": "hatdieuhoangphu@gmail.com",
-    "taxCode": "3801072160"
-  }
+    "taxCode": "3801072160",
+    "registeredOn": "2014-03-31",
+    "registrationUpdatedOn": "2025-08-25"
+  },
+  "documents": [
+    {
+      "name": "Giấy chứng nhận đăng ký doanh nghiệp",
+      "file": "gpkd.pdf"
+    },
+    {
+      "name": "Chứng nhận HACCP TCVN 5603:2023",
+      "number": "GL 0362/2024-FSMS",
+      "issuer": "GlobalCert",
+      "validFrom": "2024-01-29",
+      "validUntil": "2027-01-28",
+      "scope": "Sản xuất hạt điều rang muối",
+      "file": "haccp.jpg"
+    }
+  ]
 }
