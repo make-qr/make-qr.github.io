@@ -1,0 +1,36 @@
+{
+  "id": "HDTRCVTO-221026",
+  "slug": "hat-dieu-tuoi-rang-cui-vi-toi-ot",
+  "url": "https://creatorqrcode.com/t/hat-dieu-tuoi-rang-cui-vi-toi-ot/",
+  "product": {
+    "name": "Hạt điều tươi rang củi vị tỏi ớt",
+    "nameEn": "Chili garlic roasted cashew nuts",
+    "brand": "Hoàng Phú",
+    "description": "Hạt vàng nâu tròn đều, giòn rụm, béo ngậy, thơm khói củi, cay nồng vị tỏi ớt.",
+    "usage": "Dùng trực tiếp",
+    "origin": "Việt Nam",
+    "packs": [
+      { "size": "130g", "priceVnd": 70000 },
+      { "size": "250g", "priceVnd": 120000 },
+      { "size": "400g", "priceVnd": 180000 }
+    ],
+    "packNote": "Hộp PET",
+    "expRule": "12 tháng kể từ ngày sản xuất"
+  },
+  "batch": {
+    "code": "HDTRCVTO-221026",
+    "note": "Lô hạt điều tươi rang củi vị tỏi ớt sản xuất ngày 22 tháng 10 năm 2026",
+    "receivedOn": "2026-10-22",
+    "roastedOn": "2026-10-23"
+  },
+  "producer": {
+    "name": "Công ty TNHH Một thành viên Sản xuất Hoàng Phú",
+    "representative": "Hoàng Chuẩn",
+    "title": "Giám đốc",
+    "address": "Ấp Lộc Thiện, xã Lộc Tấn, tỉnh Đồng Nai",
+    "phone": "0977928932",
+    "email": "hatdieuhoangphu@gmail.com",
+    "website": "http://hatdieuhoangphu.com.vn/dieu-tuoi-rang-cui",
+    "taxCode": "3801072160"
+  }
+}
